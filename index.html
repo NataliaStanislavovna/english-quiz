@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Food &amp; Cooking — глаголы готовки, кухня, описания еды</title>
+<title>Food &amp; Cooking — verbs, kitchen, describing food</title>
 <style>
 :root {
   --bg: #1a1a2e;
@@ -19,80 +19,42 @@
   --theory-bg: rgba(255,255,255,0.03);
   --theory-border: #3a4a6e;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  padding: 16px;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; padding: 16px;
   -webkit-tap-highlight-color: transparent;
 }
-
 .container { max-width: 600px; margin: 0 auto; }
-
-.header {
-  text-align: center;
-  padding: 20px 0 16px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 16px;
-}
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
 .header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
 .header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
 
 .phrase-box {
   background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08));
   border: 1px solid rgba(233,69,96,0.3);
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: 16px;
-  text-align: center;
+  border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center;
 }
 .phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
 .phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
 .phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
 
 .audio-box {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  text-align: center;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: center;
 }
 .audio-box .audio-label { font-size: 12px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
 .audio-box audio { width: 100%; max-width: 320px; height: 40px; border-radius: 8px; }
 
-.progress-bar {
-  width: 100%; height: 6px;
-  background: var(--border);
-  border-radius: 3px;
-  margin-bottom: 16px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-light));
-  border-radius: 3px;
-  transition: width 0.4s ease;
-  width: 0%;
-}
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
 
 .section-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 16px;
-  animation: fadeIn 0.3s ease;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease;
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 .section-title {
   font-size: 16px; font-weight: 700; color: var(--text);
@@ -103,48 +65,20 @@ body {
 .section-title .icon { font-size: 20px; }
 
 .theory {
-  background: var(--theory-bg);
-  border-left: 3px solid var(--theory-border);
-  border-radius: 0 8px 8px 0;
-  padding: 12px 14px;
-  margin-bottom: 16px;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-dim);
+  background: var(--theory-bg); border-left: 3px solid var(--theory-border);
+  border-radius: 0 8px 8px 0; padding: 12px 14px;
+  margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim);
 }
 .theory strong { color: var(--text); font-weight: 600; }
 .theory em { color: var(--accent-light); font-style: italic; }
 
-.question-block {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-.question-number {
-  font-size: 12px; font-weight: 600;
-  color: var(--accent-light);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.sentence {
-  font-size: 15px; line-height: 1.7;
-  margin-bottom: 14px;
-  padding: 12px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 8px;
-}
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
 
 .blank {
-  display: inline-block;
-  min-width: 80px;
-  border-bottom: 2px dashed var(--accent);
-  margin: 0 4px;
-  text-align: center;
-  color: var(--accent-light);
-  font-weight: 600;
+  display: inline-block; min-width: 80px; border-bottom: 2px dashed var(--accent);
+  margin: 0 4px; text-align: center; color: var(--accent-light); font-weight: 600;
 }
 .blank.filled { border-bottom-style: solid; color: var(--correct); }
 .blank.wrong-fill { border-bottom-style: solid; color: var(--wrong); }
@@ -153,64 +87,34 @@ body {
 .options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
 
 .option-btn {
-  background: rgba(255,255,255,0.06);
-  border: 2px solid var(--border);
-  border-radius: var(--btn-radius);
-  padding: 14px 20px;
-  font-size: 15px;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: center;
-  min-height: 48px;
-  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.06); border: 2px solid var(--border);
+  border-radius: var(--btn-radius); padding: 14px 20px;
+  font-size: 15px; color: var(--text); cursor: pointer;
+  transition: all 0.2s ease; text-align: center;
+  min-height: 48px; display: flex; align-items: center; justify-content: center;
   user-select: none; -webkit-user-select: none;
 }
 .option-btn:active { transform: scale(0.97); }
-.option-btn.correct {
-  background: rgba(46,213,115,0.15);
-  border-color: var(--correct);
-  color: var(--correct);
-  font-weight: 600;
-}
-.option-btn.wrong {
-  background: rgba(255,71,87,0.15);
-  border-color: var(--wrong);
-  color: var(--wrong);
-  font-weight: 600;
-}
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
 .option-btn:disabled { cursor: default; opacity: 0.7; }
 .option-btn:disabled:active { transform: none; }
 .option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
 .option-btn.correct .letter { color: var(--correct); }
 .option-btn.wrong .letter { color: var(--wrong); }
-
-.tf-btn {
-  flex: 1; max-width: 140px;
-  padding: 18px 24px;
-  font-size: 18px; font-weight: 700;
-  letter-spacing: 1px;
-}
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
 
 .explanation {
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: rgba(46,213,115,0.08);
-  border-left: 3px solid var(--correct);
-  border-radius: 0 8px 8px 0;
-  font-size: 13px; line-height: 1.6;
-  color: var(--text-dim);
-  display: none;
+  margin-top: 10px; padding: 10px 12px;
+  background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct);
+  border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6;
+  color: var(--text-dim); display: none;
 }
 .explanation.visible { display: block; }
 
 .results {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  animation: fadeIn 0.5s ease;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease;
 }
 .results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
 .results .score .pct { font-size: 24px; color: var(--text-dim); }
@@ -218,22 +122,9 @@ body {
 .results .score.good { color: var(--accent-light); }
 .results .score.needs-work { color: var(--wrong); }
 .results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
-
-.results-detail {
-  text-align: left;
-  margin-top: 16px; padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-.results-detail h3 {
-  font-size: 14px; color: var(--text-dim);
-  margin-bottom: 12px;
-  text-transform: uppercase; letter-spacing: 1px;
-}
-.result-item {
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 14px; line-height: 1.5;
-}
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
 .result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
 .result-item .ri-correct { color: var(--correct); font-weight: 600; }
 .result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
@@ -241,29 +132,21 @@ body {
 .restart-btn {
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   border: none; border-radius: var(--btn-radius);
-  padding: 16px 40px;
-  font-size: 16px; font-weight: 700;
-  color: white; cursor: pointer;
-  margin-top: 20px;
-  transition: all 0.2s ease;
+  padding: 16px 40px; font-size: 16px; font-weight: 700;
+  color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease;
 }
 .restart-btn:active { transform: scale(0.97); }
-
 .hidden { display: none; }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <h1>Food &amp; Cooking — глаголы готовки, кухня, описания еды</h1>
+    <h1>Food &amp; Cooking — verbs, kitchen, describing food</h1>
     <div class="subtitle">2026-07-04</div>
   </div>
-  <div class="phrase-box">
-<div class="label">💡 Фраза дня</div>
-<div class="phrase">Let&#x27;s grab a bite.</div>
-<div class="translation">Давай перекусим. / Пойдём что-нибудь съедим.</div>
-</div>
-  <div class="audio-box"><div class="audio-label">🎧 Listen to the dialogue</div><audio controls preload="none"><source src="https://nataliastanislavovna.github.io/english-quiz/audio.mp3">Your browser does not support audio.</audio></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Let&#x27;s grab a bite.</div><div class="translation">Давай перекусим. / Пойдём что-нибудь съедим.</div></div>
+  <div class="audio-box"><div class="audio-label">🎧 Listen to the dialogue</div><audio controls preload="none"><source src="audio.mp3">Your browser does not support audio.</audio></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div id="quizContent"></div>
   <div class="results hidden" id="results">
@@ -275,7 +158,7 @@ body {
   </div>
 </div>
 <script>
-const quizData = {"title": "Food & Cooking — глаголы готовки, кухня, описания еды", "subtitle": "2026-07-04", "date": "2026-07-04", "phrase_of_the_day": "Let's grab a bite.", "phrase_translation": "Давай перекусим. / Пойдём что-нибудь съедим.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/audio.mp3", "sections": [{"id": "s1", "title": "Cooking Methods — способы приготовления", "icon": "✏️", "theory": "To boil — варить в воде (boil potatoes). To fry — жарить на масле в сковороде (fry eggs). To bake — печь/запекать в духовке (bake a cake). To roast — запекать мясо/овощи в духовке с корочкой (roast chicken). To chop — нарезать кусочками. To steam — готовить на пару.", "instruction": "", "questions": [{"id": 1, "type": "choice", "sentence": "Which cooking method uses a lot of hot oil and cooks food quickly in a pan?", "options": ["Boiling", "Frying", "Roasting", "Steaming"], "correct": "Frying", "explanation": "Fry = жарить на масле. Boil = варить в воде. Roast = запекать в духовке. Steam = готовить на пару."}, {"id": 2, "type": "fill", "sentence": "She ___ the chicken in the oven with rosemary and garlic for about two hours. It came out perfectly crispy on the outside.", "options": ["roasted", "boiled", "fried", "steamed"], "correct": "roasted", "explanation": "Roast = запекать в духовке, обычно с корочкой. Курица с розмарином и чесноком в духовке — типичный roast."}, {"id": 3, "type": "choice", "sentence": "You want to make a vegetable soup. First, you need to ___ the carrots and potatoes, then cook them in water with the other vegetables.", "options": ["bake", "chop", "grill", "roast"], "correct": "chop", "explanation": "Chop = нарезать. Для супа овощи сначала нарезают, потом варят. Bake = печь, grill = готовить на гриле, roast = запекать."}]}, {"id": "s2", "title": "Kitchen Equipment — оборудование на кухне", "icon": "✏️", "theory": "A grater = тёрка (для натирания сыра/овощей). A whisk = венчик (для взбивания). A ladle = половник (для разливания супа). A cutting board = разделочная доска. A can opener = открывалка для банок. A peeler = овощечистка (для чистки).", "instruction": "", "questions": [{"id": 4, "type": "choice", "sentence": "You want to make a salad and need to grate some cheese. Which kitchen tool do you need?", "options": ["A whisk", "A grater", "A ladle", "A peeler"], "correct": "A grater", "explanation": "Grater = тёрка, используется для натирания. Whisk = венчик, ladle = половник, peeler = овощечистка."}, {"id": 5, "type": "fill", "sentence": "Could you pass me the ___? I need to serve the soup into bowls.", "options": ["grater", "whisk", "ladle", "peeler"], "correct": "ladle", "explanation": "Ladle = половник, им разливают суп. Grater = тёрка, whisk = венчик, peeler = овощечистка."}, {"id": 6, "type": "tf", "sentence": "«A tablespoon is smaller than a teaspoon.»", "options": ["True", "False"], "correct": "False", "explanation": "Столовая ложка (tablespoon) БОЛЬШЕ чайной (teaspoon). Tablespoon ≈ 15 мл, teaspoon ≈ 5 мл."}]}, {"id": "s3", "title": "Describing Food — описываем еду", "icon": "✏️", "theory": "Bland = пресный, безвкусный (недостаток специй). Spicy = острый (с перцем/специями). Savoury = несладкий, пикантный. Bitter = горький. Crunchy = хрустящий (текстура). Tender = нежный, мягкий. Creamy = кремовый, однородный.", "instruction": "", "questions": [{"id": 7, "type": "choice", "sentence": "Your friend says the curry is too bland. What should they add to make it taste better?", "options": ["More sugar", "More salt and spices", "More water", "More butter"], "correct": "More salt and spices", "explanation": "Bland = пресный, безвкусный. Решение — добавить специи и соль. Сахар сделает сладким, вода — разбавит, масло — жирнее."}, {"id": 8, "type": "fill", "sentence": "The fried chicken was incredibly ___. The skin was perfectly crispy and the inside was soft and juicy.", "options": ["bland", "tough", "delicious", "bitter"], "correct": "delicious", "explanation": "Контекст положительный (perfectly crispy, soft and juicy) — «delicious» = вкусный. Bland = пресный, tough = жёсткий, bitter = горький."}, {"id": 9, "type": "tf", "sentence": "«Crunchy» describes a texture (how food feels), not a taste (how food tastes).", "options": ["True", "False"], "correct": "True", "explanation": "Crunchy = хрустящий — это текстура. Хрустят чипсы, орехи, свежий хлеб. Вкус — это sweet, sour, salty, bitter, umami."}]}, {"id": "s4", "title": "Listening: Cooking dinner together", "icon": "🎧", "theory": "", "instruction": "", "questions": [{"id": 10, "type": "listen", "sentence": "Listen to the dialogue and answer: What does Anna forget to buy?", "options": ["Pasta noodles", "Tomato sauce", "Olive oil", "Garlic"], "correct": "Olive oil", "explanation": "Anna говорит «I think we're out of olive oil» = масло закончилось, нужно купить. Макароны и соус уже есть дома.", "audio_text": "Hey Anna, I'm thinking we could make pasta tonight. I already have the noodles and tomato sauce. — Sounds great! I'll stop by the shop on my way home. What do we need? — We need onions, garlic, and some fresh basil. Oh, and I think we're out of olive oil — could you grab a bottle? — Sure! Do we need anything else? — Maybe some parmesan cheese for the top. That would be perfect."}, {"id": 11, "type": "listen", "sentence": "Listen again and answer: What does the first person suggest putting on top of the pasta?", "options": ["Fresh basil", "Garlic", "Parmesan cheese", "Tomato sauce"], "correct": "Parmesan cheese", "explanation": "«Maybe some parmesan cheese for the top» = пармезан сверху. Базилик — в соус, чеснок — при готовке, соус — основа блюда.", "audio_text": "Hey Anna, I'm thinking we could make pasta tonight. I already have the noodles and tomato sauce. — Sounds great! I'll stop by the shop on my way home. What do we need? — We need onions, garlic, and some fresh basil. Oh, and I think we're out of olive oil — could you grab a bottle? — Sure! Do we need anything else? — Maybe some parmesan cheese for the top. That would be perfect."}, {"id": 12, "type": "listen", "sentence": "Listen to the second part and answer: What problem does Mark have with the dish?", "options": ["It's too spicy", "It's a little bland", "It's too salty", "There's too much garlic"], "correct": "It's a little bland", "explanation": "Mark говорит «it's good but it's a little bit bland» = немного пресная. Решение — добавить соль и перец.", "audio_text": "OK, the pasta is ready! I chopped the onions and garlic and fried them in olive oil, then added the tomato sauce and basil. — That smells amazing! Let me taste it... Hmm, it's good but it's a little bit bland. — Really? Let me try... You're right. I'll add some salt and a pinch of pepper. — Much better! Could you also add a bit more garlic? I love garlic. — Sure, I'll chop some more and fry it in."}]}]};
+const quizData = {"title": "Food & Cooking — verbs, kitchen, describing food", "subtitle": "2026-07-04", "date": "2026-07-04", "phrase_of_the_day": "Let's grab a bite.", "phrase_translation": "Давай перекусим. / Пойдём что-нибудь съедим.", "audio_url": "audio.mp3", "sections": [{"id": "s1", "title": "Cooking verbs", "icon": "✏️", "questions": [{"id": 1, "type": "choice", "sentence": "You need to ___ the onions before putting them in the pan.", "options": ["chop", "boil", "roast", "pour"], "correct": "chop", "explanation": "Нарезать лук перед жаркой — chop."}, {"id": 2, "type": "fill", "sentence": "She ___ the chicken in the oven for two hours. (запекала)", "options": ["fried", "roasted", "boiled", "grated"], "correct": "roasted", "explanation": "Roast = запекать в духовке. Fried — жарить, boiled — варить."}, {"id": 3, "type": "fill", "sentence": "Could you ___ the soup, please? It doesn't have enough salt. (помешать)", "options": ["chop", "pour", "stir", "grate"], "correct": "stir", "explanation": "Stir = помешивать. Добавить/попробовать — тоже stir (в контексте супа)."}], "theory": "Common cooking verbs: **fry** (жарить на масле), **roast** (запекать в духовке), **boil** (варить), **chop** (резать на куски), **grate** (тереть на тёрке), **stir** (помешивать), **pour** (наливать)."}, {"id": "s2", "title": "Kitchen tools", "icon": "✅", "questions": [{"id": 4, "type": "choice", "sentence": "Use a ___ to beat the eggs until they are light and fluffy.", "options": ["grater", "whisk", "ladle", "saucepan"], "correct": "whisk", "explanation": "Whisk = венчик. Им взбивают яйца, крем и т.д."}, {"id": 5, "type": "choice", "sentence": "I need a ___ to serve the soup into bowls.", "options": ["grater", "frying pan", "ladle", "cutting board"], "correct": "ladle", "explanation": "Ladle = половник / разливательная ложка. Для супа."}], "theory": "Kitchen tools: **grater** (тёрка), **ladle** (разливательная ложка/половник), **whisk** (венчик), **cutting board** (разделочная доска), **saucepan** (кастрюля), **frying pan** (сковорода)."}, {"id": "s3", "title": "Describing food", "icon": "🎧", "questions": [{"id": 6, "type": "choice", "sentence": "The steak was cooked perfectly — very ___ and juicy.", "options": ["bland", "crunchy", "tender", "bitter"], "correct": "tender", "explanation": "Tender = нежный, мягкий. Идеально для мяса."}, {"id": 7, "type": "fill", "sentence": "These potato chips are so ___! (хрустящие)", "options": ["bland", "crunchy", "tender", "sour"], "correct": "crunchy", "explanation": "Crunchy = хрустящий. Картофельные чипсы — хрустящие."}, {"id": 8, "type": "choice", "sentence": "The soup needs more spices — it's too ___.", "options": ["spicy", "savory", "bland", "crunchy"], "correct": "bland", "explanation": "Bland = безвкусный. Суп без специй — bland."}], "theory": "Adjectives for food: **bland** (безвкусный), **crunchy** (хрустящий), **tender** (нежный/мягкий), **spicy** (острый), **sour** (кислый), **bitter** (горький), **savory** (солёный/пикантный)."}, {"id": "s4", "title": "Grammar — countable vs uncountable with food", "icon": "📖", "questions": [{"id": 9, "type": "fill", "sentence": "How ___ rice do we need for the recipe?", "options": ["many", "much", "few", "little"], "correct": "much", "explanation": "Rice — uncountable → How much?"}, {"id": 10, "type": "choice", "sentence": "There aren't ___ eggs in the fridge. I need to buy some.", "options": ["much", "many", "a little", "some"], "correct": "many", "explanation": "Eggs — countable → How many? Отрицание → aren't many."}, {"id": 11, "type": "tf", "sentence": "\"I'd like some bread, please.\" — This sentence is correct.", "options": ["T", "F"], "correct": "T", "explanation": "'Some' используется в запросах и просьбах, даже в вопросительной форме. 'I'd like some bread' = 'Мне бы хлеба'."}], "theory": "Countable (можно посчитать): apple, egg, sandwich — **How many?**. Uncountable (нельзя посчитать): rice, water, bread, cheese — **How much?**. Some words can be both: **chicken** (countable = курица-птица, uncountable = куриное мясо)."}, {"id": "s5", "title": "Listening — Cooking together", "icon": "🎯", "questions": [{"id": 12, "type": "listen", "sentence": "What does Anna ask Marco to do first?", "options": ["Chop the onions and garlic", "Boil the water for pasta", "Fry the onions", "Make the sauce"], "correct": "Chop the onions and garlic", "explanation": "Anna говорит: 'First, can you chop the onions and garlic?'"}, {"id": 13, "type": "listen", "sentence": "What should Marco do with the onions?", "options": ["Boil them", "Fry them in olive oil", "Roast them in the oven", "Grate them"], "correct": "Fry them in olive oil", "explanation": "Anna говорит: 'Fry them in olive oil until they're soft.'"}, {"id": 14, "type": "listen", "sentence": "How long does the spaghetti take to cook?", "options": ["Five minutes", "About ten minutes", "Fifteen minutes", "Twenty minutes"], "correct": "About ten minutes", "explanation": "Anna говорит: 'It takes about ten minutes.'"}], "theory": "Listen to the dialogue between two friends cooking pasta together. Answer the questions about what you hear.", "instruction": "Listen and answer."}]};
 
 let answered = 0;
 let totalQuestions = 0;
@@ -301,21 +184,13 @@ function renderAll() {
   let globalQ = 0;
   sectionData.forEach(section => {
     let html = '<div class="section-card" id="section_' + section.id + '">';
-
-    // Section title
     html += '<div class="section-title"><span class="icon">' + (section.icon || '📝') + '</span>' + esc(section.title) + '</div>';
-
-    // Theory BEFORE questions
     if (section.theory) {
       html += '<div class="theory">' + formatTheory(section.theory) + '</div>';
     }
-
-    // Instruction
     if (section.instruction) {
-      html += '<div class="instruction" style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(section.instruction) + '</div>';
+      html += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(section.instruction) + '</div>';
     }
-
-    // Questions
     (section.questions || []).forEach(q => {
       globalQ++;
       html += '<div class="question-block">';
@@ -329,18 +204,13 @@ function renderAll() {
       }
       html += '</div>';
     });
-
     html += '</div>';
     container.insertAdjacentHTML('beforeend', html);
   });
 }
 
 function formatTheory(text) {
-  // Support **bold** and *italic* in theory text
-  return esc(text)
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/\n/g, '<br>');
+  return esc(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>');
 }
 
 function formatSentence(sentence, secId, qId, type) {
@@ -356,8 +226,7 @@ function renderOptions(secId, q) {
   if (q.type === 'tf') {
     return '<div class="options horizontal">' +
       '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="T" onclick="selectOption(this)">✓ True</button>' +
-      '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="F" onclick="selectOption(this)">✗ False</button>' +
-      '</div>';
+      '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="F" onclick="selectOption(this)">✗ False</button></div>';
   }
   if (q.type === 'choice' || q.type === 'fill' || q.type === 'select' || q.type === 'listen') {
     let html = '<div class="options">';
@@ -375,38 +244,25 @@ function selectOption(btn) {
   const secId = btn.dataset.sec;
   const qId = btn.dataset.q;
   const val = btn.dataset.val;
-
   if (answers[secId][qId] !== null) return;
-
   answers[secId][qId] = val;
   answered++;
-
   const section = sectionData.find(s => s.id === secId);
   const question = section.questions.find(q => q.id == qId);
   const correct = question.correct;
   const isCorrect = val === correct;
-
   const siblings = btn.parentElement.querySelectorAll('.option-btn');
   siblings.forEach(s => {
     s.disabled = true;
     if (s.dataset.val === correct) s.classList.add('correct');
     if (s === btn && !isCorrect) s.classList.add('wrong');
   });
-
   const blank = document.getElementById('blank_' + secId + '_' + qId);
-  if (blank) {
-    blank.textContent = correct;
-    blank.classList.add(isCorrect ? 'filled' : 'wrong-fill');
-  }
-
+  if (blank) { blank.textContent = correct; blank.classList.add(isCorrect ? 'filled' : 'wrong-fill'); }
   const exp = document.getElementById('exp_' + secId + '_' + qId);
   if (exp) exp.classList.add('visible');
-
   updateProgress();
-
-  if (answered >= totalQuestions) {
-    setTimeout(showResults, 800);
-  }
+  if (answered >= totalQuestions) { setTimeout(showResults, 800); }
 }
 
 function updateProgress() {
@@ -417,16 +273,13 @@ function updateProgress() {
 function showResults() {
   document.getElementById('quizContent').classList.add('hidden');
   document.getElementById('results').classList.remove('hidden');
-
   let correct = 0;
   let detailsHtml = '';
-
   sectionData.forEach(section => {
     section.questions.forEach(q => {
       const userAnswer = answers[section.id][q.id];
       const isCorrect = userAnswer === q.correct;
       if (isCorrect) correct++;
-
       detailsHtml += '<div class="result-item">';
       detailsHtml += '<div class="ri-q">' + esc(section.title) + ' — Вопрос ' + q.id + '</div>';
       if (q.sentence) {
@@ -446,33 +299,26 @@ function showResults() {
       detailsHtml += '</div>';
     });
   });
-
   const pct = Math.round(correct / totalQuestions * 100);
   const scoreEl = document.getElementById('scoreDisplay');
   scoreEl.textContent = correct + '/' + totalQuestions + ' ';
   scoreEl.innerHTML += '<span class="pct">(' + pct + '%)</span>';
   scoreEl.className = 'score ' + (pct >= 90 ? 'excellent' : pct >= 60 ? 'good' : 'needs-work');
-
   let msg = '';
   if (pct >= 90) msg = '🎉 Отлично! Великолепная работа!';
   else if (pct >= 70) msg = '👍 Хороший результат! Ещё немного практики.';
   else if (pct >= 50) msg = '📚 Неплохо, но стоит повторить материал.';
   else msg = '💪 Не расстраивайся! Повтори тему и попробуй ещё раз.';
   document.getElementById('scoreMessage').textContent = msg;
-
   document.getElementById('resultsDetail').innerHTML = '<h3>Подробно</h3>' + detailsHtml;
 }
 
 function restartQuiz() {
   answered = 0;
-  Object.keys(answers).forEach(k => {
-    Object.keys(answers[k]).forEach(qk => answers[k][qk] = null);
-  });
+  Object.keys(answers).forEach(k => { Object.keys(answers[k]).forEach(qk => answers[k][qk] = null); });
   document.getElementById('quizContent').classList.remove('hidden');
   document.getElementById('results').classList.add('hidden');
-  renderAll();
-  updateProgress();
-  window.scrollTo(0, 0);
+  renderAll(); updateProgress(); window.scrollTo(0, 0);
 }
 
 function esc(s) {
