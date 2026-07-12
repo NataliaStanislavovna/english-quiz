@@ -19,42 +19,80 @@
   --theory-bg: rgba(255,255,255,0.03);
   --theory-border: #3a4a6e;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg); color: var(--text);
-  min-height: 100vh; padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 16px;
   -webkit-tap-highlight-color: transparent;
 }
+
 .container { max-width: 600px; margin: 0 auto; }
-.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+
+.header {
+  text-align: center;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
 .header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
 .header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
 
 .phrase-box {
   background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08));
   border: 1px solid rgba(233,69,96,0.3);
-  border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 .phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
 .phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
 .phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
 
 .audio-box {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 .audio-box .audio-label { font-size: 12px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
 .audio-box audio { width: 100%; max-width: 320px; height: 40px; border-radius: 8px; }
 
-.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.progress-bar {
+  width: 100%; height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
 
 .section-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.3s ease;
 }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .section-title {
   font-size: 16px; font-weight: 700; color: var(--text);
@@ -65,20 +103,48 @@ body {
 .section-title .icon { font-size: 20px; }
 
 .theory {
-  background: var(--theory-bg); border-left: 3px solid var(--theory-border);
-  border-radius: 0 8px 8px 0; padding: 12px 14px;
-  margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim);
+  background: var(--theory-bg);
+  border-left: 3px solid var(--theory-border);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-dim);
 }
 .theory strong { color: var(--text); font-weight: 600; }
 .theory em { color: var(--accent-light); font-style: italic; }
 
-.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
-.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.question-block {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.question-number {
+  font-size: 12px; font-weight: 600;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.sentence {
+  font-size: 15px; line-height: 1.7;
+  margin-bottom: 14px;
+  padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+}
 
 .blank {
-  display: inline-block; min-width: 80px; border-bottom: 2px dashed var(--accent);
-  margin: 0 4px; text-align: center; color: var(--accent-light); font-weight: 600;
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 2px dashed var(--accent);
+  margin: 0 4px;
+  text-align: center;
+  color: var(--accent-light);
+  font-weight: 600;
 }
 .blank.filled { border-bottom-style: solid; color: var(--correct); }
 .blank.wrong-fill { border-bottom-style: solid; color: var(--wrong); }
@@ -87,34 +153,64 @@ body {
 .options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
 
 .option-btn {
-  background: rgba(255,255,255,0.06); border: 2px solid var(--border);
-  border-radius: var(--btn-radius); padding: 14px 20px;
-  font-size: 15px; color: var(--text); cursor: pointer;
-  transition: all 0.2s ease; text-align: center;
-  min-height: 48px; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid var(--border);
+  border-radius: var(--btn-radius);
+  padding: 14px 20px;
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  min-height: 48px;
+  display: flex; align-items: center; justify-content: center;
   user-select: none; -webkit-user-select: none;
 }
 .option-btn:active { transform: scale(0.97); }
-.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
-.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn.correct {
+  background: rgba(46,213,115,0.15);
+  border-color: var(--correct);
+  color: var(--correct);
+  font-weight: 600;
+}
+.option-btn.wrong {
+  background: rgba(255,71,87,0.15);
+  border-color: var(--wrong);
+  color: var(--wrong);
+  font-weight: 600;
+}
 .option-btn:disabled { cursor: default; opacity: 0.7; }
 .option-btn:disabled:active { transform: none; }
 .option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
 .option-btn.correct .letter { color: var(--correct); }
 .option-btn.wrong .letter { color: var(--wrong); }
-.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+
+.tf-btn {
+  flex: 1; max-width: 140px;
+  padding: 18px 24px;
+  font-size: 18px; font-weight: 700;
+  letter-spacing: 1px;
+}
 
 .explanation {
-  margin-top: 10px; padding: 10px 12px;
-  background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct);
-  border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6;
-  color: var(--text-dim); display: none;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(46,213,115,0.08);
+  border-left: 3px solid var(--correct);
+  border-radius: 0 8px 8px 0;
+  font-size: 13px; line-height: 1.6;
+  color: var(--text-dim);
+  display: none;
 }
 .explanation.visible { display: block; }
 
 .results {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
 }
 .results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
 .results .score .pct { font-size: 24px; color: var(--text-dim); }
@@ -122,9 +218,22 @@ body {
 .results .score.good { color: var(--accent-light); }
 .results .score.needs-work { color: var(--wrong); }
 .results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
-.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+
+.results-detail {
+  text-align: left;
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.results-detail h3 {
+  font-size: 14px; color: var(--text-dim);
+  margin-bottom: 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.result-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px; line-height: 1.5;
+}
 .result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
 .result-item .ri-correct { color: var(--correct); font-weight: 600; }
 .result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
@@ -132,10 +241,14 @@ body {
 .restart-btn {
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   border: none; border-radius: var(--btn-radius);
-  padding: 16px 40px; font-size: 16px; font-weight: 700;
-  color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease;
+  padding: 16px 40px;
+  font-size: 16px; font-weight: 700;
+  color: white; cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.2s ease;
 }
 .restart-btn:active { transform: scale(0.97); }
+
 .hidden { display: none; }
 </style>
 </head>
@@ -145,7 +258,12 @@ body {
     <h1>Weather &amp; Seasons — describing weather, forecasts, nature vocabulary</h1>
     <div class="subtitle">2026-07-12</div>
   </div>
-  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">It&#x27;s raining cats and dogs.</div><div class="translation">Льёт как из ведра (идёт сильный дождь).</div></div>
+  <div class="phrase-box">
+<div class="label">💡 Фраза дня</div>
+<div class="phrase">It&#x27;s raining cats and dogs.</div>
+<div class="translation">Льёт как из ведра (идёт сильный дождь).</div>
+</div>
+  <div class="audio-box"><div class="audio-label">🎧 Listen to the dialogue</div><audio controls preload="none"><source src="https://nataliastanislavovna.github.io/english-quiz/audio.mp3">Your browser does not support audio.</audio></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div id="quizContent"></div>
   <div class="results hidden" id="results">
@@ -157,8 +275,7 @@ body {
   </div>
 </div>
 <script>
-const quizData = {"title": "Weather & Seasons — describing weather, forecasts, nature vocabulary", "subtitle": "2026-07-12", "date": "2026-07-12", "phrase_of_the_day": "It's raining cats and dogs.", "phrase_translation": "Льёт как из ведра (идёт сильный дождь).", "audio_url": "audio.mp3", "sections": [{"id": "s1", "title": "Theory: Weather vocabulary", "icon": "✏️", "questions": [{"id": 1, "type": "choice", "sentence": "It's very ___ today — I can barely see the road.", "options": ["sunny", "windy", "foggy", "snowy"], "correct": "foggy", "explanation": "«It's very foggy» = Очень туманно. Fog = туман. Если едешь и почти не видишь дорогу — это туман, а не ветер или солнце."}, {"id": 2, "type": "fill", "sentence": "Don't forget your umbrella — it's going to be ___ this afternoon.", "options": ["sunny", "rainy", "snowy", "clear"], "correct": "rainy", "explanation": "«It's going to be rainy» = Будет дождливо. Совет взять зонт = umbrella → значит ожидается дождь. Rainy = дождливый (от rain)."}, {"id": 3, "type": "tf", "sentence": "\"A storm is coming\" means good weather is approaching.", "options": ["T", "F"], "correct": "F", "explanation": "«A storm is coming» = Надвигается шторм/буря. Сторм — это плохая погода (сильный ветер, гром, дождь). «Approaching» здесь = надвигается, приближается."}], "theory": "Базовая погодная лексика: **sunny** (солнечно), **cloudy** (облачно), **rainy** (дождливо), **windy** (ветрено), **snowy** (снежно), **foggy** (туманно), **stormy** (шторм/гроза). Для прогноза используем **It's going to be...** или **It will be...**"}, {"id": "s2", "title": "Vocabulary: Seasons & temperature", "icon": "✅", "questions": [{"id": 4, "type": "choice", "sentence": "In which season do leaves fall from trees in most countries?", "options": ["Spring", "Summer", "Autumn", "Winter"], "correct": "Autumn", "explanation": "В **autumn** (осень) листья падают с деревьев — это называется «fall» (в американском английском autumn = fall). Spring = весна, summer = лето, winter = зима."}, {"id": 5, "type": "fill", "sentence": "It's minus 15 degrees outside — it's extremely ___!", "options": ["hot", "warm", "cold", "mild"], "correct": "cold", "explanation": "«It's extremely cold» = Невероятно холодно. Minus 15 = -15°C → это однозначно cold (холодно). Mild = мягкая погода (не слишком холодно, не слишком тепло)."}, {"id": 6, "type": "choice", "sentence": "What does \"It's boiling outside\" mean?", "options": ["It's very cold.", "It's very hot.", "It's raining heavily.", "It's very windy."], "correct": "It's very hot.", "explanation": "«It's boiling» = Жарит / Невероятно жарко. Boiling = кипящий, но в разговорной речи означает экстремальную жару. Аналог: «It's freezing» = Невероятно холодно."}]}, {"id": "s3", "title": "Vocabulary: Weather verbs & phrases", "icon": "🎧", "questions": [{"id": 7, "type": "choice", "sentence": "Which sentence is correct?", "options": ["The weather is raining.", "Weather is raining.", "It's raining heavily.", "It raining now."], "correct": "It's raining heavily.", "explanation": "В английском погода описывается с «it»: It's raining = Идёт дождь. НЕ «The weather is raining» — weather = погода (существительное), а не подлежащее для глагола rain."}, {"id": 8, "type": "fill", "sentence": "The wind is ___ so hard that my hat flew off!", "options": ["blowing", "raining", "snowing", "shining"], "correct": "blowing", "explanation": "«The wind is blowing» = Ветер дует. Shapply = сильно. Шляпа улетела (hat flew off) → ветер дует. Blow = дуть (the wind blows)."}, {"id": 9, "type": "tf", "sentence": "\"The sun is shining\" is a correct way to describe sunny weather.", "options": ["T", "F"], "correct": "T", "explanation": "«The sun is shining» = Солнце светит. Shine = светить. Present Continuous описывает погоду прямо сейчас: «Look, the sun is shining!»"}], "theory": "Глаголы погоды: **It's raining / pouring** (идёт дождь / льёт), **It's snowing** (идёт снег), **The wind is blowing** (ветер дует), **The sun is shining** (солнце светит). Внимание: в английском подлежащее — **it**, а не «weather»!"}, {"id": "s4", "title": "Listening: Weather forecast", "icon": "📖", "questions": [{"id": 10, "type": "listen", "sentence": "Listen to the forecast and answer: What will the weather be like on Saturday?", "options": ["Rainy and windy", "Sunny with a gentle breeze", "Cloudy all day", "Snowy and cold"], "correct": "Sunny with a gentle breeze", "explanation": "«Saturday will be much better — sunny skies with a gentle breeze and temperatures around twenty-five degrees» = В субботу будет солнечно с лёгким ветерком, около 25 градусов. Gentle breeze = лёгкий ветерок."}, {"id": 11, "type": "listen", "sentence": "Listen and answer: What does the presenter recommend for Friday?", "options": ["Wear a warm jacket", "Stay at home all day", "Take an umbrella if going out", "Go to the park"], "correct": "Take an umbrella if going out", "explanation": "«Take an umbrella if you're going out» = Возьми зонт, если выходишь. Heavy rain = сильный дождь → нужен зонт. Это рекомендация именно на пятницу."}, {"id": 12, "type": "listen", "sentence": "Listen and answer: What will happen to the weather on Sunday?", "options": ["It will rain all day.", "It will snow in the morning.", "It will start cloudy and clear up by afternoon.", "It will be sunny all day."], "correct": "It will start cloudy and clear up by afternoon.", "explanation": "«Sunday will start cloudy, but it should clear up by the afternoon» = В воскресенье начнётся облачно, но к вечеру прояснится. Clear up = проясниться. Start cloudy = начнётся облачно."}], "instruction": "Listen and answer."}]};
-const audioHtml = "<div class=\"audio-box\"><div class=\"audio-label\">🎧 Listen to the dialogue</div><audio controls preload=\"none\"><source src=\"audio.mp3\">Your browser does not support audio.</audio></div>";
+const quizData = {"title": "Weather & Seasons — describing weather, forecasts, nature vocabulary", "subtitle": "2026-07-12", "date": "2026-07-12", "phrase_of_the_day": "It's raining cats and dogs.", "phrase_translation": "Льёт как из ведра (идёт сильный дождь).", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/audio.mp3", "sections": [{"id": "s1", "title": "Theory: Weather vocabulary", "icon": "📖", "theory": "Базовая погодная лексика: **sunny** (солнечно), **cloudy** (облачно), **rainy** (дождливо), **windy** (ветрено), **snowy** (снежно), **foggy** (туманно), **stormy** (шторм/гроза). Для прогноза используем **It's going to be...** или **It will be...**", "instruction": "", "questions": [{"id": 1, "type": "choice", "sentence": "It's very ___ today — I can barely see the road.", "options": ["sunny", "windy", "foggy", "snowy"], "correct": "foggy", "explanation": "«It's very foggy» = Очень туманно. Fog = туман. Если едешь и почти не видишь дорогу — это туман, а не ветер или солнце."}, {"id": 2, "type": "fill", "sentence": "Don't forget your umbrella — it's going to be ___ this afternoon.", "options": ["sunny", "rainy", "snowy", "clear"], "correct": "rainy", "explanation": "«It's going to be rainy» = Будет дождливо. Совет взять зонт = umbrella → значит ожидается дождь. Rainy = дождливый (от rain)."}, {"id": 3, "type": "tf", "sentence": "\"A storm is coming\" means good weather is approaching.", "options": ["T", "F"], "correct": "F", "explanation": "«A storm is coming» = Надвигается шторм/буря. Сторм — это плохая погода (сильный ветер, гром, дождь). «Approaching» здесь = надвигается, приближается."}]}, {"id": "s2", "title": "Vocabulary: Seasons & temperature", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": 4, "type": "choice", "sentence": "In which season do leaves fall from trees in most countries?", "options": ["Spring", "Summer", "Autumn", "Winter"], "correct": "Autumn", "explanation": "В **autumn** (осень) листья падают с деревьев — это называется «fall» (в американском английском autumn = fall). Spring = весна, summer = лето, winter = зима."}, {"id": 5, "type": "fill", "sentence": "It's minus 15 degrees outside — it's extremely ___!", "options": ["hot", "warm", "cold", "mild"], "correct": "cold", "explanation": "«It's extremely cold» = Невероятно холодно. Minus 15 = -15°C → это однозначно cold (холодно). Mild = мягкая погода (не слишком холодно, не слишком тепло)."}, {"id": 6, "type": "choice", "sentence": "What does \"It's boiling outside\" mean?", "options": ["It's very cold.", "It's very hot.", "It's raining heavily.", "It's very windy."], "correct": "It's very hot.", "explanation": "«It's boiling» = Жарит / Невероятно жарко. Boiling = кипящий, но в разговорной речи означает экстремальную жару. Аналог: «It's freezing» = Невероятно холодно."}]}, {"id": "s3", "title": "Vocabulary: Weather verbs & phrases", "icon": "✏️", "theory": "Глаголы погоды: **It's raining / pouring** (идёт дождь / льёт), **It's snowing** (идёт снег), **The wind is blowing** (ветер дует), **The sun is shining** (солнце светит). Внимание: в английском подлежащее — **it**, а не «weather»!", "instruction": "", "questions": [{"id": 7, "type": "choice", "sentence": "Which sentence is correct?", "options": ["The weather is raining.", "Weather is raining.", "It's raining heavily.", "It raining now."], "correct": "It's raining heavily.", "explanation": "В английском погода описывается с «it»: It's raining = Идёт дождь. НЕ «The weather is raining» — weather = погода (существительное), а не подлежащее для глагола rain."}, {"id": 8, "type": "fill", "sentence": "The wind is ___ so hard that my hat flew off!", "options": ["blowing", "raining", "snowing", "shining"], "correct": "blowing", "explanation": "«The wind is blowing» = Ветер дует. Shapply = сильно. Шляпа улетела (hat flew off) → ветер дует. Blow = дуть (the wind blows)."}, {"id": 9, "type": "tf", "sentence": "\"The sun is shining\" is a correct way to describe sunny weather.", "options": ["T", "F"], "correct": "T", "explanation": "«The sun is shining» = Солнце светит. Shine = светить. Present Continuous описывает погоду прямо сейчас: «Look, the sun is shining!»"}]}, {"id": "s4", "title": "Listening: Weather forecast", "icon": "🎧", "theory": "", "instruction": "", "questions": [{"id": 10, "type": "listen", "sentence": "Listen to the forecast and answer: What will the weather be like on Saturday?", "options": ["Rainy and windy", "Sunny with a gentle breeze", "Cloudy all day", "Snowy and cold"], "correct": "Sunny with a gentle breeze", "explanation": "«Saturday will be much better — sunny skies with a gentle breeze and temperatures around twenty-five degrees» = В субботу будет солнечно с лёгким ветерком, около 25 градусов. Gentle breeze = лёгкий ветерок.", "audio_text": "Good morning! Here's your weekend forecast. On Friday, expect heavy rain and strong winds, so take an umbrella if you're going out. Saturday will be much better — sunny skies with a gentle breeze and temperatures around twenty-five degrees. Perfect for a walk in the park! Sunday will start cloudy, but it should clear up by the afternoon."}, {"id": 11, "type": "listen", "sentence": "Listen and answer: What does the presenter recommend for Friday?", "options": ["Wear a warm jacket", "Stay at home all day", "Take an umbrella if going out", "Go to the park"], "correct": "Take an umbrella if going out", "explanation": "«Take an umbrella if you're going out» = Возьми зонт, если выходишь. Heavy rain = сильный дождь → нужен зонт. Это рекомендация именно на пятницу.", "audio_text": "Good morning! Here's your weekend forecast. On Friday, expect heavy rain and strong winds, so take an umbrella if you're going out. Saturday will be much better — sunny skies with a gentle breeze and temperatures around twenty-five degrees. Perfect for a walk in the park! Sunday will start cloudy, but it should clear up by the afternoon."}, {"id": 12, "type": "listen", "sentence": "Listen and answer: What will happen to the weather on Sunday?", "options": ["It will rain all day.", "It will snow in the morning.", "It will start cloudy and clear up by afternoon.", "It will be sunny all day."], "correct": "It will start cloudy and clear up by afternoon.", "explanation": "«Sunday will start cloudy, but it should clear up by the afternoon» = В воскресенье начнётся облачно, но к вечеру прояснится. Clear up = проясниться. Start cloudy = начнётся облачно.", "audio_text": "Good morning! Here's your weekend forecast. On Friday, expect heavy rain and strong winds, so take an umbrella if you're going out. Saturday will be much better — sunny skies with a gentle breeze and temperatures around twenty-five degrees. Perfect for a walk in the park! Sunday will start cloudy, but it should clear up by the afternoon."}]}]};
 
 let answered = 0;
 let totalQuestions = 0;
@@ -184,16 +301,21 @@ function renderAll() {
   let globalQ = 0;
   sectionData.forEach(section => {
     let html = '<div class="section-card" id="section_' + section.id + '">';
+
+    // Section title
     html += '<div class="section-title"><span class="icon">' + (section.icon || '📝') + '</span>' + esc(section.title) + '</div>';
+
+    // Theory BEFORE questions
     if (section.theory) {
       html += '<div class="theory">' + formatTheory(section.theory) + '</div>';
     }
+
+    // Instruction
     if (section.instruction) {
-      html += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(section.instruction) + '</div>';
+      html += '<div class="instruction" style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(section.instruction) + '</div>';
     }
-    if (audioHtml && (section.questions || []).some(q => q.type === 'listen')) {
-      html += audioHtml;
-    }
+
+    // Questions
     (section.questions || []).forEach(q => {
       globalQ++;
       html += '<div class="question-block">';
@@ -207,13 +329,18 @@ function renderAll() {
       }
       html += '</div>';
     });
+
     html += '</div>';
     container.insertAdjacentHTML('beforeend', html);
   });
 }
 
 function formatTheory(text) {
-  return esc(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>');
+  // Support **bold** and *italic* in theory text
+  return esc(text)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
 }
 
 function formatSentence(sentence, secId, qId, type) {
@@ -227,12 +354,10 @@ function formatSentence(sentence, secId, qId, type) {
 function renderOptions(secId, q) {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   if (q.type === 'tf') {
-    const opts = q.options || ['T', 'F'];
-    const labels = {'T': '✓ True', 'F': '✗ False', 'True': '✓ True', 'False': '✗ False'};
     return '<div class="options horizontal">' +
-      opts.map(opt =>
-        '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="' + esc(opt) + '" onclick="selectOption(this)">' + (labels[opt] || esc(opt)) + '</button>'
-      ).join('') + '</div>';
+      '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="T" onclick="selectOption(this)">✓ True</button>' +
+      '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="F" onclick="selectOption(this)">✗ False</button>' +
+      '</div>';
   }
   if (q.type === 'choice' || q.type === 'fill' || q.type === 'select' || q.type === 'listen') {
     let html = '<div class="options">';
@@ -250,25 +375,38 @@ function selectOption(btn) {
   const secId = btn.dataset.sec;
   const qId = btn.dataset.q;
   const val = btn.dataset.val;
+
   if (answers[secId][qId] !== null) return;
+
   answers[secId][qId] = val;
   answered++;
+
   const section = sectionData.find(s => s.id === secId);
   const question = section.questions.find(q => q.id == qId);
   const correct = question.correct;
   const isCorrect = val === correct;
+
   const siblings = btn.parentElement.querySelectorAll('.option-btn');
   siblings.forEach(s => {
     s.disabled = true;
     if (s.dataset.val === correct) s.classList.add('correct');
     if (s === btn && !isCorrect) s.classList.add('wrong');
   });
+
   const blank = document.getElementById('blank_' + secId + '_' + qId);
-  if (blank) { blank.textContent = correct; blank.classList.add(isCorrect ? 'filled' : 'wrong-fill'); }
+  if (blank) {
+    blank.textContent = correct;
+    blank.classList.add(isCorrect ? 'filled' : 'wrong-fill');
+  }
+
   const exp = document.getElementById('exp_' + secId + '_' + qId);
   if (exp) exp.classList.add('visible');
+
   updateProgress();
-  if (answered >= totalQuestions) { setTimeout(showResults, 800); }
+
+  if (answered >= totalQuestions) {
+    setTimeout(showResults, 800);
+  }
 }
 
 function updateProgress() {
@@ -279,13 +417,16 @@ function updateProgress() {
 function showResults() {
   document.getElementById('quizContent').classList.add('hidden');
   document.getElementById('results').classList.remove('hidden');
+
   let correct = 0;
   let detailsHtml = '';
+
   sectionData.forEach(section => {
     section.questions.forEach(q => {
       const userAnswer = answers[section.id][q.id];
       const isCorrect = userAnswer === q.correct;
       if (isCorrect) correct++;
+
       detailsHtml += '<div class="result-item">';
       detailsHtml += '<div class="ri-q">' + esc(section.title) + ' — Вопрос ' + q.id + '</div>';
       if (q.sentence) {
@@ -305,26 +446,33 @@ function showResults() {
       detailsHtml += '</div>';
     });
   });
+
   const pct = Math.round(correct / totalQuestions * 100);
   const scoreEl = document.getElementById('scoreDisplay');
   scoreEl.textContent = correct + '/' + totalQuestions + ' ';
   scoreEl.innerHTML += '<span class="pct">(' + pct + '%)</span>';
   scoreEl.className = 'score ' + (pct >= 90 ? 'excellent' : pct >= 60 ? 'good' : 'needs-work');
+
   let msg = '';
   if (pct >= 90) msg = '🎉 Отлично! Великолепная работа!';
   else if (pct >= 70) msg = '👍 Хороший результат! Ещё немного практики.';
   else if (pct >= 50) msg = '📚 Неплохо, но стоит повторить материал.';
   else msg = '💪 Не расстраивайся! Повтори тему и попробуй ещё раз.';
   document.getElementById('scoreMessage').textContent = msg;
+
   document.getElementById('resultsDetail').innerHTML = '<h3>Подробно</h3>' + detailsHtml;
 }
 
 function restartQuiz() {
   answered = 0;
-  Object.keys(answers).forEach(k => { Object.keys(answers[k]).forEach(qk => answers[k][qk] = null); });
+  Object.keys(answers).forEach(k => {
+    Object.keys(answers[k]).forEach(qk => answers[k][qk] = null);
+  });
   document.getElementById('quizContent').classList.remove('hidden');
   document.getElementById('results').classList.add('hidden');
-  renderAll(); updateProgress(); window.scrollTo(0, 0);
+  renderAll();
+  updateProgress();
+  window.scrollTo(0, 0);
 }
 
 function esc(s) {
