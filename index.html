@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Food &amp; Cooking — verbs, kitchen, describing food</title>
+<title>At the Restaurant — ordering food, polite requests, restaurant vocabulary</title>
 <style>
 :root {
   --bg: #1a1a2e;
@@ -19,42 +19,80 @@
   --theory-bg: rgba(255,255,255,0.03);
   --theory-border: #3a4a6e;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg); color: var(--text);
-  min-height: 100vh; padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 16px;
   -webkit-tap-highlight-color: transparent;
 }
+
 .container { max-width: 600px; margin: 0 auto; }
-.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+
+.header {
+  text-align: center;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
 .header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
 .header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
 
 .phrase-box {
   background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08));
   border: 1px solid rgba(233,69,96,0.3);
-  border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 .phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
 .phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
 .phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
 
 .audio-box {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 .audio-box .audio-label { font-size: 12px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
 .audio-box audio { width: 100%; max-width: 320px; height: 40px; border-radius: 8px; }
 
-.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.progress-bar {
+  width: 100%; height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
 
 .section-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.3s ease;
 }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .section-title {
   font-size: 16px; font-weight: 700; color: var(--text);
@@ -65,20 +103,48 @@ body {
 .section-title .icon { font-size: 20px; }
 
 .theory {
-  background: var(--theory-bg); border-left: 3px solid var(--theory-border);
-  border-radius: 0 8px 8px 0; padding: 12px 14px;
-  margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim);
+  background: var(--theory-bg);
+  border-left: 3px solid var(--theory-border);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-dim);
 }
 .theory strong { color: var(--text); font-weight: 600; }
 .theory em { color: var(--accent-light); font-style: italic; }
 
-.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
-.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.question-block {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.question-number {
+  font-size: 12px; font-weight: 600;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.sentence {
+  font-size: 15px; line-height: 1.7;
+  margin-bottom: 14px;
+  padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+}
 
 .blank {
-  display: inline-block; min-width: 80px; border-bottom: 2px dashed var(--accent);
-  margin: 0 4px; text-align: center; color: var(--accent-light); font-weight: 600;
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 2px dashed var(--accent);
+  margin: 0 4px;
+  text-align: center;
+  color: var(--accent-light);
+  font-weight: 600;
 }
 .blank.filled { border-bottom-style: solid; color: var(--correct); }
 .blank.wrong-fill { border-bottom-style: solid; color: var(--wrong); }
@@ -87,34 +153,64 @@ body {
 .options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
 
 .option-btn {
-  background: rgba(255,255,255,0.06); border: 2px solid var(--border);
-  border-radius: var(--btn-radius); padding: 14px 20px;
-  font-size: 15px; color: var(--text); cursor: pointer;
-  transition: all 0.2s ease; text-align: center;
-  min-height: 48px; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid var(--border);
+  border-radius: var(--btn-radius);
+  padding: 14px 20px;
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  min-height: 48px;
+  display: flex; align-items: center; justify-content: center;
   user-select: none; -webkit-user-select: none;
 }
 .option-btn:active { transform: scale(0.97); }
-.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
-.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn.correct {
+  background: rgba(46,213,115,0.15);
+  border-color: var(--correct);
+  color: var(--correct);
+  font-weight: 600;
+}
+.option-btn.wrong {
+  background: rgba(255,71,87,0.15);
+  border-color: var(--wrong);
+  color: var(--wrong);
+  font-weight: 600;
+}
 .option-btn:disabled { cursor: default; opacity: 0.7; }
 .option-btn:disabled:active { transform: none; }
 .option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
 .option-btn.correct .letter { color: var(--correct); }
 .option-btn.wrong .letter { color: var(--wrong); }
-.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+
+.tf-btn {
+  flex: 1; max-width: 140px;
+  padding: 18px 24px;
+  font-size: 18px; font-weight: 700;
+  letter-spacing: 1px;
+}
 
 .explanation {
-  margin-top: 10px; padding: 10px 12px;
-  background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct);
-  border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6;
-  color: var(--text-dim); display: none;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(46,213,115,0.08);
+  border-left: 3px solid var(--correct);
+  border-radius: 0 8px 8px 0;
+  font-size: 13px; line-height: 1.6;
+  color: var(--text-dim);
+  display: none;
 }
 .explanation.visible { display: block; }
 
 .results {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
 }
 .results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
 .results .score .pct { font-size: 24px; color: var(--text-dim); }
@@ -122,9 +218,22 @@ body {
 .results .score.good { color: var(--accent-light); }
 .results .score.needs-work { color: var(--wrong); }
 .results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
-.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+
+.results-detail {
+  text-align: left;
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.results-detail h3 {
+  font-size: 14px; color: var(--text-dim);
+  margin-bottom: 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.result-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px; line-height: 1.5;
+}
 .result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
 .result-item .ri-correct { color: var(--correct); font-weight: 600; }
 .result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
@@ -132,20 +241,29 @@ body {
 .restart-btn {
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   border: none; border-radius: var(--btn-radius);
-  padding: 16px 40px; font-size: 16px; font-weight: 700;
-  color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease;
+  padding: 16px 40px;
+  font-size: 16px; font-weight: 700;
+  color: white; cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.2s ease;
 }
 .restart-btn:active { transform: scale(0.97); }
+
 .hidden { display: none; }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <h1>Food &amp; Cooking — verbs, kitchen, describing food</h1>
-    <div class="subtitle">2026-07-04</div>
+    <h1>At the Restaurant — ordering food, polite requests, restaurant vocabulary</h1>
+    <div class="subtitle">2026-07-13</div>
   </div>
-  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Let&#x27;s grab a bite.</div><div class="translation">Давай перекусим. / Пойдём что-нибудь съедим.</div></div>
+  <div class="phrase-box">
+<div class="label">💡 Фраза дня</div>
+<div class="phrase">I&#x27;ll have the chicken salad, please.</div>
+<div class="translation">Я возьму куриный салат, пожалуйста.</div>
+</div>
+  <div class="audio-box"><div class="audio-label">🎧 Listen to the dialogue</div><audio controls preload="none"><source src="https://nataliastanislavovna.github.io/english-quiz/audio.mp3">Your browser does not support audio.</audio></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div id="quizContent"></div>
   <div class="results hidden" id="results">
@@ -157,8 +275,7 @@ body {
   </div>
 </div>
 <script>
-const quizData = {"title": "Food & Cooking — verbs, kitchen, describing food", "subtitle": "2026-07-04", "date": "2026-07-04", "phrase_of_the_day": "Let's grab a bite.", "phrase_translation": "Давай перекусим. / Пойдём что-нибудь съедим.", "audio_url": "audio.mp3", "sections": [{"id": "s1", "title": "Cooking verbs", "icon": "✏️", "questions": [{"id": 1, "type": "choice", "sentence": "You need to ___ the onions before putting them in the pan.", "options": ["chop", "boil", "roast", "pour"], "correct": "chop", "explanation": "Нарезать лук перед жаркой — chop."}, {"id": 2, "type": "fill", "sentence": "She ___ the chicken in the oven for two hours. (запекала)", "options": ["fried", "roasted", "boiled", "grated"], "correct": "roasted", "explanation": "Roast = запекать в духовке. Fried — жарить, boiled — варить."}, {"id": 3, "type": "fill", "sentence": "Could you ___ the soup, please? It doesn't have enough salt. (помешать)", "options": ["chop", "pour", "stir", "grate"], "correct": "stir", "explanation": "Stir = помешивать. Добавить/попробовать — тоже stir (в контексте супа)."}], "theory": "Common cooking verbs: **fry** (жарить на масле), **roast** (запекать в духовке), **boil** (варить), **chop** (резать на куски), **grate** (тереть на тёрке), **stir** (помешивать), **pour** (наливать)."}, {"id": "s2", "title": "Kitchen tools", "icon": "✅", "questions": [{"id": 4, "type": "choice", "sentence": "Use a ___ to beat the eggs until they are light and fluffy.", "options": ["grater", "whisk", "ladle", "saucepan"], "correct": "whisk", "explanation": "Whisk = венчик. Им взбивают яйца, крем и т.д."}, {"id": 5, "type": "choice", "sentence": "I need a ___ to serve the soup into bowls.", "options": ["grater", "frying pan", "ladle", "cutting board"], "correct": "ladle", "explanation": "Ladle = половник / разливательная ложка. Для супа."}], "theory": "Kitchen tools: **grater** (тёрка), **ladle** (разливательная ложка/половник), **whisk** (венчик), **cutting board** (разделочная доска), **saucepan** (кастрюля), **frying pan** (сковорода)."}, {"id": "s3", "title": "Describing food", "icon": "🎧", "questions": [{"id": 6, "type": "choice", "sentence": "The steak was cooked perfectly — very ___ and juicy.", "options": ["bland", "crunchy", "tender", "bitter"], "correct": "tender", "explanation": "Tender = нежный, мягкий. Идеально для мяса."}, {"id": 7, "type": "fill", "sentence": "These potato chips are so ___! (хрустящие)", "options": ["bland", "crunchy", "tender", "sour"], "correct": "crunchy", "explanation": "Crunchy = хрустящий. Картофельные чипсы — хрустящие."}, {"id": 8, "type": "choice", "sentence": "The soup needs more spices — it's too ___.", "options": ["spicy", "savory", "bland", "crunchy"], "correct": "bland", "explanation": "Bland = безвкусный. Суп без специй — bland."}], "theory": "Adjectives for food: **bland** (безвкусный), **crunchy** (хрустящий), **tender** (нежный/мягкий), **spicy** (острый), **sour** (кислый), **bitter** (горький), **savory** (солёный/пикантный)."}, {"id": "s4", "title": "Grammar — countable vs uncountable with food", "icon": "📖", "questions": [{"id": 9, "type": "fill", "sentence": "How ___ rice do we need for the recipe?", "options": ["many", "much", "few", "little"], "correct": "much", "explanation": "Rice — uncountable → How much?"}, {"id": 10, "type": "choice", "sentence": "There aren't ___ eggs in the fridge. I need to buy some.", "options": ["much", "many", "a little", "some"], "correct": "many", "explanation": "Eggs — countable → How many? Отрицание → aren't many."}, {"id": 11, "type": "tf", "sentence": "\"I'd like some bread, please.\" — This sentence is correct.", "options": ["T", "F"], "correct": "T", "explanation": "'Some' используется в запросах и просьбах, даже в вопросительной форме. 'I'd like some bread' = 'Мне бы хлеба'."}], "theory": "Countable (можно посчитать): apple, egg, sandwich — **How many?**. Uncountable (нельзя посчитать): rice, water, bread, cheese — **How much?**. Some words can be both: **chicken** (countable = курица-птица, uncountable = куриное мясо)."}, {"id": "s5", "title": "Listening — Cooking together", "icon": "🎯", "questions": [{"id": 12, "type": "listen", "sentence": "What does Anna ask Marco to do first?", "options": ["Chop the onions and garlic", "Boil the water for pasta", "Fry the onions", "Make the sauce"], "correct": "Chop the onions and garlic", "explanation": "Anna говорит: 'First, can you chop the onions and garlic?'"}, {"id": 13, "type": "listen", "sentence": "What should Marco do with the onions?", "options": ["Boil them", "Fry them in olive oil", "Roast them in the oven", "Grate them"], "correct": "Fry them in olive oil", "explanation": "Anna говорит: 'Fry them in olive oil until they're soft.'"}, {"id": 14, "type": "listen", "sentence": "How long does the spaghetti take to cook?", "options": ["Five minutes", "About ten minutes", "Fifteen minutes", "Twenty minutes"], "correct": "About ten minutes", "explanation": "Anna говорит: 'It takes about ten minutes.'"}], "theory": "Listen to the dialogue between two friends cooking pasta together. Answer the questions about what you hear.", "instruction": "Listen and answer."}]};
-const audioHtml = "<div class=\"audio-box\"><div class=\"audio-label\">🎧 Listen to the dialogue</div><audio controls preload=\"none\"><source src=\"audio.mp3\">Your browser does not support audio.</audio></div>";
+const quizData = {"title": "At the Restaurant — ordering food, polite requests, restaurant vocabulary", "subtitle": "2026-07-13", "date": "2026-07-13", "phrase_of_the_day": "I'll have the chicken salad, please.", "phrase_translation": "Я возьму куриный салат, пожалуйста.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/audio.mp3", "sections": [{"id": "s1", "title": "Theory: Restaurant vocabulary", "icon": "📖", "theory": "Ключевые слова ресторана: **menu** (меню), **waiter/waitress** (официант/официантка), **order** (заказ), **bill / check** (счёт), **tip** (чаевые), **appetizer / starter** (закуска), **main course** (основное блюдо), **dessert** (десерт), **drink** (напиток).", "instruction": "", "questions": [{"id": 1, "type": "choice", "sentence": "After you finish eating, you ask the waiter for the ___.", "options": ["menu", "bill", "recipe", "appetizer"], "correct": "bill", "explanation": "«Bill» (или «check» в США) = счёт. После еды просишь счёт, а не меню или рецепт. Recipe = рецепт (для готовки), не для ресторана."}, {"id": 2, "type": "fill", "sentence": "The ___ brought us our drinks and took our order.", "options": ["cook", "waiter", "customer", "manager"], "correct": "waiter", "explanation": "«Waiter» = официант. Он приносит напитки и принимает заказ. Cook = повар (на кухне). Customer = клиент (это ты!)."}, {"id": 3, "type": "tf", "sentence": "\"A starter\" is the same as \"a dessert\".", "options": ["T", "F"], "correct": "F", "explanation": "Нет! Starter = закуска (первое блюдо, перед основным). Dessert = десерт (сладкое в конце). Это совершенно разные части repas!"}]}, {"id": "s2", "title": "Vocabulary: Ordering food", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": 4, "type": "choice", "sentence": "Which is the most polite way to order food?", "options": ["Give me the pasta.", "I want pasta.", "I'll have the pasta, please.", "Pasta now."], "correct": "I'll have the pasta, please.", "explanation": "«I'll have the pasta, please» = Я возьму пасту, пожалуйста. Самый вежливый и естественный способ заказать. «Give me» / «I want» звучат грубо."}, {"id": 5, "type": "fill", "sentence": "Could I see the ___, please? I'd like to choose my dishes.", "options": ["bill", "recipe", "menu", "kitchen"], "correct": "menu", "explanation": "«Could I see the menu, please?» = Можно посмотреть меню? Menu = меню. Kitchen = кухня (помещение, не документ)."}, {"id": 6, "type": "choice", "sentence": "What does \"I'd like to pay by card\" mean?", "options": ["I want to leave a tip.", "I want to pay with cash.", "I want to pay using a bank card.", "I want to order more food."], "correct": "I want to pay using a bank card.", "explanation": "«Pay by card» = оплатить картой. By card = банковской картой. By cash / in cash = наличными."}]}, {"id": "s3", "title": "Grammar: Polite requests with Could / Would", "icon": "✏️", "theory": "Вежливые просьбы: **Could I have...?** (Могу я получить...?), **Could we have...?** (Можем мы получить...?), **Would you like...?** (Вы бы хотели...? — спрашивает официант). Формула: Could + I + have + noun. Для отрицания: **I'm sorry, we don't have that.**", "instruction": "", "questions": [{"id": 7, "type": "choice", "sentence": "\"Could I ___ a glass of water, please?\" — fill in the blank.", "options": ["want", "take", "have", "get"], "correct": "have", "explanation": "«Could I have a glass of water?» = Можно мне стакан воды? Стандартная вежливая формула: Could I have + что хочешь. Не «want» и не «take»."}, {"id": 8, "type": "fill", "sentence": "___ you like anything to drink with your meal?", "options": ["Do", "Could", "Would", "Are"], "correct": "Would", "explanation": "«Would you like anything to drink?» = Хотите чего-нибудь выпить? Официант использует «Would you like...?» для вежливого предложения."}, {"id": 9, "type": "tf", "sentence": "\"Could I have the bill, please?\" is a polite way to ask for the check.", "options": ["T", "F"], "correct": "T", "explanation": "Да! «Could I have the bill, please?» = Можно счёт, пожалуйста? Это стандартная вежливая фраза. Bill = cheque (UK) = check (US)."}]}, {"id": "s4", "title": "Listening: At the restaurant", "icon": "🎧", "theory": "", "instruction": "", "questions": [{"id": 10, "type": "listen", "sentence": "Listen and answer: What does the customer order as a main course?", "options": ["Caesar salad", "Tomato soup", "Grilled salmon with vegetables", "Grilled chicken"], "correct": "Grilled salmon with vegetables", "explanation": "«I think I'll have the grilled salmon with vegetables for my main course» = Я возьму стейдь лосося с овощами как основное блюдо. Caesar salad — это starter (закуска), не main course.", "audio_text": "Good evening! Welcome to The Golden Fork. Can I get you started with some drinks? We have fresh orange juice, lemonade, and a selection of wines. Yes, I'll have a lemonade, please. Great choice! And would you like to see our menu? Yes, please. Here you are. Take your time. Okay, I think I'll have the grilled salmon with vegetables for my main course. Excellent choice! And would you like a starter? We have tomato soup and a Caesar salad today. I'll go with the Caesar salad, please. Perfect. I'll be right back with your drinks."}, {"id": 11, "type": "listen", "sentence": "Listen and answer: What drink does the customer order?", "options": ["Fresh orange juice", "A glass of wine", "Lemonade", "Water"], "correct": "Lemonade", "explanation": "«I'll have a lemonade, please» = Я возьму лимонад. Официант предложил orange juice, lemonade и wines — клиент выбрал lemonade.", "audio_text": "Good evening! Welcome to The Golden Fork. Can I get you started with some drinks? We have fresh orange juice, lemonade, and a selection of wines. Yes, I'll have a lemonade, please. Great choice! And would you like to see our menu? Yes, please. Here you are. Take your time. Okay, I think I'll have the grilled salmon with vegetables for my main course. Excellent choice! And would you like a starter? We have tomato soup and a Caesar salad today. I'll go with the Caesar salad, please. Perfect. I'll be right back with your drinks."}, {"id": 12, "type": "listen", "sentence": "Listen and answer: Which two starters does the waiter mention?", "options": ["Tomato soup and Caesar salad", "Caesar salad and fruit salad", "Tomato soup and grilled fish", "Chicken soup and Caesar salad"], "correct": "Tomato soup and Caesar salad", "explanation": "«We have tomato soup and a Caesar salad today» = У нас сегодня томатный суп и салат Цезарь. Официант назвал именно эти два блюда как starters.", "audio_text": "Good evening! Welcome to The Golden Fork. Can I get you started with some drinks? We have fresh orange juice, lemonade, and a selection of wines. Yes, I'll have a lemonade, please. Great choice! And would you like to see our menu? Yes, please. Here you are. Take your time. Okay, I think I'll have the grilled salmon with vegetables for my main course. Excellent choice! And would you like a starter? We have tomato soup and a Caesar salad today. I'll go with the Caesar salad, please. Perfect. I'll be right back with your drinks."}]}]};
 
 let answered = 0;
 let totalQuestions = 0;
@@ -184,16 +301,21 @@ function renderAll() {
   let globalQ = 0;
   sectionData.forEach(section => {
     let html = '<div class="section-card" id="section_' + section.id + '">';
+
+    // Section title
     html += '<div class="section-title"><span class="icon">' + (section.icon || '📝') + '</span>' + esc(section.title) + '</div>';
+
+    // Theory BEFORE questions
     if (section.theory) {
       html += '<div class="theory">' + formatTheory(section.theory) + '</div>';
     }
+
+    // Instruction
     if (section.instruction) {
-      html += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(section.instruction) + '</div>';
+      html += '<div class="instruction" style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(section.instruction) + '</div>';
     }
-    if (audioHtml && (section.questions || []).some(q => q.type === 'listen')) {
-      html += audioHtml;
-    }
+
+    // Questions
     (section.questions || []).forEach(q => {
       globalQ++;
       html += '<div class="question-block">';
@@ -207,13 +329,18 @@ function renderAll() {
       }
       html += '</div>';
     });
+
     html += '</div>';
     container.insertAdjacentHTML('beforeend', html);
   });
 }
 
 function formatTheory(text) {
-  return esc(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>');
+  // Support **bold** and *italic* in theory text
+  return esc(text)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
 }
 
 function formatSentence(sentence, secId, qId, type) {
@@ -227,12 +354,10 @@ function formatSentence(sentence, secId, qId, type) {
 function renderOptions(secId, q) {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   if (q.type === 'tf') {
-    const opts = q.options || ['T', 'F'];
-    const labels = {'T': '✓ True', 'F': '✗ False', 'True': '✓ True', 'False': '✗ False'};
     return '<div class="options horizontal">' +
-      opts.map(opt =>
-        '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="' + esc(opt) + '" onclick="selectOption(this)">' + (labels[opt] || esc(opt)) + '</button>'
-      ).join('') + '</div>';
+      '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="T" onclick="selectOption(this)">✓ True</button>' +
+      '<button class="option-btn tf-btn" data-sec="' + secId + '" data-q="' + q.id + '" data-val="F" onclick="selectOption(this)">✗ False</button>' +
+      '</div>';
   }
   if (q.type === 'choice' || q.type === 'fill' || q.type === 'select' || q.type === 'listen') {
     let html = '<div class="options">';
@@ -250,25 +375,38 @@ function selectOption(btn) {
   const secId = btn.dataset.sec;
   const qId = btn.dataset.q;
   const val = btn.dataset.val;
+
   if (answers[secId][qId] !== null) return;
+
   answers[secId][qId] = val;
   answered++;
+
   const section = sectionData.find(s => s.id === secId);
   const question = section.questions.find(q => q.id == qId);
   const correct = question.correct;
   const isCorrect = val === correct;
+
   const siblings = btn.parentElement.querySelectorAll('.option-btn');
   siblings.forEach(s => {
     s.disabled = true;
     if (s.dataset.val === correct) s.classList.add('correct');
     if (s === btn && !isCorrect) s.classList.add('wrong');
   });
+
   const blank = document.getElementById('blank_' + secId + '_' + qId);
-  if (blank) { blank.textContent = correct; blank.classList.add(isCorrect ? 'filled' : 'wrong-fill'); }
+  if (blank) {
+    blank.textContent = correct;
+    blank.classList.add(isCorrect ? 'filled' : 'wrong-fill');
+  }
+
   const exp = document.getElementById('exp_' + secId + '_' + qId);
   if (exp) exp.classList.add('visible');
+
   updateProgress();
-  if (answered >= totalQuestions) { setTimeout(showResults, 800); }
+
+  if (answered >= totalQuestions) {
+    setTimeout(showResults, 800);
+  }
 }
 
 function updateProgress() {
@@ -279,13 +417,16 @@ function updateProgress() {
 function showResults() {
   document.getElementById('quizContent').classList.add('hidden');
   document.getElementById('results').classList.remove('hidden');
+
   let correct = 0;
   let detailsHtml = '';
+
   sectionData.forEach(section => {
     section.questions.forEach(q => {
       const userAnswer = answers[section.id][q.id];
       const isCorrect = userAnswer === q.correct;
       if (isCorrect) correct++;
+
       detailsHtml += '<div class="result-item">';
       detailsHtml += '<div class="ri-q">' + esc(section.title) + ' — Вопрос ' + q.id + '</div>';
       if (q.sentence) {
@@ -305,26 +446,33 @@ function showResults() {
       detailsHtml += '</div>';
     });
   });
+
   const pct = Math.round(correct / totalQuestions * 100);
   const scoreEl = document.getElementById('scoreDisplay');
   scoreEl.textContent = correct + '/' + totalQuestions + ' ';
   scoreEl.innerHTML += '<span class="pct">(' + pct + '%)</span>';
   scoreEl.className = 'score ' + (pct >= 90 ? 'excellent' : pct >= 60 ? 'good' : 'needs-work');
+
   let msg = '';
   if (pct >= 90) msg = '🎉 Отлично! Великолепная работа!';
   else if (pct >= 70) msg = '👍 Хороший результат! Ещё немного практики.';
   else if (pct >= 50) msg = '📚 Неплохо, но стоит повторить материал.';
   else msg = '💪 Не расстраивайся! Повтори тему и попробуй ещё раз.';
   document.getElementById('scoreMessage').textContent = msg;
+
   document.getElementById('resultsDetail').innerHTML = '<h3>Подробно</h3>' + detailsHtml;
 }
 
 function restartQuiz() {
   answered = 0;
-  Object.keys(answers).forEach(k => { Object.keys(answers[k]).forEach(qk => answers[k][qk] = null); });
+  Object.keys(answers).forEach(k => {
+    Object.keys(answers[k]).forEach(qk => answers[k][qk] = null);
+  });
   document.getElementById('quizContent').classList.remove('hidden');
   document.getElementById('results').classList.add('hidden');
-  renderAll(); updateProgress(); window.scrollTo(0, 0);
+  renderAll();
+  updateProgress();
+  window.scrollTo(0, 0);
 }
 
 function esc(s) {
