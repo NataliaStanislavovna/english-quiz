@@ -263,7 +263,6 @@ body {
 <div class="phrase">I&#x27;ll have the chicken salad, please.</div>
 <div class="translation">Я возьму куриный салат, пожалуйста.</div>
 </div>
-  <div class="audio-box"><div class="audio-label">🎧 Listen to the dialogue</div><audio controls preload="none"><source src="https://nataliastanislavovna.github.io/english-quiz/audio.mp3">Your browser does not support audio.</audio></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div id="quizContent"></div>
   <div class="results hidden" id="results">
@@ -304,6 +303,15 @@ function renderAll() {
 
     // Section title
     html += '<div class="section-title"><span class="icon">' + (section.icon || '📝') + '</span>' + esc(section.title) + '</div>';
+
+    // Audio player INSIDE this section if it has listen questions
+    const hasListen = (section.questions || []).some(q => q.type === 'listen');
+    if (hasListen && quizData.audio_url) {
+      html += '<div class="audio-box">';
+      html += '<div class="audio-label">🎧 Listen to the dialogue</div>';
+      html += '<audio controls preload="none"><source src="' + esc(quizData.audio_url) + '">Your browser does not support audio.</audio>';
+      html += '</div>';
+    }
 
     // Theory BEFORE questions
     if (section.theory) {
