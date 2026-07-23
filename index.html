@@ -107,7 +107,7 @@ function renderAll() {
     var secAudioTexts = (sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text);
     if (secAudioTexts.length > 0) {
       h += '<div class="section-audio">';
-      h += '<button class="speak-btn" data-audio-texts="' + esc(JSON.stringify(secAudioTexts)) + '" onclick="speakSection(this)">🔊</button>';
+      h += '<button class="speak-btn" data-audio-texts='' + esc(JSON.stringify(secAudioTexts)) + '' onclick="speakSection(this)">🔊</button>';
       h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми, чтобы послушать</div>';
       h += '</div>';
     }
