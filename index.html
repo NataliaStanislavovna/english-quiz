@@ -103,12 +103,19 @@ function renderAll() {
     h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
     if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
     if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
-    // Section-level audio: combine all audio_text from listen questions
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
     var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
     if (secAudioTexts.length > 0) {
       h += '<div class="section-audio">';
-      h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
-      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми, чтобы послушать</div>';
+      if (secAudioUrl) {
+        h += '<audio controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '?nocache=' + Date.now() + '" type="audio/mpeg">';
+        h += '</audio>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
       h += '</div>';
     }
     (sec.questions||[]).forEach(q => {
