@@ -97,6 +97,14 @@ function init() {
     (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
   });
   renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
 }
 
 function renderAll() {
@@ -113,7 +121,7 @@ function renderAll() {
       h += '<div class="section-audio">';
       if (secAudioUrl) {
         h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
-        h += '<source src="' + secAudioUrl + '?nocache=' + Date.now() + '" type="audio/mpeg">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
         h += '</audio>';
         h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
         h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
@@ -236,6 +244,14 @@ function restartQuiz() {
   document.getElementById('quizContent').classList.remove('hidden');
   document.getElementById('results').classList.add('hidden');
   renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
 }
 
 function setAudioSpeed(speed, btn) {
