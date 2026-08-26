@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Все уроки английского</title>
+<style>
+body { font-family: -apple-system,'Segoe UI',sans-serif; background:#1a1a2e; color:#eee; margin:0; padding:20px; }
+h1 { color:#7ec8ff; text-align:center; }
+.home { text-align:center; margin-bottom:20px; }
+.home a { color:#ff6b8a; text-decoration:none; font-size:0.95em; }
+ul { list-style:none; max-width:640px; margin:0 auto; padding:0; }
+li { background:#232342; border-radius:12px; margin-bottom:10px; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; }
+li a { color:#eee; text-decoration:none; font-size:1.02em; flex:1; }
+li .date { color:#888; font-size:0.82em; white-space:nowrap; margin-left:12px; }
+</style></head>
+<body>
+<h1>📚 Все уроки английского</h1>
+<div class="home"><a href="https://nataliastanislavovna.github.io/english-quiz/">← Сегодняшний урок</a></div>
+<ul id="list"></ul>
+<script>
+fetch('lessons/lessons.json').then(r=>r.json()).then(ls=>{
+  document.getElementById('list').innerHTML = ls.slice().reverse().map(l =>
+    '<li><a href="lessons/lesson_' + l.label + '.html">' + l.title + '</a><span class="date">' + l.date + '</span></li>'
+  ).join('');
+}).catch(e=>{ document.getElementById('list').innerHTML='<li>Не удалось загрузить список</li>'; });
+</script>
+</body></html>
