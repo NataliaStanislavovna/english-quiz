@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Technology: Online Security + used to / be used to</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Technology: Online Security + used to / be used to</h1><div class="subtitle">2026-08-31</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Better safe than sorry.</div><div class="translation">Лучше перестраховаться, чем потом жалеть.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Technology: Online Security + used to / be used to", "subtitle": "2026-08-31", "date": "2026-08-31", "phrase_of_the_day": "Better safe than sorry.", "phrase_translation": "Лучше перестраховаться, чем потом жалеть.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0831.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Technology: Online Security", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "A copy of your files that you keep in case your computer breaks is called a...", "options": ["backup", "download", "notification", "device"], "correct": "backup", "explanation": "Backup - резервная копия. Глагол пишется раздельно: to back up your files. Download - скачивание, notification - уведомление, device - устройство."}, {"id": "v2", "type": "choice", "sentence": "To enter your account with a login and password is to...", "options": ["log in", "plug in", "sign up", "set up"], "correct": "log in", "explanation": "Log in (on) - войти в аккаунт. Sign up - зарегистрироваться (создать аккаунт!), set up - настроить (устройство или программу), plug in - подключить кабелем."}, {"id": "v3", "type": "choice", "sentence": "A fake email or message that looks real and tries to steal your passwords or card details is called...", "options": ["a notification", "phishing", "a software update", "spam"], "correct": "phishing", "explanation": "Phishing - фишинг: письмо «ваш аккаунт взломан, нажмите сюда», которое крадёт данные. Spam - просто нежелательная реклама, phishing - именно обман ради кражи данных."}, {"id": "v4", "type": "choice", "sentence": "Two-factor authentication is when you need...", "options": ["two passwords", "two accounts", "a password plus a code sent to your phone", "to log in twice"], "correct": "a password plus a code sent to your phone", "explanation": "Two-factor authentication (2FA) - двухфакторная аутентификация: пароль + код из SMS или приложения. Даже если пароль украдут, без кода аккаунт не откроют."}]}, {"id": "s2", "title": "Grammar — used to / be used to", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "I ___ share one computer with my brother, but now I have my own laptop.", "options": ["am used to", "used to", "get used to", "would rather"], "correct": "used to", "explanation": "Used to + инфинитив = раньше делал (регулярно в прошлом, теперь нет): I used to share - раньше мы делили один компьютер. Это прошлое, которого больше нет."}, {"id": "g2", "type": "choice", "sentence": "She's a nurse, so she ___ working at night. It doesn't bother her.", "options": ["used to", "is used to", "would rather", "uses to"], "correct": "is used to", "explanation": "Be used to + V-ing = привыкнуть (это для неё нормально и привычно сейчас). She is used to working at night - она привыкла работать ночью. Сравните: she used to work at night - раньше работала (теперь нет)."}, {"id": "g3", "type": "choice", "sentence": "When I moved to Latvia, it took me a whole year to ___ the dark winters.", "options": ["be used to", "used to", "get used to", "would rather"], "correct": "get used to", "explanation": "Get used to + существительное или V-ing = привыкать (процесс привыкания). It took me a year to get used to the dark winters - потребовался год, чтобы привыкнуть. Be used to - уже привык, get used to - в процессе."}, {"id": "g4", "type": "choice", "sentence": "It's cold outside. I'd rather ___ at home tonight.", "options": ["to stay", "staying", "stay", "stayed"], "correct": "stay", "explanation": "Would rather + глагол без to (как модальная конструкция): I'd rather stay - я бы предпочёл остаться. Would rather not stay - предпочёл бы не оставаться (not ставится прямо перед глаголом)."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Your friend's phone screen is cracked. What is the most natural way to ask about it?", "options": ["What happened to your phone?", "What did you do with your phone?", "Why is your phone broken by you?", "How your phone broke?"], "correct": "What happened to your phone?", "explanation": "What happened to...? - самое естественное «что случилось с...?». Отвечать: I dropped it - я его уронил(а). Спрашивать «чем ты сделал(а)» звучит как обвинение."}, {"id": "p2", "type": "choice", "sentence": "Your computer freezes. Your IT friend says: 'Have you tried turning it off and on again?' What does he mean?", "options": ["Your computer is too old", "Restart it - it often solves the problem", "You need to buy a new computer", "Turn off the internet"], "correct": "Restart it - it often solves the problem", "explanation": "Turn it off and on again = выключить и снова включить, то есть перезагрузить. Это знаменитая первая рекомендация любой техподдержки. Have you tried + V-ing - «а ты пробовал(а)...?»"}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Choose the correct sentence.", "options": ["I'm not used to drive on the left, so driving in London was scary.", "I'm not used to driving on the left, so driving in London was scary.", "I don't use to drive on the left, so driving in London was scary.", "I used not to driving on the left, so driving in London was scary."], "correct": "I'm not used to driving on the left, so driving in London was scary.", "explanation": "Be used to + V-ing всегда с -ing: I'm not used to driving - я не привык(ла) ездить. После used to (прошлое) - инфинитив без to: I used to drive. Разница: used to drive = раньше ездил(а); be used to driving = привык(ла) ездить."}, {"id": "c2", "type": "choice", "sentence": "I'd rather you ___ anyone about this. It's a secret.", "options": ["don't tell", "didn't tell", "not tell", "won't tell"], "correct": "didn't tell", "explanation": "Would rather + другой человек + Past Simple = вежливая просьба: I'd rather you didn't tell - я бы предпочёл(а), чтобы ты никому не говорил(а). Это как второе условное: прошлое время, но смысл про настоящее."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. How did the hackers probably get into Anna's account?", "options": ["They guessed her password", "She clicked a link in a fake email", "They stole her phone", "She told them her password on the phone"], "correct": "She clicked a link in a fake email", "explanation": "Anna clicked a link in the email ('a little link', 'secure your account now'), and Mark says: 'That was a phishing email' - фишинговое письмо. Выслушивание: hackers - хакеры, взломщики.", "audio_text": "Anna(F): Mark! Thank goodness you're here. I think I've been hacked!\nMark(M): Whoa, slow down. What happened?\nAnna(F): I got an email this morning saying someone tried to log into my account. From another country!\nMark(M): Okay. Did you click anything in that email?\nAnna(F): Maybe... a little link. It said 'secure your account now'.\nMark(M): Anna. That was a phishing email. You basically handed them the keys.\nAnna(F): Oh no. And I use that password everywhere. My shopping, my photos, my bank...\nMark(M): Rule number one: never use one password for everything.\nAnna(F): I know, I know. It's just easier to remember one.\nMark(M): That's why you need a password manager. It remembers everything for you.\nAnna(F): Isn't that risky? All my passwords in one place?\nMark(M): Less risky than 'Anna twenty twenty-six' and your cat's name.\nAnna(F): Hey! Mr Whiskers is a very serious cat.\nMark(M): I'm sure he is. Okay, first thing: change your email password. Everything else connects to it.\nAnna(F): Right, changing it now... done. Hmm, it says 'password strength: weak'.\nMark(M): Use capital letters, numbers and a symbol. And turn on two-factor authentication.\nAnna(F): The code thing? My dad can never figure those out.\nMark(M): He'll get used to it. My mum complained for a month, now she does it in her sleep.\nAnna(F): Okay, new password set. Oh, and my phone has been so slow lately...\nMark(M): One disaster at a time. Have you tried turning it off and on again?\nAnna(F): You IT people and that phrase...\nMark(M): Hey, it works eighty percent of the time. And tonight, back up your photos. Better safe than sorry.\nAnna(F): Deal. Dinner is on me.\nMark(M): Sushi, please. Consider it a hacking fee."}, {"id": "l2", "type": "listen", "sentence": "Listen again. What does Mark tell Anna to do FIRST?", "options": ["Buy a new phone", "Install a password manager", "Change her email password", "Back up her photos"], "correct": "Change her email password", "explanation": "Mark says: 'Okay, first thing: change your email password. Everything else connects to it.' - Первым делом смени пароль от почты, потому что через неё восстанавливают все остальные аккаунты.", "audio_text": "Anna(F): Mark! Thank goodness you're here. I think I've been hacked!\nMark(M): Whoa, slow down. What happened?\nAnna(F): I got an email this morning saying someone tried to log into my account. From another country!\nMark(M): Okay. Did you click anything in that email?\nAnna(F): Maybe... a little link. It said 'secure your account now'.\nMark(M): Anna. That was a phishing email. You basically handed them the keys.\nAnna(F): Oh no. And I use that password everywhere. My shopping, my photos, my bank...\nMark(M): Rule number one: never use one password for everything.\nAnna(F): I know, I know. It's just easier to remember one.\nMark(M): That's why you need a password manager. It remembers everything for you.\nAnna(F): Isn't that risky? All my passwords in one place?\nMark(M): Less risky than 'Anna twenty twenty-six' and your cat's name.\nAnna(F): Hey! Mr Whiskers is a very serious cat.\nMark(M): I'm sure he is. Okay, first thing: change your email password. Everything else connects to it.\nAnna(F): Right, changing it now... done. Hmm, it says 'password strength: weak'.\nMark(M): Use capital letters, numbers and a symbol. And turn on two-factor authentication.\nAnna(F): The code thing? My dad can never figure those out.\nMark(M): He'll get used to it. My mum complained for a month, now she does it in her sleep.\nAnna(F): Okay, new password set. Oh, and my phone has been so slow lately...\nMark(M): One disaster at a time. Have you tried turning it off and on again?\nAnna(F): You IT people and that phrase...\nMark(M): Hey, it works eighty percent of the time. And tonight, back up your photos. Better safe than sorry.\nAnna(F): Deal. Dinner is on me.\nMark(M): Sushi, please. Consider it a hacking fee."}]}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+init();
+</script>
+</body>
+</html>
