@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>University Life + Past Perfect Continuous</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>University Life + Past Perfect Continuous</h1><div class="subtitle">2026-09-04</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Hit the books</div><div class="translation">Засесть за учебники, серьёзно заняться учёбой</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "University Life + Past Perfect Continuous", "subtitle": "2026-09-04", "date": "2026-09-04", "phrase_of_the_day": "Hit the books", "phrase_translation": "Засесть за учебники, серьёзно заняться учёбой", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0904.mp3", "sections": [{"id": "s1", "title": "Vocabulary — University Life", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "What are \"tuition fees\"?", "options": ["Money the university pays to students", "The money students pay for their studies at a university", "The cost of food in the university canteen", "A fine for handing in coursework late"], "correct": "The money students pay for their studies at a university", "explanation": "Tuition fees — плата за обучение в университете. Пример: The tuition fees are paid in two instalments — плата за обучение вносится двумя частями. Instalment — часть платежа, взнос."}, {"id": "v2", "type": "choice", "sentence": "What is the difference between a \"lecture\" and a \"seminar\"?", "options": ["A lecture is a big talk where the professor speaks and students take notes; a seminar is a small group where everyone discusses", "A lecture is an exam; a seminar is a party", "A lecture is for first-year students; a seminar is for final-year students", "There is no difference, the words are synonyms"], "correct": "A lecture is a big talk where the professor speaks and students take notes; a seminar is a small group where everyone discusses", "explanation": "Lecture — лекция: профессор говорит, студенты слушают и конспектируют (take notes). Seminar — семинар: маленькая группа, все обсуждают тему и отвечают. На лекции слушают, на семинаре говорят. To take notes — конспектировать, записывать."}, {"id": "v3", "type": "choice", "sentence": "In American English, a \"freshman\" is...", "options": ["a student who has failed all the exams", "a first-year student at university or high school", "a student who lives on campus", "a professor's assistant"], "correct": "a first-year student at university or high school", "explanation": "Freshman — первокурсник (американский английский). Дальше идут sophomore (второй курс), junior (третий) и senior (четвёртый). В британском английском чаще говорят first-year student. Anna is a freshman — Анна первокурсница."}, {"id": "v4", "type": "choice", "sentence": "You missed two weeks of classes because of the flu. Now you have...", "options": ["caught up with the group", "fallen behind with the coursework", "graduated with honours", "dropped out of university"], "correct": "fallen behind with the coursework", "explanation": "To fall behind — отставать: пропустил занятия и теперь позади группы. Обратное действие — to catch up (with the group) — наверстать, догнать. I missed a week, but I caught up quickly — я пропустил неделю, но быстро наверстал. Ещё слово: coursework — письменные работы и задания в течение семестра."}]}, {"id": "s2", "title": "Grammar — Past Perfect Continuous", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Anna was exhausted at the exam. She ___ all night.", "options": ["had been revising", "revised", "has been revising", "was revising"], "correct": "had been revising", "explanation": "Past Perfect Continuous — had been + глагол с окончанием -ing. Показывает, что действие длилось вплоть до определённого момента в прошлом: She had been revising all night — она готовилась всю ночь (и к моменту экзамена была вымотана). Обычный Past Continuous (was revising) показал бы просто процесс, без связи с более поздним моментом."}, {"id": "g2", "type": "choice", "sentence": "By the end of the term, Kate ___ three essays, so she was proud of herself.", "options": ["had been writing", "had written", "was writing", "has written"], "correct": "had written", "explanation": "Здесь важен результат: три готовых эссе, законченное количество. Поэтому Past Perfect — had written (had + третья форма глагола). А Past Perfect Continuous (had been writing) нужен, когда важен процесс и его длительность: She had been writing essays all week, so she was exhausted — она всю неделю писала эссе (процесс), поэтому была измотана. Результат — had done, длительность — had been doing."}, {"id": "g3", "type": "tf", "sentence": "Past Perfect Continuous (had been doing) emphasizes how long an action lasted before another moment in the past, and is often used with for, since, all day, all night.", "options": [], "correct": "T", "explanation": "Верно. Past Perfect Continuous подчёркивает длительность действия до другого момента в прошлом и часто идёт с for (в течение), since (с), all day (весь день), all night (всю ночь). He had been working at the library for five hours before his friend came — он работал в библиотеке пять часов, прежде чем пришёл друг. Сравните: Past Perfect (had worked) сказал бы только, что работа была закончена к тому моменту."}, {"id": "g4", "type": "choice", "sentence": "Choose the correct sentence.", "options": ["I had been studying for three hours when the library closed.", "I had been studying for three hours when the library had closed.", "I was studying for three hours when the library had closed.", "I had studied for three hours when the library was closing."], "correct": "I had been studying for three hours when the library closed.", "explanation": "Схема: длинное действие до момента в прошлом — Past Perfect Continuous (had been studying), а сам момент, событие — обычный Past Simple (the library closed). Два had подряд во второй части — ошибка: событие, которое «наступило», всегда в Past Simple. Похожая конструкция уже знакома: I was watching TV when mum came home, только здесь фоновое действие ещё длиннее и длилось до самого события."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You were ill for two weeks and cannot finish your coursework on time. What do you write to the professor?", "options": ["I was ill, so the deadline doesn't count for me.", "Give me a new deadline immediately.", "I've been ill for two weeks and I'm falling behind. Would it be possible to have an extension on my coursework?", "Why do we even have deadlines?"], "correct": "I've been ill for two weeks and I'm falling behind. Would it be possible to have an extension on my coursework?", "explanation": "Вежливая просьба: сначала объяснение (I've been ill — я болела), потом просьба через Would it be possible to have an extension — можно ли получить продление? Extension — продление срока. Просьба звучит уважительно, и профессор, скорее всего, пойдёт навстречу."}, {"id": "p2", "type": "choice", "sentence": "You are in a lecture and you didn't understand the last point. What do you say?", "options": ["Repeat!", "Sorry, could you go over that last point again?", "You are explaining it wrong.", "Again, again!"], "correct": "Sorry, could you go over that last point again?", "explanation": "To go over something — объяснить или разобрать ещё раз. Could you go over that last point again? — не могли бы вы ещё раз объяснить последний момент? Слово Sorry в начале смягчает просьбу. Короткое «Repeat!» звучит грубо, как приказ."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Your classmate says: \"I can't go out tonight, I have to hit the books.\" What does she mean?", "options": ["She has to return books to the library", "She has to study hard, seriously sit down with her textbooks", "She has to throw away her old books", "She has to buy new books for the semester"], "correct": "She has to study hard, seriously sit down with her textbooks", "explanation": "Hit the books — разговорная идиома: засесть за учебники, всерьёз заняться учёбой, зубрить. I have two exams next week, so I'm hitting the books — на следующей неделе два экзамена, так что сажусь за учёбу. Фраза дня этого урока."}, {"id": "c2", "type": "choice", "sentence": "Choose the correct sentence.", "options": ["She had been working on her dissertation for six months before she decided to change the topic.", "She has been working on her dissertation for six months before she decided to change the topic.", "She had been working on her dissertation for six months before she has decided to change the topic.", "She was working on her dissertation for six months before she was deciding to change the topic."], "correct": "She had been working on her dissertation for six months before she decided to change the topic.", "explanation": "Всё действие происходит в прошлом, поэтому Present Perfect (has been working, has decided) не подходит. Само событие (решила сменить тему) — Past Simple: she decided. А длительное действие до этого события — Past Perfect Continuous: had been working. Dissertation — диссертация, before — прежде чем. Оба действия в прошлом: то, что длилось раньше, стоит в had been doing, то, что случилось потом, в Past Simple."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why does Anna come to see Mark?", "options": ["She wants to change her degree", "She was ill for two weeks and has fallen behind with her studies", "She wants to complain about Kate's handwriting", "She cannot pay the tuition fees"], "correct": "She was ill for two weeks and has fallen behind with her studies", "explanation": "Анна говорит: I missed two weeks of lectures — я пропустила две недели лекций, и I've fallen behind with everything — я отстала по всему. Overwhelmed — перегружена, не справляюсь. Поэтому она и пришла к преподавателю за советом.", "audio_text": "Mark(M): Come in, Anna. Take a seat. How are you feeling?\nAnna(F): Much better, thanks. Though I have to admit, I'm a bit overwhelmed. I missed two weeks of lectures.\nMark(M): So I heard. Don't worry, you're not the first freshman to catch the flu in October.\nAnna(F): The problem is I've fallen behind with everything. Coursework, seminar reading, everything.\nMark(M): Let's start with the basics. Do you have notes from the lectures?\nAnna(F): Kate promised to send me hers, but honestly her handwriting is harder to read than the textbook.\nMark(M): Ha! I've heard that before. All my slides are online, so use those together with her notes.\nAnna(F): What about the seminars? I heard you set a discussion question every week.\nMark(M): Every single week. This Thursday we're discussing lecture four. Read the chapter, and you'll be fine.\nAnna(F): And my coursework deadline is next Friday. I've only written the introduction.\nMark(M): You'd been making good progress before you got ill, hadn't you? Half the class is still on the introduction, trust me.\nAnna(F): That's oddly comforting.\nMark(M): Here's the plan. Hand in what you have by Friday, and if it's not enough, ask for an extension. That's a normal request, not a crime.\nAnna(F): I didn't know extensions existed. In my first semester I thought deadlines were laws of nature.\nMark(M): They're more like guidelines. One more thing, the tuition fees instalment. The office asked me to remind you.\nAnna(F): Already paid it on Monday. First thing I did after the fever went down, actually.\nMark(M): Now that's what I call dedication. You'll catch up faster than you think.\nAnna(F): Thanks, Mark. I might actually sleep tonight. Well, after I hit the books for a couple of hours.\nMark(M): Now that's the spirit. Off you go, scholar."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue again. What does Mark suggest about the coursework?", "options": ["To forget about the coursework this term", "To hand in what she has by Friday, and ask for an extension if it's not enough", "To write a completely new topic", "To copy Kate's coursework"], "correct": "To hand in what she has by Friday, and ask for an extension if it's not enough", "explanation": "Марк говорит: Hand in what you have by Friday, and if it's not enough, ask for an extension — сдай то, что есть, к пятнице, а если этого мало, попроси продление. Extension — продление срока, и, по словам Марка, это нормальная просьба, а не преступление. To hand in — сдать работу."}]}], "subtitles": [{"speaker": "Mark", "text": "Come in, Anna. Take a seat. How are you feeling?"}, {"speaker": "Anna", "text": "Much better, thanks. Though I have to admit, I'm a bit overwhelmed. I missed two weeks of lectures."}, {"speaker": "Mark", "text": "So I heard. Don't worry, you're not the first freshman to catch the flu in October."}, {"speaker": "Anna", "text": "The problem is I've fallen behind with everything. Coursework, seminar reading, everything."}, {"speaker": "Mark", "text": "Let's start with the basics. Do you have notes from the lectures?"}, {"speaker": "Anna", "text": "Kate promised to send me hers, but honestly her handwriting is harder to read than the textbook."}, {"speaker": "Mark", "text": "Ha! I've heard that before. All my slides are online, so use those together with her notes."}, {"speaker": "Anna", "text": "What about the seminars? I heard you set a discussion question every week."}, {"speaker": "Mark", "text": "Every single week. This Thursday we're discussing lecture four. Read the chapter, and you'll be fine."}, {"speaker": "Anna", "text": "And my coursework deadline is next Friday. I've only written the introduction."}, {"speaker": "Mark", "text": "You'd been making good progress before you got ill, hadn't you? Half the class is still on the introduction, trust me."}, {"speaker": "Anna", "text": "That's oddly comforting."}, {"speaker": "Mark", "text": "Here's the plan. Hand in what you have by Friday, and if it's not enough, ask for an extension. That's a normal request, not a crime."}, {"speaker": "Anna", "text": "I didn't know extensions existed. In my first semester I thought deadlines were laws of nature."}, {"speaker": "Mark", "text": "They're more like guidelines. One more thing, the tuition fees instalment. The office asked me to remind you."}, {"speaker": "Anna", "text": "Already paid it on Monday. First thing I did after the fever went down, actually."}, {"speaker": "Mark", "text": "Now that's what I call dedication. You'll catch up faster than you think."}, {"speaker": "Anna", "text": "Thanks, Mark. I might actually sleep tonight. Well, after I hit the books for a couple of hours."}, {"speaker": "Mark", "text": "Now that's the spirit. Off you go, scholar."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
