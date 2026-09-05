@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Restaurant: Menu &amp; Complaints + Future Perfect Continuous</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Restaurant: Menu &amp; Complaints + Future Perfect Continuous</h1><div class="subtitle">2026-09-05</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">It&#x27;s on the house</div><div class="translation">Это за счёт заведения (бесплатно, как жест извинения или гостеприимства)</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Restaurant: Menu & Complaints + Future Perfect Continuous", "subtitle": "2026-09-05", "date": "2026-09-05", "phrase_of_the_day": "It's on the house", "phrase_translation": "Это за счёт заведения (бесплатно, как жест извинения или гостеприимства)", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0905.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Restaurant: Menu & Ordering", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "If you order 'a la carte', what does that mean?", "options": ["You choose dishes separately from the menu, each with its own price", "You get a fixed three-course meal at one set price", "You order food to take away and eat at home", "You eat standing at the bar"], "correct": "You choose dishes separately from the menu, each with its own price", "explanation": "A la carte — заказ по меню, каждое блюдо выбирается и оплачивается отдельно. Набор блюд за фиксированную цену — это set menu."}, {"id": "v2", "type": "choice", "sentence": "You order a steak 'medium rare'. What should it look like?", "options": ["Cooked all the way through, firm and grey inside", "Brown on the outside, pink and juicy inside", "Almost raw, red and cold in the middle", "Covered in a thick sauce"], "correct": "Brown on the outside, pink and juicy inside", "explanation": "Степени прожарки: rare — почти сырое, medium rare — румяная корочка и розовый сок внутри, medium — средняя, well-done — полностью прожарено."}, {"id": "v3", "type": "choice", "sentence": "In a British restaurant you ask for ___ when you want to pay. In American English the same thing is called a check.", "options": ["the bill", "the receipt", "the note", "the fare"], "correct": "the bill", "explanation": "Bill (британский английский) = check (американский английский) — счёт в ресторане. Receipt — это чек, который выдают уже после оплаты."}, {"id": "v4", "type": "choice", "sentence": "You call a restaurant a week before your anniversary dinner. What do you do?", "options": ["You book a table", "You hire a table", "You rent a table", "You charge a table"], "correct": "You book a table", "explanation": "Book a table = reserve a table — бронировать столик. Hire и rent означают аренду на длительный срок (машину, квартиру), для столика в ресторане они не подходят."}]}, {"id": "s2", "title": "Grammar — Future Perfect Continuous", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "By June, Sarah ___ at this restaurant for ten years.", "options": ["will have been working", "will work", "is working", "has been working"], "correct": "will have been working", "explanation": "Future Perfect Continuous — will have been + глагол с окончанием -ing. К июню Сара будет работать там уже десять лет: действие длилось весь этот период до точки в будущем. Маркеры: by June, for ten years."}, {"id": "g2", "type": "tf", "sentence": "Future Perfect Continuous (will have been doing) describes a short action that finishes long before the point in the future.", "options": [], "correct": "F", "explanation": "Неверно. Future Perfect Continuous описывает длительное действие, которое тянулось вплоть до определённого момента в будущем и часто ещё идёт в этот момент. Короткое завершённое действие — это Future Perfect."}, {"id": "g3", "type": "choice", "sentence": "By the end of tonight's shift, the chef ___ more than a hundred steaks.", "options": ["will have been cooking", "will have cooked", "will be cooking", "has cooked"], "correct": "will have cooked", "explanation": "Здесь важен результат — конкретное число (сто стейков), поэтому Future Perfect: will have cooked. Форма will have been cooking подчёркивала бы сам процесс и его длительность, а не подсчитанный результат."}, {"id": "g4", "type": "tf", "sentence": "Both are possible: 'By five o'clock I will have been waiting for an hour' and 'By five o'clock I will have waited for an hour', but the first one stresses the duration of the wait.", "options": [], "correct": "T", "explanation": "Верно. Оба варианта грамматически правильны, но Continuous-форма подчёркивает, сколько длилось ожидание — целый час к пяти часам."}]}, {"id": "s3", "title": "Practical English — Polite Complaints", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Your steak is overcooked. What is the polite way to complain?", "options": ["This steak is terrible, take it back right now!", "Excuse me, I'm afraid my steak is a bit more well-done than I asked for. Could you possibly take it back?", "You cooked it wrong, didn't you?", "Why is your chef so bad at his job?"], "correct": "Excuse me, I'm afraid my steak is a bit more well-done than I asked for. Could you possibly take it back?", "explanation": "Вежливая жалоба строится так: Excuse me (привлекаем внимание), I'm afraid... (смягчаем), a bit (преуменьшаем проблему) и просьба через Could you possibly...? Прямые обвинения звучат грубо и обычно только мешают."}, {"id": "p2", "type": "choice", "sentence": "You want the waiter's opinion on what to order. What do you ask?", "options": ["What do you recommend?", "What is your food?", "What must I eat?", "Tell me the best dish now."], "correct": "What do you recommend?", "explanation": "What do you recommend? — «Что вы посоветуете?» Ещё один естественный вариант: What's popular tonight? — «Что сегодня чаще всего берут?»"}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "By next summer, this little bistro ___ customers for twenty-five years.", "options": ["will have been serving", "will been serving", "will have been serve", "are serving"], "correct": "will have been serving", "explanation": "Future Perfect Continuous строится строго так: will + have + been + глагол с окончанием -ing. Маркеры by next summer и for twenty-five years указывают на длительность до точки в будущем."}, {"id": "c2", "type": "choice", "sentence": "The waiter said the desserts were 'on the house'. What did he mean?", "options": ["They were free of charge, paid for by the restaurant", "They were delivered to your home address", "They were served on the top floor", "They were only for regular customers"], "correct": "They were free of charge, paid for by the restaurant", "explanation": "On the house — за счёт заведения, бесплатно. Так говорят, когда ресторан делает жест извинения или гостеприимства. Отсюда и фраза дня."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue and answer: what was wrong with Sarah's steak?", "options": ["It was cold", "It was much more well-done than she had asked for", "They brought her the wrong dish completely", "It was too spicy for her"], "correct": "It was much more well-done than she had asked for", "explanation": "Сара попросила medium rare, но получила стейк, который оказался very well-done, то есть сильно пережаренным. Официант извинился и принёс новый.", "audio_text": "Mark(M): Good evening! Welcome to The Old Mill. Do you have a reservation?\nSarah(F): Yes, under the name Sarah. A table for two, by the window if possible.\nMark(M): Of course, this way please. Can I start you off with something to drink?\nSarah(F): A glass of sparkling water for me, please. My husband David will join me in a few minutes. He's parking the car.\nMark(M): No problem. Here is the menu. The set menu is three courses for thirty pounds, or you can order a la carte.\nSarah(F): What do you recommend? I was thinking about the steak.\nMark(M): Great choice. The sirloin is very popular tonight. How would you like it cooked?\nSarah(F): Medium rare, please. And definitely not well-done. Last month I got a steak that tasted like a shoe sole.\nMark(M): Understood, medium rare. I will tell the chef the shoe sole story, just to keep him motivated.\nDavid(M): Sorry I'm late, darling. Wow, this place looks lovely.\nMark(M): Here is your steak, madam, and the trout for you, sir.\nDavid(M): Thank you. Hmm, how is yours, Sarah?\nSarah(F): Well... it is a bit more well-done than I asked for. To be honest, it is very well-done.\nMark(M): Oh no, I am so sorry. I did stress medium rare to the kitchen. Would you like me to take it back?\nSarah(F): Would you? I would really appreciate it. I hate making a fuss, but I did ask.\nMark(M): Please, it is not a fuss at all. It is what we are here for. I will bring you a fresh one straight away.\nMark(M): Here we are, a new steak, medium rare. I checked it myself. And your desserts are on the house. Again, our sincere apologies.\nSarah(F): That is very kind of you. Thank you.\nDavid(M): And do not worry, I will not tell the chef about the shoe sole.\nMark(M): Too late, madam. I think he already knows."}, {"id": "l2", "type": "listen", "sentence": "Listen again and answer: how did the restaurant apologise?", "options": ["They gave them a discount on the bill", "The desserts were on the house, free of charge", "They offered a free bottle of wine", "They only said sorry, with nothing extra"], "correct": "The desserts were on the house, free of charge", "explanation": "Официант принёс новый стейк и добавил: your desserts are on the house — десерты за счёт заведения. Это и есть извинение ресторана.", "audio_text": "Mark(M): Good evening! Welcome to The Old Mill. Do you have a reservation?\nSarah(F): Yes, under the name Sarah. A table for two, by the window if possible.\nMark(M): Of course, this way please. Can I start you off with something to drink?\nSarah(F): A glass of sparkling water for me, please. My husband David will join me in a few minutes. He's parking the car.\nMark(M): No problem. Here is the menu. The set menu is three courses for thirty pounds, or you can order a la carte.\nSarah(F): What do you recommend? I was thinking about the steak.\nMark(M): Great choice. The sirloin is very popular tonight. How would you like it cooked?\nSarah(F): Medium rare, please. And definitely not well-done. Last month I got a steak that tasted like a shoe sole.\nMark(M): Understood, medium rare. I will tell the chef the shoe sole story, just to keep him motivated.\nDavid(M): Sorry I'm late, darling. Wow, this place looks lovely.\nMark(M): Here is your steak, madam, and the trout for you, sir.\nDavid(M): Thank you. Hmm, how is yours, Sarah?\nSarah(F): Well... it is a bit more well-done than I asked for. To be honest, it is very well-done.\nMark(M): Oh no, I am so sorry. I did stress medium rare to the kitchen. Would you like me to take it back?\nSarah(F): Would you? I would really appreciate it. I hate making a fuss, but I did ask.\nMark(M): Please, it is not a fuss at all. It is what we are here for. I will bring you a fresh one straight away.\nMark(M): Here we are, a new steak, medium rare. I checked it myself. And your desserts are on the house. Again, our sincere apologies.\nSarah(F): That is very kind of you. Thank you.\nDavid(M): And do not worry, I will not tell the chef about the shoe sole.\nMark(M): Too late, madam. I think he already knows."}]}], "subtitles": [{"speaker": "Mark", "text": "Good evening! Welcome to The Old Mill. Do you have a reservation?"}, {"speaker": "Sarah", "text": "Yes, under the name Sarah. A table for two, by the window if possible."}, {"speaker": "Mark", "text": "Of course, this way please. Can I start you off with something to drink?"}, {"speaker": "Sarah", "text": "A glass of sparkling water for me, please. My husband David will join me in a few minutes. He's parking the car."}, {"speaker": "Mark", "text": "No problem. Here is the menu. The set menu is three courses for thirty pounds, or you can order a la carte."}, {"speaker": "Sarah", "text": "What do you recommend? I was thinking about the steak."}, {"speaker": "Mark", "text": "Great choice. The sirloin is very popular tonight. How would you like it cooked?"}, {"speaker": "Sarah", "text": "Medium rare, please. And definitely not well-done. Last month I got a steak that tasted like a shoe sole."}, {"speaker": "Mark", "text": "Understood, medium rare. I will tell the chef the shoe sole story, just to keep him motivated."}, {"speaker": "David", "text": "Sorry I'm late, darling. Wow, this place looks lovely."}, {"speaker": "Mark", "text": "Here is your steak, madam, and the trout for you, sir."}, {"speaker": "David", "text": "Thank you. Hmm, how is yours, Sarah?"}, {"speaker": "Sarah", "text": "Well... it is a bit more well-done than I asked for. To be honest, it is very well-done."}, {"speaker": "Mark", "text": "Oh no, I am so sorry. I did stress medium rare to the kitchen. Would you like me to take it back?"}, {"speaker": "Sarah", "text": "Would you? I would really appreciate it. I hate making a fuss, but I did ask."}, {"speaker": "Mark", "text": "Please, it is not a fuss at all. It is what we are here for. I will bring you a fresh one straight away."}, {"speaker": "Mark", "text": "Here we are, a new steak, medium rare. I checked it myself. And your desserts are on the house. Again, our sincere apologies."}, {"speaker": "Sarah", "text": "That is very kind of you. Thank you."}, {"speaker": "David", "text": "And do not worry, I will not tell the chef about the shoe sole."}, {"speaker": "Mark", "text": "Too late, madam. I think he already knows."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
