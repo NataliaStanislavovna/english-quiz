@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Sports &amp; Fitness + Complex Subject (He is said to be)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Sports &amp; Fitness + Complex Subject (He is said to be)</h1><div class="subtitle">2026-09-08</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">No pain, no gain</div><div class="translation">Без труда не вытащишь и рыбку из пруда (без боли и усилий нет результата)</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Sports & Fitness + Complex Subject (He is said to be)", "subtitle": "2026-09-08", "date": "2026-09-08", "phrase_of_the_day": "No pain, no gain", "phrase_translation": "Без труда не вытащишь и рыбку из пруда (без боли и усилий нет результата)", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0908.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Sports & Fitness", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Your friend says: 'I work out three times a week.' What does she mean?", "options": ["She does physical training regularly", "She solves difficult problems three times a week", "She works outdoors in all weather", "She rests three times a week"], "correct": "She does physical training regularly", "explanation": "To work out = тренироваться, заниматься спортом (обычно в зале). Это самое обычное слово про тренировки: I worked out at the gym yesterday. Не путайте с work out a problem — решить проблему (по контексту)."}, {"id": "v2", "type": "choice", "sentence": "Before every workout the trainer asks you to warm up. What does 'warm up' mean?", "options": ["Do light exercises to prepare your muscles for harder training", "Turn up the heating in the gym", "Put on warmer clothes", "Lie down and rest for ten minutes"], "correct": "Do light exercises to prepare your muscles for harder training", "explanation": "To warm up = размяться, разогреться: лёгкие упражнения перед основной тренировкой, чтобы не потянуть мышцы. После тренировки — cool down, лёгкое завершение, заминка."}, {"id": "v3", "type": "choice", "sentence": "The day after his first workout, David could hardly walk because his muscles were ___.", "options": ["sore", "broken", "numb", "bitter"], "correct": "sore", "explanation": "Sore = болящий, ноющий (о мышцах после нагрузки). Sore muscles after training — это нормально, по-английски даже есть специальное сокращение DOMS: delayed onset muscle soreness, крепатура. Broken = сломанный, numb = онемевший, bitter = горький."}, {"id": "v4", "type": "choice", "sentence": "After his fortieth birthday, John decided to ___ swimming.", "options": ["take up", "take after", "take over", "take off"], "correct": "take up", "explanation": "Take up a sport or a hobby = начать заниматься чем-то новым. John took up swimming = Джон начал плавать. Остальные: take after = быть похожим на родственника, take over = взять на себя управление, take off = взлететь или снять одежду."}]}, {"id": "s2", "title": "Grammar — Complex Subject: He is said to be", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "The new coach is said ___ very strict but fair.", "options": ["to be", "being", "that he is", "is"], "correct": "to be", "explanation": "Complex Subject: кто-то + is said / is known / is believed + to do. The coach is said to be strict = говорят, что тренер строгий. Так передают слухи и мнения без слов they say that."}, {"id": "g2", "type": "choice", "sentence": "She is thought ___ up running at the age of forty. (She started running before people began saying this.)", "options": ["to have taken", "to take", "to taking", "took"], "correct": "to have taken", "explanation": "Если действие произошло раньше, чем о нём говорят, используется перфектный инфинитив: to have done. She is thought to have taken up running = думают, что она начала бегать (раньше). Сравните: She is thought to run every day = думают, что она бегает каждый день."}, {"id": "g3", "type": "tf", "sentence": "Mark seems to being out of breath after the warm-up.", "options": [], "correct": "F", "explanation": "Неверно. После seem всегда идёт обычный инфинитив с to: Mark seems to be out of breath = кажется, Марк запыхался. Никакого being. Похоже работают appear: He appears to be tired."}, {"id": "g4", "type": "choice", "sentence": "You've had one training session. You are unlikely ___ any results after just one evening.", "options": ["to see", "seeing", "see", "that you see"], "correct": "to see", "explanation": "Be likely to do = вероятно, сделает; be unlikely to do = вряд ли сделает. You are unlikely to see results = вы вряд ли увидите результат. Это тоже Complex Subject: предположение о человеке через инфинитив, а не через that-предложение."}]}, {"id": "s3", "title": "Practical English — At the Gym", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are at the gym and you don't understand how to use a machine. What do you say to the trainer?", "options": ["Sorry, could you show me how to use this machine, please?", "What is this strange thing and why is it here?", "I will probably break it, no problem.", "Do you know me? It's not important."], "correct": "Sorry, could you show me how to use this machine, please?", "explanation": "Could you show me how to use... = Не могли бы вы показать, как пользоваться... Универсальная вежливая просьба: подходит для тренажёра, кофемашины на работе и любого нового устройства."}, {"id": "p2", "type": "choice", "sentence": "The trainer asks: 'How often do you exercise?' You are a beginner. What is the natural answer?", "options": ["To be honest, not very often. I'm just getting started.", "Yes, I do.", "I exercise very much often.", "Every day since tomorrow."], "correct": "To be honest, not very often. I'm just getting started.", "explanation": "На вопрос how often отвечают частотой или честным признанием: To be honest, not very often = честно говоря, не очень часто. I'm just getting started = я только начинаю. Ответ Yes, I do не подходит: вопрос не да-нет."}]}, {"id": "s4", "title": "Challenge — Level B2", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "The athlete is believed ___ two world records before the injury.", "options": ["to have broken", "to break", "to breaking", "broken"], "correct": "to have broken", "explanation": "Звёздный вопрос! Рекорды были побиты раньше, чем об этом заговорили, поэтому нужен перфектный инфинитив: to have broken. The athlete is believed to have broken two world records = считают, что атлет побил два рекорда (до травмы)."}, {"id": "c2", "type": "choice", "sentence": "After the workout Kate smiles and says: 'No pain, no gain!' What does she mean?", "options": ["If you want results, you have to accept that training is hard", "Pain is always dangerous and training must stop immediately", "The gym returns your money if the training hurts", "Only painless exercises are good for health"], "correct": "If you want results, you have to accept that training is hard", "explanation": "No pain, no gain = без усилий нет результата, аналог русской пословицы без труда не вытащишь и рыбку из пруда. Любимая фраза тренеров в зале, часто говорится с улыбкой, когда клиент ноет."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue and answer: Why did David decide to take up fitness?", "options": ["His doctor told him to move more, and his sister runs marathons", "He wants to win a competition against his sister", "His boss gives free gym tickets to all employees", "He wants to become a personal trainer"], "correct": "His doctor told him to move more, and his sister runs marathons", "explanation": "Дэвид называет две причины: Two things. My doctor said I should move more — врач посоветовал больше двигаться, и сестра бегает марафоны, а она, как говорят, одна из самых быстрых любителей в городе (she is said to be...).", "audio_text": "Kate(F): Good morning! You must be David, our new member. I'm Kate, and I'll be showing you around today.\nDavid(M): Hi, Kate. Yes, that's me. To be honest, I haven't set foot in a gym since school.\nKate(F): Don't worry, most beginners feel exactly the same. Let's start slowly. Have you done any exercise recently?\nDavid(M): Does walking to the fridge count?\nKate(F): I'll take that as a no. We'll begin with ten minutes on the treadmill, just to warm up.\nDavid(M): Ten minutes? I was hoping for something easier.\nKate(F): The warm-up is the easy part, trust me. After that we'll try some light weights and a few squats.\nDavid(M): Squats. My legs already hurt, and I haven't done anything yet.\nKate(F): That's perfectly normal. Tomorrow you'll feel it even more, and there's even a scientific name for it: delayed onset muscle soreness.\nDavid(M): You have a scientific name for the pain? Impressive.\nKate(F): Everything has a scientific name in this gym. So, what brought you here? Why did you decide to take up fitness?\nDavid(M): Two things. My doctor said I should move more. And my sister keeps running marathons. She is said to be one of the fastest amateurs in the city, so family pride is at stake.\nKate(F): Well, she is thought to have started exactly like you: on a treadmill, complaining about squats.\nDavid(M): Somehow I doubt she ever complained about anything.\nKate(F): Everyone complains. The ones who succeed just don't give up. Aim for three sessions a week at first.\nDavid(M): Three? I was thinking one, maximum.\nKate(F): How about two, and we shake on it? And remember our motto: no pain, no gain.\nDavid(M): In that case I've already gained a lot, and we haven't even touched the weights yet.\nKate(F): You'll be fine, David. By spring you're likely to lift more than you believe. Now hop on the treadmill, and no cheating."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue again and answer: What does Kate say about the pain after training?", "options": ["It is perfectly normal, and it even has a scientific name", "It means David is training incorrectly and must stop", "It only happens to beginners over sixty", "It is a sign that David should choose another sport"], "correct": "It is perfectly normal, and it even has a scientific name", "explanation": "Кейт говорит: That's perfectly normal — это совершенно нормально, завтра будет ещё заметнее, и у этого есть научное название: delayed onset muscle soreness, то есть крепатура.", "audio_text": "Kate(F): Good morning! You must be David, our new member. I'm Kate, and I'll be showing you around today.\nDavid(M): Hi, Kate. Yes, that's me. To be honest, I haven't set foot in a gym since school.\nKate(F): Don't worry, most beginners feel exactly the same. Let's start slowly. Have you done any exercise recently?\nDavid(M): Does walking to the fridge count?\nKate(F): I'll take that as a no. We'll begin with ten minutes on the treadmill, just to warm up.\nDavid(M): Ten minutes? I was hoping for something easier.\nKate(F): The warm-up is the easy part, trust me. After that we'll try some light weights and a few squats.\nDavid(M): Squats. My legs already hurt, and I haven't done anything yet.\nKate(F): That's perfectly normal. Tomorrow you'll feel it even more, and there's even a scientific name for it: delayed onset muscle soreness.\nDavid(M): You have a scientific name for the pain? Impressive.\nKate(F): Everything has a scientific name in this gym. So, what brought you here? Why did you decide to take up fitness?\nDavid(M): Two things. My doctor said I should move more. And my sister keeps running marathons. She is said to be one of the fastest amateurs in the city, so family pride is at stake.\nKate(F): Well, she is thought to have started exactly like you: on a treadmill, complaining about squats.\nDavid(M): Somehow I doubt she ever complained about anything.\nKate(F): Everyone complains. The ones who succeed just don't give up. Aim for three sessions a week at first.\nDavid(M): Three? I was thinking one, maximum.\nKate(F): How about two, and we shake on it? And remember our motto: no pain, no gain.\nDavid(M): In that case I've already gained a lot, and we haven't even touched the weights yet.\nKate(F): You'll be fine, David. By spring you're likely to lift more than you believe. Now hop on the treadmill, and no cheating."}]}], "subtitles": [{"speaker": "Kate", "text": "Good morning! You must be David, our new member. I'm Kate, and I'll be showing you around today."}, {"speaker": "David", "text": "Hi, Kate. Yes, that's me. To be honest, I haven't set foot in a gym since school."}, {"speaker": "Kate", "text": "Don't worry, most beginners feel exactly the same. Let's start slowly. Have you done any exercise recently?"}, {"speaker": "David", "text": "Does walking to the fridge count?"}, {"speaker": "Kate", "text": "I'll take that as a no. We'll begin with ten minutes on the treadmill, just to warm up."}, {"speaker": "David", "text": "Ten minutes? I was hoping for something easier."}, {"speaker": "Kate", "text": "The warm-up is the easy part, trust me. After that we'll try some light weights and a few squats."}, {"speaker": "David", "text": "Squats. My legs already hurt, and I haven't done anything yet."}, {"speaker": "Kate", "text": "That's perfectly normal. Tomorrow you'll feel it even more, and there's even a scientific name for"}, {"speaker": "it", "text": "delayed onset muscle soreness."}, {"speaker": "David", "text": "You have a scientific name for the pain? Impressive."}, {"speaker": "Kate", "text": "Everything has a scientific name in this gym. So, what brought you here? Why did you decide to take up fitness?"}, {"speaker": "David", "text": "Two things. My doctor said I should move more. And my sister keeps running marathons. She is said to be one of the fastest amateurs in the city, so family pride is at stake."}, {"speaker": "Kate", "text": "Well, she is thought to have started exactly like"}, {"speaker": "you", "text": "on a treadmill, complaining about squats."}, {"speaker": "David", "text": "Somehow I doubt she ever complained about anything."}, {"speaker": "Kate", "text": "Everyone complains. The ones who succeed just don't give up. Aim for three sessions a week at first."}, {"speaker": "David", "text": "Three? I was thinking one, maximum."}, {"speaker": "Kate", "text": "How about two, and we shake on it? And remember our"}, {"speaker": "motto", "text": "no pain, no gain."}, {"speaker": "David", "text": "In that case I've already gained a lot, and we haven't even touched the weights yet."}, {"speaker": "Kate", "text": "You'll be fine, David. By spring you're likely to lift more than you believe. Now hop on the treadmill, and no cheating."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
