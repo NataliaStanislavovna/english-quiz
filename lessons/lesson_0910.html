@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Travel: Airport &amp; Hotel + Passive with by and Prepositions (was looked after)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Travel: Airport &amp; Hotel + Passive with by and Prepositions (was looked after)</h1><div class="subtitle">2026-09-10</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Better late than never</div><div class="translation">Лучше поздно, чем никогда (например, о чемодане, который приехал на день позже)</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Travel: Airport & Hotel + Passive with by and Prepositions (was looked after)", "subtitle": "2026-09-10", "date": "2026-09-10", "phrase_of_the_day": "Better late than never", "phrase_translation": "Лучше поздно, чем никогда (например, о чемодане, который приехал на день позже)", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0910.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Travel: Airport & Hotel", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "You have just landed. Where do you go to pick up your checked suitcase?", "options": ["To the baggage claim area", "To the boarding gate", "To customs", "To the runway"], "correct": "To the baggage claim area", "explanation": "Baggage claim (или baggage reclaim) = зона выдачи багажа, где чемоданы выезжают на ленту (the belt). Gate = выход на посадку, customs = таможня, runway = взлётная полоса."}, {"id": "v2", "type": "choice", "sentence": "At customs an officer asks, 'Do you have anything to declare?' What does 'declare' mean here?", "options": ["To officially say what you are bringing into the country, because it may be taxed", "To say that you love this country", "To show your boarding pass to the officer", "To complain about the flight"], "correct": "To officially say what you are bringing into the country, because it may be taxed", "explanation": "To declare = задекларировать: официально сообщить о товарах (алкоголь, деньги, подарки), с которых могут взять пошлину. Если везти нечего, говорят 'I have nothing to declare' и идут по зелёному коридору (the green channel)."}, {"id": "v3", "type": "choice", "sentence": "The departures board says 'Flight BA 724 — Boarding — Gate 24'. What is the gate?", "options": ["The door where you leave the terminal and get onto the plane", "The desk where you drop off your suitcase", "The shop where you buy duty-free perfume", "The seat number on your boarding pass"], "correct": "The door where you leave the terminal and get onto the plane", "explanation": "Gate = выход на посадку, дверь, через которую проходят из аэропорта прямо в самолёт. Номер гейта указан на посадочном талоне (boarding pass) и на табло. Досмотр и паспортный контроль происходят до гейта."}, {"id": "v4", "type": "choice", "sentence": "A sign in the hotel lift says 'Check-out 12 noon'. What does this mean?", "options": ["You must leave your room by twelve o'clock on your last day", "Breakfast is served at twelve o'clock", "The hotel reception closes at noon", "You can only arrive at the hotel after twelve"], "correct": "You must leave your room by twelve o'clock on your last day", "explanation": "Check-out = выезд из отеля, а время рядом (например, 12 noon) — это крайний срок освободить номер. Check-in = заезд и регистрация. Если хотите остаться дольше, можно попросить late check-out."}]}, {"id": "s2", "title": "Grammar — Passive with by and Prepositions", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Choose the correct sentence:", "options": ["War and Peace was written by Leo Tolstoy.", "War and Peace was written from Leo Tolstoy.", "War and Peace was written with Leo Tolstoy.", "War and Peace wrote by Leo Tolstoy."], "correct": "War and Peace was written by Leo Tolstoy.", "explanation": "В пассиве исполнитель действия вводится предлогом by: was written by Tolstoy. Исполнителя упоминайте, только если это важно и интересно (кто написал книгу, кто построил собор). Если исполнитель очевиден или неважен, by-фразу просто опускают: The suitcase was delivered at six."}, {"id": "g2", "type": "choice", "sentence": "The children were very well ___ by their grandmother all summer.", "options": ["looked after", "looked", "after looked", "looking after"], "correct": "looked after", "explanation": "Если в активе глагол с предлогом (to look after somebody = заботиться), то в пассиве предлог остаётся на своём месте и не выбрасывается: The children were looked after. Никакого 'were looked' без after! Другие примеры: was laughed at (над ним смеялись), will be dealt with (этим займутся), is spoken about (о нём говорят)."}, {"id": "g3", "type": "choice", "sentence": "Find the correct sentence:", "options": ["Your complaint will be dealt with next week.", "Your complaint will be dealt next week.", "Your complaint will dealt with next week.", "Your complaint will be dealing with next week."], "correct": "Your complaint will be dealt with next week.", "explanation": "To deal with = заниматься, разбираться (с вопросом, жалобой). В пассиве будущее выглядит так: will + be + V3, а предлог with остаётся в конце: will be dealt with. Сравните: They will deal with your complaint → Your complaint will be dealt with."}, {"id": "g4", "type": "choice", "sentence": "Active: 'The airline will send the suitcase to the hotel.' Which is the correct passive?", "options": ["The suitcase will be sent to the hotel by the airline.", "The suitcase will be send to the hotel by the airline.", "The suitcase will sent to the hotel from the airline.", "The suitcase is will sent to the hotel by the airline."], "correct": "The suitcase will be sent to the hotel by the airline.", "explanation": "Порядок пассива в будущем: will + be + третья форма глагола (V3): will be sent. Существительное остаётся на месте (to the hotel), а исполнитель присоединяется через by the airline. Часто by-фразу можно убрать: The suitcase will be sent to the hotel — и это звучит даже естественнее."}]}, {"id": "s3", "title": "Practical English — At the Hotel", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You arrive at a hotel and want to say that you have a booking. What do you say at reception?", "options": ["I have a reservation for two nights, under the name Spencer.", "I have a reservation for two nights, on the name Spencer.", "I book myself a room in the name Spencer.", "I am a reservation of Spencer for two nights."], "correct": "I have a reservation for two nights, under the name Spencer.", "explanation": "Under the name... = на имя... (бронь записана на эту фамилию). Полезные фразы рядом: I'd like to check in (я хотел бы заселиться), Here's my booking reference (вот код бронирования), Do you need my passport? (вам нужен мой паспорт?)."}, {"id": "p2", "type": "choice", "sentence": "Your flight leaves late in the evening, but you must check out at noon. You want reception to store your suitcase. What do you ask?", "options": ["Could you keep my luggage until the evening, please?", "Could you hold my luggage on the evening, please?", "Would you carry my luggage until evening, please?", "Can you leave my luggage to yourself until evening?"], "correct": "Could you keep my luggage until the evening, please?", "explanation": "Could you keep my luggage (until six)? = Не могли бы вы оставить мой чемодан у себя? Это стандартная просьба на ресепшене. Ответ обычно: Of course, we'll keep it behind the desk (конечно, оставим за стойкой)."}]}, {"id": "s4", "title": "Challenge — Level B2", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete the sentence: 'The luggage tag was written ___ the check-in assistant ___ a black marker.'", "options": ["by ... with", "with ... by", "by ... by", "with ... with"], "correct": "by ... with", "explanation": "By вводит исполнителя — человека (written by the assistant), а with вводит инструмент, которым выполняли действие (with a black marker). Сравните: The photo was taken by my brother with his new phone. Это тонкое различие часто проверяют на экзаменах уровня B2."}, {"id": "c2", "type": "choice", "sentence": "Find the grammatically correct sentence:", "options": ["Nobody likes being laughed at in public.", "Nobody likes being laughed in public.", "Nobody likes to be laughed on in public.", "Nobody likes laughed at in public."], "correct": "Nobody likes being laughed at in public.", "explanation": "Здесь две конструкции в одной фразе. Первая: после like о чувствах и привычках чаще используется герундий (likes being...). Вторая: пассив герундия = being + V3, а предлог глагола laugh at остаётся в конце: being laughed at = когда над тобой смеются. Точно так же: I hate being told what to do, She doesn't like being stared at."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue and answer: What happened to Mark's suitcase?", "options": ["It was left behind in Frankfurt and will probably arrive at the hotel the next day", "It was stolen at the baggage claim in this city", "It was sent to the wrong hotel by the driver", "It is still on the plane because the flight was cancelled"], "correct": "It was left behind in Frankfurt and will probably arrive at the hotel the next day", "explanation": "Марк говорит, что чемодана не было на ленте выдачи багажа (my suitcase wasn't on the baggage claim belt), а на стойке потерянного багажа ему объяснили, что его, скорее всего, забыли во Франкфурте (it was probably left behind in Frankfurt) и отправят в отель к следующему вечеру.", "audio_text": "Kate(F): Good evening! Welcome to the Grand Harbour Hotel. How can I help you?\nMark(M): Hi! I have a reservation for three nights, under the name Spencer. Here is my booking reference.\nKate(F): Let me see... Spencer, three nights, a double room with a sea view. Would you like a room on a higher floor? It's quieter.\nMark(M): Yes, please. I was kept awake by a crying baby on the plane, so quieter is exactly what I need.\nKate(F): Oh dear, was it a red-eye flight?\nMark(M): It was. I'm absolutely shattered. And to make things worse, my suitcase wasn't on the baggage claim belt.\nKate(F): I'm sorry to hear that. Was a report filled in at the airport?\nMark(M): Yes, I was told to fill in a form at the lost luggage desk. They said the suitcase was probably left behind in Frankfurt.\nKate(F): Then it will most likely be sent here by tomorrow evening. We'll call your room as soon as it is delivered.\nMark(M): That's a relief. Is there a shop nearby where I can buy a toothbrush and a clean T-shirt?\nKate(F): There's a little one around the corner, open until eleven. And tonight the minibar in your room is on the house, considering your journey.\nMark(M): You are officially my favourite person in this city. What time is breakfast served?\nKate(F): From seven until ten thirty, and check-out is at noon. Could I take your passport... Here's your key card, room five hundred and twelve. Enjoy your stay!\nMark(M): Thank you! If my suitcase is delivered by noon tomorrow, this whole trip will be saved by your hotel.\nKate(F): We'll do our best. Good night, and better late than never!"}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue and answer: What does Kate offer Mark for free?", "options": ["A free breakfast for all three mornings", "Everything in the minibar tonight", "A free upgrade to a room with a sea view", "A toothbrush and a T-shirt from the hotel shop"], "correct": "Everything in the minibar tonight", "explanation": "Кейт говорит, что раз поездка выдалась такой трудной, сегодня вечером minibar in your room is on the house. On the house = за счёт заведения, бесплатно. Завтрак и вид на море не подарены, а магазин платный.", "audio_text": "Kate(F): Good evening! Welcome to the Grand Harbour Hotel. How can I help you?\nMark(M): Hi! I have a reservation for three nights, under the name Spencer. Here is my booking reference.\nKate(F): Let me see... Spencer, three nights, a double room with a sea view. Would you like a room on a higher floor? It's quieter.\nMark(M): Yes, please. I was kept awake by a crying baby on the plane, so quieter is exactly what I need.\nKate(F): Oh dear, was it a red-eye flight?\nMark(M): It was. I'm absolutely shattered. And to make things worse, my suitcase wasn't on the baggage claim belt.\nKate(F): I'm sorry to hear that. Was a report filled in at the airport?\nMark(M): Yes, I was told to fill in a form at the lost luggage desk. They said the suitcase was probably left behind in Frankfurt.\nKate(F): Then it will most likely be sent here by tomorrow evening. We'll call your room as soon as it is delivered.\nMark(M): That's a relief. Is there a shop nearby where I can buy a toothbrush and a clean T-shirt?\nKate(F): There's a little one around the corner, open until eleven. And tonight the minibar in your room is on the house, considering your journey.\nMark(M): You are officially my favourite person in this city. What time is breakfast served?\nKate(F): From seven until ten thirty, and check-out is at noon. Could I take your passport... Here's your key card, room five hundred and twelve. Enjoy your stay!\nMark(M): Thank you! If my suitcase is delivered by noon tomorrow, this whole trip will be saved by your hotel.\nKate(F): We'll do our best. Good night, and better late than never!"}]}], "subtitles": [{"speaker": "Kate", "text": "Good evening! Welcome to the Grand Harbour Hotel. How can I help you?"}, {"speaker": "Mark", "text": "Hi! I have a reservation for three nights, under the name Spencer. Here is my booking reference."}, {"speaker": "Kate", "text": "Let me see... Spencer, three nights, a double room with a sea view. Would you like a room on a higher floor? It's quieter."}, {"speaker": "Mark", "text": "Yes, please. I was kept awake by a crying baby on the plane, so quieter is exactly what I need."}, {"speaker": "Kate", "text": "Oh dear, was it a red-eye flight?"}, {"speaker": "Mark", "text": "It was. I'm absolutely shattered. And to make things worse, my suitcase wasn't on the baggage claim belt."}, {"speaker": "Kate", "text": "I'm sorry to hear that. Was a report filled in at the airport?"}, {"speaker": "Mark", "text": "Yes, I was told to fill in a form at the lost luggage desk. They said the suitcase was probably left behind in Frankfurt."}, {"speaker": "Kate", "text": "Then it will most likely be sent here by tomorrow evening. We'll call your room as soon as it is delivered."}, {"speaker": "Mark", "text": "That's a relief. Is there a shop nearby where I can buy a toothbrush and a clean T-shirt?"}, {"speaker": "Kate", "text": "There's a little one around the corner, open until eleven. And tonight the minibar in your room is on the house, considering your journey."}, {"speaker": "Mark", "text": "You are officially my favourite person in this city. What time is breakfast served?"}, {"speaker": "Kate", "text": "From seven until ten thirty, and check-out is at noon. Could I take your passport... Here's your key card, room five hundred and twelve. Enjoy your stay!"}, {"speaker": "Mark", "text": "Thank you! If my suitcase is delivered by noon tomorrow, this whole trip will be saved by your hotel."}, {"speaker": "Kate", "text": "We'll do our best. Good night, and better late than never!"}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
