@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Hobbies: Photography &amp; Reading + The more... the more... (Comparisons)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Hobbies: Photography &amp; Reading + The more... the more... (Comparisons)</h1><div class="subtitle">2026-09-11</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Practice makes perfect</div><div class="translation">Навык приходит с практикой (чем больше тренируешься, тем лучше получается)</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Hobbies: Photography & Reading + The more... the more... (Comparisons)", "subtitle": "2026-09-11", "date": "2026-09-11", "phrase_of_the_day": "Practice makes perfect", "phrase_translation": "Навык приходит с практикой (чем больше тренируешься, тем лучше получается)", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0911.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Hobbies: Photography & Reading", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Sarah takes a photo of a seagull, but it comes out blurry. David says, 'You zoomed in too much.' What does 'zoom in' mean?", "options": ["To make the subject look bigger and closer in the picture", "To make the subject look smaller and farther away", "To delete the picture and then take it once again", "To move the camera quickly from left to right"], "correct": "To make the subject look bigger and closer in the picture", "explanation": "To zoom in = приблизить (предмет становится крупнее и ближе), to zoom out = отдалить. На фотоаппарате это кнопки с значком лупы или вращающееся кольцо на объективе (lens). Если приблизить слишком сильно, малейшее дрожание руки делает снимок размытым (blurry)."}, {"id": "v2", "type": "choice", "sentence": "Sarah says about her novel, 'It's such a page-turner. I couldn't put it down.' What is a page-turner?", "options": ["A book so exciting that you want to keep reading it", "A book with very thick pages that are hard to turn", "A book that is so boring you fall asleep over it", "A book about photography with many beautiful pictures"], "correct": "A book so exciting that you want to keep reading it", "explanation": "A page-turner = захватывающая книга, которую не хочется откладывать (буквально — та, которую листаешь и листаешь). Рядом полезное выражение to put a book down = отложить книгу; в отрицании — I couldn't put it down = не могла оторваться."}, {"id": "v3", "type": "choice", "sentence": "David tells Sarah, 'First, attach the tripod.' What is a tripod?", "options": ["A three-legged stand that keeps the camera steady", "A very long lens for taking photos of wild birds", "A small button that starts the camera recording", "A waterproof bag for carrying cameras and lenses"], "correct": "A three-legged stand that keeps the camera steady", "explanation": "A tripod = штатив, подставка на трёх ножках (tri = три, как в triangle). Камера на штативе не дрожит, поэтому снимки получаются резкими (sharp), а не размытыми (blurry). Глагол to attach = прикрепить."}, {"id": "v4", "type": "choice", "sentence": "In the library you want a book about a real person's life, written by somebody else. Which genre do you ask for?", "options": ["A biography", "A crime novel", "A fantasy saga", "A poetry anthology"], "correct": "A biography", "explanation": "A biography = биография, книга о жизни реального человека. Если человек написал книгу о себе сам, это an autobiography (автобиография). A crime novel = детектив, a fantasy saga = фэнтези-сага, a poetry anthology = сборник стихов. Слово genre = жанр."}]}, {"id": "s2", "title": "Grammar — The more... the more... and Comparisons", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete David's advice about photography: 'The ___ photos you take, the ___ you get.'", "options": ["more ... better", "most ... best", "more ... best", "most ... better"], "correct": "more ... better", "explanation": "Конструкция the + сравнительная степень, the + сравнительная степень показывает, что одно растёт вместе с другим: The more photos you take, the better you get = чем больше фото ты делаешь, тем лучше у тебя получается. После the — только простая сравнительная форма (more, better, sooner), никогда not most/best."}, {"id": "g2", "type": "choice", "sentence": "Complete the sentence: 'This camera is ___ that one, but it weighs less.'", "options": ["as expensive as", "as expensive than", "so expensive as", "expensive than"], "correct": "as expensive as", "explanation": "Равное сравнение в утвердительном предложении — только as + прилагательное + as: as expensive as that one. Вариант so expensive as возможен только в отрицаниях (not so expensive as), а в утвердительном предложении он ошибочен. Than используется с comparative (more expensive than)."}, {"id": "g3", "type": "choice", "sentence": "Complete the sentence: 'The new lens is ___ the old one, but the photos are worth it.'", "options": ["twice as expensive as", "twice more expensive as", "twice expensiver than", "as twice expensive as"], "correct": "twice as expensive as", "explanation": "Во сколько раз больше — по-английски через as...as: twice as expensive as (вдвое дороже), three times as long as (втрое длиннее). Порядок строгий: сначала twice, потом as + прилагательное + as. Ошибки вроде twice more expensive или as twice expensive — типичные ловушки на экзаменах."}, {"id": "g4", "type": "choice", "sentence": "Find the correct sentence:", "options": ["The harbour is less crowded in the evening than in the morning.", "The harbour is less crowded in the evening as in the morning.", "The harbour is least crowded in the evening than in the morning.", "The harbour is more less crowded in the evening than in the morning."], "correct": "The harbour is less crowded in the evening than in the morning.", "explanation": "Меньше — это less + прилагательное + than: less crowded than = менее многолюдный, чем. После less используется exactly than, а не as (as бывает только с as...as). Формы least — это превосходная степень (the least crowded = наименее многолюдный), она здесь не подходит."}]}, {"id": "s3", "title": "Practical English — Talking About Hobbies", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "A colleague asks, 'So what do you do in your free time?' You love photography. What do you say?", "options": ["I'm really into photography — I spend most weekends taking pictures.", "I'm really on photography — I spend most weekends doing pictures.", "I'm really into take pictures — most weekends go on photographing.", "I really into photography — most weekends I spend to take pictures."], "correct": "I'm really into photography — I spend most weekends taking pictures.", "explanation": "To be into something = увлекаться чем-то (разговорное, очень частое): I'm into photography, I'm into crime novels. После into идёт существительное или герундий: into taking pictures. Ещё варианты ответа: I'm a big fan of..., I've recently taken up photography (недавно начал заниматься)."}, {"id": "p2", "type": "choice", "sentence": "Your friend asks how the novel you are reading is. It is gripping. What do you answer?", "options": ["I can't put it down — the plot twists keep you guessing.", "I can't put down it — the plot twists keep guessing you.", "I can't take it down — the plot twists keep you guessing.", "I can't put it up — the plot twists keep you guessing."], "correct": "I can't put it down — the plot twists keep you guessing.", "explanation": "I can't put it down = не могу отложить (о захватывающей книге). Порядок слов в фразовом глаголе с местоимением: put it down, а не put down it. A plot twist = неожиданный поворот сюжета. Похожие фразы: It grabs you from page one (захватывает с первой страницы), I'm hooked (я подсела)."}]}, {"id": "s4", "title": "Challenge — Level B2", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete the sentence: 'Now that spring is coming, the days are getting ___ and ___.'", "options": ["longer ... warmer", "more long ... more warm", "longer ... more warm", "more long ... warmer"], "correct": "longer ... warmer", "explanation": "To get + сравнительная степень = становиться (get better, get longer, get warmer). Короткие прилагательные образуют сравнительную степень через -er (long → longer, warm → warmer), без more. Повторяющаяся схема getting longer and longer = всё длиннее и длиннее — тоже полезная конструкция."}, {"id": "c2", "type": "choice", "sentence": "Choose the sentence that means the same as: 'David's camera is better than mine.'", "options": ["My camera is not as good as David's.", "My camera is as not good as David's.", "My camera is not so good than David's.", "David's camera is as good as mine."], "correct": "My camera is not as good as David's.", "explanation": "Сравнительное предложение можно перевернуть через not as...as: David's camera is better than mine = My camera is not as good as David's (моя не такая хорошая, как его). Порядок as not неверен, а после not so / not as в равном сравнении never стоит than. Последний вариант меняет смысл на противоположный."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue and answer: What problem does Sarah have with her first photo?", "options": ["It is blurry because she zoomed in too much", "It is dark because she forgot to open the shutter", "It is crooked because the tripod was not stable", "It is empty because the seagull flew away too early"], "correct": "It is blurry because she zoomed in too much", "explanation": "Сара делает снимок и говорит Oh no, it's blurry (ой, он размытый). Дэвид объясняет причину: You zoomed in too much — Zoom out a little and try again (приблизь меньше, отдали немного и попробуй ещё раз).", "audio_text": "David(M): So, this is the old harbour. Perfect light for photos this morning.\nSarah(F): Finally! I've been looking forward to this photo walk all week. Where do I start?\nDavid(M): First, attach the tripod. The more stable your camera is, the sharper your photos will be.\nSarah(F): Got it. And this big round button on top?\nDavid(M): That's the shutter. Press it halfway down to focus, then all the way down to take the shot.\nSarah(F): Like this? Oh no, it's blurry. The seagull looks like a white ghost.\nDavid(M): You zoomed in too much. Zoom out a little and try again. Photography is not as easy as it looks, is it?\nSarah(F): Definitely not. Your photos always look so professional. Do you use some secret settings?\nDavid(M): Not really. The more photos you take, the better you get. I've taken about ten thousand terrible ones myself.\nSarah(F): Ten thousand! That actually makes me feel much better about my white ghost.\nDavid(M): Ha! Now try landscape mode for the harbour, and portrait mode for me, so I look tall.\nSarah(F): You're not that tall, David. You are not even as tall as this tripod.\nDavid(M): Rude, but fair. By the way, are you still reading that crime novel?\nSarah(F): Yes! It's such a page-turner. I read until two in the morning. I couldn't put it down.\nDavid(M): The more exciting the plot, the less sleep you get. That's the real price of a good book.\nSarah(F): True. Now hold still — I want to practise focusing on a moving object.\nDavid(M): A moving object? I'm barely moving. Unless... watch out, seagull incoming!\nSarah(F): Perfect! That shot was actually sharp. Practice makes perfect, doesn't it?\nDavid(M): See? Twenty more years of this, and you'll be twice as good as I am."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue and answer: What does David say about learning photography?", "options": ["The more photos you take, the better you get, and he took thousands of bad ones", "The better your camera is, the less you have to practise or learn about focus", "The more books you read about photography, the sharper your photos will be", "The sooner you buy a new lens, the faster your photos start looking professional"], "correct": "The more photos you take, the better you get, and he took thousands of bad ones", "explanation": "Сара спрашивает о секретных настройках, но Дэвид отвечает: The more photos you take, the better you get. I've taken about ten thousand terrible ones myself — то есть путь к хорошим фото лежит через практику и тысячи неудачных снимков. В конце он шутит: через двадцать лет Сара будет вдвое лучше него (twice as good as I am).", "audio_text": "David(M): So, this is the old harbour. Perfect light for photos this morning.\nSarah(F): Finally! I've been looking forward to this photo walk all week. Where do I start?\nDavid(M): First, attach the tripod. The more stable your camera is, the sharper your photos will be.\nSarah(F): Got it. And this big round button on top?\nDavid(M): That's the shutter. Press it halfway down to focus, then all the way down to take the shot.\nSarah(F): Like this? Oh no, it's blurry. The seagull looks like a white ghost.\nDavid(M): You zoomed in too much. Zoom out a little and try again. Photography is not as easy as it looks, is it?\nSarah(F): Definitely not. Your photos always look so professional. Do you use some secret settings?\nDavid(M): Not really. The more photos you take, the better you get. I've taken about ten thousand terrible ones myself.\nSarah(F): Ten thousand! That actually makes me feel much better about my white ghost.\nDavid(M): Ha! Now try landscape mode for the harbour, and portrait mode for me, so I look tall.\nSarah(F): You're not that tall, David. You are not even as tall as this tripod.\nDavid(M): Rude, but fair. By the way, are you still reading that crime novel?\nSarah(F): Yes! It's such a page-turner. I read until two in the morning. I couldn't put it down.\nDavid(M): The more exciting the plot, the less sleep you get. That's the real price of a good book.\nSarah(F): True. Now hold still — I want to practise focusing on a moving object.\nDavid(M): A moving object? I'm barely moving. Unless... watch out, seagull incoming!\nSarah(F): Perfect! That shot was actually sharp. Practice makes perfect, doesn't it?\nDavid(M): See? Twenty more years of this, and you'll be twice as good as I am."}]}], "subtitles": [{"speaker": "David", "text": "So, this is the old harbour. Perfect light for photos this morning."}, {"speaker": "Sarah", "text": "Finally! I've been looking forward to this photo walk all week. Where do I start?"}, {"speaker": "David", "text": "First, attach the tripod. The more stable your camera is, the sharper your photos will be."}, {"speaker": "Sarah", "text": "Got it. And this big round button on top?"}, {"speaker": "David", "text": "That's the shutter. Press it halfway down to focus, then all the way down to take the shot."}, {"speaker": "Sarah", "text": "Like this? Oh no, it's blurry. The seagull looks like a white ghost."}, {"speaker": "David", "text": "You zoomed in too much. Zoom out a little and try again. Photography is not as easy as it looks, is it?"}, {"speaker": "Sarah", "text": "Definitely not. Your photos always look so professional. Do you use some secret settings?"}, {"speaker": "David", "text": "Not really. The more photos you take, the better you get. I've taken about ten thousand terrible ones myself."}, {"speaker": "Sarah", "text": "Ten thousand! That actually makes me feel much better about my white ghost."}, {"speaker": "David", "text": "Ha! Now try landscape mode for the harbour, and portrait mode for me, so I look tall."}, {"speaker": "Sarah", "text": "You're not that tall, David. You are not even as tall as this tripod."}, {"speaker": "David", "text": "Rude, but fair. By the way, are you still reading that crime novel?"}, {"speaker": "Sarah", "text": "Yes! It's such a page-turner. I read until two in the morning. I couldn't put it down."}, {"speaker": "David", "text": "The more exciting the plot, the less sleep you get. That's the real price of a good book."}, {"speaker": "Sarah", "text": "True. Now hold still — I want to practise focusing on a moving object."}, {"speaker": "David", "text": "A moving object? I'm barely moving. Unless... watch out, seagull incoming!"}, {"speaker": "Sarah", "text": "Perfect! That shot was actually sharp. Practice makes perfect, doesn't it?"}, {"speaker": "David", "text": "See? Twenty more years of this, and you'll be twice as good as I am."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
