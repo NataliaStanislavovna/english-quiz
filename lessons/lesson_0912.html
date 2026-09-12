@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Shopping: Online Orders &amp; Returns + Present Perfect vs Present Perfect Continuous</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Shopping: Online Orders &amp; Returns + Present Perfect vs Present Perfect Continuous</h1><div class="subtitle">2026-09-12</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Shop around</div><div class="translation">Сравнить цены и варианты в нескольких местах, прежде чем покупать — не брать в первом попавшемся магазине.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Shopping: Online Orders & Returns + Present Perfect vs Present Perfect Continuous", "subtitle": "2026-09-12", "date": "2026-09-12", "phrase_of_the_day": "Shop around", "phrase_translation": "Сравнить цены и варианты в нескольких местах, прежде чем покупать — не брать в первом попавшемся магазине.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0912.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Shopping: Online Orders & Returns", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Emma is shopping online. She likes a dress and clicks 'Add to cart'. What does she do?", "options": ["She puts the dress into her virtual basket before paying for it", "She saves the dress to a wish list for her next birthday", "She compares the dress with similar models from other shops", "She asks the shop to reserve the dress for her in the store"], "correct": "She puts the dress into her virtual basket before paying for it", "explanation": "Add to cart (UK: add to basket) = положить в корзину на сайте, ещё без оплаты. Cart/basket — «корзина». Когда товаров в корзине достаточно, нажимают checkout — перейти к оплате. Это первое действие при онлайн-покупке, не бронь и не сравнение."}, {"id": "v2", "type": "choice", "sentence": "Mark wants to buy a kettle, but the website says 'Out of stock'. What does this mean?", "options": ["The shop has sold all the kettles and has none available now", "The kettles are kept in a warehouse far away from the shop", "The kettle is so popular that the price has doubled this week", "The kettle is sold only in the physical store and not online"], "correct": "The shop has sold all the kettles and has none available now", "explanation": "Out of stock = «нет в наличии», распродано. Stock — запас товара на складе. In stock = есть в наличии. Обычно сайт предлагает: We'll email you when it's back in stock (сообщим, когда появится)."}, {"id": "v3", "type": "choice", "sentence": "Anna's new kettle doesn't work. She takes it back to the shop and asks for a refund. What does she want?", "options": ["The shop gives her money back for the faulty kettle", "The shop gives her a new kettle of exactly the same model", "The shop gives her a discount coupon for her next order", "The shop sends the kettle away and repairs it for free"], "correct": "The shop gives her money back for the faulty kettle", "explanation": "Refund = возврат денег. Не путать с exchange = замена на такой же или другой товар. Faulty = бракованный, неисправный. Если товар просто не понравился, многие магазины дают refund только с чеком (receipt) и в срок из правила возврата (return policy)."}, {"id": "v4", "type": "choice", "sentence": "After placing her order, Kate gets an email: 'Track your order'. What can she do?", "options": ["Follow where her package is on its way to her address", "Change the delivery address while the package is travelling", "Insure the package in case it gets lost or damaged on the way", "Sign the electronic paper that the courier will ask her for"], "correct": "Follow where her package is on its way to her address", "explanation": "To track an order / to track a package = отслеживать посылку: смотреть на карте или по статусам (packed — упакован, shipped — отправлен, out for delivery — курьер везёт сегодня). Track = следить, идти по следу."}]}, {"id": "s2", "title": "Grammar — Present Perfect vs Present Perfect Continuous", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Emma is annoyed. She ___ for her parcel since Monday.", "options": ["has been waiting", "is waiting right now", "was waiting that day", "will be waiting soon"], "correct": "has been waiting", "explanation": "С since Monday и «досады» здесь нужно: действие началось в прошлом и длится до сих пор — Present Perfect Continuous: has been waiting. Формула: have/has been + глагол с -ing. Маркеры: since Monday, for two weeks, all morning + действие ещё не закончилось."}, {"id": "g2", "type": "choice", "sentence": "Look at the kitchen! Mark ___ all morning, and now there are cakes everywhere.", "options": ["has been baking", "is baking right now", "was baking earlier", "bakes every weekend"], "correct": "has been baking", "explanation": "Классический случай: сам процесс был длительным (all morning), а сейчас виден его результат — cakes everywhere. Present Perfect Continuous часто объясняет, КАК получился видимый сейчас результат: He has been baking = он пёк всё утро, вот вам и пироги. Русский скажет «напёк», английский подчёркивает процесс."}, {"id": "g3", "type": "choice", "sentence": "Anna ___ three online orders this week. She really loves sales.", "options": ["has placed", "is placing", "was placing", "places"], "correct": "has placed", "explanation": "Здесь важен РЕЗУЛЬТАТ и КОЛИЧЕСТВО: three orders — три готовых, законченных заказа. С числом («сколько раз») используется Present Perfect (has placed), а не Continuous. Сравните: She has been placing orders all day (процесс, неважно сколько) vs She has placed three orders (итог: три штуки)."}, {"id": "g4", "type": "choice", "sentence": "Your friend's parcel is very late, and you want to know how long this has been going on. Choose the correct question:", "options": ["How long have you been waiting for it?", "How long did you wait for it last year?", "How long are you waiting for it tomorrow?", "How long do you wait for it on Mondays?"], "correct": "How long have you been waiting for it?", "explanation": "How long + действие, которое началось раньше и всё ещё идёт (посылка всё ещё не пришла, друг всё ещё ждёт) = How long have you been + глагол-ing. Это самый частый вопрос к Present Perfect Continuous. Past Simple (did you wait) спросил бы о законченном периоде, а не о текущем ожидании."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Mark says, 'Don't buy the first fridge you see — shop around first.' What does he mean?", "options": ["Compare prices in several shops before you decide and buy", "Take a shopping trolley instead of carrying a heavy basket", "Go shopping early in the morning to avoid the big crowds", "Walk around the whole mall to get some light exercise"], "correct": "Compare prices in several shops before you decide and buy", "explanation": "To shop around = «походить по магазинам и сравнить», прежде чем покупать. Очень полезная фраза: Shop around — the same kettle is ten euros cheaper two streets away. Не путать с window shopping = разглядывать витрины без цели купить (сегодняшняя фраза дня — shop around)."}, {"id": "p2", "type": "choice", "sentence": "The dress Emma ordered online is too small. She takes it back to the shop. What does she say at the counter?", "options": ["I'd like to return this dress, please. It's too small.", "I'd like to try this dress on, please. Do you have size ten?", "I'd like to pay for this dress, please. Can I pay by card?", "I'd like to put this dress aside, please. I'll come on Friday."], "correct": "I'd like to return this dress, please. It's too small.", "explanation": "Вежливый возврат: I'd like to return this, please + причина (It's too small / It doesn't fit / It's faulty). Ключевые слова: return = вернуть, exchange = обменять, refund = вернуть деньги, receipt = чек. I'd like to (= I would like to) звучит вежливее, чем I want to."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Which sentence is grammatically correct?", "options": ["I've been reading this review for an hour, and I'm only halfway through", "I've been knowing the shop assistant since school, and she always helps", "I've been finishing three online orders this morning, all before lunch", "I've been having two coffees this morning, so now I'm wide awake"], "correct": "I've been reading this review for an hour, and I'm only halfway through", "explanation": "Present Perfect Continuous не любит два случая. 1) Глаголы состояния (know, like, want, believe) — с ними Continuous нельзя вообще: I've known her, а не I've been knowing. 2) Законченный результат с числом — «three orders», «two coffees» требуют простой формы: I've finished three orders, I've had two coffees. А «читаю обзор час и ещё не дочитала» — живой длительный процесс, всё верно."}, {"id": "c2", "type": "choice", "sentence": "This is the third time my parcel ___ late this month. Unbelievable!", "options": ["has been late", "was late then", "is late today", "will be late"], "correct": "has been late", "explanation": "Хитрая закономерность уровня B2: после It's / This is the first (second, third) time глагол стоит в Present Perfect: This is the third time my parcel has been late. Так же: It's the first time I've ordered anything from this shop. Логика: момент «уже третье опоздание» относится к настоящему, а список опозданий подытожен к этому моменту."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue and answer: Why does Emma call customer service?", "options": ["Her yellow dress was delivered to the wrong customer in Norway", "The courier lost her parcel somewhere on the way to her flat", "The dress she received was torn and did not fit her at all", "She was charged twice for one single order of a summer dress"], "correct": "Her yellow dress was delivered to the wrong customer in Norway", "explanation": "Эмма заказала жёлтое летнее платье (I ordered a yellow summer dress two weeks ago), а курьер привёз бензопилу (a chainsaw). Марк находит причину: Your dress went to a lumberjack in Norway — перепутали этикетки на складе, платье уехало не тому клиенту.", "audio_text": "Mark(M): Good afternoon, QuickShop customer service, this is Mark speaking. How can I help you today?\nEmma(F): Hello, Mark. I've been waiting for your reply email for three days, so I decided to call.\nMark(M): I'm really sorry about that. Let's sort this out right now. So, what seems to be the problem?\nEmma(F): I ordered a yellow summer dress two weeks ago. This morning the courier brought me a chainsaw.\nMark(M): A chainsaw? Are you sure it came from us?\nEmma(F): The label says QuickShop. Order number four seven two nine.\nMark(M): One moment, I'll check. Ah, I see. There was a mix-up at our warehouse. Your dress went to a lumberjack in Norway.\nEmma(F): So somewhere in Norway there's a big man trying on my little yellow dress?\nMark(M): I honestly hope he's enjoying it. Now, how would you like to solve this — a refund or a replacement?\nEmma(F): A replacement, please. I've been looking forward to that dress all month.\nMark(M): Perfect. I'll place a new order today with free express delivery. It should arrive on Thursday.\nEmma(F): Wonderful. And what should I do with the chainsaw?\nMark(M): Keep it as our apology. Or our courier can come and pick it up, whichever you prefer.\nEmma(F): I live in a small flat, Mark. I don't even have a garden, let alone trees.\nMark(M): Fair point. The courier will pick it up tomorrow, any time between nine and five.\nEmma(F): Great. And Mark, please tell your warehouse people to double-check the labels next time.\nMark(M): I will. The busier we get, the more mistakes we make. Thank you for your patience, and enjoy the dress!"}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue and answer: What does Mark offer as a solution?", "options": ["A new dress with free express delivery and a courier for the chainsaw", "A full refund to her card and a discount voucher for her next order", "A trip to the warehouse where she can pick the right dress herself", "An apology email and free delivery on every order she makes this year"], "correct": "A new dress with free express delivery and a courier for the chainsaw", "explanation": "Эмма выбирает replacement (замену). Марк оформляет новый заказ с бесплатной экспресс-доставкой к четвергу (I'll place a new order today with free express delivery), а бензопилу завтра заберёт курьер (The courier will pick it up tomorrow). Он предлагал оставить пилу как извинение, но Эмма живёт в маленькой квартире."}]}], "subtitles": [{"speaker": "Mark", "text": "Good afternoon, QuickShop customer service, this is Mark speaking. How can I help you today?"}, {"speaker": "Emma", "text": "Hello, Mark. I've been waiting for your reply email for three days, so I decided to call."}, {"speaker": "Mark", "text": "I'm really sorry about that. Let's sort this out right now. So, what seems to be the problem?"}, {"speaker": "Emma", "text": "I ordered a yellow summer dress two weeks ago. This morning the courier brought me a chainsaw."}, {"speaker": "Mark", "text": "A chainsaw? Are you sure it came from us?"}, {"speaker": "Emma", "text": "The label says QuickShop. Order number four seven two nine."}, {"speaker": "Mark", "text": "One moment, I'll check. Ah, I see. There was a mix-up at our warehouse. Your dress went to a lumberjack in Norway."}, {"speaker": "Emma", "text": "So somewhere in Norway there's a big man trying on my little yellow dress?"}, {"speaker": "Mark", "text": "I honestly hope he's enjoying it. Now, how would you like to solve this — a refund or a replacement?"}, {"speaker": "Emma", "text": "A replacement, please. I've been looking forward to that dress all month."}, {"speaker": "Mark", "text": "Perfect. I'll place a new order today with free express delivery. It should arrive on Thursday."}, {"speaker": "Emma", "text": "Wonderful. And what should I do with the chainsaw?"}, {"speaker": "Mark", "text": "Keep it as our apology. Or our courier can come and pick it up, whichever you prefer."}, {"speaker": "Emma", "text": "I live in a small flat, Mark. I don't even have a garden, let alone trees."}, {"speaker": "Mark", "text": "Fair point. The courier will pick it up tomorrow, any time between nine and five."}, {"speaker": "Emma", "text": "Great. And Mark, please tell your warehouse people to double-check the labels next time."}, {"speaker": "Mark", "text": "I will. The busier we get, the more mistakes we make. Thank you for your patience, and enjoy the dress!"}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
