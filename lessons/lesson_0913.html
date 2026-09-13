@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Nature &amp; Environment: Climate and Waste + Reporting Verbs</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Nature &amp; Environment: Climate and Waste + Reporting Verbs</h1><div class="subtitle">2026-09-13</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Every little helps</div><div class="translation">Даже маленький вклад имеет значение — небольшие действия, повторяемые многими людьми, вместе дают большой результат.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Nature & Environment: Climate and Waste + Reporting Verbs", "subtitle": "2026-09-13", "date": "2026-09-13", "phrase_of_the_day": "Every little helps", "phrase_translation": "Даже маленький вклад имеет значение — небольшие действия, повторяемые многими людьми, вместе дают большой результат.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0913.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Nature & Environment", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Scientists say that cars and factories must reduce their emissions. What are emissions?", "options": ["Gases released into the air by cars, factories and power stations", "Rubbish thrown away in forests, parks and by the sides of roads", "Energy saved by switching off lights and electrical devices", "Trees planted to replace the forests that were cut down before"], "correct": "Gases released into the air by cars, factories and power stations", "explanation": "Emissions = выбросы, вредные газы, которые попадают в воздух. Чаще всего говорят carbon emissions — выбросы углекислого газа. Глагол: to emit. Фраза to cut emissions = сократить выбросы — она постоянно звучит в новостях про климат."}, {"id": "v2", "type": "choice", "sentence": "A region has had almost no rain for six months. The rivers are drying up and the soil is like dust. What is this called?", "options": ["A drought — a long period with little or no rain", "A flood — too much water covering streets and fields", "A heatwave — several days of extremely hot weather", "A thunderstorm — heavy rain with strong wind and thunder"], "correct": "A drought — a long period with little or no rain", "explanation": "Drought [draut] = засуха: долгий период без дождя, когда земле не хватает воды. Не путать с flood = наводнение (воды слишком много) и heatwave = жара (жарко, но речь о температуре, а не о дожде). Drought губит урожаи и пересушивает почву."}, {"id": "v3", "type": "choice", "sentence": "In Riga, people put paper, glass and plastic into separate coloured containers. What is this practice called?", "options": ["Waste sorting — separating rubbish so it can be recycled", "Composting — turning food waste into soil for gardens", "Littering — dropping rubbish on the ground in parks", "Deforestation — cutting down forests to build new roads"], "correct": "Waste sorting — separating rubbish so it can be recycled", "explanation": "Waste sorting (или rubbish separation) = сортировка мусора: раздельный сбор бумаги, стекла, пластика. To sort = сортировать. Waste = мусор (официальное слово; бытовой синоним — rubbish). Отсортированный мусор потом идёт на переработку — recycling."}, {"id": "v4", "type": "choice", "sentence": "Every year huge areas of forest are cut down in the Amazon to make room for farms. What is this process called?", "options": ["Deforestation — destroying forests by cutting down trees", "Irrigation — bringing water to dry fields through channels", "Conservation — protecting nature and saving rare species", "Erosion — washing away of soil by wind and heavy rain"], "correct": "Deforestation — destroying forests by cutting down trees", "explanation": "Deforestation = вырубка лесов: forests (леса) + де- (убирание) → исчезновение лесов. Леса поглощают углекислый газ, поэтому вырубка ускоряет изменение климата. Ложное слово-приманка: afforestation — противоположный процесс, посадка новых лесов."}]}, {"id": "s2", "title": "Grammar — Reporting Verbs", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Mark came late to the meeting and said he was sorry. Choose the correct sentence:", "options": ["He apologised for being late.", "He apologised to be late.", "He apologised for that he was late.", "He apologised of being late."], "correct": "He apologised for being late.", "explanation": "Многие глаголы сообщения требуют после себя предлог + герундий (глагол с -ing). Apologise FOR doing something = извиниться за что-то. Никакого to do и никакой связки for that. Так работают: apologise for, insist on, accuse somebody of, blame somebody for, congratulate somebody on."}, {"id": "g2", "type": "choice", "sentence": "The city council discussed recycling at yesterday's meeting. Choose the correct sentence:", "options": ["They suggested starting a new scheme.", "They suggested to start a new scheme.", "They suggested start a new scheme.", "They suggested for starting a new scheme."], "correct": "They suggested starting a new scheme.", "explanation": "Suggest — самый знаменитый «обманщик»: после него сразу герундий (V-ing) без предлога. Suggest doing = предложить что-то сделать. Ошибки suggested to start не существует в стандартном английском. Внимание: suggest нельзя и с объектом — не suggest somebody doing, а suggest that somebody should do."}, {"id": "g3", "type": "choice", "sentence": "Kate did not break the window, and she said this clearly to the teacher. How do we report her words?", "options": ["She denied breaking the window.", "She denied to break the window.", "She refused breaking the window.", "She denied for breaking the window."], "correct": "She denied breaking the window.", "explanation": "Deny + герундий = отрицать, что сделал (denied breaking = «я не ломал»). Сравните пару deny / refuse: deny doing (отрицать поступок) и refuse to do (отказаться делать). Второй как раз требует to do — поэтому refused breaking здесь неправильно."}, {"id": "g4", "type": "choice", "sentence": "David wanted to pay for the whole dinner and did not listen to objections. Choose the correct sentence:", "options": ["He insisted on paying the bill.", "He insisted to pay the bill.", "He insisted on to pay the bill.", "He insisted for paying the bill."], "correct": "He insisted on paying the bill.", "explanation": "Insist ON + герундий = настаивать на чём-то: insisted on paying. Предлог on здесь нельзя терять и нельзя заменять на to. Полезные примеры: She insisted on opening the window (настаивала, чтобы открыли), He insisted on driving me home (упрямо вызвался отвезти)."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "A colleague says you lost the report, but you did not even touch it. Which reply is correct English?", "options": ["Don't accuse me of losing it — I never touched that file.", "Don't accuse me to lose it — I never touched that file.", "Don't accuse me for losing it — I never touched that file.", "Don't accuse me that I lost it — I never touched that file."], "correct": "Don't accuse me of losing it — I never touched that file.", "explanation": "To accuse somebody OF doing something = обвинить кого-то в чём-то. Предлог только of. Родственник: to blame somebody FOR doing = винить кого-то за (здесь предлог for!). Пара accuse of / blame for — классическая ловушка на экзаменах уровня B2, запомните оба предлога вместе."}, {"id": "p2", "type": "choice", "sentence": "Emma says, 'I'll just bring one reusable cup.' David answers, 'Every little helps.' What does he mean?", "options": ["Even small actions matter when many people repeat them", "Helping your neighbours is the best way to make new friends", "Small purchases are always cheaper than the bigger ones", "You should ask for a little help before starting something"], "correct": "Even small actions matter when many people repeat them", "explanation": "Every little helps = «даже мелочь помогает», каждая маленькая помощь важна. Фраза часто встречается в разговорах про экологию: одна чашка ничего не изменит, но миллион чашек — уже нет мусора. Сегодняшняя фраза дня: говорите её, когда кто-то сомневается, стоит ли делать «слишком мало»."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Anna has just won the school science prize. Which sentence is grammatically correct?", "options": ["The teacher congratulated Anna on winning the prize.", "The teacher congratulated Anna for winning the prize.", "The teacher congratulated Anna to win the prize.", "The teacher congratulated Anna at winning the prize."], "correct": "The teacher congratulated Anna on winning the prize.", "explanation": "Congratulate somebody ON doing something = поздравить кого-то с чем-то. Предлог только on — это ловушка даже для продвинутых, потому что по-русски «поздравлять С» (и хочется of или with). Соберите семейство предлогов: congratulate on, accuse of, blame for, apologise for, insist on."}, {"id": "c2", "type": "choice", "sentence": "The mayor's original words were, 'Let's start a car-sharing scheme.' Which reported sentence is correct?", "options": ["The mayor suggested starting a car-sharing scheme.", "The mayor suggested to start a car-sharing scheme.", "The mayor insisted starting a car-sharing scheme.", "The mayor offered starting a car-sharing scheme."], "correct": "The mayor suggested starting a car-sharing scheme.", "explanation": "Let's do something в косвенной речи = suggest + герундий: The mayor suggested starting. Второй и третий варианты ломают правила (suggest + to, insist без on), а четвёртый подменяет смысл: offer требует to do (offered to start = предложил и вызвался сам), да и значение другое. Car-sharing = каршеринг, совместное использование машин — кстати, тоже про экологию."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue and answer: What is the main purpose of the meeting?", "options": ["To introduce waste sorting and a compost scheme", "To ask residents to pay for new street containers", "To plan a big spring cleaning of the library lot", "To choose families who will grow vegetables there"], "correct": "To introduce waste sorting and a compost scheme", "explanation": "Эмма — координатор «зелёного» собрания соседей. Главная тема — новый пункт сортировки мусора на Мэйпл-стрит (waste-sorting point): бумага в синий контейнер, стекло в зелёный, пластик в жёлтый. Вторая тема — компост для общего огорода за библиотекой (compost scheme for the community garden).", "audio_text": "Emma(F): Good evening, everyone, and welcome to our green neighbourhood meeting. I'm Emma, your new coordinator.\nDavid(M): Green meeting? I mostly came for the free coffee. Does that count as recycling?\nEmma(F): Reusing your cup is a great start, David. Tonight's topic is the new waste-sorting point on Maple Street.\nDavid(M): We already have bins. I throw everything into one big bag and feel fantastic.\nEmma(F): That's exactly the problem. If we sort paper, glass and plastic, the city recycles them instead of burning them.\nDavid(M): And who pays for all those fancy containers? Not me, I hope.\nEmma(F): The city council covers the cost. We only need volunteers to explain the rules to the neighbours.\nDavid(M): Rules? Like which bin is sad and which one is happy?\nEmma(F): Very funny. Paper goes in the blue bin, glass in the green one, plastic in the yellow one.\nDavid(M): I admit the system sounds simpler than I expected. And what about food waste?\nEmma(F): Great question. We're starting a compost scheme for the community garden behind the library.\nDavid(M): A garden? Last year that lot was full of old rubbish.\nEmma(F): Exactly. We cleaned it up, and now fifteen families grow vegetables there.\nDavid(M): Fine. I apologise for laughing earlier. Maybe I'll bring my old tomatoes.\nEmma(F): You mean tomato plants? Please do. Every little helps.\nDavid(M): Just promise me one thing — no future meetings about recycling coffee cups.\nEmma(F): I promise nothing. See you on Saturday at ten, and bring gloves!"}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue and answer: How does David's attitude change during the conversation?", "options": ["He starts with jokes but ends by offering to help", "He supports the plan from the start and joins at once", "He strongly opposes the project and leaves feeling angry", "He asks about prices and refuses to pay anything"], "correct": "He starts with jokes but ends by offering to help", "explanation": "Дэвид начинает с шуток про бесплатный кофе и «грустный контейнер», сомневается («who pays?»), но узнав подробности, признаёт — I admit the system sounds simpler than I expected — и извиняется за смех: I apologise for laughing earlier. В конце он готов принести свои помидоры и прийти в субботу. Обратите внимание на глаголы сообщения из урока: admit, apologise for — живьём в речи."}]}], "subtitles": [{"speaker": "Emma", "text": "Good evening, everyone, and welcome to our green neighbourhood meeting. I'm Emma, your new coordinator."}, {"speaker": "David", "text": "Green meeting? I mostly came for the free coffee. Does that count as recycling?"}, {"speaker": "Emma", "text": "Reusing your cup is a great start, David. Tonight's topic is the new waste-sorting point on Maple Street."}, {"speaker": "David", "text": "We already have bins. I throw everything into one big bag and feel fantastic."}, {"speaker": "Emma", "text": "That's exactly the problem. If we sort paper, glass and plastic, the city recycles them instead of burning them."}, {"speaker": "David", "text": "And who pays for all those fancy containers? Not me, I hope."}, {"speaker": "Emma", "text": "The city council covers the cost. We only need volunteers to explain the rules to the neighbours."}, {"speaker": "David", "text": "Rules? Like which bin is sad and which one is happy?"}, {"speaker": "Emma", "text": "Very funny. Paper goes in the blue bin, glass in the green one, plastic in the yellow one."}, {"speaker": "David", "text": "I admit the system sounds simpler than I expected. And what about food waste?"}, {"speaker": "Emma", "text": "Great question. We're starting a compost scheme for the community garden behind the library."}, {"speaker": "David", "text": "A garden? Last year that lot was full of old rubbish."}, {"speaker": "Emma", "text": "Exactly. We cleaned it up, and now fifteen families grow vegetables there."}, {"speaker": "David", "text": "Fine. I apologise for laughing earlier. Maybe I'll bring my old tomatoes."}, {"speaker": "Emma", "text": "You mean tomato plants? Please do. Every little helps."}, {"speaker": "David", "text": "Just promise me one thing — no future meetings about recycling coffee cups."}, {"speaker": "Emma", "text": "I promise nothing. See you on Saturday at ten, and bring gloves!"}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
