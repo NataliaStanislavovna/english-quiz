@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>School Life: Report Cards &amp; Uniforms + Past Modals of Advice (should have done)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>School Life: Report Cards &amp; Uniforms + Past Modals of Advice (should have done)</h1><div class="subtitle">2026-09-18</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Learn the ropes</div><div class="translation">Освоиться, понять, как всё устроено. Дословно — «выучить канаты»: выражение пришло из морского дела, где новичок учился работать с канатами на корабле. Starting a new school is hard, but she will soon learn the ropes. Учиться в новой школе тяжело, но она скоро освоится.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "School Life: Report Cards & Uniforms + Past Modals of Advice (should have done)", "subtitle": "2026-09-18", "date": "2026-09-18", "phrase_of_the_day": "Learn the ropes", "phrase_translation": "Освоиться, понять, как всё устроено. Дословно — «выучить канаты»: выражение пришло из морского дела, где новичок учился работать с канатами на корабле. Starting a new school is hard, but she will soon learn the ropes. Учиться в новой школе тяжело, но она скоро освоится.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0918.mp3", "sections": [{"id": "s1", "title": "Vocabulary — School Life", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "In British schools, the year is divided into three parts. At the end of each part parents receive a report card with grades. What is each part called?", "options": ["A term", "A break", "A lesson", "A uniform"], "correct": "A term", "explanation": "Term = учебная четверть (триместр): в британских школах год делится на autumn, spring и summer term. В конце каждого term ученики получают report card — табель с оценками. Не путайте: a break = перемена между уроками, a lesson = урок, a uniform = школьная форма."}, {"id": "v2", "type": "choice", "sentence": "In many British schools, a pupil who is rude or breaks the rules has to stay at school after lessons as a punishment. What is this punishment called?", "options": ["Detention — staying after lessons", "A scholarship — money for good studies", "An assembly — a meeting of the whole school", "A report card — a paper with your marks"], "correct": "Detention — staying after lessons", "explanation": "Detention = оставление после уроков в наказание. Классика британских школ: сидишь в тихом кабинете, иногда пишешь строки (a hundred lines). Scholarship = стипендия, assembly = общешкольная линейка, report card = табель с оценками. Глагол: to be given detention, to get detention."}, {"id": "v3", "type": "choice", "sentence": "A student writes tiny answers on a small piece of paper and hides it in a sleeve during a test. What is this paper called?", "options": ["A cheat sheet — hidden notes for a test", "A report card — a document with your grades", "A form tutor — the teacher in charge of you", "A school uniform — clothes you wear to school"], "correct": "A cheat sheet — hidden notes for a test", "explanation": "A cheat sheet = шпаргалка (от to cheat = обманывать, списывать). Списывать на экзамене — to cheat in an exam, списать у кого-то — to copy from somebody. Важно не путать: to check your notes = посмотреть в записи (легально), to cheat = списывать (запрещено)."}, {"id": "v4", "type": "choice", "sentence": "Every Monday morning the whole school gathers in the main hall to hear news and announcements from the head teacher. What is this meeting called?", "options": ["An assembly — all students meet to hear news", "A rehearsal — actors practise before a show", "A graduation — students receive their diplomas", "An exhibition — paintings are shown to people"], "correct": "An assembly — all students meet to hear news", "explanation": "An assembly = общешкольная линейка или собрание: весь школа собирается в зале, директор (head teacher) делает объявления. Rehearsal = репетиция, graduation = выпускной, exhibition = выставка. На assembly обычно нельзя разговаривать — за этим следят учителя."}]}, {"id": "s2", "title": "Grammar — should have done", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Anna got a poor maths grade. Her parents think hiring a tutor in September was a good idea that they missed. 'We ___ a tutor in September.'", "options": ["should have hired", "should have hire", "should had hired", "must have hired"], "correct": "should have hired", "explanation": "Should have + V3 = следовало сделать, но не сделали (сожаление или критика прошлого). We should have hired a tutor = надо было нанять репетитора (а мы не наняли). Ловушки: should have hire (без V3) и should had hired (had вместо have) — неверные формы. Must have hired — другой смысл: «наверняка наняли» (догадка), а не сожаление."}, {"id": "g2", "type": "choice", "sentence": "Anna wrote answers on her sleeve during a test. Her mother criticizes this past action: 'She ___ on her sleeve.'", "options": ["shouldn't have written", "shouldn't have write", "didn't should write", "shouldn't to write"], "correct": "shouldn't have written", "explanation": "Shouldn't have + V3 = не следовало делать (а сделано) — критика прошлых действий. She shouldn't have written on her sleeve = не надо было ей писать на рукаве. Отрицание ставится перед have, после него — только третья форма глагола (written, а не write)."}, {"id": "g3", "type": "choice", "sentence": "Emma washed Anna's sports kit in the morning, but Anna didn't have PE that day — she was excused because of her ankle. So the washing was unnecessary. 'Emma ___ the kit.'", "options": ["needn't have washed", "mustn't have washed", "didn't need washing", "needn't have wash"], "correct": "needn't have washed", "explanation": "Needn't have + V3 = сделал что-то, а оказалось, что этого не требовалось. Emma needn't have washed the kit = Эме не нужно было стирать форму (она постирала зря). Mustn't have washed — такой формы для «зря сделал» нет. Didn't need washing — неверная конструкция: правильно didn't need to wash, и это значило бы «стирка не была нужна» без мысли «она всё равно постирала»."}, {"id": "g4", "type": "choice", "sentence": "Mark saw the cheat sheet but said nothing. Emma reproaches him: 'You ___ me about it immediately.'", "options": ["ought to have told", "ought to have tell", "ought to had told", "ought to have telling"], "correct": "ought to have told", "explanation": "Ought to have + V3 = то же, что should have + V3: следовало сделать (а не сделано). You ought to have told me = тебе следовало мне сказать. Ought to звучит чуть формальнее и книжнее, чем should. Формула жёсткая: ought + to + have + V3 — все три ловушки (tell, had, telling) её ломают."}]}, {"id": "s3", "title": "Practical English — School Life", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are at parents' evening and want to know if your daughter is making progress in maths. What is the most natural question to the teacher?", "options": ["How is Anna getting on with maths this term?", "Why is Anna so bad at maths this term again?", "Tell me quickly everything about maths grades now", "Is maths still the only problem subject for her?"], "correct": "How is Anna getting on with maths this term?", "explanation": "To get on with something = как идут дела с чем-то. How is she getting on with maths? = как у неё продвигается математика? — вежливый и естественный вопрос родителя учителю. Похожие: How is she doing? How is she coping with maths? Вариант «why is she so bad» звучит как обвинение — так разговор с учителем не начинают."}, {"id": "p2", "type": "choice", "sentence": "Your daughter comes home and says sadly: 'I'm the worst in the class at maths.' What is the best encouraging answer?", "options": ["You're still learning the ropes, and your report is good overall", "Everyone else in your class is clearly much smarter than you", "Stop complaining, I had perfect marks when I was your age", "Well, maths is impossible, so just forget about it forever"], "correct": "You're still learning the ropes, and your report is good overall", "explanation": "Чтобы поддержать ребёнка: признать трудность, но показать общую картину и перспективу. You're still learning the ropes = ты ещё осваиваешься — идиома дня, которая мягко говорит «у тебя всё впереди». Остальные варианты обесценивают: сравнение не в её пользу, упрёк и «забудь про математику»."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Mark says: 'I could have pretended not to see it, but honesty won.' What does 'could have pretended' mean here?", "options": ["It was a possible option, but he chose another one", "He is sure that he really pretended for a while", "It was a duty, and he is proud that he did it", "It was impossible, and he never even tried it"], "correct": "It was a possible option, but he chose another one", "explanation": "Could have + V3 = мог сделать, но не сделал (упущенная возможность). I could have pretended = я мог сделать вид, что не видел (но не стал — победила честность). Сравните три смысла прошедшего: should have done = надо было сделать, needn't have done = сделал зря, could have done = мог, но не сделал."}, {"id": "c2", "type": "choice", "sentence": "Anna studied all night before the test but got a low mark because she was exhausted. Her teacher says: 'You ___ all night — good sleep helps more.'", "options": ["needn't have studied", "mustn't have studied", "didn't need studying", "needn't to study"], "correct": "needn't have studied", "explanation": "Needn't have studied = не было нужды сидеть всю ночь (она сидела — и зря). Тонкая разница: didn't need to study = учёба не требовалась (и, возможно, она и не садилась), а needn't have studied = она сидела, но это оказалось бесполезным. Mustn't have studied — так не говорят о «зря сделанном»; mustn't вообще про запрет, а не о прошлом."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. According to the report card, which subject does Anna need to improve?", "options": ["She needs to improve her maths results", "She is excellent in biology and English", "She got detention for talking in assembly", "She failed her history test with a cheat sheet"], "correct": "She needs to improve her maths results", "explanation": "Марк читает табель: excellent in biology, very good in English... oh. Maths. Needs to improve — «отлично» по биологии, «очень хорошо» по английскому, а по математике — «нужно улучшить». Именно из-за этой оценки родители жалеют, что не наняли репетитора: We should have hired a tutor in September — грамматика сегодняшнего урока в живом контексте.", "audio_text": "Emma(F): Mark, come and look at this. I found it at the bottom of Anna's school bag.\nMark(M): Is that her report card? Why is it folded eight times?\nEmma(F): Because she didn't want us to see it, that's why. The term ends on Friday, and this came out today.\nMark(M): Let me read it. Excellent in biology, very good in English... oh. Maths. Needs to improve.\nEmma(F): Needs to improve. Wonderful. And there is a note from her form tutor. Anna was talking during assembly.\nMark(M): In our day we got detention for that. A quiet room, a hundred lines, no funny business.\nEmma(F): She also missed PE twice. The school excused her because of her ankle, but still.\nMark(M): So she is doing fine everywhere except maths. We should have hired a tutor in September.\nEmma(F): I told you that in September. You said she didn't need one.\nMark(M): I said she takes after me. In looks. Unfortunately she takes after you in maths.\nEmma(F): Very funny. I'm her mother, not her maths teacher. Wait, what's this paper in her pocket?\nMark(M): That's... an old history test. With tiny answers written on the sleeve.\nEmma(F): A cheat sheet. On the sleeve. She shouldn't have done that. If a teacher had seen it...\nMark(M): Calm down. Look at the date. That test was in May. Old school, old uniform, old sleeve.\nEmma(F): You should have shown it to me the moment you first saw it.\nMark(M): I am finding out about it at exactly the same moment as you. I could have pretended not to see it, but honesty won.\nEmma(F): OK. New plan. Tonight we talk to her calmly. About the tutor, not about the sleeve.\nMark(M): And the report card? Do we tell her we found it?\nEmma(F): During dinner. Right after she tells us how her term is going.\nMark(M): You're scary. Remind me never to hide anything from you.\nEmma(F): I don't need reminding. I find everything. Now put the kettle on."}, {"id": "l2", "type": "listen", "sentence": "Listen again. Why was Anna excused from PE lessons?", "options": ["Because she had a problem with her ankle", "Because she forgot her sports clothes at home", "Because the PE teacher was away that week", "Because her mother asked the school for help"], "correct": "Because she had a problem with her ankle", "explanation": "Эмма говорит: She also missed PE twice. The school excused her because of her ankle — Анна пропустила физкультуру дважды, и школа освободила её из-за щиколотки (лодыжки). To be excused from PE = быть освобождённой от физкультуры. За разговоры на линейке (assembly) она наказания не понесла — Марк лишь вспомнил, что в их время за это давали detention.", "audio_text": "Emma(F): Mark, come and look at this. I found it at the bottom of Anna's school bag.\nMark(M): Is that her report card? Why is it folded eight times?\nEmma(F): Because she didn't want us to see it, that's why. The term ends on Friday, and this came out today.\nMark(M): Let me read it. Excellent in biology, very good in English... oh. Maths. Needs to improve.\nEmma(F): Needs to improve. Wonderful. And there is a note from her form tutor. Anna was talking during assembly.\nMark(M): In our day we got detention for that. A quiet room, a hundred lines, no funny business.\nEmma(F): She also missed PE twice. The school excused her because of her ankle, but still.\nMark(M): So she is doing fine everywhere except maths. We should have hired a tutor in September.\nEmma(F): I told you that in September. You said she didn't need one.\nMark(M): I said she takes after me. In looks. Unfortunately she takes after you in maths.\nEmma(F): Very funny. I'm her mother, not her maths teacher. Wait, what's this paper in her pocket?\nMark(M): That's... an old history test. With tiny answers written on the sleeve.\nEmma(F): A cheat sheet. On the sleeve. She shouldn't have done that. If a teacher had seen it...\nMark(M): Calm down. Look at the date. That test was in May. Old school, old uniform, old sleeve.\nEmma(F): You should have shown it to me the moment you first saw it.\nMark(M): I am finding out about it at exactly the same moment as you. I could have pretended not to see it, but honesty won.\nEmma(F): OK. New plan. Tonight we talk to her calmly. About the tutor, not about the sleeve.\nMark(M): And the report card? Do we tell her we found it?\nEmma(F): During dinner. Right after she tells us how her term is going.\nMark(M): You're scary. Remind me never to hide anything from you.\nEmma(F): I don't need reminding. I find everything. Now put the kettle on."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, come and look at this. I found it at the bottom of Anna's school bag."}, {"speaker": "Mark", "text": "Is that her report card? Why is it folded eight times?"}, {"speaker": "Emma", "text": "Because she didn't want us to see it, that's why. The term ends on Friday, and this came out today."}, {"speaker": "Mark", "text": "Let me read it. Excellent in biology, very good in English... oh. Maths. Needs to improve."}, {"speaker": "Emma", "text": "Needs to improve. Wonderful. And there is a note from her form tutor. Anna was talking during assembly."}, {"speaker": "Mark", "text": "In our day we got detention for that. A quiet room, a hundred lines, no funny business."}, {"speaker": "Emma", "text": "She also missed PE twice. The school excused her because of her ankle, but still."}, {"speaker": "Mark", "text": "So she is doing fine everywhere except maths. We should have hired a tutor in September."}, {"speaker": "Emma", "text": "I told you that in September. You said she didn't need one."}, {"speaker": "Mark", "text": "I said she takes after me. In looks. Unfortunately she takes after you in maths."}, {"speaker": "Emma", "text": "Very funny. I'm her mother, not her maths teacher. Wait, what's this paper in her pocket?"}, {"speaker": "Mark", "text": "That's... an old history test. With tiny answers written on the sleeve."}, {"speaker": "Emma", "text": "A cheat sheet. On the sleeve. She shouldn't have done that. If a teacher had seen it..."}, {"speaker": "Mark", "text": "Calm down. Look at the date. That test was in May. Old school, old uniform, old sleeve."}, {"speaker": "Emma", "text": "You should have shown it to me the moment you first saw it."}, {"speaker": "Mark", "text": "I am finding out about it at exactly the same moment as you. I could have pretended not to see it, but honesty won."}, {"speaker": "Emma", "text": "OK. New plan. Tonight we talk to her calmly. About the tutor, not about the sleeve."}, {"speaker": "Mark", "text": "And the report card? Do we tell her we found it?"}, {"speaker": "Emma", "text": "During dinner. Right after she tells us how her term is going."}, {"speaker": "Mark", "text": "You're scary. Remind me never to hide anything from you."}, {"speaker": "Emma", "text": "I don't need reminding. I find everything. Now put the kettle on."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
