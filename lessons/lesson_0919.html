@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Restaurant: Fine Dining &amp; Tipping + So do I / Neither do I</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Restaurant: Fine Dining &amp; Tipping + So do I / Neither do I</h1><div class="subtitle">2026-09-19</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Dig in!</div><div class="translation">«Приступайте к еде!» — говорят, когда все сели и можно начинать есть. Неформальное и дружелюбное выражение для семьи и гостей. Everything is hot, so dig in before it gets cold! Всё горячее, так что начинайте есть, пока не остыло.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Restaurant: Fine Dining & Tipping + So do I / Neither do I", "subtitle": "2026-09-19", "date": "2026-09-19", "phrase_of_the_day": "Dig in!", "phrase_translation": "«Приступайте к еде!» — говорят, когда все сели и можно начинать есть. Неформальное и дружелюбное выражение для семьи и гостей. Everything is hot, so dig in before it gets cold! Всё горячее, так что начинайте есть, пока не остыло.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0919.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Restaurant: Fine Dining", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "In a good restaurant there is a specialist who knows everything about wine and recommends it to guests. What is this person called?", "options": ["A sommelier — a wine expert", "A concierge — a hotel helper", "A barista — a coffee master", "A maître d' — a head waiter"], "correct": "A sommelier — a wine expert", "explanation": "A sommelier (сомелье) — специалист по вину в ресторане: он приносит винную карту (wine list), советует вино к каждому блюду и может рассказать историю вина. Читается «сомелье́», слово пришло из французского. Maître d' — метрдотель, который встречает гостей и рассаживает их; бариста делает кофе; консьерж работает в отеле."}, {"id": "v2", "type": "choice", "sentence": "The menu at The Silver Spoon has no prices for single dishes — guests get seven small dishes, one after another, for one price. What is this kind of menu called?", "options": ["A tasting menu — many small dishes in a sequence", "A set menu — one starter and one main dish", "A side menu — extra salads and fried potatoes", "A secret menu — dishes that nobody can order"], "correct": "A tasting menu — many small dishes in a sequence", "explanation": "A tasting menu — дегустационное меню: много маленьких блюд, которые подают по очереди, одно за другим, по одной фиксированной цене. Это как «путешествие» по кухне шефа. Не путайте с set menu (комплексный обед: одно блюдо на выбор из списка) и side dishes (гарниры и салаты отдельно к основному блюду)."}, {"id": "v3", "type": "choice", "sentence": "The waitress asks, 'Would you like still or sparkling water?' David wants water without bubbles. What should he choose?", "options": ["Still water — plain, without any gas", "Sparkling water — with bubbles of gas", "Tonic water — bitter, mixed with gin", "Tap water — free, from the kitchen sink"], "correct": "Still water — plain, without any gas", "explanation": "Still water — вода без газа (still = «неподвижная, тихая»), sparkling water — газированная вода (sparkling = «игристая», как у вина). Если просят просто water в ресторане, обычно уточняют still or sparkling. Tap water — водопроводная вода из-под крана: в Британии её иногда подают бесплатно, если попросить."}, {"id": "v4", "type": "choice", "sentence": "At the end of the dinner Emma says, 'Relax about the tip. Service is included.' What does 'service is included' mean?", "options": ["The service charge is already in the bill", "The waiter gets extra money only if you ask", "You must pay for your table before you sit down", "The bill is smaller if you come at midday"], "correct": "The service charge is already in the bill", "explanation": "Service is included — обслуживание уже включено в счёт: в Британию часто добавляют service charge (обычно 12,5%) прямо в bill, и тогда оставлять чаевые (a tip) сверху не нужно. Если обслуживание НЕ включено (service not included), принято оставить около 10%. Слово tip — и «чаевые», и глагол «давать на чай»."}]}, {"id": "s2", "title": "Grammar — So do I / Neither do I", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Sarah says, 'I loved the tasting menu.' David agrees — he loved it too. What does he say?", "options": ["So did I", "So do I", "So was I", "So I did"], "correct": "So did I", "explanation": "So + вспомогательный глагол + I = «я тоже». Глагол должен повторять время первого предложения: I loved (прошедшее) → So did I (did — вспомогательный глагол прошедшего времени). So do I значило бы «я тоже люблю» (настоящее), а здесь речь о прошедшем вечере. So I did — совсем другая конструкция: «да, действительно» (подтверждение своих слов), не согласие."}, {"id": "g2", "type": "choice", "sentence": "Sarah says, 'I don't usually drink wine with dinner.' David wants to say that he doesn't drink it either. What does he say?", "options": ["Neither do I", "Neither I do", "Neither am I", "So don't I"], "correct": "Neither do I", "explanation": "Neither + вспомогательный глагол + I = «я тоже нет» — согласие с отрицательным предложением. Отрицание уже «спрятано» в слове neither, поэтому глагол стоит в утвердительной форме: Neither do I (а не So don't I — такой вариант в английском не существует). Обратите внимание: don't drink → do, потому что именно do был вспомогательным глаголом в исходной фразе."}, {"id": "g3", "type": "choice", "sentence": "David says, 'I have been to this restaurant twice before.' Sarah has also visited it two times. What does she say?", "options": ["So have I", "So do I", "So did I", "So am I"], "correct": "So have I", "explanation": "Вспомогательный глагол в ответе копирует исходное предложение: I have been (Present Perfect) → So have I. Это золотое правило конструкции: loved → did, have been → have, am → am, can → can. Типичная ошибка — говорить So do I после любого предложения; do появляется только там, где он был в оригинале (Present Simple) или должен появиться (Past Simple → did)."}, {"id": "g4", "type": "choice", "sentence": "Sarah says, 'I can't stand waiting for a table.' David agrees — he also hates it. What does he say?", "options": ["Neither can I", "Neither I can", "Neither do I", "So can't I"], "correct": "Neither can I", "explanation": "I can't stand = терпеть не могу, отрицание (n't). Согласие с отрицанием — Neither + глагол + I, а глагол копируется: can't → Neither can I. Ни в коем случае не So can't I: после neither (как и после so) глагол всегда в утвердительной форме, отрицание выражает само слово neither. Можно также сказать Nor can I — то же самое, чуть формальнее."}]}, {"id": "s3", "title": "Practical English — Paying the Bill", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You have finished your meal and want to ask the waiter for the bill politely. What do you say?", "options": ["Could we have the bill, please?", "Bring us the bill right now, please.", "I would like to pay for my dinner.", "The bill, and be quick about it."], "correct": "Could we have the bill, please?", "explanation": "Could we have the bill, please? — самая естественная и вежливая просьба принести счёт в британском ресторане. Could + please смягчает просьбу. Вариант «Bring us the bill right now» звучит грубо и нетерпеливо, а «The bill, and be quick about it» — почти оскорбление для официанта. В Америке вместо bill говорят check, в Британии — bill."}, {"id": "p2", "type": "choice", "sentence": "The food was wonderful and you want the waiter to pass your praise to the cook. Which phrase does this best?", "options": ["Everything was delicious. My compliments to the chef.", "The food was acceptable, but the room was rather cold.", "We enjoyed the lovely view from our table by the window.", "The dinner was fine, though the soup was a bit salty."], "correct": "Everything was delicious. My compliments to the chef.", "explanation": "My compliments to the chef — «передайте мои комплименты повару»: классическая вежливая фраза, когда еда очень понравилась. Официант действительно передаст её на кухню — поварам приятно. Остальные варианты — не похвала: это либо нейтральное замечание, либо похвала виду из окна, а не еде."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Sarah says, 'I always order dessert. I have a terrible sweet tooth.' What does 'to have a sweet tooth' mean?", "options": ["You love eating sweet things like cakes and chocolate", "You have a tooth that hurts when you drink coffee", "You prefer savoury snacks and never eat anything sweet", "You always brush your teeth after every single meal"], "correct": "You love eating sweet things like cakes and chocolate", "explanation": "To have a sweet tooth — «быть сладкоежкой»: буквально «иметь сладкий зуб», то есть любить сладкое — торты, шоколад, десерты. Идиома про характер, а не про зубы: I have a sweet tooth, so I can never say no to dessert. Противоположность можно выразить так: I don't really have a sweet tooth — я не любитель сладкого."}, {"id": "c2", "type": "choice", "sentence": "David says, 'I've never eaten at a Michelin star restaurant.' Sarah hasn't eaten at one either. What does she say?", "options": ["Neither have I", "Neither I have", "Neither do I", "Neither did I"], "correct": "Neither have I", "explanation": "Здесь три ловушки сразу. Первая: never — это отрицание, поэтому нужен neither, а не so. Вторая: I've = I have (Present Perfect), значит копируем have: Neither have I. Третья: если бы Эмма тоже там побывала, она бы сказала So have I — согласие с утвердительным предложением. Правило одно на всё: ни so, ни neither не меняют глагол — он просто повторяет вспомогательный глагол исходной фразы."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. How does Emma explain what a tasting menu is?", "options": ["Seven small dishes that come one after another", "One big dish that the whole table has to share", "A special cheaper menu only for people with wine", "A daily menu that changes every single morning"], "correct": "Seven small dishes that come one after another", "explanation": "Эмма объясняет: This is a tasting menu, sir. Seven small dishes, one journey — дегустационное меню: семь маленьких блюд, одно за другим, «одно путешествие». Дэвид шутит, что хотел просто поужинать, а попал в экспедицию. Цена здесь не у каждого блюда — она одна за весь «опыт» (the price is for the whole experience).", "audio_text": "Emma(F): Good evening, and welcome to The Silver Spoon. Are you ready to order, or would you like a few more minutes?\nDavid(M): A few more minutes? We have been studying this menu since Tuesday. There are forty-seven dishes and not one price anywhere.\nEmma(F): This is a tasting menu, sir. Seven small dishes, one journey. The price is for the whole experience.\nDavid(M): A journey. Wonderful. I wanted dinner, and now I am on an expedition.\nSarah(F): I think it sounds exciting. I love trying new things.\nDavid(M): She does. She once ate fried grasshoppers on holiday and asked for the recipe.\nEmma(F): Then you will both enjoy tonight. Would you like still or sparkling water?\nDavid(M): Still, please. The last time I ordered sparkling, I hiccupped through the whole first course.\nSarah(F): Sparkling for me. And could we see the wine list?\nEmma(F): Of course. Our sommelier will bring it over. He can recommend a wine for every single dish.\nDavid(M): Is he the gentleman by the bar who looks like he judges people?\nEmma(F): That is him. He has already judged you, sir. He approves of your choice of still water.\nDavid(M): I have never felt so understood by a complete stranger.\nSarah(F): I don't usually drink wine with dinner.\nDavid(M): Neither do I, but tonight we are on a journey. Apparently.\nEmma(F): I will send the sommelier right over. And relax about the tip at the end. Service is included.\nDavid(M): Perfect. One less thing to worry about. And I never order dessert anyway.\nSarah(F): I always do. I have a terrible sweet tooth.\nEmma(F): Then the seventh dish will change your life. Dig in when it arrives, madam."}, {"id": "l2", "type": "listen", "sentence": "Listen again. What does Emma say about the tip at the end of the dinner?", "options": ["Service is included, so no extra tip is needed", "The tip must be left in cash before you leave", "The waiter adds the tip to your card payment", "Guests usually leave a tip of about ten per cent"], "correct": "Service is included, so no extra tip is needed", "explanation": "В конце Эмма говорит: And relax about the tip at the end. Service is included — «насчёт чаевых не волнуйтесь, обслуживание уже включено». То есть дополнительно оставлять ничего не нужно: service charge уже в счёте. Это и есть тема вопроса v4, услышанная в живом диалоге. Дэвид радуется: Perfect. One less thing to worry about."}]}], "subtitles": [{"speaker": "Emma", "text": "Good evening, and welcome to The Silver Spoon. Are you ready to order, or would you like a few more minutes?"}, {"speaker": "David", "text": "A few more minutes? We have been studying this menu since Tuesday. There are forty-seven dishes and not one price anywhere."}, {"speaker": "Emma", "text": "This is a tasting menu, sir. Seven small dishes, one journey. The price is for the whole experience."}, {"speaker": "David", "text": "A journey. Wonderful. I wanted dinner, and now I am on an expedition."}, {"speaker": "Sarah", "text": "I think it sounds exciting. I love trying new things."}, {"speaker": "David", "text": "She does. She once ate fried grasshoppers on holiday and asked for the recipe."}, {"speaker": "Emma", "text": "Then you will both enjoy tonight. Would you like still or sparkling water?"}, {"speaker": "David", "text": "Still, please. The last time I ordered sparkling, I hiccupped through the whole first course."}, {"speaker": "Sarah", "text": "Sparkling for me. And could we see the wine list?"}, {"speaker": "Emma", "text": "Of course. Our sommelier will bring it over. He can recommend a wine for every single dish."}, {"speaker": "David", "text": "Is he the gentleman by the bar who looks like he judges people?"}, {"speaker": "Emma", "text": "That is him. He has already judged you, sir. He approves of your choice of still water."}, {"speaker": "David", "text": "I have never felt so understood by a complete stranger."}, {"speaker": "Sarah", "text": "I don't usually drink wine with dinner."}, {"speaker": "David", "text": "Neither do I, but tonight we are on a journey. Apparently."}, {"speaker": "Emma", "text": "I will send the sommelier right over. And relax about the tip at the end. Service is included."}, {"speaker": "David", "text": "Perfect. One less thing to worry about. And I never order dessert anyway."}, {"speaker": "Sarah", "text": "I always do. I have a terrible sweet tooth."}, {"speaker": "Emma", "text": "Then the seventh dish will change your life. Dig in when it arrives, madam."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
