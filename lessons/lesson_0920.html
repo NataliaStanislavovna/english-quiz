@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Health: At the Dentist + Wishes &amp; Regrets (I wish / If only)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Health: At the Dentist + Wishes &amp; Regrets (I wish / If only)</h1><div class="subtitle">2026-09-20</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Grin and bear it</div><div class="translation">«Стиснуть зубы и терпеть» — идиома про то, как переносить что-то неприятное без жалоб. Дословно: grin — ухмылка, bear it — выносить это. The drill was scary, but I grinned and bore it. Бормашина была страшная, но я стерпел.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Health: At the Dentist + Wishes & Regrets (I wish / If only)", "subtitle": "2026-09-20", "date": "2026-09-20", "phrase_of_the_day": "Grin and bear it", "phrase_translation": "«Стиснуть зубы и терпеть» — идиома про то, как переносить что-то неприятное без жалоб. Дословно: grin — ухмылка, bear it — выносить это. The drill was scary, but I grinned and bore it. Бормашина была страшная, но я стерпел.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0920.mp3", "sections": [{"id": "s1", "title": "Vocabulary — At the Dentist", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Even when nothing hurts, you should visit the dentist every six months, so the doctor can examine your teeth. What is this routine visit called?", "options": ["A check-up — a routine examination", "A back-up — an extra copy of files", "A touch-up — fresh paint on a wall", "A warm-up — light exercise before sport"], "correct": "A check-up — a routine examination", "explanation": "A check-up — профилактический осмотр: врач проверяет все зубы, даже если ничего не болит, чтобы поймать проблему рано. В диалоге Анна говорит: come back for a check-up in six months — приходите на осмотр через полгода. Touch-up — «подкрасить, подправить», back-up — запасная копия, warm-up — разминка."}, {"id": "v2", "type": "choice", "sentence": "The dentist removes the damaged part of the tooth and closes the hole with a special hard material. What is this called?", "options": ["A filling — material inside the hole", "A crown — a cap over the whole tooth", "A brace — a metal frame for teeth", "An implant — an artificial tooth root"], "correct": "A filling — material inside the hole", "explanation": "A filling — пломба (от fill — «заполнять»): врач вычищает повреждённое место и заполняет его материалом. Crown — коронка, она накрывает весь зуб сверху. Brace — брекеты, металлическая скоба для выравнивания зубов (braces). Implant — имплант, искусственный корень, ввинчиваемый в десну."}, {"id": "v3", "type": "choice", "sentence": "Mark's tooth hurts when he drinks cold water or hot tea. The tooth reacts painfully to cold and heat. Which word describes such a tooth?", "options": ["Sensitive — it reacts to cold and heat", "Wisdom — the big one at the very back", "Loose — it moves slightly in the gum", "Chipped — a small piece has broken off"], "correct": "Sensitive — it reacts to cold and heat", "explanation": "Sensitive — чувствительный: зуб болезненно реагирует на холодное, горячее и сладкое. Типичная фраза: My teeth are sensitive. Wisdom tooth — зуб мудрости. Loose tooth — шатающийся зуб. Chipped — со сколотым краешком (от chip — отколоться)."}, {"id": "v4", "type": "choice", "sentence": "The dentist looks into Mark's mouth and says she can see a small hole in the tooth caused by too many sweets. What is the medical word for this hole?", "options": ["A cavity — a hole in a tooth", "A scar — a mark left on the skin", "A bruise — a dark spot from a hit", "A blister — a bubble on the skin"], "correct": "A cavity — a hole in a tooth", "explanation": "A cavity — кариозная полость, «дырка» в зубе (врач также может сказать tooth decay — разрушение зуба). Scar — шрам, bruise — синяк, blister — волдырь: все эти слова — про кожу, не про зубы. В диалоге Анна говорит: I see a small cavity — я вижу маленький кариес."}]}, {"id": "s2", "title": "Grammar — Wishes & Regrets", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Mark's appointment is early in the morning, and he doesn't like it — he wants a later time. What does he say?", "options": ["I wish I had a later appointment", "I wish I would have a later appointment", "I wish I will have a later appointment", "I wish I have a later appointment"], "correct": "I wish I had a later appointment", "explanation": "Сожаление о настоящем: I wish + Past Simple (had, was, knew). Важно: после wish нельзя ставить would или will о самом себе — только Past Simple. Здесь «хотелось бы, чтобы у меня был поздний приём» — это желание о настоящем, поэтому I wish I had."}, {"id": "g2", "type": "choice", "sentence": "Mark ate too many sweets when he was young, and now he is sorry about that past habit. What does he say?", "options": ["I wish I had eaten fewer sweets", "I wish I ate fewer sweets every day", "I wish I would eat fewer sweets now", "I wish I didn't eat so many sweets"], "correct": "I wish I had eaten fewer sweets", "explanation": "Сожаление о прошлом: I wish + Past Perfect (had + третья форма глагола). Марк сожалеет о том, что УЖЕ случилось в прошлом, поэтому had eaten. I wish I ate / didn't eat — это сожаление о настоящей привычке («жаль, что я сейчас ем много сладкого»), а I wish I would — вообще нельзя о себе."}, {"id": "g3", "type": "choice", "sentence": "Kate's son plays loud music every night. Kate is annoyed and wants him to stop. What does she say to him?", "options": ["I wish you would turn it down", "I wish you will turn it down", "I wish you turn it down at once", "I wish you had turned it down"], "correct": "I wish you would turn it down", "explanation": "I wish + would + глагол — раздражение из-за чужих действий или не changeющейся ситуации: «когда же ты уже перестанешь!». Это единственный случай, когда после wish используется would — и только о ДРУГИХ людях, не о себе. Will и «голый» глагол после wish невозможны, а had turned — сожаление о прошлом, не про регулярное раздражение."}, {"id": "g4", "type": "choice", "sentence": "'If only' means the same as 'I wish' but sounds more emotional. Mark's tooth hurt for a whole week before he called the clinic. He is very sorry about that now. What does he say?", "options": ["If only I had called the dentist sooner", "If only I would call the dentist sooner", "If only I called the dentist sooner now", "If only I have called the dentist sooner"], "correct": "If only I had called the dentist sooner", "explanation": "If only работает ровно как I wish: сожаление о прошлом — If only + had + V3. Разница только в эмоции: If only = «эх, если бы только!», сильнее и драматичнее. В диалоге Марк говорит похожее: I wish I had called a week ago — жаль, что не позвонил неделю назад."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You call a dental clinic because your tooth hurts. What is the polite way to ask for a visit?", "options": ["I'd like to make an appointment, please", "Give me a time today at three o'clock", "You must see me today, it's urgent", "When are you free this week exactly"], "correct": "I'd like to make an appointment, please", "explanation": "I'd like to make an appointment, please — стандартная вежливая фраза «я хотела бы записаться на приём». Так Марк начал телефонный звонок в клинику. Can I book an appointment? — тоже правильно. Make an appointment — записаться к врачу; у receptionist (администратора) обычно спрашивают время: Can you come tomorrow at half past nine?"}, {"id": "p2", "type": "choice", "sentence": "The dentist asks about your symptoms. Which sentence describes tooth pain in natural English?", "options": ["It hurts when I drink something cold", "It is pain me when I eat cold things", "My tooth is paining since two days", "I am hurting my tooth every morning"], "correct": "It hurts when I drink something cold", "explanation": "Боль по-английски: it hurts when... — «болит, когда...». Hurt — правильный глагол (hurt — hurt), про боль внутри тела. «Paining» не существует, а «I am hurting my tooth» значило бы «я причиняю боль зубу сам». Марк в диалоге говорит: It hurts when I drink anything cold — болит, когда пью что-то холодное."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Which sentence about your OWN ability is grammatically correct?", "options": ["I wish I could stop eating sweets", "I wish I would stop eating sweets", "I wish I can stop eating sweets", "I wish I will stop eating sweets"], "correct": "I wish I could stop eating sweets", "explanation": "Главная ловушка конструкции: wish + would используется ТОЛЬКО о других людях и ситуациях (I wish you would stop). О себе — нельзя! Желание о своей способности выражается через could: I wish I could stop — «жаль, что я не могу перестать». Can после wish невозможно, will тоже."}, {"id": "c2", "type": "choice", "sentence": "When Mark says, 'I wish I had looked after my teeth better,' Anna answers, 'Join the club.' What does she mean?", "options": ["I have exactly the same problem as you", "Welcome to our patient loyalty program", "Follow me into the club room next door", "You should join a sports club instead"], "correct": "I have exactly the same problem as you", "explanation": "Join the club — идиома «у меня та же проблема / я в такой же ситуации», говорится с юмором и сочувствием. Анна отвечает: «добро пожаловать в клуб» — то есть «я сама тоже в молодости ела слишком много сладкого». Дословный перевод здесь не работает: речь не про настоящий клуб."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why didn't Mark visit a dentist for six years?", "options": ["He says he was busy, but really he was afraid", "He lived abroad and could not find a clinic", "His previous dentist moved to another city", "He had no pain and skipped all his check-ups"], "correct": "He says he was busy, but really he was afraid", "explanation": "Марк говорит I haven't visited a dentist in six years, а на вопрос Анны о страхе отвечает с юмором: «Я был очень занят. Шесть лет». Из диалога ясно: на самом деле он боялся (My tooth. And my fear. Mostly my fear.)", "audio_text": "Kate(F): Good morning, Sunshine Dental Clinic. How can I help you?\nMark(M): Hello. My tooth has been hurting for a week. I'd like to make an appointment, please.\nKate(F): Of course. Can you come tomorrow at half past nine?\nMark(M): Tomorrow is perfect. To be honest, I wish I had called a week ago.\nKate(F): Don't worry, you're not the first. See you tomorrow, Mr...\nMark(M): Miller. Mark Miller. I haven't visited a dentist in six years.\nKate(F): We'll be gentle, I promise.\nAnna(F): Good morning, Mark. Come in and take a seat. What brings you here today?\nMark(M): My tooth. And my fear. Mostly my fear.\nAnna(F): Let's take a look first. Open wide, please. Which tooth hurts?\nMark(M): The one at the back, on the left. It hurts when I drink anything cold.\nAnna(F): Hmm, I see a small cavity. Nothing dramatic at all.\nMark(M): So I don't need the drill?\nAnna(F): You do need a filling, I'm afraid. But it's a quick one, five minutes.\nMark(M): I wish you wouldn't say the word drill so calmly.\nAnna(F): I'll give you an injection first, so you won't feel a thing. Grin and bear it.\nMark(M): I wish I had looked after my teeth better when I was young. All those sweets.\nAnna(F): Join the club. Now open wide again and think of somewhere nice.\nMark(M): I'm thinking of the exit.\nAnna(F): There. All done. That wasn't so terrible, was it?\nMark(M): Honestly? I wish I had known it was this easy.\nAnna(F): Then come back for a check-up in six months. And brush twice a day.\nMark(M): I wish my schedule allowed that. Fine. Twice a day."}, {"id": "l2", "type": "listen", "sentence": "Listen to the end of the dialogue. How does Mark feel after the treatment?", "options": ["Surprised that it was quick and painless", "Angry because the treatment cost too much", "Worried that the tooth will hurt again", "Relieved that he needs no second visit"], "correct": "Surprised that it was quick and painless", "explanation": "После лечения Марк говорит: Honestly? I wish I had known it was this easy — «Честно? Жаль, я не знал, что это так просто». Он удивлён, насколько всё было быстро и безболезненно, и жалеет, что боялся шесть лет. Анна сделала укол (injection), поэтому он ничего не почувствовал.", "audio_text": "Kate(F): Good morning, Sunshine Dental Clinic. How can I help you?\nMark(M): Hello. My tooth has been hurting for a week. I'd like to make an appointment, please.\nKate(F): Of course. Can you come tomorrow at half past nine?\nMark(M): Tomorrow is perfect. To be honest, I wish I had called a week ago.\nKate(F): Don't worry, you're not the first. See you tomorrow, Mr...\nMark(M): Miller. Mark Miller. I haven't visited a dentist in six years.\nKate(F): We'll be gentle, I promise.\nAnna(F): Good morning, Mark. Come in and take a seat. What brings you here today?\nMark(M): My tooth. And my fear. Mostly my fear.\nAnna(F): Let's take a look first. Open wide, please. Which tooth hurts?\nMark(M): The one at the back, on the left. It hurts when I drink anything cold.\nAnna(F): Hmm, I see a small cavity. Nothing dramatic at all.\nMark(M): So I don't need the drill?\nAnna(F): You do need a filling, I'm afraid. But it's a quick one, five minutes.\nMark(M): I wish you wouldn't say the word drill so calmly.\nAnna(F): I'll give you an injection first, so you won't feel a thing. Grin and bear it.\nMark(M): I wish I had looked after my teeth better when I was young. All those sweets.\nAnna(F): Join the club. Now open wide again and think of somewhere nice.\nMark(M): I'm thinking of the exit.\nAnna(F): There. All done. That wasn't so terrible, was it?\nMark(M): Honestly? I wish I had known it was this easy.\nAnna(F): Then come back for a check-up in six months. And brush twice a day.\nMark(M): I wish my schedule allowed that. Fine. Twice a day."}]}], "subtitles": [{"speaker": "Kate", "text": "Good morning, Sunshine Dental Clinic. How can I help you?"}, {"speaker": "Mark", "text": "Hello. My tooth has been hurting for a week. I'd like to make an appointment, please."}, {"speaker": "Kate", "text": "Of course. Can you come tomorrow at half past nine?"}, {"speaker": "Mark", "text": "Tomorrow is perfect. To be honest, I wish I had called a week ago."}, {"speaker": "Kate", "text": "Don't worry, you're not the first. See you tomorrow, Mr..."}, {"speaker": "Mark", "text": "Miller. Mark Miller. I haven't visited a dentist in six years."}, {"speaker": "Kate", "text": "We'll be gentle, I promise."}, {"speaker": "Anna", "text": "Good morning, Mark. Come in and take a seat. What brings you here today?"}, {"speaker": "Mark", "text": "My tooth. And my fear. Mostly my fear."}, {"speaker": "Anna", "text": "Let's take a look first. Open wide, please. Which tooth hurts?"}, {"speaker": "Mark", "text": "The one at the back, on the left. It hurts when I drink anything cold."}, {"speaker": "Anna", "text": "Hmm, I see a small cavity. Nothing dramatic at all."}, {"speaker": "Mark", "text": "So I don't need the drill?"}, {"speaker": "Anna", "text": "You do need a filling, I'm afraid. But it's a quick one, five minutes."}, {"speaker": "Mark", "text": "I wish you wouldn't say the word drill so calmly."}, {"speaker": "Anna", "text": "I'll give you an injection first, so you won't feel a thing. Grin and bear it."}, {"speaker": "Mark", "text": "I wish I had looked after my teeth better when I was young. All those sweets."}, {"speaker": "Anna", "text": "Join the club. Now open wide again and think of somewhere nice."}, {"speaker": "Mark", "text": "I'm thinking of the exit."}, {"speaker": "Anna", "text": "There. All done. That wasn't so terrible, was it?"}, {"speaker": "Mark", "text": "Honestly? I wish I had known it was this easy."}, {"speaker": "Anna", "text": "Then come back for a check-up in six months. And brush twice a day."}, {"speaker": "Mark", "text": "I wish my schedule allowed that. Fine. Twice a day."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
