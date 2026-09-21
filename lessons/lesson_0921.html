@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Work &amp; Career: Job Interview + try to do vs try doing (Gerund vs Infinitive)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Work &amp; Career: Job Interview + try to do vs try doing (Gerund vs Infinitive)</h1><div class="subtitle">2026-09-21</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">A foot in the door</div><div class="translation">«Нога в двери» — шанс начать работу в компании, даже с небольшой позиции, чтобы потом расти. David got a foot in the door as an assistant — Дэвид начал с должности ассистента и закрепился в компании.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Work & Career: Job Interview + try to do vs try doing (Gerund vs Infinitive)", "subtitle": "2026-09-21", "date": "2026-09-21", "phrase_of_the_day": "A foot in the door", "phrase_translation": "«Нога в двери» — шанс начать работу в компании, даже с небольшой позиции, чтобы потом расти. David got a foot in the door as an assistant — Дэвид начал с должности ассистента и закрепился в компании.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0921.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Job Interview", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "David saw the company's advertisement for the open position of project manager. What is the word for an open position that a company wants to fill?", "options": ["A vacancy — a position that is open", "A variety — a range of many things", "A victory — a success in a contest", "A priority — something done first"], "correct": "A vacancy — a position that is open", "explanation": "A vacancy — вакансия, открытая должность (от vacant — «свободный, незанятый»). Типичные фразы: to apply for a vacancy — подать заявку на вакансию, your vacancy ad — объявление о вакансии. Variety — разнообразие, victory — победа, priority — приоритет."}, {"id": "v2", "type": "choice", "sentence": "When David applied for the job, he sent his CV and a short letter explaining why he wanted this position. What is this letter called?", "options": ["A cover letter — sent together with the CV", "A follow-up call — made a week after applying", "A reference — a letter written by your boss", "A thank-you note — written after an interview"], "correct": "A cover letter — sent together with the CV", "explanation": "A cover letter — сопроводительное письмо: вы отправляете его вместе с резюме (CV) и объясняете, почему подходите на должность. Эмма хвалит письмо Дэвида: it was one of the best this year. Reference — рекомендация от бывшего работодателя, follow-up call — звонок, чтобы напомнить о себе, thank-you note — благодарственное письмо после собеседования."}, {"id": "v3", "type": "choice", "sentence": "David cannot start the new job immediately: he must work one more month at his current job before leaving. What is this month called?", "options": ["A notice period — time you must work before leaving", "A probation period — a trial period at a new job", "A lunch period — a break in the middle of the day", "A peak period — the busiest hours of the day"], "correct": "A notice period — time you must work before leaving", "explanation": "Notice period — срок предупреждения об уходе: вы сообщаете работодателю (give notice) и отрабатываете определённое время, часто один месяц. Дэвид говорит: I have to give one month's notice — я должен предупредить за месяц. Не путайте с probation period — испытательным сроком на новой работе (эта тема была в уроке про работу)."}, {"id": "v4", "type": "choice", "sentence": "Emma says the company offers twenty-five days of paid holiday every year. What is the formal word for these paid holiday days?", "options": ["Annual leave — paid holiday days each year", "Sick leave — days off when you are ill", "Parental leave — time off for a new baby", "Unpaid leave — time off without salary"], "correct": "Annual leave — paid holiday days each year", "explanation": "Annual leave — ежегодный оплачиваемый отпуск (annual — «ежегодный», leave — «отпуск» в формальном английском). Дэвид спрашивает: How many days of annual leave do you offer? Sick leave — больничный, parental leave — декрет, unpaid leave — отпуск за свой счёт."}]}, {"id": "s2", "title": "Grammar — try to do vs try doing", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "The printer was not working. As an experiment, David turned it off and on again to see if that would solve the problem. Which sentence describes this?", "options": ["He tried restarting the printer — testing a solution", "He tried to restart the printer — he struggled but failed", "He stopped restarting the printer — he gave up the habit", "He remembered restarting the printer — he recalled doing it"], "correct": "He tried restarting the printer — testing a solution", "explanation": "try + V-ing (doing) = поэкспериментировать, попробовать способ: «а что, если сделать так?». try + to do = постараться, приложить усилие сделать что-то трудное (часто безуспешно): I tried to keep the letter short — я старался сделать письмо коротким. Здесь Дэвид проверял способ решения — значит, tried restarting."}]}, {"id": "s3", "title": "Grammar — forget to do vs forget doing", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g2", "type": "choice", "sentence": "Checking the details is David's habit — he always does it and never misses it. Which sentence describes this habit?", "options": ["He never forgets to check the details", "He never forgets checking the details", "He keeps forgetting to check the details", "He doesn't remember checking the details"], "correct": "He never forgets to check the details", "explanation": "forget TO DO = забыть сделать что-то (действие ещё не сделано): Don't forget to check — не забудь проверить. never forgets to check — «никогда не забывает проверить», то есть всегда проверяет. forget DOING = иметь (или не иметь) воспоминание о сделанном: I'll never forget signing my first contract — никогда не забуду, как подписал первый контракт. Здесь речь о привычке действия, а не о памяти."}]}, {"id": "s4", "title": "Grammar — stop doing vs stop to do", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g3", "type": "choice", "sentence": "David worked at his old company for eight years, and at some point the job stopped making him happy. Which sentence says this?", "options": ["He stopped enjoying his job", "He stopped to enjoy his job", "He went on enjoying his job", "He kept enjoying his job"], "correct": "He stopped enjoying his job", "explanation": "stop DOING = перестать делать что-то (действие прекращается): I stopped enjoying it — работа перестала приносить радость. stop TO DO = остановиться, чтобы сделать что-то другое: I stopped to think — я остановился, чтобы подумать. go on doing и keep doing = продолжать делать — противоположный смысл."}, {"id": "g4", "type": "choice", "sentence": "One day David paused his work for a moment in order to think about his career. Which sentence describes this?", "options": ["He stopped to think about his career", "He stopped thinking about his career", "He forgot to think about his career", "He didn't stop thinking about his career"], "correct": "He stopped to think about his career", "explanation": "stop TO DO = остановиться (прервать одно действие), чтобы сделать другое. Дэвид прервал работу, чтобы подумать: last year I stopped to think — в прошлом году я остановился, чтобы подумать. Он думал! А stopped thinking значило бы «перестал думать» — противоположный смысл."}]}, {"id": "s5", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "At the interview, Emma asks the classic question: 'Why do you want to work for our company?' What is the best answer for a candidate?", "options": ["I see a company where I can grow and take on new challenges", "I heard you pay the highest salary in the whole industry", "My last boss was terrible and I want to escape from him", "I don't know yet, I will decide after the first month"], "correct": "I see a company where I can grow and take on new challenges", "explanation": "На вопрос «Почему наша компания?» называют конкретные плюсы компании и свой рост: challenges — задачи, которые интересно решать, to grow — расти профессионально, to take on challenges — браться за сложные задачи. Ответы про зарплату, побег от старого начальника или «не знаю» производят плохое впечатление."}, {"id": "p2", "type": "choice", "sentence": "David wants to know how much the position pays. What is the polite way to ask about it at an interview?", "options": ["May I ask what the salary range for this position is?", "How much money will you give me every single month?", "Tell me your number and I will say if it is fine", "What is the minimum that you would accept paying me?"], "correct": "May I ask what the salary range for this position is?", "explanation": "Спрашивать о зарплате можно и нужно, но вежливо: May I ask...? — Можно спросить...? Salary range — вилка зарплаты (от и до). Эмма отвечает: It's between three and three and a half thousand, depending on experience — в зависимости от опыта. Прямые вопросы без May I ask звучат грубо."}]}, {"id": "s6", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "At the end, Emma says: 'Try not to worry too much.' What does this sentence mean?", "options": ["Make an effort not to worry — she advises him to stay calm", "Test whether worrying less works for you, as an experiment", "Don't keep the memory of worrying about the result", "Worry a little, but not every single day of the week"], "correct": "Make an effort not to worry — she advises him to stay calm", "explanation": "try TO DO = постараться, приложить усилие. Try not to worry — «постарайся не волноваться», совет успокоиться. Дэвид отвечает I'll try — я постараюсь и даже шутит: I'll try not to eat chocolate until Friday. А try DOING здесь значило бы «попробуй способ: меньше волноваться» — как эксперимент, что не подходит к совету."}, {"id": "c2", "type": "choice", "sentence": "Emma finishes with the words: 'You have a foot in the door.' What does she mean?", "options": ["He has a real chance of getting the job", "He has already signed the employment contract", "He is standing in the office doorway right now", "He got stuck halfway through the job interview"], "correct": "He has a real chance of getting the job", "explanation": "A foot in the door — «нога в двери»: шанс попасть в компанию и начать там расти. Фраза говорит: шансы хорошие, ты почти внутри — и часто про старт с небольшой позиции с перспективой роста. Дословный смысл (стоять в дверном проёме) здесь ни при чём."}]}, {"id": "s7", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why can't David start the new job immediately?", "options": ["He must give one month's notice at his current job", "He is going on a long trip during his annual leave", "He wants to finish a training course at college", "He is waiting for a reference from his old boss"], "correct": "He must give one month's notice at his current job", "explanation": "Дэвид говорит: I have to give one month's notice. My current employer will need time to find a replacement — я должен предупредить за месяц, нынешнему работодателю нужно время найти замену. Эмма отвечает, что это стандартный notice period.", "audio_text": "Emma(F): Good morning, Mr Bennett. Please take a seat. Did you find our office easily?\nDavid(M): Good morning. Yes, no problems. Your vacancy ad had very clear directions.\nEmma(F): Glad to hear it. So, you applied for the position of project manager. I read your cover letter — it was one of the best this year.\nDavid(M): Thank you. I tried to keep it short. Two pages became one.\nEmma(F): Impressive. Let's start with the classic question. What are your strengths and weaknesses?\nDavid(M): My strength is that I never forget to check the details. My weakness is chocolate.\nEmma(F): I meant a professional weakness. But noted, we all have our battles.\nDavid(M): All right. My professional weakness is that I sometimes take on too much work myself.\nEmma(F): Honest and human. And why did you leave your last job?\nDavid(M): I stopped enjoying it. I mean, I worked there eight great years, but last year I stopped to think — and realised I wanted new challenges.\nEmma(F): A good reason. If we hire you, when could you start?\nDavid(M): I have to give one month's notice. My current employer will need time to find a replacement.\nEmma(F): That's fine, it's a standard notice period. Do you have any questions for us?\nDavid(M): Yes. What is the workload like in a normal week? And how many days of annual leave do you offer?\nEmma(F): Forty hours, busier before deadlines. Twenty-five days of leave, plus public holidays.\nDavid(M): That sounds fair. In my last interview I was too shy to ask, so... may I ask about the salary range?\nEmma(F): You may. It's between three and three and a half thousand, depending on experience.\nDavid(M): Perfect. When can I expect your decision?\nEmma(F): By Friday. Try not to worry too much — you have a foot in the door.\nDavid(M): I'll try. And I'll try not to eat chocolate until Friday."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. How does David answer the question about his strengths and weaknesses?", "options": ["He jokes about chocolate, then gives a real answer", "He says he often forgets to check small details", "He says he cannot work in a team of many people", "He says he has no weakness worth mentioning"], "correct": "He jokes about chocolate, then gives a real answer", "explanation": "Сначала Дэвид шутит: My weakness is chocolate — моя слабость — шоколад. Эмма просит профессиональную слабость, и он отвечает честно: I sometimes take on too much work myself — иногда беру на себя слишком много работы. Хорошая стратегия на собеседовании: честная, но не страшная слабость.", "audio_text": "Emma(F): Good morning, Mr Bennett. Please take a seat. Did you find our office easily?\nDavid(M): Good morning. Yes, no problems. Your vacancy ad had very clear directions.\nEmma(F): Glad to hear it. So, you applied for the position of project manager. I read your cover letter — it was one of the best this year.\nDavid(M): Thank you. I tried to keep it short. Two pages became one.\nEmma(F): Impressive. Let's start with the classic question. What are your strengths and weaknesses?\nDavid(M): My strength is that I never forget to check the details. My weakness is chocolate.\nEmma(F): I meant a professional weakness. But noted, we all have our battles.\nDavid(M): All right. My professional weakness is that I sometimes take on too much work myself.\nEmma(F): Honest and human. And why did you leave your last job?\nDavid(M): I stopped enjoying it. I mean, I worked there eight great years, but last year I stopped to think — and realised I wanted new challenges.\nEmma(F): A good reason. If we hire you, when could you start?\nDavid(M): I have to give one month's notice. My current employer will need time to find a replacement.\nEmma(F): That's fine, it's a standard notice period. Do you have any questions for us?\nDavid(M): Yes. What is the workload like in a normal week? And how many days of annual leave do you offer?\nEmma(F): Forty hours, busier before deadlines. Twenty-five days of leave, plus public holidays.\nDavid(M): That sounds fair. In my last interview I was too shy to ask, so... may I ask about the salary range?\nEmma(F): You may. It's between three and three and a half thousand, depending on experience.\nDavid(M): Perfect. When can I expect your decision?\nEmma(F): By Friday. Try not to worry too much — you have a foot in the door.\nDavid(M): I'll try. And I'll try not to eat chocolate until Friday."}]}], "subtitles": [{"speaker": "Emma", "text": "Good morning, Mr Bennett. Please take a seat. Did you find our office easily?"}, {"speaker": "David", "text": "Good morning. Yes, no problems. Your vacancy ad had very clear directions."}, {"speaker": "Emma", "text": "Glad to hear it. So, you applied for the position of project manager. I read your cover letter — it was one of the best this year."}, {"speaker": "David", "text": "Thank you. I tried to keep it short. Two pages became one."}, {"speaker": "Emma", "text": "Impressive. Let's start with the classic question. What are your strengths and weaknesses?"}, {"speaker": "David", "text": "My strength is that I never forget to check the details. My weakness is chocolate."}, {"speaker": "Emma", "text": "I meant a professional weakness. But noted, we all have our battles."}, {"speaker": "David", "text": "All right. My professional weakness is that I sometimes take on too much work myself."}, {"speaker": "Emma", "text": "Honest and human. And why did you leave your last job?"}, {"speaker": "David", "text": "I stopped enjoying it. I mean, I worked there eight great years, but last year I stopped to think — and realised I wanted new challenges."}, {"speaker": "Emma", "text": "A good reason. If we hire you, when could you start?"}, {"speaker": "David", "text": "I have to give one month's notice. My current employer will need time to find a replacement."}, {"speaker": "Emma", "text": "That's fine, it's a standard notice period. Do you have any questions for us?"}, {"speaker": "David", "text": "Yes. What is the workload like in a normal week? And how many days of annual leave do you offer?"}, {"speaker": "Emma", "text": "Forty hours, busier before deadlines. Twenty-five days of leave, plus public holidays."}, {"speaker": "David", "text": "That sounds fair. In my last interview I was too shy to ask, so... may I ask about the salary range?"}, {"speaker": "Emma", "text": "You may. It's between three and three and a half thousand, depending on experience."}, {"speaker": "David", "text": "Perfect. When can I expect your decision?"}, {"speaker": "Emma", "text": "By Friday. Try not to worry too much — you have a foot in the door."}, {"speaker": "David", "text": "I'll try. And I'll try not to eat chocolate until Friday."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice') return s.replace(/___+/g,'<span class="blank" id="blank_'+sid+'_'+qid+'">___</span>'); return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const bl=document.getElementById('blank_'+sid+'_'+qid);
+  if(bl) { bl.textContent=corr; bl.classList.add(ok?'filled':'wrong-fill'); }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
