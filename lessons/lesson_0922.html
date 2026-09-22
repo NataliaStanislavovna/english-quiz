@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Sports &amp; Fitness: Team Sports &amp; Training + had better / It&#x27;s time</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Sports &amp; Fitness: Team Sports &amp; Training + had better / It&#x27;s time</h1><div class="subtitle">2026-09-22</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">It&#x27;s high time</div><div class="translation">«Давно пора» — когда что-то следовало сделать уже давно, а оно всё ещё не сделано. It&#x27;s high time we started training — давно пора начать нормально тренироваться. После it&#x27;s time / it&#x27;s high time + человек глагол стоит в прошедшей форме (started), хотя смысл — про сейчас.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Sports & Fitness: Team Sports & Training + had better / It's time", "subtitle": "2026-09-22", "date": "2026-09-22", "phrase_of_the_day": "It's high time", "phrase_translation": "«Давно пора» — когда что-то следовало сделать уже давно, а оно всё ещё не сделано. It's high time we started training — давно пора начать нормально тренироваться. После it's time / it's high time + человек глагол стоит в прошедшей форме (started), хотя смысл — про сейчас.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0922.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Team Sports", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Mark says his team drew today, two goals each. What is a draw?", "options": ["A result where both teams finish with the same score", "A short break between the two halves of a match", "A serious injury that keeps a player out for weeks", "An extra period played when a cup match is level"], "correct": "A result where both teams finish with the same score", "explanation": "A draw — ничья: обе команды закончили матч с одинаковым счётом (two goals each — по два гола каждая). Глагол to draw — сыграть вничью: We only drew today — мы сегодня лишь сыграли вничью. Если победитель нужен, играют extra time — дополнительное время."}, {"id": "v2", "type": "choice", "sentence": "Mark and Kate are unhappy with one man in black at the match. Who is the referee?", "options": ["The official who enforces the rules during a match", "The person who trains the team every week at the club", "The player who scores the most goals in a season", "The fan who travels to every away game with the team"], "correct": "The official who enforces the rules during a match", "explanation": "A referee — судья (в футболе, боксе; в теннисе обычно an umpire). Судья следит за правилами и назначает нарушения: The referee gave a penalty against us — судья назначил пенальти против нас. Personal trainer — персональный тренер, а trainer в команде — тренер."}, {"id": "v3", "type": "choice", "sentence": "Mark twisted his ankle on the pitch. Kate says wounds heal on their own, but this is different. What is the word for damage like a twisted ankle?", "options": ["An injury — harm to the body from sport or an accident", "A wound — a cut in the skin made by something sharp", "A check-up — a routine visit to the doctor when well", "A warm-up — light exercise done before real training"], "correct": "An injury — harm to the body from sport or an accident", "explanation": "An injury — травма: растяжение, ушиб, вывих — повреждение от спорта или несчастного случая (a knee injury, a back injury). A wound — рана: открытый порез или разрез, обычно от чего-то острого. Кейт шутит, что раны заживают сами, а суставам нужно внимание. A warm-up — разминка."}, {"id": "v4", "type": "choice", "sentence": "Kate says she was out of breath after twenty minutes of the match. What does it mean?", "options": ["She was breathing fast and could hardly speak", "She felt dizzy and had to sit down on the bench", "She was bored with the slow pace of the game", "She had a sharp pain in her chest while running"], "correct": "She was breathing fast and could hardly speak", "explanation": "To be out of breath — задыхаться, не хватать воздуха после нагрузки: I was out of breath after twenty minutes — после двадцати минут у меня сбилось дыхание. To catch your breath — отдышаться, перевести дух. Связано с cardio training — тренировкой выносливости, о которой Кейт предлагает план."}]}, {"id": "s2", "title": "Grammar — had better", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Kate says: 'You'd better see a doctor tomorrow morning.' What kind of advice is this?", "options": ["Strong advice for this situation — or there may be trouble", "A gentle suggestion that Mark can easily ignore safely", "A regret about a doctor Mark failed to see in the past", "A guess that Mark probably saw a doctor the day before"], "correct": "Strong advice for this situation — or there may be trouble", "explanation": "You'd better do = had better do — сильный совет именно для данной ситуации, часто с намёком на неприятности, если не послушаться: Тебе лучше сходить к врачу (а то будет хуже). Это сильнее, чем should, и конкретнее: advice «здесь и сейчас». You should have seen — сожаление о прошлом, you must have seen — догадка о прошлом."}, {"id": "g2", "type": "choice", "sentence": "Kate warns Mark about next Saturday. Which negative sentence is correct?", "options": ["You'd better not play next Saturday", "You'd not better play next Saturday", "You'd better don't play next Saturday", "You don't had better play next Saturday"], "correct": "You'd better not play next Saturday", "explanation": "Отрицание у had better ставится так: you'd better + NOT + глагол. You'd better not play — лучше не играй. Частая ошибка — don't после better (you'd better don't play — нельзя). Сравните с have to: I don't have to play — мне не нужно играть (нет необходимости), а you'd better not play — лучше не играть (совет не делать)."}]}, {"id": "s3", "title": "Grammar — It's time + Past Simple", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g3", "type": "choice", "sentence": "Kate says: 'It is high time we started training properly.' The verb 'started' looks past, but the meaning is present. Why?", "options": ["After 'it is time' + person, English uses the Past form", "Because the training already finished some weeks ago", "Because Kate is talking about a future tournament date", "It is a mistake — the correct form is 'we start'"], "correct": "After 'it is time' + person, English uses the Past form", "explanation": "It's time + подлежащее + Past Simple — особая конструкция: форма прошедшая, а смысл «давно пора уже сейчас»: It's (high) time we started — давно пора начать. Высокий (high) усиливает: «уже давно пора». Без подлежащего глагол обычный: It's time to start training — пора начинать тренировки (просто инфинитив)."}]}, {"id": "s4", "title": "Grammar — It's time to do vs It's time we did", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g4", "type": "choice", "sentence": "Which sentence means 'we are already late — we should go right now'?", "options": ["It's time we left — the bus leaves in five minutes", "It's time to leave whenever you feel ready to go", "It was time for us to leave earlier that morning", "It will be time to leave once the rain stops soon"], "correct": "It's time we left — the bus leaves in five minutes", "explanation": "It's time to do — нейтральное «пора делать» (просто наступило время). It's time we did (с подлежащим и Past Simple) — «давно пора», упрёк, что уже опаздываем: It's time we left — нам давно пора уходить (автобус через пять минут!). Форма прошедшая, но смысл настоящий — как в конструкции из предыдущего вопроса."}]}, {"id": "s5", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Your teammate twists an ankle during a match but wants to keep playing. What is the best thing to say?", "options": ["You'd better come off and ice it — you can't help the team like this", "Stop being such a baby and run it off — the final is coming soon", "Just play on — twisted ankles always heal on their own in a day", "Say nothing at all and let the referee decide what to do with it"], "correct": "You'd better come off and ice it — you can't help the team like this", "explanation": "Когда товарищ травмирован, лучший совет — остановить его: You'd better come off — тебе лучше уйти с поля (come off the pitch — покинуть поле), ice it — приложить лёд. Играть через боль (run it off) при травме сустава опасно: маленькая травма может стать большой, как говорит Кейт в диалоге."}, {"id": "p2", "type": "choice", "sentence": "Mark tells you his ankle hurts when he walks. What is the best response?", "options": ["You'd better see a doctor before the cup final next month", "You should have thought about that before the match today", "You must have enjoyed the match much more than the rest", "You might want to walk a little faster on it tomorrow"], "correct": "You'd better see a doctor before the cup final next month", "explanation": "На жалобу о боли лучший ответ — дельный совет: You'd better see a doctor — тебе лучше показаться врачу. Упрёки (you should have thought — надо было думать раньше) и странные догадки (you must have enjoyed — «наверное, тебе понравилось») здесь неуместны. Sooner better than later — совет не откладывать."}]}, {"id": "s6", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Kate says: 'You'd better not play next Saturday.' What does she mean?", "options": ["A strong warning — playing could make the injury worse", "A polite request — she is asking Mark about his plans", "A prediction — she believes Mark will refuse to play", "A criticism — she blames Mark for the draw today"], "correct": "A strong warning — playing could make the injury worse", "explanation": "Had better not do — сильный совет НЕ делать что-то, предупреждение: лучше не играть, иначе травма усугубится. Ранее Кейт объяснила: a small injury can turn into a big one — маленькая травма может стать большой. Это не просьба, не предсказание и не упрёк за ничью — именно заботливое «не смей играть, пока не зажило»."}, {"id": "c2", "type": "choice", "sentence": "Kate says: 'It is high time we started training properly.' What does she mean?", "options": ["They should have started proper training long ago", "The training will take place on a high mountain top", "The team trains too much and needs to slow down now", "She is asking what time the training starts on Friday"], "correct": "They should have started proper training long ago", "explanation": "It's high time — «давно пора»: действие следовало начать уже давно, а оно всё откладывается. High усиливает нетерпение: не просто пора, а давно пора. Глагол после подлежащего стоит в Past Simple (we started) — форма прошедшая, смысл настоящий. Фраза дня этого урока — именно она."}]}, {"id": "s7", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What was the result of today's match?", "options": ["A draw — the teams finished level at two goals each", "A win — Mark's team scored three and the others one", "A defeat — Mark's team lost to a single late penalty", "A cancellation — the referee stopped it due to rain"], "correct": "A draw — the teams finished level at two goals each", "explanation": "Марк говорит: I still cannot believe we only drew today. Two goals each — не могу поверить, что мы сыграли вничью, по два гола каждая. Кейт добавляет: A draw away from home is not a disaster — ничья на выезде не катастрофа. Выигрыш, поражение и отмена матча в диалоге не звучат.", "audio_text": "Kate(F): Mark, you are limping. What happened out there?\nMark(M): I twisted my ankle in the second half. The pitch was wet after all that rain.\nKate(F): Can you put any weight on it at all?\nMark(M): A little, but it hurts when I walk too fast. Relax, it is just a small injury.\nKate(F): A small injury can turn into a big one. You'd better see a doctor tomorrow morning.\nMark(M): I was going to wait a week and see how it feels.\nKate(F): A whole week? Mark, wounds heal on their own, but joints need proper attention. And we have the cup final next month.\nMark(M): Speaking of the cup, I still cannot believe we only drew today. Two goals each.\nKate(F): A draw away from home is not a disaster. The referee had other ideas, though.\nMark(M): Please do not start about the referee. One penalty against us and suddenly he is the villain of the story.\nKate(F): He was hopeless and you know it. But listen, it is high time we started training properly.\nMark(M): What do you mean by properly? We train every Tuesday and Thursday already.\nKate(F): Jogging around the pitch is not training. I was out of breath after twenty minutes today.\nMark(M): True. By the seventieth minute I could barely walk, and not because of my ankle.\nKate(F): So here is my plan. Cardio on Mondays, strength work on Wednesdays, ball practice on Fridays.\nMark(M): That sounds like a second job. Do we get a personal trainer as well?\nKate(F): Funny you should ask. The club has just hired one — Sarah from the city team.\nMark(M): Sarah? She turned them into champions overnight. All right, you have convinced me.\nKate(F): Good. And about that ankle — you'd better not play next Saturday. Rest it properly.\nMark(M): Fine. But you had better score a goal for me, then.\nKate(F): Deal. And you had better ice that ankle tonight, hero."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What does Kate want to change about the team?", "options": ["The training — cardio, strength work and a personal trainer", "The captain — she thinks Mark should lead the team instead", "The pitch — she wants the club to play on a drier ground", "The schedule — she prefers to train only on Tuesday nights"], "correct": "The training — cardio, strength work and a personal trainer", "explanation": "Кейт говорит: It is high time we started training properly — давно пора тренироваться по-настоящему, и предлагает план: cardio on Mondays, strength work on Wednesdays, ball practice on Fridays. Плюс клуб нанял personal trainer — Сару из городской команды, которая сделала ту команду чемпионами. Про капитана, поле и расписание она этого не говорит.", "audio_text": "Kate(F): Mark, you are limping. What happened out there?\nMark(M): I twisted my ankle in the second half. The pitch was wet after all that rain.\nKate(F): Can you put any weight on it at all?\nMark(M): A little, but it hurts when I walk too fast. Relax, it is just a small injury.\nKate(F): A small injury can turn into a big one. You'd better see a doctor tomorrow morning.\nMark(M): I was going to wait a week and see how it feels.\nKate(F): A whole week? Mark, wounds heal on their own, but joints need proper attention. And we have the cup final next month.\nMark(M): Speaking of the cup, I still cannot believe we only drew today. Two goals each.\nKate(F): A draw away from home is not a disaster. The referee had other ideas, though.\nMark(M): Please do not start about the referee. One penalty against us and suddenly he is the villain of the story.\nKate(F): He was hopeless and you know it. But listen, it is high time we started training properly.\nMark(M): What do you mean by properly? We train every Tuesday and Thursday already.\nKate(F): Jogging around the pitch is not training. I was out of breath after twenty minutes today.\nMark(M): True. By the seventieth minute I could barely walk, and not because of my ankle.\nKate(F): So here is my plan. Cardio on Mondays, strength work on Wednesdays, ball practice on Fridays.\nMark(M): That sounds like a second job. Do we get a personal trainer as well?\nKate(F): Funny you should ask. The club has just hired one — Sarah from the city team.\nMark(M): Sarah? She turned them into champions overnight. All right, you have convinced me.\nKate(F): Good. And about that ankle — you'd better not play next Saturday. Rest it properly.\nMark(M): Fine. But you had better score a goal for me, then.\nKate(F): Deal. And you had better ice that ankle tonight, hero."}]}], "subtitles": [{"speaker": "Kate", "text": "Mark, you are limping. What happened out there?"}, {"speaker": "Mark", "text": "I twisted my ankle in the second half. The pitch was wet after all that rain."}, {"speaker": "Kate", "text": "Can you put any weight on it at all?"}, {"speaker": "Mark", "text": "A little, but it hurts when I walk too fast. Relax, it is just a small injury."}, {"speaker": "Kate", "text": "A small injury can turn into a big one. You'd better see a doctor tomorrow morning."}, {"speaker": "Mark", "text": "I was going to wait a week and see how it feels."}, {"speaker": "Kate", "text": "A whole week? Mark, wounds heal on their own, but joints need proper attention. And we have the cup final next month."}, {"speaker": "Mark", "text": "Speaking of the cup, I still cannot believe we only drew today. Two goals each."}, {"speaker": "Kate", "text": "A draw away from home is not a disaster. The referee had other ideas, though."}, {"speaker": "Mark", "text": "Please do not start about the referee. One penalty against us and suddenly he is the villain of the story."}, {"speaker": "Kate", "text": "He was hopeless and you know it. But listen, it is high time we started training properly."}, {"speaker": "Mark", "text": "What do you mean by properly? We train every Tuesday and Thursday already."}, {"speaker": "Kate", "text": "Jogging around the pitch is not training. I was out of breath after twenty minutes today."}, {"speaker": "Mark", "text": "True. By the seventieth minute I could barely walk, and not because of my ankle."}, {"speaker": "Kate", "text": "So here is my plan. Cardio on Mondays, strength work on Wednesdays, ball practice on Fridays."}, {"speaker": "Mark", "text": "That sounds like a second job. Do we get a personal trainer as well?"}, {"speaker": "Kate", "text": "Funny you should ask. The club has just hired one — Sarah from the city team."}, {"speaker": "Mark", "text": "Sarah? She turned them into champions overnight. All right, you have convinced me."}, {"speaker": "Kate", "text": "Good. And about that ankle — you'd better not play next Saturday. Rest it properly."}, {"speaker": "Mark", "text": "Fine. But you had better score a goal for me, then."}, {"speaker": "Kate", "text": "Deal. And you had better ice that ankle tonight, hero."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
