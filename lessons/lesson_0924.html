@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Money &amp; Banking: Card Fraud &amp; Scams + Reported Speech with Modals</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Money &amp; Banking: Card Fraud &amp; Scams + Reported Speech with Modals</h1><div class="subtitle">2026-09-24</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Too good to be true</div><div class="translation">«Слишком хорошо, чтобы быть правдой» — так говорят о предложении или новости, которые кажутся удивительно выгодными и поэтому подозрительными. If a deal sounds too good to be true, it usually is — если предложение звучит слишком хорошо, чтобы быть правдой, оно обычно и неправда. Отличная фраза-предупреждение про мошенников, скидки и «выигрыши».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Money & Banking: Card Fraud & Scams + Reported Speech with Modals", "subtitle": "2026-09-24", "date": "2026-09-24", "phrase_of_the_day": "Too good to be true", "phrase_translation": "«Слишком хорошо, чтобы быть правдой» — так говорят о предложении или новости, которые кажутся удивительно выгодными и поэтому подозрительными. If a deal sounds too good to be true, it usually is — если предложение звучит слишком хорошо, чтобы быть правдой, оно обычно и неправда. Отличная фраза-предупреждение про мошенников, скидки и «выигрыши».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0924.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Card Fraud & Scams", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Kate says she nearly fell for a scam. What is a scam?", "options": ["A trick criminals use to get your money or personal details", "A new service the bank offers to protect your savings", "A message the bank sends you when your salary arrives", "A meeting where bank workers discuss your account plan"], "correct": "A trick criminals use to get your money or personal details", "explanation": "A scam — мошенничество, обманная схема, чтобы выманить деньги или личные данные. A scammer — мошенник. To fall for a scam — «повестись» на обман: Kate nearly fell for it — Кейт чуть не повелась. Фишинг из урока про онлайн-безопасность — одна из разновидностей scam, просто по почте."}, {"id": "v2", "type": "choice", "sentence": "The caller said Kate had to transfer her money. What does 'to transfer money' mean?", "options": ["To move money from one account to another account", "To take out cash from a cash machine in the street", "To hide your money somewhere very safe in your home", "To change your money into a foreign currency at once"], "correct": "To move money from one account to another account", "explanation": "To transfer money — перевести деньги с одного счёта на другой. A bank transfer — банковский перевод. Главный признак мошенника: он просит transfer your money to a safe account — перевести всё на «безопасный счёт». Настоящий банк никогда так не просит, о чём Джон и говорит Кейт."}, {"id": "v3", "type": "choice", "sentence": "John says that if a call feels suspicious, you should hang up. What does 'suspicious' mean?", "options": ["Making you feel that something is wrong or dishonest", "Making you feel happy and completely relaxed on a call", "Making you feel that a call is worth five minutes more", "Making you feel that your money is safe in a good bank"], "correct": "Making you feel that something is wrong or dishonest", "explanation": "Suspicious — подозрительный: что-то заставляет думать, что дело нечисто. If a call feels suspicious — если звонок кажется подозрительным. Похожее слово из урока про закон: a suspect — подозреваемый. А интонация «срочно, никуда не звоните, секретно» — самый подозрительный признак из всех."}, {"id": "v4", "type": "choice", "sentence": "John warns Kate about identity theft. What is identity theft?", "options": ["Criminals using your personal details to pretend to be you", "Criminals stealing a mobile phone from your bag or car", "Criminals breaking into a bank building quietly at night", "Criminals copying your house keys and entering your flat"], "correct": "Criminals using your personal details to pretend to be you", "explanation": "Identity theft — кража личности: мошенники получают ваши личные данные (PIN, пароли, номер паспорта) и от вашего имени берут кредиты или тратят деньги. Identity — личность, личные данные; theft — кража (из урока про закон: burglary vs robbery vs theft). Поэтому Джон и говорит: never share your PIN or passwords — никому не сообщайте коды и пароли."}]}, {"id": "s2", "title": "Grammar — Reported Speech with Modals", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Direct speech: 'I must transfer my money today.' How does it sound in reported speech?", "options": ["He said he had to transfer his money that day", "He said he must to transfer his money that day", "He said he must have transferred his money now", "He said he had transferring his money that day"], "correct": "He said he had to transfer his money that day", "explanation": "Must в косвенной речи превращается в had to — «должен был»: He said he had to transfer his money. Вспомните диалог: he said I had to transfer everything — он сказал, что я должна перевести всё. Заодно меняются слова времени: today → that day. Формы must to не существует в принципе."}, {"id": "g2", "type": "choice", "sentence": "Direct speech: 'I can call you back in ten minutes.' What is the correct reported sentence?", "options": ["She said she could call me back in ten minutes", "She said she can call me back in ten minutes", "She said she could to call me back in ten minutes", "She said she can calling me back in ten minutes"], "correct": "She said she could call me back in ten minutes", "explanation": "Can в косвенной речи становится could — как Present Simple становится Past Simple: I can → she could. В диалоге: he said I couldn't tell anyone — он сказал, что я не могу никому рассказывать (can't → couldn't). После could — обычный глагол без to: could call, а не could to call."}, {"id": "g3", "type": "choice", "sentence": "Which of these modal verbs does NOT change its form in reported speech?", "options": ["would — He said he would come at noon", "can — He said he can come at noon", "must — He said he must come at noon", "may — He said he may come at noon"], "correct": "would — He said he would come at noon", "explanation": "Would, could, should и might вообще не меняются — они уже «прошлые» по форме: He said he would call — он сказал, что позвонит. А вот can → could, must → had to, may → might. В диалоге: he might call back later — и в прямой, и в косвенной речи одинаково might."}, {"id": "g4", "type": "choice", "sentence": "The scammer told Kate: 'You must not tell anyone.' Which reported sentence keeps the meaning of a prohibition?", "options": ["He said she mustn't tell anyone about the call", "He said she didn't have to tell anyone at all", "He said she mustn't to tell anyone about it", "He said she must not telling anyone there"], "correct": "He said she mustn't tell anyone about the call", "explanation": "Запрет mustn't в косвенной речи сохраняется: He said she mustn't tell anyone — он сказал, чтобы она никому не говорила (запрет!). Ловушка — didn't have to: это «не нужно было», отсутствие необходимости, а не запрет. Второй правильный вариант передачи запрета — через конструкцию из урока про команды: He told her not to tell anyone."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You get a call from 'bank security' asking for your PIN code. What should you do?", "options": ["Hang up and call the bank using the number on your card", "Give the PIN quickly and hope the caller is honest", "Share the code but ask the caller to be careful with it", "Keep talking for an hour to waste the caller's time"], "correct": "Hang up and call the bank using the number on your card", "explanation": "Золотое правило Джона: If a call feels suspicious, hang up and call the number printed on your card — положите трубку и позвоните сами по номеру на карте. Мошенники могут подделать номер на экране (caller ID spoofing), но не могут принять ваш звонок на настоящий номер банка. PIN и пароли не знают даже сотрудники банка — и никогда их не спрашивают."}, {"id": "p2", "type": "choice", "sentence": "You want to report a strange call to your bank. Which sentence sounds best?", "options": ["I'd like to report a suspicious call I received today", "Some fool called me, what are you going to do about it", "You must find this man today or I close my account", "I got a call, it was bad, do something with that man"], "correct": "I'd like to report a suspicious call I received today", "explanation": "I'd like to report... — «я хотела бы сообщить о...» — вежливый и ясный способ начать разговор с поддержкой, так Кейт и начала звонок. To report a suspicious call — сообщить о подозрительном звонке. Грубость и угрозы работают хуже: спокойный клиент получает помощь быстрее, а работнику поддержки проще вежливо поговорить с человеком и собрать все детали."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "John says: 'If a deal sounds too good to be true, it usually is.' What does he mean?", "options": ["An offer that looks amazingly good is probably a trick", "An offer that looks amazingly good is usually the best", "A good price only lasts until the shop opens on Monday", "A real deal always takes a long time to complete fully"], "correct": "An offer that looks amazingly good is probably a trick", "explanation": "Too good to be true — «слишком хорошо, чтобы быть правдой»: если предложение звучит фантастически выгодно, почти наверняка это обман. Фраза дня. Дочь Кейт сказала то же самое: странно, что банк «сам позвонил первым» — такие чудеса бывают только в сказке или у мошенников. Тот же принцип работал в диалоге про техподдержку: «вы выиграли в лотерею», в которую не участвовали."}, {"id": "c2", "type": "choice", "sentence": "Kate's daughter told her to hang up immediately. What does 'to hang up on somebody' mean?", "options": ["To end the call and put the phone down on somebody", "To hold the phone far away from your ear for a while", "To shout loudly into the phone until they go quiet", "To give the phone to another person in the same room"], "correct": "To end the call and put the phone down on somebody", "explanation": "To hang up — положить трубку, закончить разговор. To hang up on somebody — оборвать разговор, бросить трубку (обычно невежливо, но с мошенником — самое то). Джон советует то же самое: if a call feels suspicious, hang up. Антоним — to pick up — снять трубку и ответить. А фраза Hold on, please — наоборот, «не вешайте трубку, подождите»."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What did the scammer tell Kate?", "options": ["That her money was in danger and she had to transfer it", "That her card had won a big prize in a foreign lottery", "That her salary would arrive a week later than usual", "That her daughter had spent all her savings on ducks"], "correct": "That her money was in danger and she had to transfer it", "explanation": "Кейт пересказывает: He said my money was in danger and I had to transfer everything to a safe account right away — он сказал, что её деньги в опасности и нужно срочно перевести всё на «безопасный счёт». Обратите внимание на косвенную речь с модальными: had to (переведённый must) и couldn't — он сказал, что нельзя никому рассказывать. Семьдесят резиновых утят тут только прикрытие.", "audio_text": "Kate(F): Hello, I would like to report something strange. A man called me an hour ago.\nJohn(M): You have reached the fraud department. My name is John. Take your time and tell me everything.\nKate(F): He said he was from my bank security team. He said someone had used my card to buy seventy rubber ducks in another country.\nJohn(M): Seventy rubber ducks. May I ask what he wanted you to do next?\nKate(F): He said my money was in danger and I had to transfer everything to a safe account right away.\nJohn(M): I see. Did he ask for any codes or passwords as well?\nKate(F): He did. He said I couldn't tell anyone about the call, and he might call back later to check on me.\nJohn(M): Kate, I can promise you one thing. The real bank will never ask you to move your money, and it will never ask for your PIN or passwords. Sharing those risks identity theft.\nKate(F): That is exactly what my daughter said. She told me to hang up immediately.\nJohn(M): Your daughter is a natural. Could you tell me the number that appeared on your screen?\nKate(F): It looked exactly like the official bank number. He said I could check it myself, so the call must be real.\nJohn(M): That trick is called caller ID spoofing. Criminals can make any number look official.\nKate(F): So the number on my screen meant nothing at all?\nJohn(M): Nothing at all. If a call feels suspicious, hang up and call the number printed on your card.\nKate(F): I did not transfer anything, thankfully. My daughter said it was too good to be true that the bank would call first.\nJohn(M): She was right. If a deal sounds too good to be true, it usually is.\nKate(F): I feel a little silly now, but I nearly fell for it.\nJohn(M): Please don't. These people are professionals, and you did everything right by calling us first."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. How did the number on Kate's screen look, and what did it really mean?", "options": ["It looked like the bank's real number but meant nothing", "It looked strange and clearly came from another country", "It looked like her daughter's number and meant trouble", "It looked empty, so the call could not be traced at all"], "correct": "It looked like the bank's real number but meant nothing", "explanation": "Кейт говорит: It looked exactly like the official bank number — номер на экране выглядел в точности как настоящий номер банка, и она решила, что звонок настоящий. Но Джон объясняет: это caller ID spoofing — подмена номера, мошенники умеют показывать любой номер. Вывод: номер на экране ничего не доказывает, перезванивать нужно самому по номеру с карты.", "audio_text": "Kate(F): Hello, I would like to report something strange. A man called me an hour ago.\nJohn(M): You have reached the fraud department. My name is John. Take your time and tell me everything.\nKate(F): He said he was from my bank security team. He said someone had used my card to buy seventy rubber ducks in another country.\nJohn(M): Seventy rubber ducks. May I ask what he wanted you to do next?\nKate(F): He said my money was in danger and I had to transfer everything to a safe account right away.\nJohn(M): I see. Did he ask for any codes or passwords as well?\nKate(F): He did. He said I couldn't tell anyone about the call, and he might call back later to check on me.\nJohn(M): Kate, I can promise you one thing. The real bank will never ask you to move your money, and it will never ask for your PIN or passwords. Sharing those risks identity theft.\nKate(F): That is exactly what my daughter said. She told me to hang up immediately.\nJohn(M): Your daughter is a natural. Could you tell me the number that appeared on your screen?\nKate(F): It looked exactly like the official bank number. He said I could check it myself, so the call must be real.\nJohn(M): That trick is called caller ID spoofing. Criminals can make any number look official.\nKate(F): So the number on my screen meant nothing at all?\nJohn(M): Nothing at all. If a call feels suspicious, hang up and call the number printed on your card.\nKate(F): I did not transfer anything, thankfully. My daughter said it was too good to be true that the bank would call first.\nJohn(M): She was right. If a deal sounds too good to be true, it usually is.\nKate(F): I feel a little silly now, but I nearly fell for it.\nJohn(M): Please don't. These people are professionals, and you did everything right by calling us first."}]}], "subtitles": [{"speaker": "Kate", "text": "Hello, I would like to report something strange. A man called me an hour ago."}, {"speaker": "John", "text": "You have reached the fraud department. My name is John. Take your time and tell me everything."}, {"speaker": "Kate", "text": "He said he was from my bank security team. He said someone had used my card to buy seventy rubber ducks in another country."}, {"speaker": "John", "text": "Seventy rubber ducks. May I ask what he wanted you to do next?"}, {"speaker": "Kate", "text": "He said my money was in danger and I had to transfer everything to a safe account right away."}, {"speaker": "John", "text": "I see. Did he ask for any codes or passwords as well?"}, {"speaker": "Kate", "text": "He did. He said I couldn't tell anyone about the call, and he might call back later to check on me."}, {"speaker": "John", "text": "Kate, I can promise you one thing. The real bank will never ask you to move your money, and it will never ask for your PIN or passwords. Sharing those risks identity theft."}, {"speaker": "Kate", "text": "That is exactly what my daughter said. She told me to hang up immediately."}, {"speaker": "John", "text": "Your daughter is a natural. Could you tell me the number that appeared on your screen?"}, {"speaker": "Kate", "text": "It looked exactly like the official bank number. He said I could check it myself, so the call must be real."}, {"speaker": "John", "text": "That trick is called caller ID spoofing. Criminals can make any number look official."}, {"speaker": "Kate", "text": "So the number on my screen meant nothing at all?"}, {"speaker": "John", "text": "Nothing at all. If a call feels suspicious, hang up and call the number printed on your card."}, {"speaker": "Kate", "text": "I did not transfer anything, thankfully. My daughter said it was too good to be true that the bank would call first."}, {"speaker": "John", "text": "She was right. If a deal sounds too good to be true, it usually is."}, {"speaker": "Kate", "text": "I feel a little silly now, but I nearly fell for it."}, {"speaker": "John", "text": "Please don't. These people are professionals, and you did everything right by calling us first."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
