@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Shopping: Grocery &amp; Sales Talk + Articles (a, an, the, zero article)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Shopping: Grocery &amp; Sales Talk + Articles (a, an, the, zero article)</h1><div class="subtitle">2026-09-30</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">It&#x27;s a steal</div><div class="translation">«Это просто даром» — так говорят о необыкновенно выгодной покупке. Марк находит последний кусок сыра с жёлтым стикером «half price» и говорит: It is a steal — «Это почти даром / дешевле не бывает». Буквально steal значит «кража», но идиома не про воровство: цена настолько хороша, будто вы «украли» товар у магазина. Часто говорят с восклицанием: That price? It&#x27;s a steal!</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Shopping: Grocery & Sales Talk + Articles (a, an, the, zero article)", "subtitle": "2026-09-30", "date": "2026-09-30", "phrase_of_the_day": "It's a steal", "phrase_translation": "«Это просто даром» — так говорят о необыкновенно выгодной покупке. Марк находит последний кусок сыра с жёлтым стикером «half price» и говорит: It is a steal — «Это почти даром / дешевле не бывает». Буквально steal значит «кража», но идиома не про воровство: цена настолько хороша, будто вы «украли» товар у магазина. Часто говорят с восклицанием: That price? It's a steal!", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0930.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Shopping: Grocery & Sales Talk", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Mark asks, \"Which aisle is the rice in?\" What is an aisle?", "options": ["A long passage between the shelves in a shop", "A person who packs your bags at the checkout", "A card that collects points when you buy things", "A large basket on wheels that you push around"], "correct": "A long passage between the shelves in a shop", "explanation": "An aisle — «проход между рядами полок» в магазине или супермаркете. Произносится как «айл» — буква s в этом слове не читается! В супермаркетах проходы часто пронумерованы, поэтому спрашивают: Which aisle is the rice in? — «В каком проходе рис?». Последний вариант описывает a trolley — тележку, а второй — человека у кассы. Кстати, слово aisle звучит точно так же, как isle — «остров», различить их можно только по написанию."}, {"id": "v2", "type": "choice", "sentence": "Emma says, \"Check the use by date on that yogurt.\" What is a use by date?", "options": ["The last date when food is still safe to eat", "The date when the product first arrived at the shop", "The price that is printed on the label of the product", "A discount that is valid for one weekend only"], "correct": "The last date when food is still safe to eat", "explanation": "A use by date — срок годности: последний день, когда продукт ещё безопасно есть. Use — «использовать», by — «к какому времени»: «использовать до такой-то даты». Рядом на упаковках встречается и best before — «лучше употребить до»: это совет о вкусе, а не строгий запрет, поэтому просроченный по best before печенье есть не опасно, просто оно уже не самое вкусное. Эмма не случайно просит Марка проверять дату: на полках иногда стоит йогурт «из прошлого»."}, {"id": "v3", "type": "choice", "sentence": "Emma says, \"It is a good thing you have a loyalty card.\" What is a loyalty card?", "options": ["A card that gives you points each time you shop", "A card that you buy once and then spend like cash", "A card that opens the doors for staff in the morning", "A card that shows how healthy a product is for you"], "correct": "A card that gives you points each time you shop", "explanation": "A loyalty card — карта постоянного покупателя (карта лояльности): при каждой покупке на неё падают баллы-поинты, которые потом превращаются в скидки. Loyalty — «верность», то есть магазин благодарит вас за то, что вы «верны» ему. Первый вариант неверного описывает a gift card — подарочную карту, на которой лежат деньги. В диалоге выяснилось, что карта Марка лежит дома в ящике — тогда достаточно дать свой номер телефона, и баллы начислят на него."}, {"id": "v4", "type": "choice", "sentence": "Emma asks, \"Own brand or the famous one?\" What are own brand products?", "options": ["Products made for the shop and sold under its name", "Products made by famous companies and advertised", "Products imported from small farms in other countries", "Products sold only during the winter holiday season"], "correct": "Products made for the shop and sold under its name", "explanation": "Own brand (её ещё называют a supermarket's own label) — собственная марка магазина: продукт делают по заказу супермаркета и выпускают под его именем, а не под именем известного бренда. Из-за этого он заметно дешевле — помидоры Эммы и Марка из одного поля, просто этикетка другая. Famous brand products — «брендовые» товары с рекламой и наценкой за имя. Проверено многими покупателями: крупа, сахар или консервы собственной марки по вкусу почти не отличаются."}]}, {"id": "s2", "title": "Grammar — Articles (a, an, the, zero article)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete the sentence: \"My sister plays ___ piano beautifully.\"", "options": ["the", "a", "an", "no article"], "correct": "the", "explanation": "Музыкальные инструменты в английском всегда идут с the: play the piano, play the guitar, play the violin. Логика такая: инструментов много, но когда вы играете «на пианино», имеется в виду вполне конкретный инструмент — тот, на котором вы играете. Поэтому по-английски говорят She plays the piano, хотя по-русски артикль никак не переводится. Обратите внимание: со спортом наоборот — артикля нет вообще: play football, play tennis."}, {"id": "g2", "type": "choice", "sentence": "Complete the sentence: \"What do you usually have for ___ breakfast?\"", "options": ["no article", "a", "an", "the"], "correct": "no article", "explanation": "Названия приёмов пищи — breakfast, lunch, dinner — используются без артикля: for breakfast — «на завтрак», after lunch — «после обеда», have dinner — «ужинать». Это «нулевой артикль» (zero article): артикль просто не нужен. Ловушка появляется, когда у еды появляется описание: It was a quick breakfast — «Это был быстрый завтрак» (здесь a, потому что перед существительным стоит прилагательное). А the появится, если речь о конкретном завтраке: The breakfast at that hotel was amazing."}, {"id": "g3", "type": "choice", "sentence": "Which sentence is correct?", "options": ["The moon looked beautiful over the crowded car park.", "A moon looked beautiful over a crowded car park.", "Moon looked beautiful over crowded car park.", "A moon looked beautiful over the crowded car park."], "correct": "The moon looked beautiful over the crowded car park.", "explanation": "Уникальные, единственные в своём роде вещи идут с the: the moon — луна (она одна), the sun, the sky, the world, the sea. Сравните: a moon — так можно сказать только про планеты, у которых несколько лун. Во втором предложении и a crowded car park — почти возможно (любая парковка), но «a moon» делает вариант неверным; третий вариант вообще без артиклей — так по-английски нельзя. Правило простое: один на весь мир — значит the."}, {"id": "g4", "type": "choice", "sentence": "Complete the sentence: \"This is ___ cheapest loaf of bread in the whole shop.\"", "options": ["the", "a", "an", "no article"], "correct": "the", "explanation": "Превосходная степень всегда требует the: the cheapest bread — «самый дешёвый хлеб», the best deal — «лучшая скидка», the biggest queue — «самая большая очередь». В помощь себе запомните маленькую семью слов, которые тоже дружат с the: the same — «тот же самый», the only — «единственный», the first / the last — «первый / последний». In the whole shop — «во всём магазине» — только подчёркивает, что этот батон чемпион по дешевизне."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are in a big supermarket and cannot find the rice. What do you ask a shop assistant?", "options": ["Excuse me, could you tell me which aisle the rice is in?", "Excuse me, you must carry the rice to my car for me.", "Excuse me, do you actually work here or just shop here?", "Excuse me, why is your rice better than rice elsewhere?"], "correct": "Excuse me, could you tell me which aisle the rice is in?", "explanation": "Excuse me, could you tell me which aisle the rice is in? — вежливый вопрос, который звучит в супермаркете каждый день: «Подскажите, пожалуйста, в каком проходе рис?». Обратите внимание на два момента: could you tell me делает вопрос мягче, а порядок слов в нём — как в утверждении (which aisle the rice is in, а не which aisle is the rice in). Второй вариант — требование, а не просьба, третий звучит грубовато, а четвёртый — просто странный спор о рисе."}, {"id": "p2", "type": "choice", "sentence": "At the checkout, the cashier asks, \"Do you have a loyalty card?\" You don't have one, but you would like to collect points. What do you say?", "options": ["No, I don't have one, but I would like to sign up.", "No, I don't have one, and please keep the receipt.", "No, I don't have one, I think I left it at home.", "Yes, I think I have three of them in my jacket."], "correct": "No, I don't have one, but I would like to sign up.", "explanation": "No, I don't have one, but I would like to sign up — «Нет, у меня нет, но я бы хотела оформить». To sign up — «зарегистрироваться, оформить» (карту, сервис, рассылку): самое частое слово в такой ситуации. Кассир тут же оформит карту или предложит вводить номер телефона — именно так советует Эмма в диалоге. Третий вариант звучит противоречиво: сначала «нет карты», потом «кажется, оставила дома». Четвёртый противоречит вопросу ещё сильнее."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Mark says about the cheese, \"It is a steal.\" What does \"it is a steal\" mean?", "options": ["It is an extremely good bargain for that price", "It is something stolen from the shop and sold on", "It is a product that the shop refuses to sell now", "It is a price that keeps changing every single day"], "correct": "It is an extremely good bargain for that price", "explanation": "It's a steal — «почти даром», «дешевле не бывает»: так говорят об очень выгодной цене. Слово steal буквально значит «кража», но идиома добрая: цена настолько хороша, будто покупатель «провёл» магазин. Марк говорит это про последний кусок сыра с наклейкой half price — «полцены». Похожее настроение передаёт и a bargain — «выгодная покупка», а человека, который охотится за скидками, называют a bargain hunter — «охотник за выгодой»."}, {"id": "c2", "type": "choice", "sentence": "Emma says, \"It is a good thing you have a loyalty card. Points soften the blow.\" What does \"soften the blow\" mean?", "options": ["To make something unpleasant feel less severe", "To make the queue at the checkout move faster", "To turn your points into cash you can use anywhere", "To replace a plastic card with your phone number"], "correct": "To make something unpleasant feel less severe", "explanation": "To soften the blow — «смягчить удар»: сделать неприятное чуть менее болезненным. A blow — удар, to soften — смягчать. Эмма имеет в виду: сумма на кассе всё равно огорчит, но баллы с карты лояльности немного «смягчат удар» скидкой. Идиома живёт во всех неприятных ситуациях: компания выплатила компенсацию, чтобы смягчить удар после отмены рейса; друг сначала пошутил, чтобы смягчить удар от плохой новости. Марк, правда, признался, что его карта лежит дома в ящике «любимая, но неиспользуемая»."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What does Emma think about the buy one, get one free offer?", "options": ["The shop uses it to make people buy more than they need", "The rice in that offer tastes worse than the usual brand", "The offer is only valid for customers with loyalty cards", "The same offer is always much cheaper at the farm shop"], "correct": "The shop uses it to make people buy more than they need", "explanation": "Марк удивляется: «Я столько риса даже не ем». Эмма отвечает: Nobody does. That is the whole trick of the deal — «Никто не ест. В этом и весь трюк акции». Buy one, get one free — «купи один, второй бесплатно»: звучит щедро, но часто заставляет набирать продукты, которые вам не нужны, — как башня суповых банок у Марка с марта. Акции полезны только тогда, когда вы и так собирались купить этот продукт.", "audio_text": "Emma(F): Mark, grab a trolley. But not that one. That one has a mind of its own.\nMark(M): Too late. This trolley and I have already bonded. It pulls to the left.\nEmma(F): Fine. Left it is. We need rice, tinned tomatoes and something nice for Saturday.\nMark(M): Which aisle is the rice in?\nEmma(F): Aisle three, next to the pasta. And listen, today they have a deal there. Buy one, get one free.\nMark(M): On rice? I do not even eat that much rice.\nEmma(F): Nobody does. That is the whole trick of the deal.\nMark(M): That explains the tower of soup in my cupboard from March.\nEmma(F): Now, own brand or the famous one? The own brand tomatoes are thirty cents cheaper.\nMark(M): Do they at least taste like tomatoes?\nEmma(F): They taste like tomatoes that cost thirty cents less. Same field, different label.\nMark(M): Sold. You should honestly run this shop.\nEmma(F): Wait. Check the use by date on that yogurt before it goes in the trolley.\nMark(M): The third of October. Is that good or a health experiment?\nEmma(F): Good enough. Yesterday I found one that expired before the weekend.\nMark(M): A yogurt from the past. Very retro. Look, this cheese has a half price sticker.\nEmma(F): Because it is the last one and the corner is slightly sad. Take it.\nMark(M): It is a steal. My dinner is basically free now.\nEmma(F): Nothing is free. Wait until the checkout shows you the truth.\nMark(M): Speaking of which, the queue at the self checkout is enormous.\nEmma(F): Then it is a good thing you have a loyalty card. Points soften the blow.\nMark(M): I do have a card. It is at home, in a drawer, feeling loved and unused.\nEmma(F): Classic. Just give them your phone number then. It works the same.\nMark(M): Done. And look at that. A coupon for soup. The circle is complete."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. Why does Emma tell Mark to check the use by date on the yogurt?", "options": ["Some products on the shelf may be close to expiring", "The shop always hides the freshest products in the back", "Yogurt with a later date on it always tastes much better", "The date printed on the pack decides the size of discount"], "correct": "Some products on the shelf may be close to expiring", "explanation": "Эмма говорит: Yesterday I found one that expired before the weekend — «Вчера я нашла йогурт, срок которого истёк ещё до выходных». Поэтому она проверяет дату до того, как продукт оказался в тележке. Марк шутит: A yogurt from the past. Very retro — «Йогурт из прошлого. Очень ретро». Мораль простая: берёте молочное или мясо — всегда взгляните на use by date, даже если упаковка стоит на самой видной полке."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, grab a trolley. But not that one. That one has a mind of its own."}, {"speaker": "Mark", "text": "Too late. This trolley and I have already bonded. It pulls to the left."}, {"speaker": "Emma", "text": "Fine. Left it is. We need rice, tinned tomatoes and something nice for Saturday."}, {"speaker": "Mark", "text": "Which aisle is the rice in?"}, {"speaker": "Emma", "text": "Aisle three, next to the pasta. And listen, today they have a deal there. Buy one, get one free."}, {"speaker": "Mark", "text": "On rice? I do not even eat that much rice."}, {"speaker": "Emma", "text": "Nobody does. That is the whole trick of the deal."}, {"speaker": "Mark", "text": "That explains the tower of soup in my cupboard from March."}, {"speaker": "Emma", "text": "Now, own brand or the famous one? The own brand tomatoes are thirty cents cheaper."}, {"speaker": "Mark", "text": "Do they at least taste like tomatoes?"}, {"speaker": "Emma", "text": "They taste like tomatoes that cost thirty cents less. Same field, different label."}, {"speaker": "Mark", "text": "Sold. You should honestly run this shop."}, {"speaker": "Emma", "text": "Wait. Check the use by date on that yogurt before it goes in the trolley."}, {"speaker": "Mark", "text": "The third of October. Is that good or a health experiment?"}, {"speaker": "Emma", "text": "Good enough. Yesterday I found one that expired before the weekend."}, {"speaker": "Mark", "text": "A yogurt from the past. Very retro. Look, this cheese has a half price sticker."}, {"speaker": "Emma", "text": "Because it is the last one and the corner is slightly sad. Take it."}, {"speaker": "Mark", "text": "It is a steal. My dinner is basically free now."}, {"speaker": "Emma", "text": "Nothing is free. Wait until the checkout shows you the truth."}, {"speaker": "Mark", "text": "Speaking of which, the queue at the self checkout is enormous."}, {"speaker": "Emma", "text": "Then it is a good thing you have a loyalty card. Points soften the blow."}, {"speaker": "Mark", "text": "I do have a card. It is at home, in a drawer, feeling loved and unused."}, {"speaker": "Emma", "text": "Classic. Just give them your phone number then. It works the same."}, {"speaker": "Mark", "text": "Done. And look at that. A coupon for soup. The circle is complete."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
