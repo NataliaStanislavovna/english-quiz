@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Travel: Car Rental &amp; Road Trips + prefer / would prefer / would rather</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Travel: Car Rental &amp; Road Trips + prefer / would prefer / would rather</h1><div class="subtitle">2026-10-03</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Backseat driver</div><div class="translation">«Водитель на заднем сиденье» — так называют пассажира, который всю дорогу не умолкая командует водителю: «Поверни налево! Тут обгони! Ты едешь слишком быстро!» Сам он за руль не садится, но советов даёт больше всех. Выражение насмешливое: так говорят про надоедливых пассажиров и про тех, кто любит учить других, не отвечая за результат. Эмма напутствует Марка: никто не любит backseat driver. Марк отвечает, что в его машине единственным «советчиком с заднего сиденья» будет навигатор.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Travel: Car Rental & Road Trips + prefer / would prefer / would rather", "subtitle": "2026-10-03", "date": "2026-10-03", "phrase_of_the_day": "Backseat driver", "phrase_translation": "«Водитель на заднем сиденье» — так называют пассажира, который всю дорогу не умолкая командует водителю: «Поверни налево! Тут обгони! Ты едешь слишком быстро!» Сам он за руль не садится, но советов даёт больше всех. Выражение насмешливое: так говорят про надоедливых пассажиров и про тех, кто любит учить других, не отвечая за результат. Эмма напутствует Марка: никто не любит backseat driver. Марк отвечает, что в его машине единственным «советчиком с заднего сиденья» будет навигатор.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1003.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Car Rental", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Emma says the small car comes with \"unlimited mileage\". What does unlimited mileage mean?", "options": ["You may drive as many kilometres as you like", "You can only drive a small number of kilometres", "The car can go faster than all the other cars", "You get a larger car if you pay extra every day"], "correct": "You may drive as many kilometres as you like", "explanation": "Unlimited mileage — «неограниченный пробег»: сколько угодно километров без доплаты. Mileage — «пробег» (miles — мили, хотя в Европе считают километры, слово всё равно используют). Ограничение называется limited mileage: например, two hundred kilometres a day, а за каждый лишний километр — отдельная плата. Для поездки на выходные unlimited mileage — приятный бонус: Марк может спокойно ехать к морю и обратно, не считая километры. Третий вариант путает mileage со скоростью, четвёртый — с бесплатным повышением класса машины."}, {"id": "v2", "type": "choice", "sentence": "Emma says, \"The drop-off is until nine on Monday morning.\" What is a drop-off?", "options": ["Returning the car at the end of the rental period", "Leaving the company and cancelling your booking there", "Delivering a new car to your home address for money", "Picking up the keys from the office early in the morning"], "correct": "Returning the car at the end of the rental period", "explanation": "Drop-off — «возврат машины» в конце аренды: вы привозите её в согласованное место (офис, аэропорт) и передаёте сотруднику. Противоположность — pick-up, «получение машины» в начале аренды. Глагол тоже есть: to drop the car off — «сдать машину», to pick the car up — «забрать машину». Эмма уточняет, что сдать машину можно до девяти утра понедельника в офисе или в аэропорту — Марк выбирает аэропорт, потому что его рейс на рассвете. В метро и такси drop off значит «высадить пассажира»."}, {"id": "v3", "type": "choice", "sentence": "Emma says, \"The basic cover has a three hundred euro excess.\" What is an excess?", "options": ["The part of the damage cost that you pay yourself", "The extra money the company pays you for each delay", "The full price of the car if you decide to buy it later", "The official fee for driving the car into another country"], "correct": "The part of the damage cost that you pay yourself", "explanation": "Excess — «франшиза»: часть ущерба, которую при аварии вы платите из своего кармана, а остальное покрывает страховка. Если франшиза триста евро, а ремонт на тысячу, страховая заплатит семьсот. Марк шутя спрашивает, не «доплата за extra скорость» — нет, слово здесь вообще про страховку (insurance cover), а не про скорость. Чтобы не платить франшизу, берут full cover — полную страховку, она дороже, зато при любом повреждении вы не платите ничего. Именно её и выбирает Марк."}, {"id": "v4", "type": "choice", "sentence": "Emma asks Mark to return the car with a full tank. What does \"to fill up the tank\" mean?", "options": ["To put fuel into the car until the tank is full", "To clean the inside of the car before returning it", "To pump some air into the tyres at the station", "To pack all the luggage neatly into the boot"], "correct": "To put fuel into the car until the tank is full", "explanation": "To fill up the tank — «заправить полный бак»: fill up — «наполнить до верху», tank — «бак». Самая частая политика проката — full to full: машину выдают с полным баком, и вернуть её нужно тоже с полным. Если вернёшь с пустым, компания заправит сама, но по двойной цене — отсюда решимость Марка заправиться самостоятельно, «даже если на это уйдёт всё воскресенье». Заправка — a petrol station (британский английский) или a gas station (американский), бензин — petrol, а не benzine."}]}, {"id": "s2", "title": "Grammar — prefer / would prefer / would rather", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Mark says, \"I prefer paying less to paying more.\" Which sentence uses the same pattern correctly?", "options": ["I prefer driving at night to driving in the rush hour.", "I prefer driving at night than driving in the rush hour.", "I prefer to drive at night to driving in the rush hour.", "I prefer drive at night rather drive in the rush hour."], "correct": "I prefer driving at night to driving in the rush hour.", "explanation": "Формула: prefer + V-ing + to + V-ing — «предпочитаю одно другому». Здесь to — это предлог, а не часть инфинитива, поэтому после него стоит герундий: I prefer driving to flying — «Предпочитаю машину самолёту». Ловушки: than вместо to (второй вариант) — нельзя, в этой конструкции только to; смешивать герундий с инфинитивом (третий вариант) тоже нельзя — либо оба действия с -ing, либо используйте другую формулу. Четвёртый вариант ломается дважды: prefer без -ing и rather без than. Русское «чем» так и тянет поставить than — помните: в конструкции с герундием только to."}, {"id": "g2", "type": "choice", "sentence": "Complete the sentence: \"The weather is lovely. I would rather ___ with the windows open.\"", "options": ["drive", "to drive", "driving", "for driving"], "correct": "drive", "explanation": "Would rather + глагол в первой форме БЕЗ to: I would rather drive — «Я бы лучше поехал (за рулём)». Это главная ловушка темы: rather сам работает как тот самый «нужный» элемент, поэтому to drive, driving и for driving здесь невозможны. Сокращённая разговорная форма — I'd rather drive. Would rather близко к would prefer to, но у них разная грамматика: would prefer берёт инфинитив с to (I would prefer to drive), а would rather — голый глагол. Сравните: I'd rather walk = I would prefer to walk — «Я бы лучше пошёл пешком»."}, {"id": "g3", "type": "choice", "sentence": "Emma offers two cars. Complete Mark's answer: \"I would prefer ___ the smaller car. It uses less fuel.\"", "options": ["to take", "taking", "take", "than take"], "correct": "to take", "explanation": "Would prefer + to do — «предпочёл бы (сделать)»: I would prefer to take the smaller car. После would prefer всегда инфинитив с to, герундий здесь невозможен. В чём разница с обычным prefer? Prefer описывает общий вкус, привычку (I prefer tea — я вообще люблю чай), а would prefer — конкретный выбор прямо сейчас, в этой ситуации (I would prefer tea now — именно сейчас я бы выбрал чай). Эмма предлагает две машины — это конкретная ситуация, поэтому Марк отвечает I would prefer to take, а не I prefer taking. В коротком ответе to тоже нужно: Which car? — The small one, I would prefer to take it."}, {"id": "g4", "type": "choice", "sentence": "Complete the sentence: \"Mark prefers to drive at night ___ during the rush hour.\"", "options": ["rather than drive", "rather than driving", "to driving in it", "instead of driving"], "correct": "rather than drive", "explanation": "Вторая формула сравнения: prefer to do A rather than do B — «предпочитаю сделать А, чем Б». После rather than — глагол в первой форме без to, как и после prefer to: I prefer to drive at night rather than drive during the rush hour. Запомните пару формул целиком: prefer doing A to doing B (с герундием и предлогом to) и prefer to do A rather than do B (с инфинитивами). Их нельзя перемешивать: rather than driving после prefer to drive — ошибка (второй вариант). Четвёртый вариант вместо сравнения даёт «вместо», и грамматика у него другая — instead of + герундий."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are at the rental counter. You want to know if you can return the car in another city. What do you ask?", "options": ["Could you tell me whether I can drop the car off in another city?", "Could you tell me whether can I drop the car off in another city?", "Do you know if to drop the car off in other city is possible?", "Could you tell me do I need to drop the car off in another city?"], "correct": "Could you tell me whether I can drop the car off in another city?", "explanation": "Вежливый вопрос на стойке проката — косвенный: Could you tell me whether I can drop the car off in another city? Порядок слов как в утверждении (I can drop), без вопроса-перевёртыша: does и can во внутрь не залезают (ошибка второго варианта). Whether и if здесь взаимозаменяемы, но после предлогов и перед or используется whether. Третий вариант ломается дважды: герундий без смысла и потерян артикль (another city). Четвёртый задаёт другой вопрос — «обязательно ли», а вам интересно «можно ли». Косвенные вопросы у вас уже были — сегодня они работают на стойке аренды."}, {"id": "p2", "type": "choice", "sentence": "You are lost, and your satnav has stopped working. You stop and ask a local person for directions. What do you say?", "options": ["Could you tell me how to get to the motorway from here?", "Could you tell me how do I get to the motorway from here?", "Could you tell me where is the beginning of the motorway?", "Can you tell me what road the motorway is going from here?"], "correct": "Could you tell me how to get to the motorway from here?", "explanation": "Could you tell me how to get to...? — классическая вежливая просьба показать дорогу: «Не подскажете, как проехать к...?» Здесь удобна упрощённая конструкция вопрос + to + глагол (how to get, where to turn), она звучит легче полного косвенного вопроса. Второй вариант — знакомая ловушка: do не должно быть внутри косвенного вопроса (how I get, а не how do I get). Третий ставит is перед подлежащим, ломая порядок слов. Motorway — «шоссе, автомагистраль» (британский английский), по-американски highway. Полезные слова рядом: a junction — съезд, service station — заправка с кафе на трассе."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Emma says, \"If a friend travels with you, hope they stay quiet. Nobody loves a backseat driver.\" What is a backseat driver?", "options": ["A passenger who keeps telling the driver what to do", "A professional driver who teaches you from the back seat", "A second steering wheel that passengers can hold too", "A person who sleeps in the car quietly during the trip"], "correct": "A passenger who keeps telling the driver what to do", "explanation": "Backseat driver — «задний сиденье + командир»: пассажир, который сам не за рулём, но непрерывно командует — «Поверни здесь! Сбавь скорость! Обгони!». Выражение насмешливое: таких пассажиров не любит никто. Кстати, «командовать» может и передний пассажир, и даже навигатор — на что Марк и шутит: единственный backseat driver в его машине будет сатнав. Слово backseat — «заднее сиденье», спереди это front seat. Похожая шутливая фраза — a Monday morning quarterback, «знаток после игры», но backseat driver — про дорогу и вполне литеральное заднее сиденье."}, {"id": "c2", "type": "choice", "sentence": "At the end, Emma says about the satnav, \"When it says turn left, it is usually right.\" Why is this funny?", "options": ["Right means both a direction and being correct", "The satnav always turns left and never turns right", "Emma does not trust any words that the satnav says", "The satnav can only speak when the car turns right"], "correct": "Right means both a direction and being correct", "explanation": "Игра слов: right — это и «направо» (направление), и «правильно». Фраза usually right одновременно значит «обычно направо» и «обычно право» — навигатор, который «говорит повернуть налево, обычно прав». Марк подхватывает шутку: Unlike my last passenger, who navigated us into a lake — «В отличие от моего прошлого пассажира, который довёл нас до озера». Английский обожает такие каламбуры: слова вроде left (левый и «оставленный»), right (право и направление) постоянно участвуют в дорожных шутках. Запомните: Turn right — «направо», You are right — «ты прав»."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why does Mark choose the full insurance cover?", "options": ["He is not confident about his parking skills", "The full cover makes the fuel at the pump cheaper", "The basic cover does not include unlimited mileage", "The agent refuses to give him the keys without it"], "correct": "He is not confident about his parking skills", "explanation": "Марк говорит: My parking skills are still experimental, so that is a wise choice — «Мои навыки парковки всё ещё на экспериментальной стадии». Выбирая полную страховку (full cover), он честно признаёт, что паркуются у него «экспериментально», и предпочитает доплатить, чем всё выходные переживать: I would rather pay a little more than worry all weekend. Забавный момент: Эмма называет его выбор «мудрым», добавляя его же шутку про экспериментальные навыки — «ты не можешь воровать мои шутки», возмущается Марк. Полная страховка никак не связана с топливом и пробегом — это отдельные условия аренды.", "audio_text": "Emma(F): Good morning, welcome to Star Cars. How can I help you?\nMark(M): Good morning. I would like to rent a car for the weekend.\nEmma(F): Of course. May I see your driving licence and a bank card, please?\nMark(M): Here you are. And here is my best confident smile.\nEmma(F): Charming. We have a small city car, a family estate and a van.\nMark(M): I will take the small one. I prefer paying less to paying more.\nEmma(F): Wise words. It comes with unlimited mileage and a free satnav.\nMark(M): Perfect. The satnav is my only friend on the road.\nEmma(F): Now, about insurance. The basic cover has a three hundred euro excess.\nMark(M): Excess? Is that extra money for extra speed?\nEmma(F): It is the part of the damage you pay yourself. Or you can pay more and take full cover.\nMark(M): Full cover, please. I would rather pay a little more than worry all weekend.\nEmma(F): Noted. My parking skills are still experimental, so that is a wise choice.\nMark(M): Emma, those were my words. You cannot steal my jokes like that.\nEmma(F): Please return the car with a full tank, or we fill it up for double the price.\nMark(M): Double? I will fill it up myself, even if it takes all Sunday morning.\nEmma(F): The drop-off is until nine on Monday morning, here or at the airport.\nMark(M): The airport sounds romantic. And my flight leaves at dawn anyway.\nEmma(F): Then sign here. And if a friend travels with you, hope they stay quiet. Nobody loves a backseat driver.\nMark(M): Do not worry. The only backseat driver in that car will be the satnav.\nEmma(F): Drive safely, Mark. And remember, when the satnav says turn left, it is usually right.\nMark(M): Unlike my last passenger, who navigated us into a lake."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What will happen if Mark returns the car with an empty tank?", "options": ["The company will fill it up and charge double the price", "The company will keep his licence and cancel the booking", "He will have to buy the company a brand new tank of fuel", "He will pay for the fuel at the normal price at the station"], "correct": "The company will fill it up and charge double the price", "explanation": "Эмма предупреждает: Please return the car with a full tank, or we fill it up for double the price — «Верните машину с полным баком, иначе мы заправим её сами, но по двойной цене». Именно поэтому Марк твёрдо решает заправиться самостоятельно, «даже если это займёт всё воскресное утро» (even if it takes all Sunday morning). Это стандартное правило проката full to full: получил полный бак — верни полный. Утро понедельника — крайний срок (drop-off until nine), после него аренда считается продлённой на новый день.", "audio_text": "Emma(F): Good morning, welcome to Star Cars. How can I help you?\nMark(M): Good morning. I would like to rent a car for the weekend.\nEmma(F): Of course. May I see your driving licence and a bank card, please?\nMark(M): Here you are. And here is my best confident smile.\nEmma(F): Charming. We have a small city car, a family estate and a van.\nMark(M): I will take the small one. I prefer paying less to paying more.\nEmma(F): Wise words. It comes with unlimited mileage and a free satnav.\nMark(M): Perfect. The satnav is my only friend on the road.\nEmma(F): Now, about insurance. The basic cover has a three hundred euro excess.\nMark(M): Excess? Is that extra money for extra speed?\nEmma(F): It is the part of the damage you pay yourself. Or you can pay more and take full cover.\nMark(M): Full cover, please. I would rather pay a little more than worry all weekend.\nEmma(F): Noted. My parking skills are still experimental, so that is a wise choice.\nMark(M): Emma, those were my words. You cannot steal my jokes like that.\nEmma(F): Please return the car with a full tank, or we fill it up for double the price.\nMark(M): Double? I will fill it up myself, even if it takes all Sunday morning.\nEmma(F): The drop-off is until nine on Monday morning, here or at the airport.\nMark(M): The airport sounds romantic. And my flight leaves at dawn anyway.\nEmma(F): Then sign here. And if a friend travels with you, hope they stay quiet. Nobody loves a backseat driver.\nMark(M): Do not worry. The only backseat driver in that car will be the satnav.\nEmma(F): Drive safely, Mark. And remember, when the satnav says turn left, it is usually right.\nMark(M): Unlike my last passenger, who navigated us into a lake."}]}], "subtitles": [{"speaker": "Emma", "text": "Good morning, welcome to Star Cars. How can I help you?"}, {"speaker": "Mark", "text": "Good morning. I would like to rent a car for the weekend."}, {"speaker": "Emma", "text": "Of course. May I see your driving licence and a bank card, please?"}, {"speaker": "Mark", "text": "Here you are. And here is my best confident smile."}, {"speaker": "Emma", "text": "Charming. We have a small city car, a family estate and a van."}, {"speaker": "Mark", "text": "I will take the small one. I prefer paying less to paying more."}, {"speaker": "Emma", "text": "Wise words. It comes with unlimited mileage and a free satnav."}, {"speaker": "Mark", "text": "Perfect. The satnav is my only friend on the road."}, {"speaker": "Emma", "text": "Now, about insurance. The basic cover has a three hundred euro excess."}, {"speaker": "Mark", "text": "Excess? Is that extra money for extra speed?"}, {"speaker": "Emma", "text": "It is the part of the damage you pay yourself. Or you can pay more and take full cover."}, {"speaker": "Mark", "text": "Full cover, please. I would rather pay a little more than worry all weekend."}, {"speaker": "Emma", "text": "Noted. My parking skills are still experimental, so that is a wise choice."}, {"speaker": "Mark", "text": "Emma, those were my words. You cannot steal my jokes like that."}, {"speaker": "Emma", "text": "Please return the car with a full tank, or we fill it up for double the price."}, {"speaker": "Mark", "text": "Double? I will fill it up myself, even if it takes all Sunday morning."}, {"speaker": "Emma", "text": "The drop-off is until nine on Monday morning, here or at the airport."}, {"speaker": "Mark", "text": "The airport sounds romantic. And my flight leaves at dawn anyway."}, {"speaker": "Emma", "text": "Then sign here. And if a friend travels with you, hope they stay quiet. Nobody loves a backseat driver."}, {"speaker": "Mark", "text": "Do not worry. The only backseat driver in that car will be the satnav."}, {"speaker": "Emma", "text": "Drive safely, Mark. And remember, when the satnav says turn left, it is usually right."}, {"speaker": "Mark", "text": "Unlike my last passenger, who navigated us into a lake."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
