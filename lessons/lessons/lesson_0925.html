@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Art &amp; Culture: At the Theatre + Gerund vs Infinitive (go on, mean, regret)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Art &amp; Culture: At the Theatre + Gerund vs Infinitive (go on, mean, regret)</h1><div class="subtitle">2026-09-25</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Break a leg!</div><div class="translation">«Сломай ногу!» — так в театре желают удачи перед выступлением. Есть поверье: слово good luck приносит актёрам несчастье, поэтому удачу призывают такой странной фразой. Сказать актёру good luck перед спектаклем считается плохой приметой, а Break a leg — самый лучший комплимент. Фраза давно вышла за пределы театра: так желают успеха перед экзаменом, собеседованием или презентацией.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Art & Culture: At the Theatre + Gerund vs Infinitive (go on, mean, regret)", "subtitle": "2026-09-25", "date": "2026-09-25", "phrase_of_the_day": "Break a leg!", "phrase_translation": "«Сломай ногу!» — так в театре желают удачи перед выступлением. Есть поверье: слово good luck приносит актёрам несчастье, поэтому удачу призывают такой странной фразой. Сказать актёру good luck перед спектаклем считается плохой приметой, а Break a leg — самый лучший комплимент. Фраза давно вышла за пределы театра: так желают успеха перед экзаменом, собеседованием или презентацией.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0925.mp3", "sections": [{"id": "s1", "title": "Vocabulary — At the Theatre", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Mark says the show has been sold out since the tickets went on sale. What does 'sold out' mean?", "options": ["All the tickets for the performance have already been bought", "The show has been cancelled because the actors are on strike", "The tickets are cheaper if you buy them on the same day", "The theatre keeps a few seats for guests who arrive first"], "correct": "All the tickets for the performance have already been bought", "explanation": "Sold out — «все билеты проданы»: свободных мест нет совсем. Именно поэтому Марк удивлён, что Эмма попала на спектакль. Близкая фраза из урока про транспорт: the concert sold out in an hour — билеты разошли за час. Если шоу sold out, остаются только день показа и надежда на возвратные билеты в кассе (the box office)."}, {"id": "v2", "type": "choice", "sentence": "Mark advises David to try the Saturday matinee. What is a matinee?", "options": ["A performance that takes place in the afternoon", "A short break between the two acts of a play", "The evening performance with the famous cast", "The final performance of a play this season"], "correct": "A performance that takes place in the afternoon", "explanation": "A matinee — дневной спектакль или сеанс, обычно в 14–15 часов. Слово пришло из французского matin — утро. Дневные показы часто дешевле и реже распроданы — поэтому Марк и советует матине Давиду, который не успел купить билеты на вечер. Вечерний показ — an evening performance, а перерыв между актами — an interval (в Америке — intermission)."}, {"id": "v3", "type": "choice", "sentence": "Mark says Sarah got a standing ovation. What is a standing ovation?", "options": ["The audience stand up and applaud to show they loved it", "The actors invite the audience to dance on the stage", "The director asks the audience to leave very quickly", "The critics publish their reviews the next morning"], "correct": "The audience stand up and applaud to show they loved it", "explanation": "A standing ovation — овация стоя: зал встаёт и аплодирует. To stand — стоять, ovation — овация. Это высший знак признания для актёров: Марк говорит, что Сарра получила овацию стоя ещё до конца монолога — то есть зал встал буквально через пару минут после её выхода. To applaud — аплодировать, applause — аплодисменты."}, {"id": "v4", "type": "choice", "sentence": "In the dialogue the audience enjoyed a long curtain call. What is a curtain call?", "options": ["The actors return to the stage and bow at the end", "The short pause when the scenery is being changed", "The moment when the new tickets go on sale to the public", "The short speech the director gives before the play starts"], "correct": "The actors return to the stage and bow at the end", "explanation": "A curtain call — поклоны в конце спектакля: занавес (the curtain) поднимается, актёры выходят и кланяются (to bow), а зал аплодирует. To take a curtain call — получить поклон. Отсюда же выражение it was all over by the curtain call. А если зал не хочет расходиться и зовёт актёров снова — это encore: «ещё!», как с тремя песнями Сарры."}]}, {"id": "s2", "title": "Grammar — go on / mean / regret", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "The critic discussed the first act and then went on to say the second act was perfect. What does 'went on to say' mean?", "options": ["He finished his first point and then moved on to a new one", "He kept repeating the same point about the first act", "He apologised because the first act was rather slow", "He refused to discuss the second act in his review"], "correct": "He finished his first point and then moved on to a new one", "explanation": "Go on TO DO — перейти к новому действию: закончил одно и взялся за другое. Критик сначала написал про первый акт, а ЗАТЕМ перешёл ко второму: he went on to say — «а дальше написал». Сравните: went on doing — продолжал делать то же самое (зал продолжал аплодировать: the audience went on clapping). Разница ровно как у stop to do и stop doing, только наоборот по смыслу."}, {"id": "g2", "type": "choice", "sentence": "Emma says, \"I mean to see every production this season.\" What is she saying?", "options": ["She intends to see every production this season", "Buying a ticket for every show costs a lot of money", "She is sorry that she missed some shows this season", "The theatre plans to stage a lot of new shows this year"], "correct": "She intends to see every production this season", "explanation": "Mean TO DO — «собираться, намереваться» что-то сделать: I mean to see every production — я намерена посмотреть все постановки. Это то же самое, что to be going to или to intend to, только чуть формальнее. А вот mean DOING — «значить, означать»: Working late means missing the show — работа допоздна означает пропущенный спектакль. Смысл меняется полностью, как у stop и try из прошлого урока."}, {"id": "g3", "type": "choice", "sentence": "Which sentence shows regret about something that has already happened?", "options": ["I regret telling my sister the end of the play last week", "We regret to say that tonight's show is cancelled", "I regret to announce a change in the evening programme", "The theatre regrets to inform you that tickets are sold out"], "correct": "I regret telling my sister the end of the play last week", "explanation": "Regret DOING — сожалеть о том, что уже сделал: I regret telling — жалею, что рассказал (рассказал — жалею). Давид из диалога жалеет именно о прошлом: he regrets not booking sooner — жалеет, что не купил билеты раньше. А regret TO DO — «с сожалением сообщаю»: так начинают плохие новости, I regret to say — с сожалением сообщаю (само сообщение только сейчас, сожалеть пока не о чем). Марк так и ответил: I regret to say I am not free."}, {"id": "g4", "type": "choice", "sentence": "Which sentence means that somebody continued doing the SAME activity?", "options": ["Sarah went on singing the same song for ten minutes", "After the song Sarah went on to thank the whole orchestra", "Sarah stopped singing as soon as the stage lights went down", "Sarah sang a different song before the interval started"], "correct": "Sarah went on singing the same song for ten minutes", "explanation": "Go on DOING — продолжать делать то же самое: Sarah went on singing — Сарра продолжала петь (ту же песню). В диалоге то же самое делал зал: the audience went on clapping — зал продолжал аплодировать. А go on TO DO — после одного действия перейти к другому: спела песню, а потом пошла благодарить оркестр. Запомните пару: doing = то же действие, to do = новое действие."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are at the theatre box office and want two tickets. Which sentence works best?", "options": ["Two seats in the stalls for Saturday's matinee, please", "Give me the best seats you have left in this theatre", "I want two tickets for tonight and I refuse to pay much", "Could somebody possibly sell me the seats near the stage"], "correct": "Two seats in the stalls for Saturday's matinee, please", "explanation": "В кассе говорят коротко и конкретно: Two seats in the stalls for Saturday's matinee, please — два места в партере на субботний дневной спектакль. The stalls — партер, the balcony — балкон, the box office — театральная касса. Слово please делает просьбу вежливой, а четкость (место, день, показ) помогает кассиру сразу найти билеты. Вариант «дайте мне лучшие места» звучит грубо и требовательно."}, {"id": "p2", "type": "choice", "sentence": "Your friend has just finished performing in a play. What should you say?", "options": ["You were wonderful, and the audience loved every minute", "You should have learned your lines a little bit better", "Was that really the play, or were you just improvising", "The critics will be cruel, but at least I liked your hat"], "correct": "You were wonderful, and the audience loved every minute", "explanation": "После спектакля друг ждёт поддержки: You were wonderful — ты была великолепна, the audience loved every minute — зал был в восторге. Простая, тёплая фраза без лишних слов. А вот Break a leg говорят ДО выступления — это пожелание удачи, после спектакля оно уже не нужно. Критиковать линии (реплики, to learn your lines — учить роль) в первую же минуту — лучший способ обидеть друга."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "At the end Emma says, \"Break a leg at the rehearsals.\" What does she mean?", "options": ["She wishes him good luck without using the unlucky words", "She thinks he should rest his leg before the rehearsals", "She is angry because he broke a promise to the director", "She jokes that his dancing is dangerous for the actors"], "correct": "She wishes him good luck without using the unlucky words", "explanation": "Break a leg — «удачи!», традиционное театральное пожелание. По суеверию, пожелать актёру good luck — к беде, поэтому удачу призывают «наоборот»: сломай ногу! Марк в конце подтверждает: We never say good luck here — в театре так не говорят. Фраза давно живёт и за стенами театра: её говорят перед экзаменом, собеседованием, презентацией. Фраза дня."}, {"id": "c2", "type": "choice", "sentence": "Mark says the critics called Sarah \"the discovery of the season.\" What does that mean?", "options": ["She is a new performer everybody has started talking about", "She found an old lost play in the theatre library archive", "She is an actress who was discovered working in a ticket office", "She is a journalist who writes reviews for a theatre magazine"], "correct": "She is a new performer everybody has started talking about", "explanation": "The discovery of the season — «открытие сезона»: новый исполнитель, о котором вдруг заговорили все. To discover — открывать, обнаруживать; здесь существительное discovery — открытие, т.е. новое громкое имя. Так говорят не только о людях: the discovery of the year может быть и молодой писатель, и футболист. Критики, кстати, «продолжили и назвали» её так: the critics went on to call her... — тот самый go on to do."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. How did Emma manage to get tickets for opening night?", "options": ["She booked two seats in the stalls two months before", "She queued at the box office from the early morning", "Sarah saved two seats for her friends behind the stage", "She won two tickets in a radio competition last week"], "correct": "She booked two seats in the stalls two months before", "explanation": "Эмма объясняет: I booked two seats in the stalls two months in advance — она купила два места в партере за два месяца, потому что намерена посмотреть все постановки сезона (I mean to see every production this season). In advance — заранее, заблаговременно. Спектакль был распродан с первого дня продаж (sold out since the tickets went on sale), поэтому в последний момент билет было не достать — Давид тому доказательство.", "audio_text": "Emma(F): Mark, the show was amazing. We are still clapping inside.\nMark(M): Emma, you came on opening night. That was the loudest audience we have had all week.\nEmma(F): And how. The audience went on clapping for ten minutes, and Sarah sang three songs as an encore.\nMark(M): Sarah got a standing ovation before she had even finished the monologue. The critics went on to call her the discovery of the season.\nEmma(F): I read that review. The critic wrote that the first act was a bit slow, but then he went on to say the second act was perfect.\nMark(M): He did. By the way, how did you get in at all? The show has been sold out since the tickets went on sale.\nEmma(F): I booked two seats in the stalls two months in advance. I mean to see every production this season, so I bought them early.\nMark(M): Good planning. Some people try the box office on the day and leave with nothing at all.\nEmma(F): My friend David wanted to come tonight, but the only seats left were in the balcony. He regrets not booking sooner.\nMark(M): Tell him about the Saturday matinee. It is never sold out, and the tickets are much cheaper.\nEmma(F): I will pass that on. One more thing. Are you free on the tenth of October?\nMark(M): I regret to say I am not. We start rehearsals for the new play that week, and the director hates lateness.\nEmma(F): A new play already? You never stop.\nMark(M): An actor's life. Oh, and thank you for the flowers. I mean to keep the card forever.\nEmma(F): Any time. Break a leg at the rehearsals, Mark.\nMark(M): You know the theatre rule. We never say good luck here, so that is the kindest thing you can tell me."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What does Mark say about the Saturday matinee?", "options": ["It is usually not sold out and the tickets are cheaper", "It is the only performance where Sarah sings her songs", "It starts much later than all the evening performances", "It is already sold out, like every show this whole month"], "correct": "It is usually not sold out and the tickets are cheaper", "explanation": "Марк советует: Tell him about the Saturday matinee. It is never sold out, and the tickets are much cheaper — субботний дневной спектакль никогда не распродан и билеты заметно дешевле. Это совет для Давида, который не успел с билетами на вечер. Заодно обратите внимание: Эмма передаст совет словами I will pass that on — «я передам ему это», полезная разговорная фраза.", "audio_text": "Emma(F): Mark, the show was amazing. We are still clapping inside.\nMark(M): Emma, you came on opening night. That was the loudest audience we have had all week.\nEmma(F): And how. The audience went on clapping for ten minutes, and Sarah sang three songs as an encore.\nMark(M): Sarah got a standing ovation before she had even finished the monologue. The critics went on to call her the discovery of the season.\nEmma(F): I read that review. The critic wrote that the first act was a bit slow, but then he went on to say the second act was perfect.\nMark(M): He did. By the way, how did you get in at all? The show has been sold out since the tickets went on sale.\nEmma(F): I booked two seats in the stalls two months in advance. I mean to see every production this season, so I bought them early.\nMark(M): Good planning. Some people try the box office on the day and leave with nothing at all.\nEmma(F): My friend David wanted to come tonight, but the only seats left were in the balcony. He regrets not booking sooner.\nMark(M): Tell him about the Saturday matinee. It is never sold out, and the tickets are much cheaper.\nEmma(F): I will pass that on. One more thing. Are you free on the tenth of October?\nMark(M): I regret to say I am not. We start rehearsals for the new play that week, and the director hates lateness.\nEmma(F): A new play already? You never stop.\nMark(M): An actor's life. Oh, and thank you for the flowers. I mean to keep the card forever.\nEmma(F): Any time. Break a leg at the rehearsals, Mark.\nMark(M): You know the theatre rule. We never say good luck here, so that is the kindest thing you can tell me."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, the show was amazing. We are still clapping inside."}, {"speaker": "Mark", "text": "Emma, you came on opening night. That was the loudest audience we have had all week."}, {"speaker": "Emma", "text": "And how. The audience went on clapping for ten minutes, and Sarah sang three songs as an encore."}, {"speaker": "Mark", "text": "Sarah got a standing ovation before she had even finished the monologue. The critics went on to call her the discovery of the season."}, {"speaker": "Emma", "text": "I read that review. The critic wrote that the first act was a bit slow, but then he went on to say the second act was perfect."}, {"speaker": "Mark", "text": "He did. By the way, how did you get in at all? The show has been sold out since the tickets went on sale."}, {"speaker": "Emma", "text": "I booked two seats in the stalls two months in advance. I mean to see every production this season, so I bought them early."}, {"speaker": "Mark", "text": "Good planning. Some people try the box office on the day and leave with nothing at all."}, {"speaker": "Emma", "text": "My friend David wanted to come tonight, but the only seats left were in the balcony. He regrets not booking sooner."}, {"speaker": "Mark", "text": "Tell him about the Saturday matinee. It is never sold out, and the tickets are much cheaper."}, {"speaker": "Emma", "text": "I will pass that on. One more thing. Are you free on the tenth of October?"}, {"speaker": "Mark", "text": "I regret to say I am not. We start rehearsals for the new play that week, and the director hates lateness."}, {"speaker": "Emma", "text": "A new play already? You never stop."}, {"speaker": "Mark", "text": "An actor's life. Oh, and thank you for the flowers. I mean to keep the card forever."}, {"speaker": "Emma", "text": "Any time. Break a leg at the rehearsals, Mark."}, {"speaker": "Mark", "text": "You know the theatre rule. We never say good luck here, so that is the kindest thing you can tell me."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Weather: Frost, Sleet &amp; Storms + I think so / I hope not</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Weather: Frost, Sleet &amp; Storms + I think so / I hope not</h1><div class="subtitle">2026-10-04</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Snowed under</div><div class="translation">«Заваленный снегом» — так говорят о человеке, которого засыпало работой настолько, что он не может никуда выбраться. Она завалена отчётами — I am snowed under with reports. Используют её круглый год — про работу, письма и дела. Если друг зовёт вас погулять, а у вас три дедлайна, вы отвечаете именно так: Sorry, I am snowed under.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Weather: Frost, Sleet & Storms + I think so / I hope not", "subtitle": "2026-10-04", "date": "2026-10-04", "phrase_of_the_day": "Snowed under", "phrase_translation": "«Заваленный снегом» — так говорят о человеке, которого засыпало работой настолько, что он не может никуда выбраться. Она завалена отчётами — I am snowed under with reports. Используют её круглый год — про работу, письма и дела. Если друг зовёт вас погулять, а у вас три дедлайна, вы отвечаете именно так: Sorry, I am snowed under.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1004.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Winter Weather", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Emma says, \"Frost tonight, then sleet in the afternoon.\" What is sleet?", "options": ["Rain mixed with snow that falls near freezing point", "Soft white flakes that fall when it is truly cold", "A spinning wind column that lifts roofs off houses", "Water that freezes hard on the ground overnight"], "correct": "Rain mixed with snow that falls near freezing point", "explanation": "Sleet — «мокрый снег, дождь со снегом»: осадки между дождём и снегом, когда на улице около нуля. Именно поэтому Марк удивляется sleet в октябре — для настоящего снега ещё слишком тепло, а для дождя уже слишком холодно. Не путайте: snow — чистый снег (второй вариант), frost — иней, заморозок, лёд на поверхностях (четвёртый вариант), а tornado — смерч (третий вариант). Слит и мокрый снег на дорогах превращаются в скользкую кашу — по-английски slush, это слово будет в следующем вопросе."}, {"id": "v2", "type": "choice", "sentence": "Mark says, \"Tomorrow the paths will be slush and mud.\" What is slush?", "options": ["Half melted snow lying dirty and wet on the paths", "A thin coat of ice that covers the car in the night", "A dense cloud that hides the road from the drivers", "Small hard ice balls falling from the sky in storms"], "correct": "Half melted snow lying dirty and wet on the paths", "explanation": "Slush — «снежная каша»: наполовину растаявший, грязный и мокрый снег на дорогах и тропинках. Самое неприятное явление межсезонья: Эмма сравнивает прогулку по нему со «ступанием в холодный суп» (stepping into cold soup). Четвёртый вариант описывает hail — град (он был в уроке про грозы), второй — ледяную корку на машине, третий — облако или туман. Прилагательное slushy — «кашеобразный, из мокрого снега»: slushy pavement, slushy roads."}, {"id": "v3", "type": "choice", "sentence": "Emma says, \"A cold spell is coming.\" What is a cold spell?", "options": ["A period of several days with unusually cold weather", "A sudden fall of heavy wet snow from the dark clouds", "A strong icy wind that blows from the sea all night", "A magic charm that people say protects from freezing"], "correct": "A period of several days with unusually cold weather", "explanation": "A spell of (cold) weather — «период определённой погоды»: a cold spell — период холодов, a hot spell — период жары, a dry spell — период без дождя. Слово spell здесь означает «отрезок времени, период» и не имеет отношения ни к волшебству (заклинание — тоже spell), ни к ветру или снегу. Фраза очень частая в прогнозах и разговорах: We are in for a cold spell — «Нас ждёт похолодание». Обратите внимание на предлог: a spell of cold weather."}, {"id": "v4", "type": "choice", "sentence": "Emma says, \"I covered my roses with a special cloth.\" Why does she worry about frost?", "options": ["Because frost leaves a layer of ice that can kill plants", "Because frost makes the flowers grow too fast in autumn", "Because frost brings heavy clouds that block the sunlight", "Because frost fills the garden with wet snow and puddles"], "correct": "Because frost leaves a layer of ice that can kill plants", "explanation": "Frost — «заморозок, иней»: когда температура падает ниже нуля, на поверхностях и растениях образуется тонкий слой льда. Для растений это опасно: прошлогодние розы Марка почернели после первого заморозка (turned black after the first frost) — клеточный сок замерзает и ткани растения повреждаются. Поэтому Эмма и укрывает розы тканью на ночь. Запомните пару: frost — заморозок (лёд на поверхностях), snow — снег (падает с неба). Прилагательное frosty — «морозный»."}]}, {"id": "s2", "title": "Grammar — I think so / I hope not", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Mark asks, \"Will it clear up the day after tomorrow?\" Emma believes it will. What does she say?", "options": ["I think so.", "I think it.", "I think yes.", "I think that."], "correct": "I think so.", "explanation": "Чтобы не повторять целое предложение, англичане заменяют его словом so: Will it clear up? — I think so = «Думаю, что да (расчистится)». Так работают think, believe, suppose, guess, expect, hope и be afraid. So ставится после глагола и заменяет всё придаточное. Варианты I think it, I think yes и I think that невозможны — это дословный перевод русского «думаю, что да». Отрицание строится от глагола: I don't think so — «Думаю, что нет». Именно эта фраза звучит в диалоге, когда Эмма отвечает про солнечную погоду."}, {"id": "g2", "type": "choice", "sentence": "Mark asks, \"Will the frost hurt your roses?\" Emma wants the opposite. What does she say?", "options": ["I hope not.", "I hope no.", "I don't hope.", "I don't hope so."], "correct": "I hope not.", "explanation": "С hope всё наоборот по сравнению с think: отрицание присоединяется к частице, а не к глаголу. Правильно — I hope not = «Надеюсь, что нет», а I don't hope so — ошибка! Сравните пару, которую надо выучить наизусть: I think so / I don't think so, но I hope so / I hope not. Почему так: think отрицается обычным способом (don't think), а у hope отрицательная форма с don't почти не используется. Ловушка именно в том, что русская логика («не надеюсь») тянет поставить don't — сопротивляйтесь этому порыву."}, {"id": "g3", "type": "choice", "sentence": "Emma says, \"Both apps say the same.\" Mark believes her and is a little sorry about it. What does he say?", "options": ["I am afraid so.", "I am afraid of it.", "I am afraid yes.", "I am afraid from it."], "correct": "I am afraid so.", "explanation": "I'm afraid so = «Боюсь, что да» — вежливый способ согласиться с неприятной новостью. I'm afraid not = «Боюсь, что нет». Be afraid здесь не про страх, а про сожаление — мягкое извинение перед плохим ответом. Обратите внимание: of после afraid в этом значении не ставится — I am afraid of it значит «я его боюсь» (настоящий страх перед чем-то), это совсем другая история. Фраза из диалога — Both say the same, I am afraid — здесь so вообще опущено, потому что смысл ясен и без него."}, {"id": "g4", "type": "choice", "sentence": "Three of these short answers are correct English. Which one is NOT possible?", "options": ["I know so.", "I think so.", "I hope so.", "I guess so."], "correct": "I know so.", "explanation": "So после глагола можно ставить с think, believe, suppose, guess, expect, hope и be afraid. А вот know так не работает: нельзя ответить I know so на вопрос «Пойдёт завтра дождь?». С know говорят просто I know — «Знаю» (когда уверены в факте) или I don't know — «Не знаю». По той же причине so не сочетается с be sure и be certain: там уверенность уже выражена самим словом. Запомните список «друзей so»: think, believe, suppose, guess, expect, hope, seem (It seems so) и be afraid."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "It is a freezing morning. Your friend is leaving the house without a coat. What do you say?", "options": ["Bundle up, it is freezing outside!", "Dress up, it is freezing outside!", "Cover up it, it is freezing outside!", "Put up warm, it is freezing outside!"], "correct": "Bundle up, it is freezing outside!", "explanation": "To bundle up — «тепло одеться, укутаться»: очень частая фраза в холодное время года, именно ею Марк напутствует Эмму в диалоге. Bundle — «свёрток, узел», образно человек укутывается как узел в шарфах и свитерах. Второй вариант — ловушка: to dress up значит «нарядиться» (для вечера или праздника), а не «одеться теплее». Одеться тепло можно ещё фразой wrap up warm — она тоже правильная и полезная. Freezing здесь — разговорное «жуткий холод», хотя по науке это «ниже нуля»."}, {"id": "p2", "type": "choice", "sentence": "You want to know about tomorrow's weather. What do you ask your colleague?", "options": ["Do you know what the forecast is for tomorrow?", "Do you know what is the forecast for tomorrow?", "Do you know what the forecast tells it tomorrow?", "Could you tell me what the forecast say tomorrow?"], "correct": "Do you know what the forecast is for tomorrow?", "explanation": "Косвенный вопрос после Do you know сохраняет порядок слов утверждения: what the forecast is, а не what is the forecast (второй вариант — классический перевёртыш). Третий и четвёртый варианты ломают глагол: forecast — единственное число, поэтому says, а не say, и tells it здесь не нужно. Forecast — «прогноз погоды» (вчера was, сегодня is, прогноз погоды — the weather forecast). Полезные вопросы рядом: What is it like outside? — «Что на улице?», Is it still sleeting? — «Мокрый снег всё идёт?»."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Your colleague cannot join your lunch because she is \"snowed under\". What does she mean?", "options": ["She has far too much work and cannot leave her desk", "She has caught a heavy cold and stays in bed all day", "She is waiting until the snow melts outside her house", "She has gone skiing in the mountains for a long weekend"], "correct": "She has far too much work and cannot leave her desk", "explanation": "To be snowed under — «быть заваленным (работой)»: буквально «засыпанным снегом», образно — по уши в делах. Самая частая рабочая идиома зимнего сезона, хотя используется круглый год: I am snowed under with reports — «Я завалена отчётами». Если друг зовёт погулять, а у вас три дедлайна, отвечаете именно так. Близкое выражение — to be swamped with work, «затопленный» работой. Никакого настоящего снега, простуды и лыж в идиоме нет — только метафора."}, {"id": "c2", "type": "choice", "sentence": "Emma's grandmother said the July storm was \"almost like a small tornado\". What is the difference between a tornado and a hurricane?", "options": ["A tornado spins over land, a hurricane is born over warm seas", "A tornado is a warm wind, a hurricane is always a cold one", "A tornado comes in winter, a hurricane only in the summer", "A tornado is quite small, a hurricane stays near the rivers"], "correct": "A tornado spins over land, a hurricane is born over warm seas", "explanation": "Tornado — смерч: вращающийся столб воздуха, который возникает над сушей, небольшой, но очень разрушительный на своём пути. Hurricane — ураган: гигантский шторм, зарождающийся над тёплыми океанами (в Азии его называют typhoon). Поэтому в Латвии ураганов и не бывает — Балтика слишком холодная, только gales, сильные ветры. Оба слова встречаются в прогнозах и новостях, а tornado ещё и в метафоре: like a tornado — «как смерч» — про того, кто врывается и всё переворачивает."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why do Emma and Mark move their walk to the day after tomorrow?", "options": ["Because tomorrow the paths will be covered with slush", "Because Emma has hurt her foot and cannot walk that far", "Because Mark is snowed under with work until the evening", "Because the river will flood after a night of heavy rain"], "correct": "Because tomorrow the paths will be covered with slush", "explanation": "Эмма сообщает: tonight — frost, afternoon — sleet, и Марк делает вывод: tomorrow the paths will be slush and mud, but frozen solid the next day — «завтра тропинки превратятся в кашу и грязь, а послезавтра промёрзнут». Прогуляться по замёрзшим тропинкам куда приятнее, чем «ступать в холодный суп», поэтому поход переносят. Никаких травм, завалов работ и наводнений в диалоге нет — эти детали придуманы, чтобы сбить вас с толку.", "audio_text": "Emma(F): Mark, are you still up for our walk by the river tomorrow?\nMark(M): I was thinking about it, yes. Why? What have you seen in the forecast?\nEmma(F): A cold spell is coming. Frost tonight, then sleet in the afternoon.\nMark(M): Sleet in October? Are you sure it is not just rain?\nEmma(F): I checked two apps. Both say the same, I am afraid.\nMark(M): And the day after tomorrow? Will it clear up?\nEmma(F): I think so. Sunny but cold, around three degrees.\nMark(M): So tomorrow the paths will be slush and mud, but frozen solid the next day.\nEmma(F): Exactly. Walking through slush is like stepping into cold soup.\nMark(M): A lovely image, Emma. You should write travel guides.\nEmma(F): So shall we move the walk to the day after tomorrow?\nMark(M): Let's do that. Will the frost hurt your roses, by the way?\nEmma(F): I hope not. I covered them with a special cloth last night.\nMark(M): Good thinking. Mine turned black after the first frost last year.\nEmma(F): That is the price of gardening. Do you remember the storm in July?\nMark(M): The one that blew the neighbour's trampoline into my garden?\nEmma(F): That one. My grandmother said it was almost like a small tornado.\nMark(M): A tornado in Latvia. Next you will tell me to watch out for hurricanes.\nEmma(F): I do not think so. Hurricanes are for warmer seas, we only get gales.\nMark(M): What a relief. See you the day after tomorrow, then. Bundle up!\nEmma(F): I will. And if the forecast is wrong again, I hope it snows instead.\nMark(M): Snow I can forgive. It is the cold soup I cannot stand."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What does Emma say about hurricanes in Latvia?", "options": ["They need warmer seas, and Latvia only gets strong gales", "They often hit the coast there in late autumn evenings", "They are the same as gales but with much more snow", "They were common there when her grandmother was young"], "correct": "They need warmer seas, and Latvia only gets strong gales", "explanation": "На шутку Марка про ураганы Эмма отвечает: I do not think so. Hurricanes are for warmer seas, we only get gales — «Ураганы — для более тёплых морей, у нас бывают только штормовые ветры». И это правда: ураганы зарождаются над тёплыми океанами, а на Балтике случаются лишь gales — сильные ветры (это слово было в уроке про штормы). Бабушка Эммы сравнила июльский шторм с маленьким торнадо, но не с ураганом. Заодно заметьте: I do not think so — «Думаю, что нет», отрицание при think."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, are you still up for our walk by the river tomorrow?"}, {"speaker": "Mark", "text": "I was thinking about it, yes. Why? What have you seen in the forecast?"}, {"speaker": "Emma", "text": "A cold spell is coming. Frost tonight, then sleet in the afternoon."}, {"speaker": "Mark", "text": "Sleet in October? Are you sure it is not just rain?"}, {"speaker": "Emma", "text": "I checked two apps. Both say the same, I am afraid."}, {"speaker": "Mark", "text": "And the day after tomorrow? Will it clear up?"}, {"speaker": "Emma", "text": "I think so. Sunny but cold, around three degrees."}, {"speaker": "Mark", "text": "So tomorrow the paths will be slush and mud, but frozen solid the next day."}, {"speaker": "Emma", "text": "Exactly. Walking through slush is like stepping into cold soup."}, {"speaker": "Mark", "text": "A lovely image, Emma. You should write travel guides."}, {"speaker": "Emma", "text": "So shall we move the walk to the day after tomorrow?"}, {"speaker": "Mark", "text": "Let's do that. Will the frost hurt your roses, by the way?"}, {"speaker": "Emma", "text": "I hope not. I covered them with a special cloth last night."}, {"speaker": "Mark", "text": "Good thinking. Mine turned black after the first frost last year."}, {"speaker": "Emma", "text": "That is the price of gardening. Do you remember the storm in July?"}, {"speaker": "Mark", "text": "The one that blew the neighbour's trampoline into my garden?"}, {"speaker": "Emma", "text": "That one. My grandmother said it was almost like a small tornado."}, {"speaker": "Mark", "text": "A tornado in Latvia. Next you will tell me to watch out for hurricanes."}, {"speaker": "Emma", "text": "I do not think so. Hurricanes are for warmer seas, we only get gales."}, {"speaker": "Mark", "text": "What a relief. See you the day after tomorrow, then. Bundle up!"}, {"speaker": "Emma", "text": "I will. And if the forecast is wrong again, I hope it snows instead."}, {"speaker": "Mark", "text": "Snow I can forgive. It is the cold soup I cannot stand."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>

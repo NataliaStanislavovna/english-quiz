@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>House &amp; Home: DIY &amp; Decorating + Negative Inversion (Never have I...)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>House &amp; Home: DIY &amp; Decorating + Negative Inversion (Never have I...)</h1><div class="subtitle">2026-09-27</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">A dab hand</div><div class="translation">«Догу́бая рука» — так называют мастера на все руки, человека, который ловко что-то делает: Mary is a dab hand at wallpaper — Мария — золотые руки, когда дело доходит до обоев. Чаще всего говорят a dab hand at something. В диалоге Эмма хвалит Марка: You are a dab hand at this — «да ты в этом профи». Идиома добрая и разговорная: так хвалят соседа, который за вечер повесит полки, и бабушку, которая печёт лучший пирог на улице. Раз отец Марка был заядлым домашним мастером, гены взяли своё.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "House & Home: DIY & Decorating + Negative Inversion (Never have I...)", "subtitle": "2026-09-27", "date": "2026-09-27", "phrase_of_the_day": "A dab hand", "phrase_translation": "«Догу́бая рука» — так называют мастера на все руки, человека, который ловко что-то делает: Mary is a dab hand at wallpaper — Мария — золотые руки, когда дело доходит до обоев. Чаще всего говорят a dab hand at something. В диалоге Эмма хвалит Марка: You are a dab hand at this — «да ты в этом профи». Идиома добрая и разговорная: так хвалят соседа, который за вечер повесит полки, и бабушку, которая печёт лучший пирог на улице. Раз отец Марка был заядлым домашним мастером, гены взяли своё.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_0927.mp3", "sections": [{"id": "s1", "title": "Vocabulary — DIY & Decorating", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Emma says, \"And I have a step ladder for the ceiling.\" What is a step ladder?", "options": ["A small folding ladder that stands on its own", "A tall metal ladder that leans against the wall", "A strong plastic box for carrying tools and paint", "A wooden platform that builders raise up on ropes"], "correct": "A small folding ladder that stands on its own", "explanation": "A step ladder — стремянка: небольшая раскладная лесенка, которая стоит сама по себе, без опоры о стену. Идеальна для потолка и верхних частей стен. Обычная приставная лестница — просто a ladder: её прислоняют к стене. Стремянка Эммы раньше принадлежала её бабушке — Mark шутливо называет её a family heirloom, «семейной реликвией»."}, {"id": "v2", "type": "choice", "sentence": "Mark says, \"A roller covers the large areas, and a brush cuts in around the corners and the edges.\" What does 'to cut in' mean here?", "options": ["To paint carefully along the edges and corners", "To cut the wallpaper with scissors so it fits", "To scrape old paint off the wall with a knife", "To cover the corners with strips of sticky tape"], "correct": "To paint carefully along the edges and corners", "explanation": "To cut in — малярный термин: аккуратно прокрасить кистью углы, края и линии у плинтуса, туда, куда валиком не подобраться. Сначала «режут» края кистью, потом закрашивают большую поверхность валиком (a roller). Не имеет отношения к ножницам и ножу — это про аккуратную линию краски. Мастера перед этим клеят masking tape — малярный скотч, чтобы линия была ровной."}, {"id": "v3", "type": "choice", "sentence": "Mark says, \"We will use the detector first.\" What does a detector do in DIY?", "options": ["It finds pipes and cables hidden inside walls", "It mixes the paint much faster than by hand", "It measures the exact height of the ceiling", "It turns the lights on when you enter a room"], "correct": "It finds pipes and cables hidden inside walls", "explanation": "A (wall) detector — детектор скрытой проводки: прибор, который «видит» через штукатурку трубы (pipes), провода (cables) и деревянные брусья. Перед сверлением стены им проводят по поверхности, чтобы не пробить водопроводную трубу или провод под напряжением. Именно поэтому Эмма кричит Careful! There might be a pipe behind that wall — Осторожно! За стеной может быть труба."}, {"id": "v4", "type": "choice", "sentence": "Emma says, \"When we finish, dinner is on me.\" What does she mean?", "options": ["She will pay for the dinner herself", "She will cook a big dinner at home", "Mark must bring the food with him", "They will order pizza and share the cost"], "correct": "She will pay for the dinner herself", "explanation": "Dinner is on me — «ужин за мой счёт»: она сама всё оплатит в знак благодарности. Конструкция on + человек работает везде: The coffee is on the house — кофе за счёт заведения (уже встречали), The drinks are on Mark — напитки оплачивает Марк. Полезный и очень частый способ сказать «я угощаю» без единого слова про деньги."}]}, {"id": "s2", "title": "Grammar — Negative Inversion (Never have I...)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Emma's first line is: \"Never ___ such a terrible colour in my life.\" Complete the sentence.", "options": ["have I seen", "I have seen", "did I saw", "I saw"], "correct": "have I seen", "explanation": "Когда отрицательное слово (never, rarely, little, not only) стоит в начале предложения, порядок слов меняется, как в вопросе: Never HAVE I SEEN... — «никогда в жизни я не видел...». Сравните обычный порядок: I have never seen such a colour. Смысл один и тот же, но версия с Never в начале звучит эмоциональнее и сильнее — так говорят, чтобы подчеркнуть удивление. Ошибка I have seen после Never — самая частая: слово уже «заняло» начало, поэтому вспомогательный глагол идёт перед подлежащим."}, {"id": "g2", "type": "choice", "sentence": "Emma says: \"Hardly had I finished moving the sofa when the doorbell rang.\" Which sentence is also correct?", "options": ["Hardly had they started painting when the bell rang", "Hardly they had started painting when the bell rang", "Hardly had they started painting when the bell rings", "Hardly did they start painting when the bell rang"], "correct": "Hardly had they started painting when the bell rang", "explanation": "Конструкция Hardly had + кто-то + V3 ... when + Past Simple = «не успели они..., как...». Два правила сразу: hardly стоит в начале, поэтому had идёт перед подлежащим (как в вопросе), а вторая часть присоединяется через when в Past Simple. Проверяйте по шаблону диалога: Hardly had I finished moving the sofa (Past Perfect) when the doorbell rang (Past Simple). Вариант Hardly did they start неверен: после hardly нужен had + третья форма глагола, а не did + первая."}, {"id": "g3", "type": "choice", "sentence": "\"Not only did she repaint the kitchen, but she also replaced the floor.\" Why does this sentence use 'did'?", "options": ["After 'not only' at the start, the word order changes like in a question", "The past simple always needs 'did' when the sentence is quite long", "'Did' shows that both actions happened a very long time ago", "The word 'also' later in the sentence always requires 'did' before it"], "correct": "After 'not only' at the start, the word order changes like in a question", "explanation": "Not only в начале предложения — тоже «триггер» инверсии: Not only DID she repaint... — «она не только перекрасила кухню...». Если глагол был в Past Simple (repainted), мы достаём вспомогательный did, а сам глагол возвращается в первую форму: did she repaint, не did she repainted. Вторая часть присоединяется через but ... also. В диалоге Марк использует ту же схему в будущем времени: Not only WILL we drill the holes, but I will also teach you."}, {"id": "g4", "type": "choice", "sentence": "Emma says, \"Little did I know when I bought it that it came without any instructions.\" What does 'little did I know' mean?", "options": ["She had no idea about it at that moment", "She knew about it very well but kept it secret", "She had read about it somewhere once before", "She suspected it but decided to ignore the problem"], "correct": "She had no idea about it at that moment", "explanation": "Little did I know — «я и не подозревала / понятия не имела». Классическая инверсия: little = «мало» (отрицательный смысл), поэтому did встаёт перед I. Эта фраза обожаема рассказчиками: Little did she know that everything would change — «Она и не подозревала, что всё изменится». В диалоге Эмма признаётся: покупая дрель, она не догадывалась, что инструкция в комплект не входит."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You want to borrow your neighbour's drill for the weekend. What is the politest way to ask?", "options": ["Would you mind if I borrowed your drill this weekend?", "Could you possibly lend me your drill this weekend?", "I am taking your drill for the weekend, if that is fine.", "Do you think I could use your drill some time this weekend?"], "correct": "Would you mind if I borrowed your drill this weekend?", "explanation": "Would you mind if I borrowed... — одна из самых вежливых просьб в английском: «Не возражаете, если я возьму...?». Обратите внимание на подвох: после Would you mind if I глагол стоит в прошедшей форме (borrowed), хотя речь о будущем. Ответ Yes, I would mind означает «да, я против» — поэтому вежливое согласие звучит как Not at all или Of course not. Вариант с lend me тоже вежлив, но чуть прямее: lend = дать взаймы."}, {"id": "p2", "type": "choice", "sentence": "Your friend is about to drill into a wall, and you are worried about hidden pipes. What do you say?", "options": ["Careful! There might be a pipe behind that wall.", "Do not worry, this wall is completely empty inside.", "Give me that drill, I always drill much faster than you.", "That is honestly the wrong colour of paint for this room."], "correct": "Careful! There might be a pipe behind that wall.", "explanation": "Careful! — короткое «Осторожно!», а might be — «может быть, там есть»: так говорят о реальной возможности, в которой не уверены. Формула There might be + что-то + behind the wall полезна в любом ремонте: There might be a cable behind the plaster — за штукатуркой может быть провод. Именно поэтому в диалоге Марк сначала берёт детектор. Остальные варианты не предупреждают об опасности, а один из них ещё и наивно успокаивает."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Emma says, \"That explains your confidence with the roller. You are a dab hand at this.\" What does she mean?", "options": ["Mark is very skilful and good at decorating", "Mark works as a paid professional decorator", "Mark only does decorating once or twice a year", "Mark prefers watching other people do the job"], "correct": "Mark is very skilful and good at decorating", "explanation": "A dab hand at something — «золотые руки», мастер: человек, который делает что-то очень ловко и умело. Emma says it after watching Mark handle the roller — «вот откуда у тебя такая уверенность с валиком». Идиома разговорная и тёплая: так хвалят, а не нанимают — поэтому вариант про «платного профессионала» неверен: отец Марка был стоматологом, а сам он красит просто отлично и бесплатно (правда, шутит: Careful, or I will start charging — «Аккуратнее, а то начну брать деньги»)."}, {"id": "c2", "type": "choice", "sentence": "Mark says, \"Measure twice, cut once — my father's favourite saying.\" What does this saying teach?", "options": ["Check everything carefully before you do anything", "Do each job two times to be sure of the result", "Buy double the amount of materials for the project", "Finish the work early and then check it all again"], "correct": "Check everything carefully before you do anything", "explanation": "Measure twice, cut once — дословно «отмерь дважды, отрежь один раз»: проверь всё заранее, потому что ошибку уже не исправить — отрезанную доску не приклеишь обратно. Русский аналог: семь раз отмерь, один раз отрежь. Именно поэтому Марк сначала ищет трубы детектором и лишь потом сверлит. Это favourite saying — любимая поговорка его отца. Saying — поговорка, известная мудрость; пословица чаще называется proverb."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why does Mark want to use the detector before drilling?", "options": ["To check for pipes and cables hidden in the wall", "To measure the right height for the new shelves", "To find the wooden beams that will hold the screws", "To test whether the old paint on the wall is safe"], "correct": "To check for pipes and cables hidden in the wall", "explanation": "Эмма предупреждает: Careful! There might be a pipe or a cable behind that wall — «Осторожно! За стеной может быть труба или провод». Марк соглашается: Good thinking. We will use the detector first — «Верно подмечено. Сначала возьмём детектор». Заметьте его следующую фразу: Measure twice, cut once — отцовская поговорка «семь раз отмерь, один раз отрежь».", "audio_text": "Emma(F): Mark, thank you for coming. Never have I seen a living room this desperate for a new colour.\nMark(M): Happy to help. My father was a dab hand at decorating, so I learned the basics before I learned to ride a bike.\nEmma(F): Perfect. The paint is over there, and I bought a roller and two brushes yesterday.\nMark(M): Excellent choice. A roller covers the large areas, and a brush cuts in around the corners and the edges.\nEmma(F): And I have a step ladder for the ceiling. It used to belong to my grandmother.\nMark(M): A family heirloom ladder. Right, first things first. We need to put down dust sheets, or the carpet will never forgive us.\nEmma(F): Already done. Hardly had I finished moving the sofa when the doorbell rang with the paint delivery.\nMark(M): Good organisation. Now, you mentioned you want shelves on that wall too?\nEmma(F): Yes, above the sofa. But I am scared of the drill. Little did I know when I bought it that it came without any instructions.\nMark(M): Not only will we drill the holes together, but I will also teach you to use the level. You hold it like this, and you drill slowly.\nEmma(F): Careful! There might be a pipe or a cable behind that wall.\nMark(M): Good thinking. We will use the detector first. Measure twice, cut once — my father's favourite saying.\nEmma(F): Was your father a professional decorator, then?\nMark(M): Not at all. A dentist by day. But at weekends no shelf in our house was safe. Never did a wall survive a month without a new picture on it.\nEmma(F): That explains your confidence with the roller. You are a dab hand at this.\nMark(M): Careful, or I will start charging. Right, you do the edges with a brush, and I will start on the ceiling with the roller.\nEmma(F): And when we finish, dinner is on me. I am not letting you leave after all this.\nMark(M): Deal. But I warn you, not only am I good at painting, I am also famous for eating a lot.\nEmma(F): Then it is lucky I bought twice as much food as usual."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What do we learn about Mark's father?", "options": ["He was a dentist who loved decorating at weekends", "He was a professional decorator with forty years of work", "He was a builder who taught evening classes in repairs", "He was a teacher who never allowed tools in the house"], "correct": "He was a dentist who loved decorating at weekends", "explanation": "Марк говорит: Not at all. A dentist by day. But at weekends no shelf in our house was safe — «Что вы. Днём — стоматолог. Но по выходным ни одна полка в нашем доме не была в безопасности». И добавляет с инверсией: Never did a wall survive a month without a new picture on it — «ни одна стена не пережила и месяца без новой картины». Вот откуда умение Марка: практика с детства. A dentist by day — «стоматолог по будням/днём», удобная конструкция для описания «второй жизни» человека.", "audio_text": "Emma(F): Mark, thank you for coming. Never have I seen a living room this desperate for a new colour.\nMark(M): Happy to help. My father was a dab hand at decorating, so I learned the basics before I learned to ride a bike.\nEmma(F): Perfect. The paint is over there, and I bought a roller and two brushes yesterday.\nMark(M): Excellent choice. A roller covers the large areas, and a brush cuts in around the corners and the edges.\nEmma(F): And I have a step ladder for the ceiling. It used to belong to my grandmother.\nMark(M): A family heirloom ladder. Right, first things first. We need to put down dust sheets, or the carpet will never forgive us.\nEmma(F): Already done. Hardly had I finished moving the sofa when the doorbell rang with the paint delivery.\nMark(M): Good organisation. Now, you mentioned you want shelves on that wall too?\nEmma(F): Yes, above the sofa. But I am scared of the drill. Little did I know when I bought it that it came without any instructions.\nMark(M): Not only will we drill the holes together, but I will also teach you to use the level. You hold it like this, and you drill slowly.\nEmma(F): Careful! There might be a pipe or a cable behind that wall.\nMark(M): Good thinking. We will use the detector first. Measure twice, cut once — my father's favourite saying.\nEmma(F): Was your father a professional decorator, then?\nMark(M): Not at all. A dentist by day. But at weekends no shelf in our house was safe. Never did a wall survive a month without a new picture on it.\nEmma(F): That explains your confidence with the roller. You are a dab hand at this.\nMark(M): Careful, or I will start charging. Right, you do the edges with a brush, and I will start on the ceiling with the roller.\nEmma(F): And when we finish, dinner is on me. I am not letting you leave after all this.\nMark(M): Deal. But I warn you, not only am I good at painting, I am also famous for eating a lot.\nEmma(F): Then it is lucky I bought twice as much food as usual."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, thank you for coming. Never have I seen a living room this desperate for a new colour."}, {"speaker": "Mark", "text": "Happy to help. My father was a dab hand at decorating, so I learned the basics before I learned to ride a bike."}, {"speaker": "Emma", "text": "Perfect. The paint is over there, and I bought a roller and two brushes yesterday."}, {"speaker": "Mark", "text": "Excellent choice. A roller covers the large areas, and a brush cuts in around the corners and the edges."}, {"speaker": "Emma", "text": "And I have a step ladder for the ceiling. It used to belong to my grandmother."}, {"speaker": "Mark", "text": "A family heirloom ladder. Right, first things first. We need to put down dust sheets, or the carpet will never forgive us."}, {"speaker": "Emma", "text": "Already done. Hardly had I finished moving the sofa when the doorbell rang with the paint delivery."}, {"speaker": "Mark", "text": "Good organisation. Now, you mentioned you want shelves on that wall too?"}, {"speaker": "Emma", "text": "Yes, above the sofa. But I am scared of the drill. Little did I know when I bought it that it came without any instructions."}, {"speaker": "Mark", "text": "Not only will we drill the holes together, but I will also teach you to use the level. You hold it like this, and you drill slowly."}, {"speaker": "Emma", "text": "Careful! There might be a pipe or a cable behind that wall."}, {"speaker": "Mark", "text": "Good thinking. We will use the detector first. Measure twice, cut once — my father's favourite saying."}, {"speaker": "Emma", "text": "Was your father a professional decorator, then?"}, {"speaker": "Mark", "text": "Not at all. A dentist by day. But at weekends no shelf in our house was safe. Never did a wall survive a month without a new picture on it."}, {"speaker": "Emma", "text": "That explains your confidence with the roller. You are a dab hand at this."}, {"speaker": "Mark", "text": "Careful, or I will start charging. Right, you do the edges with a brush, and I will start on the ceiling with the roller."}, {"speaker": "Emma", "text": "And when we finish, dinner is on me. I am not letting you leave after all this."}, {"speaker": "Mark", "text": "Deal. But I warn you, not only am I good at painting, I am also famous for eating a lot."}, {"speaker": "Emma", "text": "Then it is lucky I bought twice as much food as usual."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
