@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>House &amp; Home: Renovation + Present Perfect vs Present Perfect Continuous</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>House &amp; Home: Renovation + Present Perfect vs Present Perfect Continuous</h1><div class="subtitle">2026-10-05</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Put your feet up</div><div class="translation">«Вытянуть ноги, расслабиться» — так говорят, когда предлагают человеку сесть и отдохнуть. Появилось в диалоге, когда Эмма предложила Марку сначала чай и отдых, а только потом покраску: Put your feet up first. Буквально «положить ноги повыше» — как в кресле после тяжёлого дня. Типичное гостеприимство: Come in and put your feet up — «Заходи и отдыхай».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "House & Home: Renovation + Present Perfect vs Present Perfect Continuous", "subtitle": "2026-10-05", "date": "2026-10-05", "phrase_of_the_day": "Put your feet up", "phrase_translation": "«Вытянуть ноги, расслабиться» — так говорят, когда предлагают человеку сесть и отдохнуть. Появилось в диалоге, когда Эмма предложила Марку сначала чай и отдых, а только потом покраску: Put your feet up first. Буквально «положить ноги повыше» — как в кресле после тяжёлого дня. Типичное гостеприимство: Come in and put your feet up — «Заходи и отдыхай».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1005.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Home Renovation", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Emma's friend spent the whole day holding masking tape. What is masking tape for?", "options": ["Paper tape that protects edges and switches from paint", "Sticky plastic film that covers whole windows in storms", "A wide soft brush that spreads primer on big surfaces", "A thick paper cloth that catches dust from the walls"], "correct": "Paper tape that protects edges and switches from paint", "explanation": "Masking tape — «малярный скотч, бумажная лента»: ею заклеивают края, плинтусы, выключатели и розетки, чтобы краска не попала куда не надо. После покраски лента просто отклеивается — в этом её смысл. Слово to mask значит «маскировать, прятать», то есть лента «прячет» то, что красить нельзя. Это слово из урока про ремонт стен, и в диалоге оно стало шуткой: друг Эммы целый день подавал ей эту ленту, вместо того чтобы делать что-то серьёзное."}, {"id": "v2", "type": "choice", "sentence": "Emma says, \"I hung the wallpaper myself.\" What does it mean to hang wallpaper?", "options": ["To cover a wall with rolls of decorated paper", "To put framed pictures up on the walls of a room", "To paint a wall with several layers of bright colour", "To repair broken plaster with thick glue and a knife"], "correct": "To cover a wall with rolls of decorated paper", "explanation": "To wallpaper или to hang wallpaper — «клеить обои». По-английски обои буквально «вешают» (hang), потому что полоса намазывается клеем и прикладывается к стене сверху вниз. Сам материал — wallpaper (неизменяемое, как furniture), полоса обоев — a strip или a roll of wallpaper. В диалоге Эмма поклеила обои сама, и одна полоса оказалась вверх ногами: ананасы висят верхушками вниз. Глагол hung — неправильный: hang — hung — hung."}, {"id": "v3", "type": "choice", "sentence": "Mark asks why the floor feels like sandpaper. What is sanding?", "options": ["Rubbing a rough old surface to make it smooth", "Pouring hot liquid wax over wood until it shines", "Sweeping the floor after all the painting is done", "Covering old boards with glue and new wooden tiles"], "correct": "Rubbing a rough old surface to make it smooth", "explanation": "Sanding — «шлифовка»: когда старый паркет или деревянную поверхность трут специальной шкуркой, чтобы она стала гладкой. Инструмент и материал — sandpaper, «наждачная бумага» (дословно «песочная бумага»), а делать это — to sand: We sanded the floor before painting. В диалоге шлифовка паркета была «шагом первым» — отсюда и шутка Марка, что пол на ощупь как наждачка. Отсюда же пыль, из-за которой по полу постелили защитные полотна — dust sheets."}, {"id": "v4", "type": "choice", "sentence": "Emma says, \"The plumber is coming on Thursday.\" Who is the plumber?", "options": ["A person whose job is fixing pipes and water taps", "A person whose job is painting walls and hanging paper", "A person whose job is wiring a house for electricity", "A person whose job is laying wooden floors and tiles"], "correct": "A person whose job is fixing pipes and water taps", "explanation": "A plumber — «сантехник»: специалист по трубам, кранам и всему, что связано с водой в доме. Слово пришло из латинского plumbum — «свинец», потому что раньше трубы делали из свинца. Рядом запомните других мастеров: an electrician — электрик, a painter and decorator — маляр, a tiler — плиточник, а a handyman — мастер на все руки, «золотые руки» по дому. В диалоге сантехник приходит в четверг чинить капающий кран — a leaking tap."}]}, {"id": "s2", "title": "Grammar — Present Perfect vs Present Perfect Continuous", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "You want to know how long Emma's renovation has taken so far. What do you ask?", "options": ["How long have you been renovating the flat?", "How long are you renovating the flat?", "How long do you renovate the flat?", "How long will you be renovating the flat?"], "correct": "How long have you been renovating the flat?", "explanation": "Вопрос «Как долго ты уже это делаешь?» строится через Present Perfect Continuous: How long + have/has + подлежащее + been + V-ing. Ремонт начался два месяца назад и ещё не закончен — действие тянется до сих пор, и это главное условие для этой формы. Второй вариант описывает происходящее прямо сейчас, третий — регулярное действие в целом, четвёртый — вопрос о будущем. Маркеры, которые подсказывают эту форму: How long..., since, for, all day, so far."}, {"id": "g2", "type": "choice", "sentence": "Mark and Emma became friends at university, years ago. What is the correct sentence?", "options": ["I have known Emma since university.", "I have been knowing Emma since university.", "I am knowing Emma since university.", "I know Emma since university."], "correct": "I have known Emma since university.", "explanation": "Know — глагол состояния (также like, want, have в значении «иметь», understand): он описывает состояние, а не процесс, поэтому формы с -ing с ним не используются — ни I am knowing, ни I have been knowing. Правильная форма — Present Perfect: I have known her since university = «Я знаю её со времён университета» — знакомство началось в прошлом и продолжается сейчас. Четвёртый вариант неверен из-за since: с since и for о длительном состоянии нужен Present Perfect, а не Present Simple."}, {"id": "g3", "type": "choice", "sentence": "Which sentence tells us the RESULT of the work — something you can count or see finished?", "options": ["Emma has painted three walls today.", "Emma has been painting the walls today.", "Emma is painting the walls at the moment.", "Emma was painting the walls all day long."], "correct": "Emma has painted three walls today.", "explanation": "Present Perfect (have + V3) показывает результат: покрашено ТРИ стены — можно посчитать, дело сделано. Present Perfect Continuous (has been painting) показал бы процесс и время: «красила и красила весь день», возможно, всё ещё в краске, а сколько стен — неизвестно. Правило простое: считаете результат — Present Perfect; подчёркиваете, как долго длилась работа — Present Perfect Continuous. Третий вариант — действие в этот момент, четвёртый — фон в прошлом, к настоящему отношения не имеют."}, {"id": "g4", "type": "choice", "sentence": "Emma says the tap has been dripping ___ she moved in. Which word is correct?", "options": ["since", "for", "from", "during"], "correct": "since", "explanation": "Since — «с (того момента, как)»: ставится перед точкой отсчёта — моментом или событием, с которого всё началось: since she moved in, since 2024, since Monday. For — «в течение»: перед длительностью периода: for three months, for two hours. Кран капает С МОМЕНТА заселения — значит since. Ловушка в том, что по-русски здесь тоже «с», и многие автоматически ставят from — но from используется с другими временами (from Monday to Friday), а с Present Perfect говорят именно since."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Your kitchen tap has been leaking for a week. You call a repair service. What do you say?", "options": ["Hello, my kitchen tap is leaking. Could you send a plumber this week?", "Hello, my kitchen tap is leaking. Could you send a painter on Thursday?", "Hello, my kitchen tap is leaking. Could you bring me a bucket quickly?", "Hello, my kitchen tap is leaking. Could you tell me how to hang wallpaper?"], "correct": "Hello, my kitchen tap is leaking. Could you send a plumber this week?", "explanation": "Такая просьба строится просто: сначала проблема — my kitchen tap is leaking (кран протекает; a leaking tap — протекающий кран), потом вежливая просьба — Could you send a plumber? Сантехника вызывают именно к воде; художник тут не поможет. Глагол to leak — «протекать, капать» — годится и для крана, и для потолка: The roof is leaking. Полезные слова рядом: a drip — «капля/капанье», to drip — «капать» (в диалоге: How long has it been dripping?)."}, {"id": "p2", "type": "choice", "sentence": "You want to borrow your neighbour's step ladder to paint the ceiling. What do you ask?", "options": ["Could I borrow your step ladder this weekend?", "Could I lend your step ladder this weekend?", "Could you borrow me your step ladder this weekend?", "Could I have borrowed your step ladder this weekend?"], "correct": "Could I borrow your step ladder this weekend?", "explanation": "Пара, которую путают все: to borrow — «взять взаймы» (вы берёте чужое), to lend — «дать взаймы» (вы даёте своё). Просить чужую стремянку можно только borrow: Could I borrow your step ladder? Если очень хочется использовать lend, то говорить нужно от лица соседа: Could you lend me your step ladder? — «Не одолжите мне стремянку?» — и это тоже правильный вариант. Конструкция could you borrow me — типичная ошибка перевода с русского «одолжи мне». Четвёртый вариант — про прошлое, к выходным не подходит."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Estate agents call a flat like Emma's \"a real fixer-upper\". What do they mean?", "options": ["A home in poor condition that someone buys in order to renovate it", "A home with modern furniture included, ready to move straight into", "A home where every single repair has already been done by experts", "A home that stands empty because nobody wants to buy it anymore"], "correct": "A home in poor condition that someone buys in order to renovate it", "explanation": "A fixer-upper — «квартира или дом под ремонт»: жильё в плохом состоянии, которое покупают дёшево, чтобы потом всё переделать. От глагола to fix up — «починить, привести в порядок»: fixer — тот, кто чинит, upper — то, что «поднимут» до нормы. Слово из реклам объявлений о недвижимости: great fixer-upper opportunity — «отличная возможность купить под ремонт». Плата за низкую цену — месяцы пыли, шлифовки и кота в грунтовке, как у Эммы. Обратный вариант — move-in ready, «можно заезжать сразу»."}, {"id": "c2", "type": "choice", "sentence": "Emma tells Mark, \"Put your feet up first.\" What does she mean?", "options": ["Sit down and relax for a while before doing any painting", "Lift your shoes off the new floor so the primer stays clean", "Stretch your legs after carrying the heavy rolls upstairs", "Stand on the ladder and start painting near the ceiling"], "correct": "Sit down and relax for a while before doing any painting", "explanation": "To put your feet up — «вытянуть ноги, отдохнуть»: сесть в кресло, положить ноги повыше и ничего не делать. Буквальный смысл (поднять ноги) здесь ни при чём — это идиома про отдых, и она стала фразой дня. Эмма предлагает гостю сначала чай и отдых, а покраску потом: Put your feet up first. Tea, then painting. Похожие выражения отдыха: to take a break, to have a rest, to take it easy. Не перепутайте с to put your foot down — совсем другая идиома, «твёрдо настоять на своём»."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why does Emma's floor have cat footprints?", "options": ["Because the cat walked through the primer before it dried", "Because the cat slept on the freshly sanded parquet overnight", "Because Emma carried the cat over the wet floor in her arms", "Because the cat chased a mouse across the painted doorway"], "correct": "Because the cat walked through the primer before it dried", "explanation": "Эмма объясняет последовательность работ: sanding the old parquet was step one — сначала отшлифовали старый паркет, потом — wet primer, влажная грунтовка. И кот прошёл по ней до того, как она высохла: the cat walked through the wet primer. Теперь, как шутит Марк, пол «защищён слоем кошачьих следов» — protected by a layer of cat footprints — навсегда. Ни сна на паркете, ни мыши в диалоге не было — эти детали добавлены, чтобы запутать.", "audio_text": "Emma(F): Mark, come in! Mind the dust sheets on the floor.\nMark(M): Wow. The last time I visited, this room was a grey box with one sad sofa.\nEmma(F): That was two months ago. I have been renovating ever since.\nMark(M): The walls look great. Is that new wallpaper in the bedroom?\nEmma(F): It is. I hung it myself. One strip has pineapples hanging by their tops.\nMark(M): Upside down?\nEmma(F): David says it is a designer choice. I say I did not notice until the third roll.\nMark(M): Classic. And why does the floor feel like sandpaper?\nEmma(F): Because sanding the old parquet was step one. Then the cat walked through the wet primer.\nMark(M): So the floor is now protected by a layer of cat footprints?\nEmma(F): Forever, yes. The plumber is coming on Thursday about the bathroom tap.\nMark(M): Still leaking? How long has it been dripping?\nEmma(F): Since I moved in. I put a bucket under it and call it a water feature.\nMark(M): You have lived here three months, and half of the flat is already finished.\nEmma(F): The half you can see. Behind that door there is... the other half.\nMark(M): Do you need help? I am free this weekend.\nEmma(F): Careful. The last friend who offered spent the whole day holding masking tape.\nMark(M): I have held worse things in my life. Where do I start?\nEmma(F): Put your feet up first. Tea, then painting.\nMark(M): Deal. But if I find the pineapples, I am fixing them."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What does Emma say about the bathroom tap?", "options": ["It has been dripping since she moved in, so she uses a bucket", "It started dripping last Thursday while the plumber was visiting", "It drips only on the days when the boiler is switched on", "It drips because the neighbour upstairs floods her bathroom"], "correct": "It has been dripping since she moved in, so she uses a bucket", "explanation": "На вопрос Марка How long has it been dripping? Эмма отвечает: Since I moved in — «С момента, как я сюда переехала». Заметьте сам вопрос: Present Perfect Continuous после How long — он и стал грамматической темой урока. Решение проблемы пока очень жизненное: под кран стоит ведро, а сама Эмма называет его «декоративным водным объектом» — I call it a water feature. Сантехник — the plumber — придёт только в четверг.", "audio_text": "Emma(F): Mark, come in! Mind the dust sheets on the floor.\nMark(M): Wow. The last time I visited, this room was a grey box with one sad sofa.\nEmma(F): That was two months ago. I have been renovating ever since.\nMark(M): The walls look great. Is that new wallpaper in the bedroom?\nEmma(F): It is. I hung it myself. One strip has pineapples hanging by their tops.\nMark(M): Upside down?\nEmma(F): David says it is a designer choice. I say I did not notice until the third roll.\nMark(M): Classic. And why does the floor feel like sandpaper?\nEmma(F): Because sanding the old parquet was step one. Then the cat walked through the wet primer.\nMark(M): So the floor is now protected by a layer of cat footprints?\nEmma(F): Forever, yes. The plumber is coming on Thursday about the bathroom tap.\nMark(M): Still leaking? How long has it been dripping?\nEmma(F): Since I moved in. I put a bucket under it and call it a water feature.\nMark(M): You have lived here three months, and half of the flat is already finished.\nEmma(F): The half you can see. Behind that door there is... the other half.\nMark(M): Do you need help? I am free this weekend.\nEmma(F): Careful. The last friend who offered spent the whole day holding masking tape.\nMark(M): I have held worse things in my life. Where do I start?\nEmma(F): Put your feet up first. Tea, then painting.\nMark(M): Deal. But if I find the pineapples, I am fixing them."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, come in! Mind the dust sheets on the floor."}, {"speaker": "Mark", "text": "Wow. The last time I visited, this room was a grey box with one sad sofa."}, {"speaker": "Emma", "text": "That was two months ago. I have been renovating ever since."}, {"speaker": "Mark", "text": "The walls look great. Is that new wallpaper in the bedroom?"}, {"speaker": "Emma", "text": "It is. I hung it myself. One strip has pineapples hanging by their tops."}, {"speaker": "Mark", "text": "Upside down?"}, {"speaker": "Emma", "text": "David says it is a designer choice. I say I did not notice until the third roll."}, {"speaker": "Mark", "text": "Classic. And why does the floor feel like sandpaper?"}, {"speaker": "Emma", "text": "Because sanding the old parquet was step one. Then the cat walked through the wet primer."}, {"speaker": "Mark", "text": "So the floor is now protected by a layer of cat footprints?"}, {"speaker": "Emma", "text": "Forever, yes. The plumber is coming on Thursday about the bathroom tap."}, {"speaker": "Mark", "text": "Still leaking? How long has it been dripping?"}, {"speaker": "Emma", "text": "Since I moved in. I put a bucket under it and call it a water feature."}, {"speaker": "Mark", "text": "You have lived here three months, and half of the flat is already finished."}, {"speaker": "Emma", "text": "The half you can see. Behind that door there is... the other half."}, {"speaker": "Mark", "text": "Do you need help? I am free this weekend."}, {"speaker": "Emma", "text": "Careful. The last friend who offered spent the whole day holding masking tape."}, {"speaker": "Mark", "text": "I have held worse things in my life. Where do I start?"}, {"speaker": "Emma", "text": "Put your feet up first. Tea, then painting."}, {"speaker": "Mark", "text": "Deal. But if I find the pineapples, I am fixing them."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
