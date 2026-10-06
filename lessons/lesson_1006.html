@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>At the Bank: Opening an Account + would rather you did</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>At the Bank: Opening an Account + would rather you did</h1><div class="subtitle">2026-10-06</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Jump through hoops</div><div class="translation">«Прыгать через обручи» — так говорят, когда от вас требуют выполнить нелепо много условий и формальностей, чтобы получить желаемое. В диалоге Эмма утешает Марка: открыть счёт непросто, ей тоже пришлось «прыгать через обручи». По-русски ближайшее — «пройти семь кругов ада» или «собрать кучу бумажек». Типичное употребление: I had to jump through hoops to open a bank account — «Мне пришлось выполнить кучу условий, чтобы открыть счёт».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "At the Bank: Opening an Account + would rather you did", "subtitle": "2026-10-06", "date": "2026-10-06", "phrase_of_the_day": "Jump through hoops", "phrase_translation": "«Прыгать через обручи» — так говорят, когда от вас требуют выполнить нелепо много условий и формальностей, чтобы получить желаемое. В диалоге Эмма утешает Марка: открыть счёт непросто, ей тоже пришлось «прыгать через обручи». По-русски ближайшее — «пройти семь кругов ада» или «собрать кучу бумажек». Типичное употребление: I had to jump through hoops to open a bank account — «Мне пришлось выполнить кучу условий, чтобы открыть счёт».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1006.mp3", "sections": [{"id": "s1", "title": "Vocabulary — At the Bank", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "The bank asked Mark for proof of address. What is a utility bill?", "options": ["A monthly paper for electricity, water or gas at your home", "A yearly letter from the council about local parking rules", "A bank letter listing all the payments you made last year", "A printed card that shows your income from freelance work"], "correct": "A monthly paper for electricity, water or gas at your home", "explanation": "A utility bill — «счёт за коммунальные услуги»: электричество, воду, газ или отопление. Utilities — это коммунальные службы, поэтому счёт от них и называется utility bill. Это самый частый способ подтвердить адрес (proof of address) — банк хочет видеть официальный документ, где указаны ваше имя и адрес. В диалоге у Марка проблема: счёт выписан на имя арендодателя (it was in my landlord's name), потому что квартиру он снимает, и договор на коммуналку — не на него."}, {"id": "v2", "type": "choice", "sentence": "Mark says, \"I am a freelance photographer.\" What does freelance mean?", "options": ["Working independently for different clients, not one employer", "Owning a small shop that sells cameras and photo albums", "Working full time for a newspaper with a monthly salary", "Studying photography at university without a fixed grant"], "correct": "Working independently for different clients, not one employer", "explanation": "Freelance — «фрилансер, свободный работник»: человек, который работает сам на себя и выполняет заказы для разных клиентов, а не сидит в штате одной компании. Фраза: to work freelance — «работать фрилансом». Для банка такие клиенты «неудобные»: у них нет зарплатной справки, поэтому Марку пришлось принести полгода счетов-фактур. Родственное слово из урока про работу: self-employed — «самозанятый», часто используется как синоним."}, {"id": "v3", "type": "choice", "sentence": "Mark had to show six months of invoices. What is an invoice?", "options": ["A document that a worker sends a client asking for payment", "A document that a bank sends a client about a blocked card", "A document that an employer gives a worker each payday", "A document that a landlord gives a new tenant to sign"], "correct": "A document that a worker sends a client asking for payment", "explanation": "An invoice — «счёт-фактура»: документ, который исполнитель отправляет клиенту с просьбой оплатить выполненную работу. Фрилансер сделал заказ — выписал invoice — клиент оплатил. Для банка стопка таких счетов и есть доказательство дохода (proof of income): видно, сколько и как регулярно вам платят. Не путайте: a receipt — квитанция о уже состоявшейся оплате, а a bill — счёт, который выставляют вам (как счёт за электричество из первого вопроса)."}, {"id": "v4", "type": "choice", "sentence": "The clerk offered Mark a platinum card. What is a monthly fee?", "options": ["Money the bank charges you every month for the account", "Money the bank pays you every year as account interest", "Money you pay once when you first open the account", "Money the bank returns when you close your account"], "correct": "Money the bank charges you every month for the account", "explanation": "A fee — «плата, комиссия» (это слово уже встречалось в уроках про деньги и аренду машины), а a monthly fee — «ежемесячная плата за обслуживание»: многие «крутые» карты с бонусами и страховкой стоят денег — банк списывает эту сумму каждый месяц просто за то, что карта у вас есть. Поэтому Марк выбрал простую карту без ежемесячной платы — with no monthly fee. Глагол: to charge a fee — «взимать плату». Модное слово из рекламы банков: fee-free — «без комиссий»."}]}, {"id": "s2", "title": "Grammar — would rather + person", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Mark prefers fighting the photocopier to fighting the bank. Which sentence says this best?", "options": ["I would rather wrestle the photocopier.", "I would rather the photocopier appear.", "I would rather to wrestle the photocopier.", "I would rather wrestling the photocopier."], "correct": "I would rather wrestle the photocopier.", "explanation": "Базовое правило (оно было в уроке про аренду машины): would rather + глагол в первой форме БЕЗ to — I'd rather wrestle, I'd rather have, I'd rather wait. Второй вариант неверен: после rather стоит подлежащее the photocopier, и тогда нужен Past Simple (об этом — следующий вопрос). Третий и четвёртый — классические ловушки: частица to и окончание -ing после rather не ставятся никогда. Сокращение: I would rather = I'd rather."}, {"id": "g2", "type": "choice", "sentence": "Emma thinks it would be nicer if banks accepted phone bills. Which sentence is correct?", "options": ["I would rather they accepted a phone bill.", "I would rather they accept a phone bill.", "I would rather they will accept a phone bill.", "I would rather they to accept a phone bill."], "correct": "I would rather they accepted a phone bill.", "explanation": "Новая конструкция: would rather + ДРУГОЙ ЧЕЛОВЕК + Past Simple = «я бы предпочёл, чтобы он (сделал)». Форма прошедшая, а смысл — настоящее или будущее пожелание: I would rather they accepted a phone bill — «Я бы предпочла, чтобы они принимали счёт за телефон». Это близкий родственник второго условного: If I were you, I'd... — грамматика та же. Поэтому второй вариант (accept — настоящая форма) неверен, третий (will) — тоже, а четвёртый нарушает правило: после подлежащего идёт смысловой глагол без to."}, {"id": "g3", "type": "choice", "sentence": "Mark does not want the clerk to call him at home. What does he say?", "options": ["I would rather you didn't call me at home.", "I would rather you don't call me at home.", "I would rather not you call me at home.", "I would rather you won't call me at home."], "correct": "I would rather you didn't call me at home.", "explanation": "Отрицание в этой конструкции: I would rather + человек + DIDN'T + глагол — «Я бы предпочёл, чтобы ты не звонил». Вспомогательный глагол ставится в прошедшую форму, а смысловой глагол остаётся «чистым»: didn't call, didn't tell, didn't wait. Второй вариант неверен: don't (настоящее время) не подходит — вся конструкция живёт по правилам Past Simple, как второе условное. Третий — неверный порядок слов (not уезжает в didn't), четвёртый — will здесь запрещён. Это очень вежливый способ отказать: I'd rather you didn't — «Лучше не надо»."}, {"id": "g4", "type": "choice", "sentence": "Choose the sentence where would rather is used correctly with another person.", "options": ["I would rather my sister came with me tomorrow.", "I would rather my sister will come with me tomorrow.", "I would rather my sister to come with me tomorrow.", "I would rather my sister comes with me tomorrow."], "correct": "I would rather my sister came with me tomorrow.", "explanation": "Правильная схема: would rather + человек (my sister, you, they, the clerk) + Past Simple. Даже если речь о завтрашнем дне — форма всё равно прошедшая: I would rather my sister came with me tomorrow — «Я бы предпочёл, чтобы сестра пошла со мной завтра». Это главное, что надо запомнить: форма времени не совпадает со смыслом, точно так же, как во втором условном (If I had time, I would help — про сейчас, а не про вчера). Проверьте себя на остальных вариантах: will, to и comes — три самые частые ошибки в этой конструкции."}]}, {"id": "s3", "title": "Practical English", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You want to open a bank account and prefer not to wait in a queue. What do you say to the clerk?", "options": ["I would rather book an appointment for tomorrow.", "I would rather to book an appointment for tomorrow.", "I would rather booked an appointment for tomorrow.", "I would rather booking an appointment for tomorrow."], "correct": "I would rather book an appointment for tomorrow.", "explanation": "Вежливо высказать своё предпочтение в банке (или где угодно): I would rather + глагол без to — «Я бы предпочёл(а)...». I would rather book an appointment — «Я бы предпочла записаться на приём». Именно так Эмма советовала Марку поступить в следующий раз. Альтернативы из прошлых уроков: I'd prefer to book an appointment (здесь to нужно — после prefer!) и Could I book an appointment? Сравните и запомните разницу: rather — без to, prefer — с to."}, {"id": "p2", "type": "choice", "sentence": "A bank clerk asks for documents. Which phrase means \"a document that proves something\"?", "options": ["Proof of income, such as invoices or a work contract", "Rate of income, such as salaries or monthly payments", "Fund of income, such as savings or a deposit account", "Gain of income, such as prizes or a lottery ticket"], "correct": "Proof of income, such as invoices or a work contract", "explanation": "Proof — «доказательство, подтверждение»: proof of address — подтверждение адреса (счёт за коммуналку), proof of identity — удостоверение личности (паспорт), proof of income — подтверждение дохода (счета-фактуры, справка работодателя, контракт). Банки обожают это слово, оно встретится вам в любом отделении. Полезная пара: evidence — доказательство в юридическом смысле (из урока о преступлениях), proof — повседневное слово для документов и фактов."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Your friend keeps asking to borrow your car. Ask him politely to stop. Which sentence is correct?", "options": ["I would rather you didn't borrow my car again.", "I would rather you don't borrow my car again.", "I would rather not borrowing my car again.", "I would rather you not borrow my car again."], "correct": "I would rather you didn't borrow my car again.", "explanation": "Конструкция с другим человеком в отрицании: I would rather + you + didn't + глагол. I would rather you didn't borrow my car — «Я бы предпочёл, чтобы ты не одалживал мою машину». По-английски это звучит вежливо, но твёрдо — идеальный способ отказать, не начиная ссоры. Часто используется в укороченном виде: I'd rather you didn't — «Лучше не надо». Ошибка второго варианта — don't вместо didn't; третий ломает всю конструкцию (not ушло не туда, плюс -ing); в четвёртом not стоит перед глаголом, а должен быть частью didn't."}, {"id": "c2", "type": "choice", "sentence": "Emma says she had to jump through hoops to open her account. What does this idiom mean?", "options": ["To satisfy many difficult demands before getting something", "To visit many different bank branches before choosing one", "To pay several hidden fees that appear without warning", "To wait a long time in a queue before your number comes up"], "correct": "To satisfy many difficult demands before getting something", "explanation": "To jump through hoops — дословно «прыгать через обручи», как дрессированная собака в цирке. Так говорят о ситуации, когда ради нужного результата приходится выполнять нелепо много условий и формальностей: принести документы, потом ещё документы, потом заверенные копии документов... Эмма имела в виду, что открытие счёта потребовало от неё целой серии «цирковых трюков». По-русски похоже по духу: «пройти семь кругов ада», «собрать кучу бумажек». I had to jump through hoops to get my visa — очень типичное употребление. Это и фраза дня."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What was the only easy part of Mark's visit to the bank?", "options": ["The free coffee that the bank offered to customers", "The queue machine that worked without any problems", "The friendly clerk who stamped his invoices quickly", "The online form that he filled in before coming"], "correct": "The free coffee that the bank offered to customers", "explanation": "Марк говорит: The one with the free coffee. The coffee was the only easy part — «Я выбрал банк с бесплатным кофе. Кофе был единственной лёгкой частью». Всё остальное пошло наперекосяк: счёт за коммуналку на имя арендодателя, полгода счетов-фактур, очередь с одним работающим табло и решение, которое пришлют обычной почтой. Слово one здесь заменяет «банк» — The one with... = «Тот, что с...», полезная конструкция, чтобы не повторять существительное.", "audio_text": "Emma(F): Mark, you look like a man who has fought with a photocopier and lost.\nMark(M): Close. I tried to open a bank account. I would rather wrestle the photocopier.\nEmma(F): That bad? Which bank did you choose?\nMark(M): The one with the free coffee. The coffee was the only easy part.\nEmma(F): So what did they ask for?\nMark(M): Proof of address. I brought a utility bill, but it was in my landlord's name.\nEmma(F): Ah. I would rather they accepted a phone bill, but banks love official paper.\nMark(M): Then they asked for proof of income. I am a freelance photographer.\nEmma(F): Let me guess. They wanted three months of invoices.\nMark(M): Six. Six months of invoices, stamped and signed.\nEmma(F): Welcome to banking. I had to jump through hoops to open my account, too.\nMark(M): And there was a queue with one number machine working.\nEmma(F): I would rather book an appointment online next time. It really helps.\nMark(M): The clerk offered me a platinum card with travel insurance.\nEmma(F): Did you take it?\nMark(M): I said I would rather have a simple card with no monthly fee.\nEmma(F): Smart. Did they at least approve the account?\nMark(M): They will send a decision by post. By post, Emma. In this century.\nEmma(F): So while you wait, can I interest you in a coffee? Real coffee, no paperwork.\nMark(M): Now you are talking my language."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What did Mark answer when the clerk offered him a platinum card?", "options": ["He would rather have a simple card with no monthly fee.", "He would rather take the platinum card with free insurance.", "He would rather pay the monthly fee once every year.", "He would rather keep his money at home in a drawer."], "correct": "He would rather have a simple card with no monthly fee.", "explanation": "Клерк предложил Марку платиновую карту со страховкой для путешествий, но Марк ответил: I said I would rather have a simple card with no monthly fee — «Я сказал, что предпочёл бы простую карту без ежемесячной платы». Обратите внимание: если бы Марк говорил о клерке, понадобилась бы конструкция с Past Simple (I would rather he offered...), но здесь он говорит о себе — и после rather идёт просто have без to. А решение банка он узнает по почте — by post, к его ужасу.", "audio_text": "Emma(F): Mark, you look like a man who has fought with a photocopier and lost.\nMark(M): Close. I tried to open a bank account. I would rather wrestle the photocopier.\nEmma(F): That bad? Which bank did you choose?\nMark(M): The one with the free coffee. The coffee was the only easy part.\nEmma(F): So what did they ask for?\nMark(M): Proof of address. I brought a utility bill, but it was in my landlord's name.\nEmma(F): Ah. I would rather they accepted a phone bill, but banks love official paper.\nMark(M): Then they asked for proof of income. I am a freelance photographer.\nEmma(F): Let me guess. They wanted three months of invoices.\nMark(M): Six. Six months of invoices, stamped and signed.\nEmma(F): Welcome to banking. I had to jump through hoops to open my account, too.\nMark(M): And there was a queue with one number machine working.\nEmma(F): I would rather book an appointment online next time. It really helps.\nMark(M): The clerk offered me a platinum card with travel insurance.\nEmma(F): Did you take it?\nMark(M): I said I would rather have a simple card with no monthly fee.\nEmma(F): Smart. Did they at least approve the account?\nMark(M): They will send a decision by post. By post, Emma. In this century.\nEmma(F): So while you wait, can I interest you in a coffee? Real coffee, no paperwork.\nMark(M): Now you are talking my language."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, you look like a man who has fought with a photocopier and lost."}, {"speaker": "Mark", "text": "Close. I tried to open a bank account. I would rather wrestle the photocopier."}, {"speaker": "Emma", "text": "That bad? Which bank did you choose?"}, {"speaker": "Mark", "text": "The one with the free coffee. The coffee was the only easy part."}, {"speaker": "Emma", "text": "So what did they ask for?"}, {"speaker": "Mark", "text": "Proof of address. I brought a utility bill, but it was in my landlord's name."}, {"speaker": "Emma", "text": "Ah. I would rather they accepted a phone bill, but banks love official paper."}, {"speaker": "Mark", "text": "Then they asked for proof of income. I am a freelance photographer."}, {"speaker": "Emma", "text": "Let me guess. They wanted three months of invoices."}, {"speaker": "Mark", "text": "Six. Six months of invoices, stamped and signed."}, {"speaker": "Emma", "text": "Welcome to banking. I had to jump through hoops to open my account, too."}, {"speaker": "Mark", "text": "And there was a queue with one number machine working."}, {"speaker": "Emma", "text": "I would rather book an appointment online next time. It really helps."}, {"speaker": "Mark", "text": "The clerk offered me a platinum card with travel insurance."}, {"speaker": "Emma", "text": "Did you take it?"}, {"speaker": "Mark", "text": "I said I would rather have a simple card with no monthly fee."}, {"speaker": "Emma", "text": "Smart. Did they at least approve the account?"}, {"speaker": "Mark", "text": "They will send a decision by post. By post, Emma. In this century."}, {"speaker": "Emma", "text": "So while you wait, can I interest you in a coffee? Real coffee, no paperwork."}, {"speaker": "Mark", "text": "Now you are talking my language."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
