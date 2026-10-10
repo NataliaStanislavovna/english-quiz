@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>House &amp; Home: Trades &amp; Heating + would for Past Habits (used to vs would)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>House &amp; Home: Trades &amp; Heating + would for Past Habits (used to vs would)</h1><div class="subtitle">2026-10-10</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">We might as well</div><div class="translation">«Раз уж всё равно...» — might as well делают, когда нет лучшего варианта: всё равно ждём, всё равно холодно, так что можно и сделать это. We might as well be useful while we freeze — «раз мы всё равно мёрзнем, можем быть полезными». Отрицательного смысла нет: это не «придётся», а спокойное «а почему бы и нет, других вариантов всё равно нет». По-русски близко: «раз уж на то пошло», «можно с тем же успехом».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "House & Home: Trades & Heating + would for Past Habits (used to vs would)", "subtitle": "2026-10-10", "date": "2026-10-10", "phrase_of_the_day": "We might as well", "phrase_translation": "«Раз уж всё равно...» — might as well делают, когда нет лучшего варианта: всё равно ждём, всё равно холодно, так что можно и сделать это. We might as well be useful while we freeze — «раз мы всё равно мёрзнем, можем быть полезными». Отрицательного смысла нет: это не «придётся», а спокойное «а почему бы и нет, других вариантов всё равно нет». По-русски близко: «раз уж на то пошло», «можно с тем же успехом».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1010.mp3", "sections": [{"id": "s1", "title": "Vocabulary — House & Trades", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Mark says the boiler died on Tuesday. What is a boiler?", "options": ["A device that heats water and warms up the whole house", "A large tank that collects cold rainwater under the house", "A machine that cools the air down in hot summer weather", "A small portable heater that you carry from room to room"], "correct": "A device that heats water and warms up the whole house", "explanation": "A boiler — «котёл»: устройство, которое греет воду и гонит её по трубам к радиаторам, обогревая дом. Когда котёл умирает (the boiler died — так и шутят по-английски), в доме пропадают и отопление, и горячая вода — именно поэтому Марк моется в спортзале. Связка слов: central heating — «центральное отопление», a radiator — «радиатор, батарея», a fuse box — «щиток с пробками». Не путайте с a kettle — «чайник для воды»: котёл греет весь дом, чайник — две чашки чая."}, {"id": "v2", "type": "choice", "sentence": "Emma says Mark needs to bleed the radiators. What does 'to bleed a radiator' mean?", "options": ["To let the trapped air out through a small side valve", "To replace an old radiator with a brand new one", "To paint over the rusty parts of the metal pipes", "To turn the radiator up to its highest setting"], "correct": "To let the trapped air out through a small side valve", "explanation": "To bleed a radiator — «стравить воздух из радиатора»: тем же словом bleed — «кровоточить, пускать кровь» называют и выпуск воздуха. Если верх батареи холодный, а низ тёплый (как Эмма определила на ощупь) — внутри пузырь воздуха, горячая вода не поднимается. Открываете маленький клапан a valve специальным ключом a radiator key, воздух шипит и выходит — the air hisses out. Это первое, что советуют сделать до вызова мастера: в диалоге бабушка Эммы делала это каждую осень, grumble — «ворчать» при этом необязательно."}, {"id": "v3", "type": "choice", "sentence": "Emma tells Mark to ask Dave for a written quote. What is a quote in this context?", "options": ["A price in writing that the tradesman promises to keep", "A funny saying that painters write on the new walls", "A discount that the company gives to new customers", "A short phone call where nobody writes anything down"], "correct": "A price in writing that the tradesman promises to keep", "explanation": "A quote — «смета, зафиксированная цена»: мастер осматривает работу и письменно называет сумму, выше которой (в идеале) не имеет права попросить. Эмма советует именно письменную смету, потому что цена, названная по телефону, к концу ремонта имеет свойство расти. Рядом слово an estimate — «примерная оценка»: ориентир, который может измениться. Глагол to quote — «называть цену». Слово многозначное: to quote Shakespeare — «цитировать Шекспира», но в диалоге с мастером quote — это только про деньги."}, {"id": "v4", "type": "choice", "sentence": "The landlord tells Mark to ring a handyman from an advert. What is a handyman?", "options": ["A person who does many small repairs around the house", "A shop assistant who sells tools in a hardware shop", "A manager who collects the rent from the tenants", "A worker who only installs new heating systems"], "correct": "A person who does many small repairs around the house", "explanation": "A handyman — «мастер на все руки»: человек, которого зовут починить кран, повесить полку, поправить дверь — всё мелкое сразу. Слово образовано от handy — «умелый, ловкий» (буквально «рукастый»). Для серьёзных работ нужны специалисты: a plumber — «сантехник», an electrician — «электрик» (у него должна быть лицензия a licence, как подчёркивает Эмма), a tiler — «плиточник». Шуточный слоган Дейва I fix everything twice — «я чиню всё дважды» — намекает, что с первого раза у него не получается."}]}, {"id": "s2", "title": "Grammar — would for Past Habits", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete the sentence: Every autumn my grandmother ___ the radiators before winter came.", "options": ["would bleed", "will bleed", "has bled", "is bleeding"], "correct": "would bleed", "explanation": "would + глагол в первой форме описывает регулярное действие в прошлом — «бывало, делала». She would bleed the radiators every autumn — «каждую осень она бывало стравливала воздух из батарей». Это то же «прошлое-привычка», что и used to bleed, только would звучит чуть более литературно и часто встречается в воспоминаниях. Ловушки простые: will bleed — будущее (привычка не в будущем), has bled — Present Perfect, is bleeding — процесс сейчас. Все «привычные» формы прошлого — это Past Simple (bled) или would / used to + глагол."}, {"id": "g2", "type": "choice", "sentence": "Which sentence is NOT correct?", "options": ["I would have short hair when I was at school.", "We would spend every summer at our gran's.", "My grandad would walk us to school in the snow.", "She would grumble about the price of bread."], "correct": "I would have short hair when I was at school.", "explanation": "Главное ограничение would для прошлых привычек: только ДЕЙСТВИЯ, не состояния. Have (в значении «иметь»), be, live, know, like — это состояния, с ними used to и только used to: I used to have short hair — «у меня были короткие волосы». Фраза I would have short hair — ошибка. А вот spend — действие (проводить время), walk — действие, grumble — действие: здесь would правильный. Проверка на здравый смысл: если это можно «делать регулярно и намеренно» — would подходит; если это просто «как было» — только used to. Поэтому про бабушку Эммы верно и she would bleed, и she used to bleed — bleed это действие."}]}, {"id": "s3", "title": "Grammar — used to vs be used to", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g3", "type": "choice", "sentence": "Complete the sentence: When I was a child, we ___ in a house with no central heating.", "options": ["used to live", "would live", "are used to live", "were use to living"], "correct": "used to live", "explanation": "Live — состояние, «жить где-то», а не повторяющееся действие, поэтому would live здесь нельзя — только used to live: «раньше мы жили в доме без отопления». Ещё одна ловушка рядом: are used to live — неверная форма другой конструкции be used to + V-ing — «привык к чему-то»: I am used to living in a cold flat — «я привык жить в холодной квартире» (и мне нормально). А were use to living — двойная ошибка: и use без d, и лишний предлог смысла. Три конструкции, которые звучат почти одинаково: used to live = раньше жил, am used to living = привык жить, get used to living = привыкаю жить."}]}, {"id": "s4", "title": "Grammar — used to: questions and negatives", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g4", "type": "choice", "sentence": "Which sentence is correct?", "options": ["She didn't use to like coffee, but now she drinks it.", "She didn't used to like coffee, but now she drinks it.", "She doesn't use to like coffee, but now she drinks it.", "She use not to like coffee, but now she drinks it."], "correct": "She didn't use to like coffee, but now she drinks it.", "explanation": "Отрицание и вопрос с used to строятся через did, а сам глагол возвращается в начальную форму: didn't USE to, Did you USE to...? Причина: did уже несёт прошлое, вторая d была бы двойной. Правильно: She didn't use to like coffee — «раньше она не любила кофе (а теперь пьёт)». Ошибки в остальных: didn't used to — лишняя d; doesn't use to — used to не живёт в настоящем; use not to — такой формы нет (в старых книгах встречалось used not to, но это архаика). Смысл отрицания важный: didn't use to like = раньше НЕ любила — противоположность нынешнего «пьёт»."}]}, {"id": "s5", "title": "Practical English — Calling a Tradesman", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Mark rings Dave about the boiler. Which sentence best explains the problem on the phone?", "options": ["My boiler has stopped working and there is no hot water.", "My boiler is going to stop working maybe sometime soon.", "My boiler works fine but I would like a newer model.", "My boiler makes the whole kitchen look old and boring."], "correct": "My boiler has stopped working and there is no hot water.", "explanation": "Present Perfect — has stopped working — идеальная форма для жалобы мастеру: поломка уже случилась, и её результат (нет горячей воды) ощущается сейчас. Эта пара фраз — стандартный шаблон звонка: X has stopped working + следствие (there is no hot water / the kitchen is flooded / nothing turns on). Дальше по шаблону уточняют: How soon could you come? — «Как быстро вы могли бы приехать?» и Do you charge a call-out fee? — «Берёте ли плату за выезд?». Формы is going to stop — «собирается сломаться» или works fine — «работает отлично» мастера не мобилизуют: первая — поломка ещё не случилась, вторая — не повод для вызова вовсе."}, {"id": "p2", "type": "choice", "sentence": "Emma advises Mark to ask about the price politely. Which request is the best one?", "options": ["Could you give me a written quote before you start?", "How much will it cost and do not try to cheat me?", "Tell me your price right now because I am very busy.", "Is it expensive or should I call somebody else instead?"], "correct": "Could you give me a written quote before you start?", "explanation": "Could you + глагол — самый безопасный способ попросить в английском: вежливо, без давления, с прозрачным смыслом. Просьба о письменной смете — Could you give me a written quote? — ровно то, что Эмма советует сделать до того, как Дэйв что-либо тронет (before he touches anything). Для сравнения: Tell me your price — приказ, How much and do not cheat me — оскорбление, Is it expensive — расплывчато и на вопрос цены не отвечает. Полезные вежливые усилители: Could you possibly... — «не могли бы вы вообще-то...» и I was wondering if you could... — самая мягкая форма просьбы."}]}, {"id": "s6", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Mark says: 'We might as well be useful while we freeze.' What does 'might as well' mean here?", "options": ["We have no better option, so this is a reasonable plan.", "We would rather freeze than do anything useful today.", "We are used to being useful even in freezing weather.", "It is far too cold for anybody to do anything useful."], "correct": "We have no better option, so this is a reasonable plan.", "explanation": "might as well + глагол — «а почему бы и нет, всё равно других вариантов нет»: не самый лучший сценарий, но раз уж так вышло — можно извлечь из него хоть что-то. Раз мы всё равно мёрзнем в ожидании Дэйва, можно заняться полезным делом. Похоже на русские «раз уж на то пошло», «с тем же успехом». Частая конструкция: We might as well start without him — «можем с тем же успехом начать без него». Форма всегда might as well — как в сослагательном наклонении, независимо от времени действия. Это и есть фраза дня."}, {"id": "c2", "type": "choice", "sentence": "Complete the sentence so it means 'cold showers feel normal to me now': After five winters in this flat, I ___ cold showers, so they do not bother me any more.", "options": ["am used to taking", "used to take", "would take", "am used to take"], "correct": "am used to taking", "explanation": "Нужна конструкция be used to + V-ing — «привык к чему-то, и это нормально»: I am used to taking cold showers — «я привык принимать холодный душ». Подсказка — вторая половина фразы: they do not bother me any more — «они меня больше не беспокоят» — это состояние привычки в настоящем. Ловушки: used to take — «раньше принимал (и уже не принимаю)», противоположный смысл; would take — прошлые привычки, тоже не о настоящем; am used to take — форма неверна, после предлога to нужен герундий. Запомните разницу между внешне одинаковыми фразами: I used to take — действие в прошлом, I am used to taking — состояние привыкания сейчас."}]}, {"id": "s7", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why is the top half of Mark's radiators cold?", "options": ["There is trapped air inside the radiators.", "The radiators are too old and cannot be fixed.", "The landlord switched the heating off for October.", "The windows are open and the warm air escapes."], "correct": "There is trapped air inside the radiators.", "explanation": "Эмма трогает батарею и ставит диагноз сразу: The top half is cold and the bottom is warm — that is air in the system — «верх холодный, низ тёплый — значит, в системе воздух». Лечится это стравливанием — you need to bleed them — специальным ключом, который продаётся в любом хозяйственном магазине. Диагноз «воздух» Эмма ставит до всего остального, потому что это самая частая и самая легкоустранимая причина: сломанный котёл — отдельная история.", "audio_text": "Emma(F): Brr. Mark, it is colder in here than outside. How do you survive?\nMark(M): The boiler died on Tuesday. I have been showering at the gym like a professional athlete.\nEmma(F): And the radiators? Did you check them at all?\nMark(M): They make sad noises and give out about as much heat as a sleepy cat.\nEmma(F): Let me feel one. The top half is cold and the bottom is warm, right? That is air in the system. You need to bleed them.\nMark(M): Bleed them? They are radiators, not vampires.\nEmma(F): Very funny. There is a small valve on the side. You open it with a special key, the air hisses out, and the heat comes back.\nMark(M): And where would I find this special key in my endless toolbox of one hammer?\nEmma(F): Any hardware shop sells them. When I was a student, my flat had the same problem, and my gran showed me. She would bleed the radiators every autumn and grumble about the price of bread at the same time.\nMark(M): Your gran sounds tougher than my landlord.\nEmma(F): She was. Now, about the boiler itself. Is it still under warranty?\nMark(M): The landlord says do not call the company, just ring a handyman from an advert. His name is Dave and his slogan is I fix everything twice.\nEmma(F): Twice?\nMark(M): The first attempt never works. At least the man is honest about it.\nEmma(F): Then ask Dave for a written quote before he touches anything. And if it turns out to be the electrics, you need a proper electrician with a licence, not a man from an advert.\nMark(M): Fine. You ring Dave, I will make tea. We might as well be useful while we freeze.\nEmma(F): Deal. And Mark, one more thing. When the boiler starts grumbling in September, do not wait until it dies in October."}, {"id": "l2", "type": "listen", "sentence": "Listen to the dialogue. What does Dave's slogan 'I fix everything twice' suggest?", "options": ["His first repair usually fails and he comes again.", "He is so popular that every client books him twice.", "He charges double the price for every single visit.", "He repairs two houses at the same time every day."], "correct": "His first repair usually fails and he comes again.", "explanation": "Марк сам объясняет шутку: The first attempt never works — «первая попытка никогда не срабатывает», и добавляет: at least the man is honest about it — «по крайней мере, человек честен». Слоган I fix everything twice — каламбур: рекламный слоган обычно обещает качество, а у Дэйва — «починку со второго захода». Отсюда и совет Эммы: смета в письме и лицензированный электрик, если дело в электрике. В диалоге это ключ к характеру героя: не мошенник, а милый бракодел.", "audio_text": "Emma(F): Brr. Mark, it is colder in here than outside. How do you survive?\nMark(M): The boiler died on Tuesday. I have been showering at the gym like a professional athlete.\nEmma(F): And the radiators? Did you check them at all?\nMark(M): They make sad noises and give out about as much heat as a sleepy cat.\nEmma(F): Let me feel one. The top half is cold and the bottom is warm, right? That is air in the system. You need to bleed them.\nMark(M): Bleed them? They are radiators, not vampires.\nEmma(F): Very funny. There is a small valve on the side. You open it with a special key, the air hisses out, and the heat comes back.\nMark(M): And where would I find this special key in my endless toolbox of one hammer?\nEmma(F): Any hardware shop sells them. When I was a student, my flat had the same problem, and my gran showed me. She would bleed the radiators every autumn and grumble about the price of bread at the same time.\nMark(M): Your gran sounds tougher than my landlord.\nEmma(F): She was. Now, about the boiler itself. Is it still under warranty?\nMark(M): The landlord says do not call the company, just ring a handyman from an advert. His name is Dave and his slogan is I fix everything twice.\nEmma(F): Twice?\nMark(M): The first attempt never works. At least the man is honest about it.\nEmma(F): Then ask Dave for a written quote before he touches anything. And if it turns out to be the electrics, you need a proper electrician with a licence, not a man from an advert.\nMark(M): Fine. You ring Dave, I will make tea. We might as well be useful while we freeze.\nEmma(F): Deal. And Mark, one more thing. When the boiler starts grumbling in September, do not wait until it dies in October."}]}], "subtitles": [{"speaker": "Emma", "text": "Brr. Mark, it is colder in here than outside. How do you survive?"}, {"speaker": "Mark", "text": "The boiler died on Tuesday. I have been showering at the gym like a professional athlete."}, {"speaker": "Emma", "text": "And the radiators? Did you check them at all?"}, {"speaker": "Mark", "text": "They make sad noises and give out about as much heat as a sleepy cat."}, {"speaker": "Emma", "text": "Let me feel one. The top half is cold and the bottom is warm, right? That is air in the system. You need to bleed them."}, {"speaker": "Mark", "text": "Bleed them? They are radiators, not vampires."}, {"speaker": "Emma", "text": "Very funny. There is a small valve on the side. You open it with a special key, the air hisses out, and the heat comes back."}, {"speaker": "Mark", "text": "And where would I find this special key in my endless toolbox of one hammer?"}, {"speaker": "Emma", "text": "Any hardware shop sells them. When I was a student, my flat had the same problem, and my gran showed me. She would bleed the radiators every autumn and grumble about the price of bread at the same time."}, {"speaker": "Mark", "text": "Your gran sounds tougher than my landlord."}, {"speaker": "Emma", "text": "She was. Now, about the boiler itself. Is it still under warranty?"}, {"speaker": "Mark", "text": "The landlord says do not call the company, just ring a handyman from an advert. His name is Dave and his slogan is I fix everything twice."}, {"speaker": "Emma", "text": "Twice?"}, {"speaker": "Mark", "text": "The first attempt never works. At least the man is honest about it."}, {"speaker": "Emma", "text": "Then ask Dave for a written quote before he touches anything. And if it turns out to be the electrics, you need a proper electrician with a licence, not a man from an advert."}, {"speaker": "Mark", "text": "Fine. You ring Dave, I will make tea. We might as well be useful while we freeze."}, {"speaker": "Emma", "text": "Deal. And Mark, one more thing. When the boiler starts grumbling in September, do not wait until it dies in October."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
