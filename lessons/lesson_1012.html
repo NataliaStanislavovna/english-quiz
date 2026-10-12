@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Travel: Hotel Check-in &amp; Room Service + be supposed to (rumours and plans)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Travel: Hotel Check-in &amp; Room Service + be supposed to (rumours and plans)</h1><div class="subtitle">2026-10-12</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Make yourself at home</div><div class="translation">«Чувствуй себя как дома» — фраза, которую говорят хозяева гостям, но в отеле она звучит как знак особого радушия. В диалоге портье Дэвид так приветствует постоялицу Эмму после долгой поездки. Похожие выражения: make yourself comfortable — «устрояйтесь удобнее», after you — «прошу вас, проходите».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Travel: Hotel Check-in & Room Service + be supposed to (rumours and plans)", "subtitle": "2026-10-12", "date": "2026-10-12", "phrase_of_the_day": "Make yourself at home", "phrase_translation": "«Чувствуй себя как дома» — фраза, которую говорят хозяева гостям, но в отеле она звучит как знак особого радушия. В диалоге портье Дэвид так приветствует постоялицу Эмму после долгой поездки. Похожие выражения: make yourself comfortable — «устрояйтесь удобнее», after you — «прошу вас, проходите».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1012.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Travel: Hotel", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "David says the hotel room comes with breakfast included. What word means 'the price of a room for one night'?", "options": ["The room rate", "The room rent", "The room price tag", "The room ticket"], "correct": "The room rate", "explanation": "Rate — «тариф, цена за единицу»: room rate — цена номера за ночь, а call rate — тариф звонков. В отелях и на сайтах бронирования слово rate встречается постоянно: nightly rate — «тариф за ночь», special rate — «специальный тариф». Rent — «арендная плата» за квартиру на месяцы, не за номер на ночь. Обратите внимание на слово include: breakfast is included in the rate — «завтрак входит в тариф». Глагол to charge — «взимать плату»: we do not charge for Wi-Fi — «за интернет доплаты нет»."}, {"id": "v2", "type": "choice", "sentence": "Emma's flight leaves at six in the morning. What does she ask about?", "options": ["A wake-up call at four thirty", "A good night call at four thirty", "A rise and shine at four thirty", "An alarm visit at four thirty"], "correct": "A wake-up call at four thirty", "explanation": "A wake-up call — «звонок-будильник» от ресепшена в назначенное время: Could I have a wake-up call at four thirty? На стойке регистрации также просят: a taxi for five o'clock — «такси к пяти», to book a taxi — «заказать такси». Слова four thirty — «полпятого» — время, которое в отеле называют вслух, поэтому его полезно узнавать на слух. Если будильник в телефоне подводит, wake-up call — надёжная страховка: звонит живой человек или автоматическая служба."}, {"id": "v3", "type": "choice", "sentence": "What is 'a loyalty programme' in a hotel?", "options": ["Points you collect and swap for free nights", "A discount the receptionist invents on the spot", "A bonus for guests who complain about rooms", "A card that lets you skip paying any bills"], "correct": "Points you collect and swap for free nights", "explanation": "A loyalty programme — «программа лояльности»: регистрируетесь, копите баллы (points) за ночи и получаете бесплатные ночи, повышение категории номера (an upgrade) или поздний выезд (late check-out). Слово loyalty — «верность» — намекает, что программа награждает постоянных гостей. В диалоге Дэвид говорит: you earn points towards a free night — «вы копите баллы на бесплатную ночь». Родственные слова: a loyalty card в супермаркете (урок от 30 сентября), to be loyal to a brand — «быть верным марке»."}, {"id": "v4", "type": "choice", "sentence": "David says the hotel is 'fully booked' tonight. What does it mean?", "options": ["Every room is taken; there are no free ones", "All rooms have been painted from top to bottom", "The hotel closes early and locks its front door", "Guests must reserve a table for dinner in advance"], "correct": "Every room is taken; there are no free ones", "explanation": "Fully booked — «полностью занято, мест нет»: то же выражение мы разбирали в уроке о ресторанах (10 октября) — там fully booked значило «все столики заняты». В отеле — «все номера заняты». Выражение работает всюду, где есть бронирование: the flight is fully booked — «на рейс мест нет». Если мест нет, вам могут предложить: to put you on a waiting list — «внести в лист ожидания», или try another hotel nearby — «попробовать отель рядом». В диалоге Дэвид шутит, что единственное свободное место — это столик в лобби."}]}, {"id": "s2", "title": "Grammar — be supposed to", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete the sentence about a rumour: The shuttle bus ___ to run every twenty minutes, but nobody has seen it today.", "options": ["is supposed", "is supposing", "is suppose", "has supposing"], "correct": "is supposed", "explanation": "Be supposed to do — «по сведениям, так должно быть»: вы передаёте то, что слышали или что заявлено, не ручаясь лично. The shuttle bus is supposed to run every twenty minutes — «автобус, говорят, ходит каждые двадцать минут» — расписание есть, но живого автобуса никто не видел. Ловушки: is suppose (без d) и is supposing — таких форм нет: supposed — это прилагательное-причастие, оно не меняется. Сравните три значения be supposed to: правило (You are supposed to check out at noon), слух (The concert is supposed to start at eight) и сорвавшийся план (I was supposed to meet her)."}, {"id": "g2", "type": "choice", "sentence": "What does this sentence mean: 'The restaurant was supposed to open at seven'?", "options": ["It was planned for seven, but it did not happen", "It opened at seven exactly, as everybody expected", "The owner was legally obliged to open at seven", "Guests were asked to arrive earlier than seven"], "correct": "It was planned for seven, but it did not happen", "explanation": "Was supposed to do — «должен был (по плану), но не случилось»: прошедшее время превращает ожидание в сорванный план. The restaurant was supposed to open at seven — «ресторан должен был открыться в семь» — а открылся в девять или не открылся вообще. Контекст обычно подсказывает, что пошло не так. Сравните: had to open at seven — «был обязан» (чужой приказ, внешний долг), should have opened at seven — «надо было открыть» (моё осуждение: не открыл, а надо было). В диалоге Эмма говорит: the heater was supposed to work — «нагреватель, предполагалось, работает»."}, {"id": "g3", "type": "choice", "sentence": "You see a sign in a hotel corridor. How does it sound?", "options": ["Guests are not supposed to smoke in the rooms.", "Guests are not supposing to smoke in the rooms.", "Guests are not suppose to smoke in the rooms.", "Guests do not supposed to smoke in the rooms."], "correct": "Guests are not supposed to smoke in the rooms.", "explanation": "Отрицание be supposed to — «по правилам нельзя»: not стоит сразу после глагола be, и вся конструкция звучит мягче официального запрета: Guests are not supposed to smoke — «гостям не положено курить» — правило отеля, а не личный приказ. Другие примеры: You are not supposed to park here — «здесь парковаться не положено», We are not supposed to eat at our desks — «у нас не принято есть за рабочим столом». Ловушки: are not suppose (потеряли d), are not supposing (причастие не принимает -ing) и do not supposed (лишний вспомогательный do: supposed — не глагол действия)."}, {"id": "g4", "type": "choice", "sentence": "Which sentence reports what people say about the new hotel?", "options": ["The new hotel is supposed to be very quiet.", "The new hotel is supposed be very quiet.", "The new hotel supposes to be very quiet.", "The new hotel is suppose being very quiet."], "correct": "The new hotel is supposed to be very quiet.", "explanation": "Be supposed to be — «говорят, что...», «по слухам, ...»: The new hotel is supposed to be very quiet — «новый отель, говорят, очень тихий». Вы передаёте чужое мнение, не подтверждая его лично: часто так говорят о местах и фильмах. The film is supposed to be brilliant — «фильм, говорят, замечательный». Полезно сравнить: It is said to be quiet — более книжно (Complex Subject из урока от 8 сентября), a be supposed to be — разговорный брат этой конструкции. После supposed всегда стоит to: is supposed to be — без to фраза рассыпается."}]}, {"id": "s3", "title": "Practical English — At the Front Desk", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You arrive at a hotel and want a room. What do you say?", "options": ["Hi, I have a reservation under the name Emma Wilson.", "Hi, I would like to order a taxi to the airport, please.", "Hi, could you tell me where the lift is, please?", "Hi, I am calling about the bill for my last visit."], "correct": "Hi, I have a reservation under the name Emma Wilson.", "explanation": "Under the name — «на имя»: бронь хранится под именем гостя, и эта фраза — первый шаг заселения. I have a reservation under the name Emma Wilson — «у меня бронь на имя Эмма Уилсон». Дальше портье попросит паспорт (May I see your ID?) и скажет номер комнаты и этаж. Остальные фразы тоже правильный английский, но решают другие задачи: заказать такси, спросить лифт, разобраться со старым счётом — заселением они не являются. Полезная пара: check in — «заселиться», check out — «выехать» (from our lessons of the tenth of September)."}, {"id": "p2", "type": "choice", "sentence": "You are leaving and want to stay in the room until two. Ask politely:", "options": ["Would it be possible to get a late check-out?", "I demand that you let me stay until two now.", "Late check-out is my right, is it not, tell me?", "You will give me late check-out, will not you?"], "correct": "Would it be possible to get a late check-out?", "explanation": "Would it be possible to...? — «было бы возможно...?» — один из самых вежливых способов попросить в английском: даже в отеле, где вы правы, мягкая форма работает лучше. Late check-out — «поздний выезд»: стандартное время выезда (check-out time) — полдень, а поздний — по договорённости, иногда за доплату. Другие вежливые формулы: Could I possibly...?, I was wondering if I could... (урок от 23 сентября). Варианты с I demand и you will give me — грамматически возможны, но звучат как ультиматум: так про поздний выезд не просят, а ссорятся."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Combine into one sentence: 'The gym is on the second floor. People say it is open twenty-four hours.'", "options": ["The gym on the second floor is supposed to be open twenty-four hours.", "The gym on the second floor supposes to be open twenty-four hours.", "The gym on the second floor is supposed being open twenty-four hours.", "The gym on the second floor is suppose to open twenty-four hours."], "correct": "The gym on the second floor is supposed to be open twenty-four hours.", "explanation": "Правильная сборка: is supposed + to be — «говорят, что работает»: слух о спортзале передан через be supposed to be. Второй вариант теряет причастие (supposes — «предполагает» — вообще другой глагол с другим смыслом), третий ставит герундий вместо инфинитива, четвёртый роняет d и меняет смысл: «должен открыть», а не «говорят, что открыт». Обратите внимание, как много значит маленькое be: to be open — состояние «быть открытым», to open — действие «открывать». Twenty-four hours — «круглосуточно», в отелях часто пишут twenty-four seven."}, {"id": "c2", "type": "choice", "sentence": "David says: 'The only room left is a table in the lobby.' Why is it funny?", "options": ["He pretends a table is a guest room; it is not", "He confuses the lobby with the hotel restaurant", "He honestly thinks guests enjoy sleeping on tables", "He wants Emma to book the table for next time"], "correct": "He pretends a table is a guest room; it is not", "explanation": "Это ирония в чистом виде: Дэвид «предлагает» Эмме стол в лобби как последний свободный номер — абсурд, который и смешит. The only room left — «единственный оставшийся номер»: здесь room — «номер в отеле», а a table in the lobby — место, где room означает лишь «место, пространство». Игра слов на двойном смысле room — «гость поняла, портье пошутил». Так англичане смягчают неловкую ситуацию: мест нет (fully booked), но юмор спасает разговор. Похожую шутку Дэвид делает про единственный оставшийся будильник — свой телефон на ресепшене."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What is the problem with Emma's room?", "options": ["The heater is not working and the room feels cold", "The window faces a noisy street with heavy traffic", "The shower is broken and the floor is wet", "The minibar is empty and the TV has no signal"], "correct": "The heater is not working and the room feels cold", "explanation": "Эмма звонит на ресепшен: the heater does not seem to work — «нагреватель, похоже, не работает», и в комнате холодно. Дэвид извиняется, обещает прислать мастера (someone from maintenance) и делает жест доброй воли — кофе и бутерброд за счёт отеля, on the house (повторение идиомы из уроков о ресторанах). Обратите внимание на фразу Эммы: it was supposed to work — «он должен был работать» — сорванный план с be supposed to. Maintenance — «служба эксплуатации», те, кто чинит в отеле всё: от крана до лифта.", "audio_text": "Emma(F): Good evening. I have a reservation under the name Emma Wilson.\nDavid(M): Good evening, Ms Wilson. Welcome to the Harbour Hotel. You are in room three twelve, on the fourth floor.\nEmma(F): The fourth floor. Is the lift working?\nDavid(M): It is supposed to be working, and unlike our shuttle bus, it actually is.\nEmma(F): The shuttle bus does not run?\nDavid(M): It is supposed to run every twenty minutes. Nobody has seen it since Tuesday. We believe it is exploring the old town on its own.\nEmma(F): As long as my bed is not exploring anything, I will survive. My flight leaves at six tomorrow, so could I have a wake-up call at four thirty?\nDavid(M): Of course. A call at four thirty for room three twelve. May I just say, that is a heroic time of day.\nEmma(F): A conference in Amsterdam. By tomorrow night I will need coffee injected directly into my veins.\nDavid(M): Speaking of coffee, we have a new loyalty programme. You earn points towards a free night, and your first point is a free coffee tomorrow morning.\nEmma(F): You had me at free.\nDavid(M): Here is your key card. Breakfast is included in the rate, from seven until ten.\nEmma(F): Perfect. Good night.\n[Later, Emma calls the front desk from her room]\nEmma(F): David? It is Emma, from three twelve. The heater does not seem to work. It was supposed to work, I believe.\nDavid(M): Oh no. I am really sorry about that. I will send someone from maintenance up right away. In the meantime, would you like a coffee and a sandwich on the house?\nEmma(F): Only if it arrives faster than the shuttle bus.\nDavid(M): Give us five minutes. Maintenance is faster than the bus, but slower than the lift.\n[The coffee arrives, and Emma calls again]\nEmma(F): That was the fastest coffee in hotel history. I drank it in forty seconds. All is forgiven.\nDavid(M): You are not supposed to drink it in under a minute, you know. That is a house rule.\nEmma(F): Then tomorrow I will break one more rule at breakfast.\nDavid(M): Just to warn you, we are fully booked tonight. So if you decide you do not like your room, the only room left is a table in the lobby.\nEmma(F): Does the table come with a wake-up call?\nDavid(M): Sadly no. The only alarm we have left is my phone at reception, and for some reason it only speaks Polish.\nEmma(F): Then I will happily keep my cold room. Was it not you who said, make yourself at home?\nDavid(M): Exactly. Cold, but yours. Good night, Ms Wilson, and enjoy your four thirty."}, {"id": "l2", "type": "listen", "sentence": "David says: 'You are not supposed to drink the coffee in under a minute.' Why does he say it?", "options": ["As a joke: Emma drank her free coffee too fast", "As a rule: hotel rules forbid drinking coffee quickly", "As a warning: the coffee is far too hot to drink", "As advice: cold coffee tastes better than hot coffee"], "correct": "As a joke: Emma drank her free coffee too fast", "explanation": "Эмма выпивает чашку за секунды и говорит, что готова простить отелю всё. Дэвид смеётся: You are not supposed to drink it in under a minute — «её не положено выпивать меньше чем за минуту» — это шутка: формула запрета (are not supposed to) применена к безобидному кофе. Английский юмор часто строится на таких «фейных правилах». Заодно закрепляем грамматику: в утверждении о правиле not стоит после be, а глагол — в первой форме (drink). In under a minute — «меньше чем за минуту»: полезная разговорная конструкция с двойным предлогом.", "audio_text": "Emma(F): Good evening. I have a reservation under the name Emma Wilson.\nDavid(M): Good evening, Ms Wilson. Welcome to the Harbour Hotel. You are in room three twelve, on the fourth floor.\nEmma(F): The fourth floor. Is the lift working?\nDavid(M): It is supposed to be working, and unlike our shuttle bus, it actually is.\nEmma(F): The shuttle bus does not run?\nDavid(M): It is supposed to run every twenty minutes. Nobody has seen it since Tuesday. We believe it is exploring the old town on its own.\nEmma(F): As long as my bed is not exploring anything, I will survive. My flight leaves at six tomorrow, so could I have a wake-up call at four thirty?\nDavid(M): Of course. A call at four thirty for room three twelve. May I just say, that is a heroic time of day.\nEmma(F): A conference in Amsterdam. By tomorrow night I will need coffee injected directly into my veins.\nDavid(M): Speaking of coffee, we have a new loyalty programme. You earn points towards a free night, and your first point is a free coffee tomorrow morning.\nEmma(F): You had me at free.\nDavid(M): Here is your key card. Breakfast is included in the rate, from seven until ten.\nEmma(F): Perfect. Good night.\n[Later, Emma calls the front desk from her room]\nEmma(F): David? It is Emma, from three twelve. The heater does not seem to work. It was supposed to work, I believe.\nDavid(M): Oh no. I am really sorry about that. I will send someone from maintenance up right away. In the meantime, would you like a coffee and a sandwich on the house?\nEmma(F): Only if it arrives faster than the shuttle bus.\nDavid(M): Give us five minutes. Maintenance is faster than the bus, but slower than the lift.\n[The coffee arrives, and Emma calls again]\nEmma(F): That was the fastest coffee in hotel history. I drank it in forty seconds. All is forgiven.\nDavid(M): You are not supposed to drink it in under a minute, you know. That is a house rule.\nEmma(F): Then tomorrow I will break one more rule at breakfast.\nDavid(M): Just to warn you, we are fully booked tonight. So if you decide you do not like your room, the only room left is a table in the lobby.\nEmma(F): Does the table come with a wake-up call?\nDavid(M): Sadly no. The only alarm we have left is my phone at reception, and for some reason it only speaks Polish.\nEmma(F): Then I will happily keep my cold room. Was it not you who said, make yourself at home?\nDavid(M): Exactly. Cold, but yours. Good night, Ms Wilson, and enjoy your four thirty."}]}], "subtitles": [{"speaker": "Emma", "text": "Good evening. I have a reservation under the name Emma Wilson."}, {"speaker": "David", "text": "Good evening, Ms Wilson. Welcome to the Harbour Hotel. You are in room three twelve, on the fourth floor."}, {"speaker": "Emma", "text": "The fourth floor. Is the lift working?"}, {"speaker": "David", "text": "It is supposed to be working, and unlike our shuttle bus, it actually is."}, {"speaker": "Emma", "text": "The shuttle bus does not run?"}, {"speaker": "David", "text": "It is supposed to run every twenty minutes. Nobody has seen it since Tuesday. We believe it is exploring the old town on its own."}, {"speaker": "Emma", "text": "As long as my bed is not exploring anything, I will survive. My flight leaves at six tomorrow, so could I have a wake-up call at four thirty?"}, {"speaker": "David", "text": "Of course. A call at four thirty for room three twelve. May I just say, that is a heroic time of day."}, {"speaker": "Emma", "text": "A conference in Amsterdam. By tomorrow night I will need coffee injected directly into my veins."}, {"speaker": "David", "text": "Speaking of coffee, we have a new loyalty programme. You earn points towards a free night, and your first point is a free coffee tomorrow morning."}, {"speaker": "Emma", "text": "You had me at free."}, {"speaker": "David", "text": "Here is your key card. Breakfast is included in the rate, from seven until ten."}, {"speaker": "Emma", "text": "Perfect. Good night. [Later, Emma calls the front desk from her room]"}, {"speaker": "Emma", "text": "David? It is Emma, from three twelve. The heater does not seem to work. It was supposed to work, I believe."}, {"speaker": "David", "text": "Oh no. I am really sorry about that. I will send someone from maintenance up right away. In the meantime, would you like a coffee and a sandwich on the house?"}, {"speaker": "Emma", "text": "Only if it arrives faster than the shuttle bus."}, {"speaker": "David", "text": "Give us five minutes. Maintenance is faster than the bus, but slower than the lift. [The coffee arrives, and Emma calls again]"}, {"speaker": "Emma", "text": "That was the fastest coffee in hotel history. I drank it in forty seconds. All is forgiven."}, {"speaker": "David", "text": "You are not supposed to drink it in under a minute, you know. That is a house rule."}, {"speaker": "Emma", "text": "Then tomorrow I will break one more rule at breakfast."}, {"speaker": "David", "text": "Just to warn you, we are fully booked tonight. So if you decide you do not like your room, the only room left is a table in the lobby."}, {"speaker": "Emma", "text": "Does the table come with a wake-up call?"}, {"speaker": "David", "text": "Sadly no. The only alarm we have left is my phone at reception, and for some reason it only speaks Polish."}, {"speaker": "Emma", "text": "Then I will happily keep my cold room. Was it not you who said, make yourself at home?"}, {"speaker": "David", "text": "Exactly. Cold, but yours. Good night, Ms Wilson, and enjoy your four thirty."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
