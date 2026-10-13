@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Shopping: Gift Cards, Delivery Slots &amp; the Butcher&#x27;s + Gerund deep dive (can&#x27;t help, be worth, prefer)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Shopping: Gift Cards, Delivery Slots &amp; the Butcher&#x27;s + Gerund deep dive (can&#x27;t help, be worth, prefer)</h1><div class="subtitle">2026-10-13</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">I can&#x27;t help it</div><div class="translation">«Ничего не могу с собой поделать» — признание в слабости, которое англичане произносят с улыбкой: I can&#x27;t help looking at the sale rails — «не могу пройти мимо распродажных стоек». Конструкция can&#x27;t help + V-ing = «не могу не сделать», то же самое в короткой форме I can&#x27;t help it. Похожие выражения: it is too good to resist — «устоять невозможно», I have no willpower — «у меня нет силы воли».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Shopping: Gift Cards, Delivery Slots & the Butcher's + Gerund deep dive (can't help, be worth, prefer)", "subtitle": "2026-10-13", "date": "2026-10-13", "phrase_of_the_day": "I can't help it", "phrase_translation": "«Ничего не могу с собой поделать» — признание в слабости, которое англичане произносят с улыбкой: I can't help looking at the sale rails — «не могу пройти мимо распродажных стоек». Конструкция can't help + V-ing = «не могу не сделать», то же самое в короткой форме I can't help it. Похожие выражения: it is too good to resist — «устоять невозможно», I have no willpower — «у меня нет силы воли».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1013.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Shopping", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Kate wants a present for Sarah that she can spend in one shop. What does she choose?", "options": ["A twenty euro gift card from the bookshop", "A loyalty card that needs twenty stamps", "A library card that belongs to the city", "A coupon that expired last Saturday"], "correct": "A twenty euro gift card from the bookshop", "explanation": "A gift card — «подарочная карта»: на ней уже лежит сумма (twenty euros), и получатель тратит её в конкретном магазине или сети. Это самый безопасный подарок, когда вы не уверены во вкусах: Sarah сама попросила такую карту. Не путайте: a loyalty card — «карта постоянного покупателя», она ничего не дарит, просто копит баллы (мы разбирали её в уроке от 30 сентября); a coupon — «купон со скидкой на одну покупку», у него есть срок действия (it expires — «истекает»). Глагол to spend money on something — «тратить деньги на что-то»."}, {"id": "v2", "type": "choice", "sentence": "Kate says she picked a delivery slot for Friday. What is a delivery slot?", "options": ["A chosen time window when your order arrives", "A parking space reserved for delivery vans", "A shelf at the back of the supermarket", "A ticket that lets you skip the checkout"], "correct": "A chosen time window when your order arrives", "explanation": "A delivery slot — «временное окно доставки»: при заказе продуктов или товаров онлайн вы выбираете отрезок времени (например, Friday morning), когда курьер привезёт заказ. Глагол to pick — «выбрать» (разговорный брат to choose): I picked the delivery slot for Friday — «я выбрала доставку на пятницу». Полезные слова рядом: to reschedule a delivery — «перенести доставку», the order is out for delivery — «заказ у курьера» (урок от 12 сентября). Slot вообще — «прорезь, слот»: узкое окно времени или места, как прорезь для монеты."}, {"id": "v3", "type": "choice", "sentence": "Mark says: 'I need the butcher's.' What does he mean?", "options": ["He is going to a shop that sells fresh meat", "He is visiting a friend whose name is Butcher", "He is buying a big knife for the chicken", "He wants the bakery that stands next door"], "correct": "He is going to a shop that sells fresh meat", "explanation": "The butcher's — «мясная лавка»: конструкция «профессия + 's» называет магазин по его хозяину, слово shop само опускается. Точно так же: the baker's — «булочная», the chemist's — «аптека» (британское), the hairdresser's — «парикмахерская». Mark идёт к мяснику за курицей для ужина. Ловушка перевода: the butcher's — не «у мясника в гостях», а именно магазин. А the bakery — «пекарня или булочный отдел», там продают хлеб, а не мясо."}, {"id": "v4", "type": "choice", "sentence": "Kate says one lamp was free: 'three for the price of two.' What kind of offer is it?", "options": ["You pay for two items and get the third free", "You get three items and pay only one third", "You buy three items and the price triples", "You pay twice the price and get nothing"], "correct": "You pay for two items and get the third free", "explanation": "Three for the price of two — «три по цене двух»: платите за две вещи, третья — в подарок. Это классика британских супермаркетов, как и buy one get one free (BOGOF) — «купи одну, вторая бесплатно» из урока от 30 сентября. Слово offer — «специальное предложение»: a special offer this week only — «предложение только на этой неделе». Рядом живут: half price — «полцены», a bargain — «выгодная покупка», a bargain hunter — «охотник за скидками»."}]}, {"id": "s2", "title": "Grammar — Gerund vs Infinitive", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete the sentence: I can't help ___ at the sale signs every time I pass the shop.", "options": ["stopping", "to stop", "stop", "for stopping"], "correct": "stopping", "explanation": "Can't help + V-ing = «не могу не делать»: I can't help stopping at the sale signs — «не могу пройти мимо распродажных вывесок». После help в этой конструкции всегда герундий, предлог для него не нужен. В диалоге Кейт оправдывается той же формулой: I can't help looking at the sale rails — «не могу не смотреть на стойки со скидками». Это продолжение темы герундия и инфинитива (уроки от 28 августа и 21 сентября): help здесь — не «помогать», а составная часть выражения, поэтому правило «help somebody (to) do» не работает."}, {"id": "g2", "type": "choice", "sentence": "Complete the sentence: The Christmas market is worth ___ even in the rain.", "options": ["visiting", "to visit", "visit", "for a visit"], "correct": "visiting", "explanation": "Be worth + V-ing = «стоит того, чтобы...»: The Christmas market is worth visiting — «рождественский рынок стоит посещения». После worth — только герундий, причём действие направлено на само подлежащее (рынок посещают), поэтому форма Active, а не Passive: worth visiting, а не worth being visited. Таких «прилагательных с герундием» несколько: be busy doing, be no use doing (It's no use crying over spilt milk — «слезами делу не поможешь»). Про деньги говорят: This knife is worth every cent — «этот нож стоит каждого цента»."}, {"id": "g3", "type": "choice", "sentence": "Which sentence is correct?", "options": ["I prefer shopping online to queueing in shops.", "I prefer shopping online than queueing in shops.", "I prefer to shop online to queue in the shops.", "I prefer shopping online for queueing in shops."], "correct": "I prefer shopping online to queueing in shops.", "explanation": "Prefer + V-ing + TO + V-ing = «предпочитаю одно другому»: I prefer shopping online to queueing in shops — «я предпочитаю покупать онлайн стоянию в очередях». Здесь to — предлог «по сравнению с», а не часть инфинитива, поэтому после него — герундий (queueing). Это та же логика, что в I'm looking forward to seeing you (урок от 28 августа). Ловушка — союз than, он работает с comparative: better than, а с prefer в этой конструкции — только предлог to. Если хотите использовать than, стройте фразу иначе: I prefer to shop online rather than queue."}, {"id": "g4", "type": "choice", "sentence": "Complete the sentence: Sorry, I can't talk now. I am busy ___ the birthday dinner.", "options": ["cooking", "to cook", "cook", "for cooking"], "correct": "cooking", "explanation": "Be busy + V-ing = «занят делом»: I am busy cooking the birthday dinner — «я занята приготовлением праздничного ужина». После busy — герундий без предлога. В диалоге Марк говорит: I am busy roasting a chicken this evening, in theory — «я занят запеканием курицы, в теории» — и добавка in theory выдаёт, что курица всё ещё в морозилке. Сравните с be busy with something, когда после идёт существительное: She is busy with her report. Эта тема — продолжение серии о герундии: remember doing, stop to do, go on doing (уроки от 21 и 25 сентября)."}]}, {"id": "s3", "title": "Practical English — At the Shop", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are at the bookshop till and want a gift card. What do you say?", "options": ["Could I have a twenty euro gift card, please?", "Could you tell me where the cookbooks are?", "Could I leave my bag behind the counter?", "Could you wrap this scarf with cats on it?"], "correct": "Could I have a twenty euro gift card, please?", "explanation": "Could I have..., please? — вежливая просьба на кассе: Could I have a twenty euro gift card, please? — «мне, пожалуйста, подарочную карту на двадцать евро». Продавец может спросить: Would you like a receipt with that? — «нужен ли чек?» — или предложить: Would you like it gift wrapped? — «завернуть как подарок?». Остальные фразы тоже правильный английский, но решают другие задачи: спросить полку с кулинарными книгами, оставить сумку за прилавком, завернуть шарф — подарочную карту так не купишь. Вежливое please в конце — обязательно."}, {"id": "p2", "type": "choice", "sentence": "Your online order arrives on Friday, but you are out all day. Call the shop:", "options": ["Would it be possible to change my delivery slot?", "You must deliver my order when I am at home.", "I would like to cancel my order and my account.", "Can you tell me how much the delivery costs?"], "correct": "Would it be possible to change my delivery slot?", "explanation": "Would it be possible to...? — «было бы возможно...?» — одна из самых вежливых просьб в английском (мы разбирали её в отеле 12 октября, а впервые — 23 сентября). Would it be possible to change my delivery slot? — «можно было бы поменять время доставки?» Оператор ответит: Let me see what we have for Friday — «посмотрю, что есть на пятницу» — и предложит другие окна: Saturday morning, Monday evening. Вариант с You must deliver звучит как приказ и портит разговор, а отмена заказа (to cancel) — совсем другая задача: вы же хотите просто перенести время."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete the summary of the dialogue: Mark could not help ___ when Kate mentioned her new lamps.", "options": ["laughing", "to laugh", "laugh", "laughed"], "correct": "laughing", "explanation": "Could not help laughing — «не смог не рассмеяться»: конструкция can't help + V-ing работает и в прошедшем времени, couldn't, причём герундий не меняется. Ловушки расставлены классически: to laugh подсовывает инфинитив, laugh — «голую» первую форму, laughed — вторую форму прошедшего времени, будто после help стоит обычный глагол. Помните: help в выражении can't help — часть идиомы, а не глагол «помогать», поэтому логика «help somebody to do» здесь неприменима. В диалоге Кейт тоже «не может помочь себе»: I can't help looking at the sale rails."}, {"id": "c2", "type": "choice", "sentence": "Mark says: 'The chicken is still in my freezer. So is the rest of the plan.' Why is it funny?", "options": ["His dinner plan is as frozen as the chicken", "His freezer is too small for a whole chicken", "His plan was written on the chicken's wrapper", "His dinner with Anna is planned for winter"], "correct": "His dinner plan is as frozen as the chicken", "explanation": "Игра слов на слове frozen — «замороженный»: курица лежит в морозилке, и «остальная часть плана» (the rest of the plan) — там же, то есть план так же заморожен, как и курица. Конструкция So is the rest of the plan — «остальная часть плана тоже» — это согласие через so + глагол + подлежащее из урока от 19 сентября: So is mine, So did I. Марк честно признаёт: ужин «в теории» есть, на практике — только лёд. Такой самоироничный юмор типичен для британской беседы: сказать о своём провале так, чтобы собеседник засмеялся, а не пожалел."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What has Kate already done at the end?", "options": ["She has ordered the lamps online for Friday", "She has hidden the lamps in Mark's freezer", "She has returned the lamps to the shop", "She has sold the lamps to her neighbour"], "correct": "She has ordered the lamps online for Friday", "explanation": "В финале Кейт признаётся: Of course not. I ordered them online this morning. I picked the delivery slot for Friday — «конечно нет, я заказала их сегодня утром и выбрала доставку на пятницу». Марк успокоился зря: новые лампы уже в пути. Здесь слушайте Present Perfect по смыслу: действие «заказала» свершилось и влияет на сейчас (лампы приедут). Обратите внимание на фразу came home with two lamps — «пришла домой с двумя лампами» — Марк вспоминает прошлый поход по магазинам, когда у Кейт «болезнь распродаж» уже обернулась лампами.", "audio_text": "Mark(M): Are you coming to the shopping centre with me this afternoon?\nKate(F): Tempting, but I am trying to save money this month. I made a list and everything.\nMark(M): A list? Kate, last time you had a list you came home with two lamps.\nKate(F): That was different. They were three for the price of two. Paying for two lamps and getting a third one free is practically saving money.\nMark(M): That is not saving money. That is spending money with extra steps.\nKate(F): You sound like my bank app. It sends me a warning every time I walk past that shop.\nMark(M): Does it help?\nKate(F): Not really. I can't help looking at the sale rails even when I only need bread. It is like a disease, but a bright, colourful disease.\nMark(M): Speaking of diseases, I need your advice. Sarah's birthday is coming up. What do I get someone who reads faster than I walk?\nKate(F): Easy. A gift card from the bookshop. Twenty euros, no wrapping paper, no stress, no wrong book about cats.\nMark(M): That is perfect. She cannot complain about the size, the colour, or the smell.\nKate(F): Exactly. Shopping for Sarah is worth doing properly once a year.\nMark(M): While we are at it, what is your plan for tomorrow? Anna invited herself to dinner, so I am busy roasting a chicken this evening. In theory.\nKate(F): Why only in theory?\nMark(M): The chicken is still in my freezer. So is the rest of the plan.\nKate(F): Then you had better hurry. The butcher's closes at two on Saturdays.\nMark(M): How do you know that?\nKate(F): I also can't help noticing closing times of shops I should not enter. It is a professional illness.\nMark(M): One last question. You are not going to that shopping centre alone this afternoon, are you?\nKate(F): Of course not. I ordered the lamps online this morning. I picked the delivery slot for Friday.\nMark(M): Which lamps?\nKate(F): The ones that look like little moons. They were half price. Practically free, if you think about it.\nMark(M): I am not thinking about it. I refuse.\nKate(F): Suit yourself. The moon lamps are very calming. They help me fall asleep.\nMark(M): Good night, Kate.\nKate(F): It is three in the afternoon.\nMark(M): I am preparing emotionally."}, {"id": "l2", "type": "listen", "sentence": "Why does Mark need the butcher's?", "options": ["Anna is coming to dinner and he plans a roast", "Anna is a vegetarian and he needs advice", "Anna works at the butcher's on Saturdays", "Anna has invited him to a barbecue party"], "correct": "Anna is coming to dinner and he plans a roast", "explanation": "Марк объясняет: Anna invited herself to dinner, so I am busy roasting a chicken this evening. In theory — «Анна сама себя пригласила на ужин, так что я занят запеканием курицы — в теории». To invite yourself — «пригласить себя самого», ироничная формула о настойчивом госте. Шутка в том, что the chicken is still in my freezer — «курица всё ещё в морозилке», поэтому roast chicken пока только план. Грамматика урока звучит в реплике напрямую: be busy roasting — «занят запеканием». И не пропустите: мясная лавка закрывается в два — потому и приходится бежать.", "audio_text": "Mark(M): Are you coming to the shopping centre with me this afternoon?\nKate(F): Tempting, but I am trying to save money this month. I made a list and everything.\nMark(M): A list? Kate, last time you had a list you came home with two lamps.\nKate(F): That was different. They were three for the price of two. Paying for two lamps and getting a third one free is practically saving money.\nMark(M): That is not saving money. That is spending money with extra steps.\nKate(F): You sound like my bank app. It sends me a warning every time I walk past that shop.\nMark(M): Does it help?\nKate(F): Not really. I can't help looking at the sale rails even when I only need bread. It is like a disease, but a bright, colourful disease.\nMark(M): Speaking of diseases, I need your advice. Sarah's birthday is coming up. What do I get someone who reads faster than I walk?\nKate(F): Easy. A gift card from the bookshop. Twenty euros, no wrapping paper, no stress, no wrong book about cats.\nMark(M): That is perfect. She cannot complain about the size, the colour, or the smell.\nKate(F): Exactly. Shopping for Sarah is worth doing properly once a year.\nMark(M): While we are at it, what is your plan for tomorrow? Anna invited herself to dinner, so I am busy roasting a chicken this evening. In theory.\nKate(F): Why only in theory?\nMark(M): The chicken is still in my freezer. So is the rest of the plan.\nKate(F): Then you had better hurry. The butcher's closes at two on Saturdays.\nMark(M): How do you know that?\nKate(F): I also can't help noticing closing times of shops I should not enter. It is a professional illness.\nMark(M): One last question. You are not going to that shopping centre alone this afternoon, are you?\nKate(F): Of course not. I ordered the lamps online this morning. I picked the delivery slot for Friday.\nMark(M): Which lamps?\nKate(F): The ones that look like little moons. They were half price. Practically free, if you think about it.\nMark(M): I am not thinking about it. I refuse.\nKate(F): Suit yourself. The moon lamps are very calming. They help me fall asleep.\nMark(M): Good night, Kate.\nKate(F): It is three in the afternoon.\nMark(M): I am preparing emotionally."}]}], "subtitles": [{"speaker": "Mark", "text": "Are you coming to the shopping centre with me this afternoon?"}, {"speaker": "Kate", "text": "Tempting, but I am trying to save money this month. I made a list and everything."}, {"speaker": "Mark", "text": "A list? Kate, last time you had a list you came home with two lamps."}, {"speaker": "Kate", "text": "That was different. They were three for the price of two. Paying for two lamps and getting a third one free is practically saving money."}, {"speaker": "Mark", "text": "That is not saving money. That is spending money with extra steps."}, {"speaker": "Kate", "text": "You sound like my bank app. It sends me a warning every time I walk past that shop."}, {"speaker": "Mark", "text": "Does it help?"}, {"speaker": "Kate", "text": "Not really. I can't help looking at the sale rails even when I only need bread. It is like a disease, but a bright, colourful disease."}, {"speaker": "Mark", "text": "Speaking of diseases, I need your advice. Sarah's birthday is coming up. What do I get someone who reads faster than I walk?"}, {"speaker": "Kate", "text": "Easy. A gift card from the bookshop. Twenty euros, no wrapping paper, no stress, no wrong book about cats."}, {"speaker": "Mark", "text": "That is perfect. She cannot complain about the size, the colour, or the smell."}, {"speaker": "Kate", "text": "Exactly. Shopping for Sarah is worth doing properly once a year."}, {"speaker": "Mark", "text": "While we are at it, what is your plan for tomorrow? Anna invited herself to dinner, so I am busy roasting a chicken this evening. In theory."}, {"speaker": "Kate", "text": "Why only in theory?"}, {"speaker": "Mark", "text": "The chicken is still in my freezer. So is the rest of the plan."}, {"speaker": "Kate", "text": "Then you had better hurry. The butcher's closes at two on Saturdays."}, {"speaker": "Mark", "text": "How do you know that?"}, {"speaker": "Kate", "text": "I also can't help noticing closing times of shops I should not enter. It is a professional illness."}, {"speaker": "Mark", "text": "One last question. You are not going to that shopping centre alone this afternoon, are you?"}, {"speaker": "Kate", "text": "Of course not. I ordered the lamps online this morning. I picked the delivery slot for Friday."}, {"speaker": "Mark", "text": "Which lamps?"}, {"speaker": "Kate", "text": "The ones that look like little moons. They were half price. Practically free, if you think about it."}, {"speaker": "Mark", "text": "I am not thinking about it. I refuse."}, {"speaker": "Kate", "text": "Suit yourself. The moon lamps are very calming. They help me fall asleep."}, {"speaker": "Mark", "text": "Good night, Kate."}, {"speaker": "Kate", "text": "It is three in the afternoon."}, {"speaker": "Mark", "text": "I am preparing emotionally."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
