@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Work &amp; Career: Meetings, Minutes &amp; Performance Review + Arrangements (Present Continuous vs Future Continuous)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Work &amp; Career: Meetings, Minutes &amp; Performance Review + Arrangements (Present Continuous vs Future Continuous)</h1><div class="subtitle">2026-10-14</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Call it a day</div><div class="translation">«Свернуть работу, закончить на сегодня» — устойчивое выражение для момента, когда пора отпустить рабочие дела: Let&#x27;s call it a day and go to the pub — «давай заканчивать и пойдём в паб». Глагол to call здесь — «объявить» (как the referee called the game — «судья объявил матч законченным»). Родственные фразы: to knock off for the day — разговорное «закончить рабочий день», to clock off — «отбить конец смены», to switch off after work — «выключиться после работы» — всё это про work-life balance.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Work & Career: Meetings, Minutes & Performance Review + Arrangements (Present Continuous vs Future Continuous)", "subtitle": "2026-10-14", "date": "2026-10-14", "phrase_of_the_day": "Call it a day", "phrase_translation": "«Свернуть работу, закончить на сегодня» — устойчивое выражение для момента, когда пора отпустить рабочие дела: Let's call it a day and go to the pub — «давай заканчивать и пойдём в паб». Глагол to call здесь — «объявить» (как the referee called the game — «судья объявил матч законченным»). Родственные фразы: to knock off for the day — разговорное «закончить рабочий день», to clock off — «отбить конец смены», to switch off after work — «выключиться после работы» — всё это про work-life balance.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1014.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Work & Career", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Before a meeting, Emma sends everybody a short list of topics to discuss. What is this list called?", "options": ["An agenda with three topics maximum", "A minutes document from the last meeting", "An invitation to the team building day", "A memo about the broken coffee machine"], "correct": "An agenda with three topics maximum", "explanation": "An agenda — «повестка дня»: список вопросов, которые обсудят на встрече, разосланный заранее. Полезная привычка Эммы из диалога: three topics maximum — «максимум три пункта», иначе встреча превращается в сорок пунктов и знакомство заново. Рядом живут: the first item on the agenda — «первый пункт повестки», to put something on the agenda — «поставить вопрос на повестку». Не путайте с minutes — «протокол», записью того, что уже произошло (следующий вопрос)."}, {"id": "v2", "type": "choice", "sentence": "After every meeting, somebody writes down what was discussed and decided. These official notes are called...", "options": ["The minutes of the meeting", "The seconds of the meeting", "The memories of the meeting", "The reminders of the meeting"], "correct": "The minutes of the meeting", "explanation": "The minutes — «протокол встречи»: официальная запись решений и договорённостей. Ловушка в самом слове: minutes выглядит как «минуты», и корень тот же (латинское minuta — «мелочь»), но значение другое. Употребляется во множественном числе: The minutes were approved — «протокол утвердили». Глагол to take the minutes — «вести протокол», человек, который это делает, — minute taker. В диалоге протокол ведёт Дэвид, но рисует на полях котов: last month the minutes were ninety percent cats. Разослать протокол участникам — to circulate the minutes."}, {"id": "v3", "type": "choice", "sentence": "Kate has been chosen to chair the meeting on Thursday. What will she do?", "options": ["She will lead the discussion and keep order", "She will bring extra chairs for the visitors", "She will write the minutes for the others", "She will book the room and buy the coffee"], "correct": "She will lead the discussion and keep order", "explanation": "To chair a meeting — «вести собрание»: руководить обсуждением, следить за регламентом и подводить итоги. Существительное a chair здесь — «председатель»: Kate is the chair of the meeting — «Кейт — председатель на этой встрече». Это не про мебель, хотя шутки про стулья неизбежны — поэтому вариант с extra chairs такой соблазнительный. Аналоги: to run a meeting — «проводить встречу» (нейтральнее), to host a meeting — «принимать встречу» у себя. Пример: The meeting was chaired by the head of sales — «встречу вёл руководитель отдела продаж»."}, {"id": "v4", "type": "choice", "sentence": "Emma makes candles at weekends and sells them at a small market. What is this extra activity called?", "options": ["A side hustle that brings extra money", "A sick day she takes every single Friday", "A performance review with scented candles", "An agenda item about the craft market"], "correct": "A side hustle that brings extra money", "explanation": "A side hustle — «подработка, побочный заработок»: занятие помимо основной работы, которое приносит деньги и радость. Слово hustle буквально — «суета, напор», так что side hustle — это что-то живое и энергичное, не просто вторая смена. Пример: Her side hustle pays for the holidays — «подработка окупает отпуск». Рядом из темы работы (мы разбирали 8 октября): workload — «загрузка», to burn out — «выгореть», work-life balance — «баланс между работой и личной жизнью» — то, ради чего всё и затевается. В диалоге Эмма признаётся: making candles keeps me sane — «свечи держат меня в здравом уме»."}]}, {"id": "s2", "title": "Grammar — Future Arrangements", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete the sentence: Excuse me, ___ the conference room on Friday afternoon? I need it for a training session.", "options": ["will you be using", "do you usually use", "are you used to using", "have you been using"], "correct": "will you be using", "explanation": "Will you be using...? — самый вежливый способ спросить о чужих планах: Will you be using the conference room on Friday afternoon? — «вы будете пользоваться переговоркой в пятницу после обеда?» Это Future Continuous (will be + V-ing), который мы разбирали 1 сентября и 28 сентября. Такая формулировка звучит как нейтральный вопрос о фактах, а не как просьба или давление — поэтому её любят офисные переписки. Сравните: Will you use...? — грамматически возможно, но звучит резковато, как допрос. Типичный ответ: No, it will be free after two — «нет, после двух она свободна»."}, {"id": "g2", "type": "choice", "sentence": "Complete the sentence: This time tomorrow, Mark ___ his annual report to the directors.", "options": ["will be presenting", "presents every year", "has already presented", "was presenting"], "correct": "will be presenting", "explanation": "This time tomorrow + will be doing — классический маркер Future Continuous: действие будет В ПРОЦЕССЕ в конкретный момент будущего. This time tomorrow Mark will be presenting his annual report — «завтра в это же время Марк будет представлять отчёт»: он встанет, откроет слайды и будет в разгаре выступления. В диалоге Эмма удивляется именно так: So this time tomorrow you will be standing in front of the directors? Похожие маркеры: this time next week, at midnight tonight, at this point on Monday. Сравните: will present сообщило бы факт будущего, но без картины процесса."}, {"id": "g3", "type": "choice", "sentence": "Complete the sentence: I cannot meet at ten on Monday. I ___ the design team — it is already in my calendar.", "options": ["am meeting", "meet always", "will meeting", "would meet"], "correct": "am meeting", "explanation": "Present Continuous для будущих договорённостей: I am meeting the design team — «я встречаюсь с командой дизайнеров». Раз встреча уже стоит в календаре (it is in my calendar) — это фиксированная договорённость, и англичане передают её именно Present Continuous, а не will. То же самое: We are flying to Berlin on Sunday — «мы летим в Берлин в воскресенье» (билеты куплены). Порядок простой: will — решение на ходу, be going to — намерение, Present Continuous — уже согласованное событие. Марк в диалоге жалуется ровно на это: My calendar is wall to wall meetings — «календарь забит встречами под завязку»."}, {"id": "g4", "type": "choice", "sentence": "Which sentence means that the plan is already fixed and agreed with the other person?", "options": ["I am having lunch with the supplier on Thursday.", "I will probably have lunch with the supplier.", "I would rather have lunch with the supplier.", "I am used to having lunch with the supplier."], "correct": "I am having lunch with the supplier on Thursday.", "explanation": "Только первый вариант — зафиксированная договорённость: I am having lunch with the supplier on Thursday — «я обедаю с поставщиком в четверг» (уже договорились, стол забронирован). Остальные грамматически верны, но означают другое: will probably have lunch — «вероятно, пообедаю» (предположение, плана нет); would rather have lunch — «предпочёл бы пообедать» (вкус, а не план — конструкция из урока 6 октября); am used to having lunch — «привык обедать» (be used to + V-ing из уроков 31 августа и 10 октября). Один глагол have — четыре разные истории: договорённость, прогноз, предпочтение, привычка."}]}, {"id": "s3", "title": "Practical English — At Work", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You wake up with a high temperature and cannot go to the office. What do you write to your boss?", "options": ["I have got a temperature, so I am calling in sick today.", "I have got a temperature, so I am taking next Friday off.", "I have got a temperature, so I am leaving early at lunchtime.", "I have got a temperature, so I am handing in my notice."], "correct": "I have got a temperature, so I am calling in sick today.", "explanation": "To call in sick — «сообщить, что не придёшь из-за болезни»: I am calling in sick today — «я сегодня на больничном». Present Continuous здесь не случаен: это сегодняшнее решение-договорённость, а не регулярная хроника (иначе было бы I call in sick every Monday — «я беру больничный каждый понедельник», что уже тревожный симптом). Остальные фразы — правильный английский, но про другое: to take a day off — «взять отгул» (запланированный, без болезни), to leave early — «уйти пораньше», to hand in your notice — «подать заявление об увольнении» (урок от 8 октября — не то сообщение, которое хотят получать от человека с температурой)."}, {"id": "p2", "type": "choice", "sentence": "A colleague invites you to a meeting at three, but you have a dentist appointment at that time. What do you say?", "options": ["I am afraid I cannot make it at three. Could we push it back to four?", "I am afraid I cannot make it at three. Could we cancel the whole project?", "I am afraid I cannot make it at three. Could you come to the dentist with me?", "I am afraid I cannot make it at three. Could you tell the boss I am busy?"], "correct": "I am afraid I cannot make it at three. Could we push it back to four?", "explanation": "I cannot make it — «не смогу прийти» (make it здесь — «успеть, присутствовать»): универсальная вежливая формула для отказов. To push the meeting back — «сдвинуть встречу на более позднее время» (back — дальше по времени); сдвинуть раньше — to bring it forward, просто перенести — to reschedule или to move the meeting. Весь пакет вежливости: I am afraid I cannot make it at three. Could we push it back to four? — «Боюсь, не смогу в три. Можно на четыре?» И заметьте: приём у стоматолога — тоже договорённость, поэтому по-английски это I am seeing the dentist at three — Present Continuous, как в вопросе g3."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete the sentence: By five o'clock on Friday, Mark ___ three meetings and one performance review.", "options": ["will have attended", "will be attending", "will attend usually", "attends every week"], "correct": "will have attended", "explanation": "By five o'clock + will have V3 — Future Perfect: к крайнему сроку результат уже подсчитан. By five o'clock Mark will have attended three meetings and one performance review — «к пяти часам Марк посетит три встречи и одну аттестацию» — всё это будет позади как завершённый результат. Ловушка рядом: will be attending — Future Continuous, действие ЕЩЁ в процессе в пять часов, а по смыслу к этому моменту всё уже закончено. Это повторение темы из 2 сентября: at — точка процесса, by — дедлайн результата. А про трудную неделю можно сказать с чувством: By Friday I will have survived it all — «к пятнице я всё это переживу»."}, {"id": "c2", "type": "choice", "sentence": "Mark says his meetings have agendas with forty items, and the first item is always introductions. Why is it funny?", "options": ["Everybody at the meeting already knows everybody", "New people join the team every single Monday", "Nobody at the company has ever learned the names", "The forty items are all about kinds of coffee"], "correct": "Everybody at the meeting already knows everybody", "explanation": "Юмор в напрасной формальности: сорок пунктов повестки начинаются со знакомства — introductions — на встрече, где все друг друга сто лет знают. Марк подчёркивает это прямо: and everybody already knows everybody — «и каждый уже знает каждого». Это классическая офисная сатира: ритуал живёт по инструкции, а не по смыслу (ср. русское «пункт первый — объявить заседание открытым»). Слово an introduction — «представление, знакомство»; во множественном числе introductions часто значат «вводная часть, вступительные слова». Грамматический бонус: «все друг друга» передаётся повтором everybody knows everybody — без отдельного слова «друг друга»."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What will Mark be doing this time tomorrow?", "options": ["Presenting his annual report to the directors", "Chairing a meeting about the coffee machine", "Taking minutes for Emma and drawing cats in them", "Attending a team building event outside the city"], "correct": "Presenting his annual report to the directors", "explanation": "Марк объясняет: it is not a meeting, it is my performance review. I am presenting the whole annual report to the directors — «это не встреча, это моя аттестация. Я представляю полный годовой отчёт директорам». A performance review — «оценка работы за период»: встреча с руководством, где обсуждают результаты (мы начинали эту тему 8 октября). Эмма тут же примеряет грамматику урока: So this time tomorrow you will be standing in front of the directors defending your year? — Future Continuous: действие в процессе в момент будущего. Слушайте на этом месте интонацию удивления: Wait — «стоп, подожди-ка».", "audio_text": "Mark(M): Emma, do you have a minute? I need to vent.\nEmma(F): Only if you vent while walking. I am meeting the design team in ten minutes.\nMark(M): Of course you are. That is exactly what I want to talk about. My calendar is wall to wall meetings. On Monday I had six.\nEmma(F): Six? What did you actually do between them?\nMark(M): Nothing. I answered emails during the meetings and thought about lunch during the emails.\nEmma(F): Classic. You know what helps? A short agenda. Three topics maximum, and one of them is coffee.\nMark(M): Our meetings do have agendas. Forty items each. The first item is always introductions, and everybody already knows everybody.\nEmma(F): Then ask David to take the minutes. He writes everything down.\nMark(M): David draws cats in the margins. Last month the minutes were ninety percent cats.\nEmma(F): That is still more useful than half of the slides I have seen this year. By the way, who is chairing your Friday meeting?\nMark(M): Me. And it is not a meeting, it is my performance review. I am presenting the whole annual report to the directors.\nEmma(F): Wait. So this time tomorrow you will be standing in front of the directors defending your year?\nMark(M): If I finish the slides. Right now slide forty is a picture of a cat that David sent me.\nEmma(F): Deep breath. The review is supposed to start at nine, so you still have the whole evening. And afterwards you are coming to the pub with us. No excuses, no agenda items.\nMark(M): Fine. But the first round is on me. Now if you will excuse me, I am going to finish those slides and call it a day.\nEmma(F): That is the spirit. And Mark, next time you feel like this, do not call in sick and blame my candles.\nMark(M): Your candles?\nEmma(F): I have a little side hustle. I make candles at weekends and sell them at the Christmas market. It keeps me sane.\nMark(M): Well, that explains the smell of cinnamon in the office.\nEmma(F): That is the sample batch. Advertising works best in person."}, {"id": "l2", "type": "listen", "sentence": "Why does Mark mention cats during the conversation?", "options": ["David draws them in the margins of the minutes", "David brings his cat to every office meeting", "Mark has to feed the office cat on Fridays", "Emma puts them on her slides for every review"], "correct": "David draws them in the margins of the minutes", "explanation": "Марк жалуется на протоколы: David draws cats in the margins. Last month the minutes were ninety percent cats — «Дэвид рисует котов на полях. В прошлом месяце протокол состоял из котов на девяносто процентов». The margins — «поля страницы», где обычно делают пометки. Шутка развивается: слайд номер сорок презентации Марка — тоже кот, которого прислал Дэвид: slide forty is a picture of a cat that David sent me. А ответ Эммы — классика офисного юмора: That is still more useful than half of the slides I have seen this year — «это всё равно полезнее половины слайдов, которые я видела за год».", "audio_text": "Mark(M): Emma, do you have a minute? I need to vent.\nEmma(F): Only if you vent while walking. I am meeting the design team in ten minutes.\nMark(M): Of course you are. That is exactly what I want to talk about. My calendar is wall to wall meetings. On Monday I had six.\nEmma(F): Six? What did you actually do between them?\nMark(M): Nothing. I answered emails during the meetings and thought about lunch during the emails.\nEmma(F): Classic. You know what helps? A short agenda. Three topics maximum, and one of them is coffee.\nMark(M): Our meetings do have agendas. Forty items each. The first item is always introductions, and everybody already knows everybody.\nEmma(F): Then ask David to take the minutes. He writes everything down.\nMark(M): David draws cats in the margins. Last month the minutes were ninety percent cats.\nEmma(F): That is still more useful than half of the slides I have seen this year. By the way, who is chairing your Friday meeting?\nMark(M): Me. And it is not a meeting, it is my performance review. I am presenting the whole annual report to the directors.\nEmma(F): Wait. So this time tomorrow you will be standing in front of the directors defending your year?\nMark(M): If I finish the slides. Right now slide forty is a picture of a cat that David sent me.\nEmma(F): Deep breath. The review is supposed to start at nine, so you still have the whole evening. And afterwards you are coming to the pub with us. No excuses, no agenda items.\nMark(M): Fine. But the first round is on me. Now if you will excuse me, I am going to finish those slides and call it a day.\nEmma(F): That is the spirit. And Mark, next time you feel like this, do not call in sick and blame my candles.\nMark(M): Your candles?\nEmma(F): I have a little side hustle. I make candles at weekends and sell them at the Christmas market. It keeps me sane.\nMark(M): Well, that explains the smell of cinnamon in the office.\nEmma(F): That is the sample batch. Advertising works best in person."}]}], "subtitles": [{"speaker": "Mark", "text": "Emma, do you have a minute? I need to vent."}, {"speaker": "Emma", "text": "Only if you vent while walking. I am meeting the design team in ten minutes."}, {"speaker": "Mark", "text": "Of course you are. That is exactly what I want to talk about. My calendar is wall to wall meetings. On Monday I had six."}, {"speaker": "Emma", "text": "Six? What did you actually do between them?"}, {"speaker": "Mark", "text": "Nothing. I answered emails during the meetings and thought about lunch during the emails."}, {"speaker": "Emma", "text": "Classic. You know what helps? A short agenda. Three topics maximum, and one of them is coffee."}, {"speaker": "Mark", "text": "Our meetings do have agendas. Forty items each. The first item is always introductions, and everybody already knows everybody."}, {"speaker": "Emma", "text": "Then ask David to take the minutes. He writes everything down."}, {"speaker": "Mark", "text": "David draws cats in the margins. Last month the minutes were ninety percent cats."}, {"speaker": "Emma", "text": "That is still more useful than half of the slides I have seen this year. By the way, who is chairing your Friday meeting?"}, {"speaker": "Mark", "text": "Me. And it is not a meeting, it is my performance review. I am presenting the whole annual report to the directors."}, {"speaker": "Emma", "text": "Wait. So this time tomorrow you will be standing in front of the directors defending your year?"}, {"speaker": "Mark", "text": "If I finish the slides. Right now slide forty is a picture of a cat that David sent me."}, {"speaker": "Emma", "text": "Deep breath. The review is supposed to start at nine, so you still have the whole evening. And afterwards you are coming to the pub with us. No excuses, no agenda items."}, {"speaker": "Mark", "text": "Fine. But the first round is on me. Now if you will excuse me, I am going to finish those slides and call it a day."}, {"speaker": "Emma", "text": "That is the spirit. And Mark, next time you feel like this, do not call in sick and blame my candles."}, {"speaker": "Mark", "text": "Your candles?"}, {"speaker": "Emma", "text": "I have a little side hustle. I make candles at weekends and sell them at the Christmas market. It keeps me sane."}, {"speaker": "Mark", "text": "Well, that explains the smell of cinnamon in the office."}, {"speaker": "Emma", "text": "That is the sample batch. Advertising works best in person."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
