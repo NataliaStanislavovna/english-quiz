@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Food &amp; Cooking: Spices, Herbs &amp; Baking + Concessive Clauses (although / despite / in spite of)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Food &amp; Cooking: Spices, Herbs &amp; Baking + Concessive Clauses (although / despite / in spite of)</h1><div class="subtitle">2026-10-15</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">A recipe for disaster</div><div class="translation">«Рецепт катастрофы» — идиома про план, который почти наверняка плохо кончится. Строится по образцу a recipe for success — «рецепт успеха»: Fresh bread on your first attempt, for your boss? That is a recipe for disaster — «Свежий хлеб с первой попытки, да ещё для начальника? Это верный путь к катастрофе». Смешно здесь то, что кулинарное выражение ушло в общую речь: рецепт есть, а блюдо — беда. Похожие образы о гарантированных неприятностях: a ticking time bomb — «бомба замедленного действия», to ask for trouble — «сам напроситься на неприятности».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Food & Cooking: Spices, Herbs & Baking + Concessive Clauses (although / despite / in spite of)", "subtitle": "2026-10-15", "date": "2026-10-15", "phrase_of_the_day": "A recipe for disaster", "phrase_translation": "«Рецепт катастрофы» — идиома про план, который почти наверняка плохо кончится. Строится по образцу a recipe for success — «рецепт успеха»: Fresh bread on your first attempt, for your boss? That is a recipe for disaster — «Свежий хлеб с первой попытки, да ещё для начальника? Это верный путь к катастрофе». Смешно здесь то, что кулинарное выражение ушло в общую речь: рецепт есть, а блюдо — беда. Похожие образы о гарантированных неприятностях: a ticking time bomb — «бомба замедленного действия», to ask for trouble — «сам напроситься на неприятности».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1015.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Food & Cooking", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Sarah tells John to roast the chicken with rosemary and paprika. Rosemary is an example of...", "options": ["a herb — the leaf of a small plant", "a spice — the seed of a hot pepper", "a grain — the base of a side dish", "a sauce — a liquid for frying potatoes"], "correct": "a herb — the leaf of a small plant", "explanation": "A herb (произносится «хёб», h часто немое) — «трава, пряная зелень»: листья растений — rosemary (розмарин), thyme (тимьян), basil (базилик), parsley (петрушка). A spice — «специя»: обычно сушёные семена, плоды, кора или корни — paprika (паприка), cinnamon (корица), pepper (перец), cumin (зира). Простое правило: herbs растут в европейских садах и кладутся веточкой, spices приезжают издалека и кладутся щепоткой. В диалоге розмарин идёт к курице, а корица — по ошибке в тесто: something from a jar, it might have been cinnamon."}, {"id": "v2", "type": "choice", "sentence": "The recipe says to knead the dough for ten minutes. What should John do?", "options": ["Press and fold it with his hands", "Leave it alone in a warm place", "Cut it into thick slices with a knife", "Bake it quickly at a very high heat"], "correct": "Press and fold it with his hands", "explanation": "To knead the dough — «месить тесто»: энергично нажимать и складывать — press and fold, — раз за разом, пока тесто не станет гладким и упругим. Произносится «нид» с долгим гласным. Сара уточняет в диалоге: Real pressing and folding, not two polite pats — «настоящее давление и складывание, а не два вежливых шлепка» (a pat — «лёгкий шлепок»), и добавляет: You are petting it, John. It is dough, not a hamster — «ты его гладишь. Это тесто, а не хомяк». Рядом живёт to prove the dough — «дать тесту подняться»."}, {"id": "v3", "type": "choice", "sentence": "At the end of cooking, the recipe says to season the chicken to taste. What does this mean?", "options": ["Add salt until the flavour seems right", "Follow exactly the amounts in the recipe", "Cover the pot and let the dish cool down", "Replace all the salt with lemon juice"], "correct": "Add salt until the flavour seems right", "explanation": "To season — «приправлять, солить и перчить»: добавлять соль, специи, травы. To taste — «по вкусу», без точной цифры: пробуешь и решаешь сам. Season to taste — «приправь по вкусу»; так же пишут salt to taste. Сара учит в диалоге: You can always add more, but you cannot take it out — «добавить всегда можно, убрать — нельзя». Существительное seasoning — «приправа, смесь специй». Не путайте to taste («по вкусу») с to taste like — «иметь вкус чего-то»: It tastes like cinnamon — «на вкус как корица»."}, {"id": "v4", "type": "choice", "sentence": "Why does bread dough rise in a warm kitchen?", "options": ["The yeast produces small bubbles of gas", "The flour slowly turns into warm water", "The oven pushes hot air into the mixture", "The salt reacts with oil inside the dough"], "correct": "The yeast produces small bubbles of gas", "explanation": "Yeast — «дрожжи»: живые грибки, которые в тепле едят сахар и выделяют углекислый газ; пузырьки газа и поднимают тесто — the dough rises. Если дрожжей нет, тесто остаётся плоским — именно это случилось у Джона: The dough looks exactly the same as an hour ago — «тесто выглядит точно так же, как час назад», потому что в миске корица вместо дрожжей. Сара объясняет: That is the whole magic of yeast — «в этом вся магия дрожжей». Глагол rise неправильный: rise — rose — risen; а «поднять что-то» — уже другой глагол, to raise (raise — raised — raised)."}]}, {"id": "s2", "title": "Grammar — although / despite / in spite of", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete the sentence: ___ having read the recipe twice, John still forgot to preheat the oven.", "options": ["Despite", "Although", "However", "Whereas"], "correct": "Despite", "explanation": "Перед герундием (having read, burning, being) стоит despite или in spite of: Despite having read the recipe twice, John still forgot to preheat the oven — «несмотря на дважды прочитанный рецепт, Джон всё равно забыл разогреть духовку». Хотя союз «хотя» здесь и просится, although не подходит: оно требует после себя целого предложения с подлежащим и глаголом (although he had read...). However — «однако» — не работает перед герундием. Запомните пару: despite / in spite of + существительное ИЛИ V-ing; although / even though + целое предложение. И никаких despite of — это ошибка, на ней построен вопрос c2."}, {"id": "g2", "type": "choice", "sentence": "Complete the sentence: ___ the bread was a total failure, the dinner was still a great success.", "options": ["Although", "Despite", "In spite of", "Because of"], "correct": "Although", "explanation": "После пропуска стоит целое предложение — the bread was a total failure — значит, нужен союз для предложений: although — «хотя». Несмотря на соблазн, despite и in spite of здесь невозможны: они вводят только существительное или герундий (despite the failure, despite failing). Because of — «из-за» — смысл противоположный: оно называет причину успеха, а не контраст. Усиленный вариант союза — even though: контраст сильнее, строй тот же: Even though the bread was a failure, the dinner was a success. Именно так Джон в диалоге оценивает своё творение: сначала «немного необычно», потом — «впрочем, вкусно»."}, {"id": "g3", "type": "choice", "sentence": "Which sentence is correct?", "options": ["In spite of the burnt garlic, the sauce tasted great.", "Despite of the burnt garlic, the sauce tasted great.", "Although the burnt garlic, the sauce tasted great.", "In spite the garlic burnt, the sauce tasted great."], "correct": "In spite of the burnt garlic, the sauce tasted great.", "explanation": "Три классические ловушки в одной задаче. Первая: despite of — НИКОГДА не правильно; у despite нет предлога of. Вторая: although + существительное нельзя — although требует предложения (although the garlic burnt — можно, а although the burnt garlic — нет). Третья: у in spite of нельзя выбрасывать of и менять порядок слов. Правильный строй: in spite of / despite + существительное: In spite of the burnt garlic — «несмотря на подгоревший чеснок». Смысл у despite и in spite of одинаковый; in spite of чуть формальнее и эмоциональнее. Если хочется сказать «хотя» — перестройте: Although the garlic burnt, the sauce tasted great."}, {"id": "g4", "type": "choice", "sentence": "John tastes the chicken and says, 'It is a little unusual. Tasty, though.' What does though mean here?", "options": ["However — a contrast with what came before", "As well — one more good quality added", "Very — it makes the adjective stronger", "Still cooking — the chicken is not ready"], "correct": "However — a contrast with what came before", "explanation": "Though в конце предложения после запятой — разговорное «однако, впрочем»: It is a little unusual. Tasty, though — «Немного необычно. Впрочем, вкусно». Сначала идёт минус (unusual), потом though разворачивает мысль к плюсу. Это тот же though, что живёт внутри although, только здесь он стоит самостоятельно в хвосте фразы — типично для живой речи. Сравните из диалога: Your defence is noted and rejected — «защита принята к сведению и отклонена», — Сара тоже сначала признаёт аргумент, потом его разворачивает. Even though так в хвост не ставится — только короткое though. В начале фразы though тоже значит «однако», но звучит книжно: Though he was tired, he cooked."}]}, {"id": "s3", "title": "Practical English — At the Table", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are at a friend's dinner table. The salt is near the host, far from you. What do you say?", "options": ["Could you pass me the salt, please?", "Give me the salt. I cannot eat this.", "This food is completely without salt.", "Why did you not put any salt in this?"], "correct": "Could you pass me the salt, please?", "explanation": "Could you pass me the salt, please? — стандартная формула за столом: «Передайте, пожалуйста, соль». To pass — «передать, протянуть» по столу. Остальные варианты грамматически правильны, но это упрёк хозяину: Give me the salt — приказ, completely without salt и why did you not — прямая критика еды. Разница между ужином у друзей и рестораном (урок 19 сентября): в ресторане жалобу смягчают через I am afraid, a bit и Could you possibly; дома достаточно Could you... please. Ответ хозяина: Here you are — «пожалуйста, вот»."}, {"id": "p2", "type": "choice", "sentence": "The host offers you a second portion, but you are completely full. What is the polite answer?", "options": ["It was delicious, but I could not eat another bite.", "It was delicious, but I am on a strict diet now.", "It was delicious, but my plate is far too small.", "It was delicious, but you cook far too slowly."], "correct": "It was delicious, but I could not eat another bite.", "explanation": "I could not eat another bite — «больше ни кусочка не влезет»: вежливый отказ, который начинается с комплимента, чтобы хозяин не обиделся. Другие варианты — тоже комплимент плюс «но», но с проблемой: строгая диета звучит как намёк на калорийность блюда, маленькая тарелка — претензия к сервировке, а медленное приготовление — удар по хозяйской гордости. Формула надёжна: похвала + but + мягкая причина, связанная с вами, а не с едой. Ещё варианты: I am stuffed (разговорное «объелся»), Everything was perfect, I simply have no room left — «всё было прекрасно, просто места не осталось»."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete the sentence: ___ he had never baked bread before, John's chicken turned out surprisingly well.", "options": ["Even though", "Despite", "Owing to", "In spite of"], "correct": "Even though", "explanation": "После пропуска стоит целое предложение he had never baked bread before — нужен союз, а не предлог: Even though he had never baked bread before — «хотя он прежде никогда не пёк хлеб». Even though — усиленное although: контраст подчёркнут — «хотя уж точно никогда». Despite и in spite of потребовали бы герундия: Despite never having baked bread before — тоже правильно, но строй другой. Owing to — «по причине» — называет причину успеха, а не контраст. Тонкость речи: в even though ударение на even, а голос на though чуть падает — уверенность, а не вопрос."}, {"id": "c2", "type": "choice", "sentence": "Which sentence has the same meaning as 'Although the kitchen was tiny, the dinner was a great success'?", "options": ["Despite the tiny kitchen, the dinner was a great success.", "Despite of the tiny kitchen, the dinner was a great success.", "Despite the kitchen was tiny, the dinner was a great success.", "Despite the kitchen tiny, the dinner was a great success."], "correct": "Despite the tiny kitchen, the dinner was a great success.", "explanation": "Переход с although на despite — это перестройка из предложения в именную группу: the kitchen was tiny → the tiny kitchen («крошечная кухня» вместо «кухня была крошечной»). Despite the tiny kitchen — единственно правильный вариант. Три ловушки: despite of — несуществующая форма; despite + предложение (the kitchen was tiny) — нельзя, для предложений есть although; despite the kitchen tiny — перепутан порядок слов английской именной группы (прилагательное стоит перед существительным). Самопроверка на всю тему: после despite / in spite of должно стоять существительное или V-ing; если слышите подлежащее с глаголом — ставьте although / even though."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why does the bread dough look exactly the same as an hour ago?", "options": ["John put cinnamon in it instead of yeast", "John left the bowl in a cold part of the kitchen", "John covered the dough with the wrong cloth", "John used old flour that had gone stale"], "correct": "John put cinnamon in it instead of yeast", "explanation": "Джон признаётся: Something from a jar. It smelled warm and friendly. It might have been cinnamon — «что-то из баночки. Пахло тепло и дружелюбно. Кажется, это была корица». Без дрожжей тесто не поднимается, поэтому The dough looks exactly the same as an hour ago — «тесто выглядит точно так же, как час назад». Модальная конструкция might have been — «возможно, это было»: неуверенный вывод о прошлом (мы разбирали его 15 сентября). Диагноз Сары — идиома дня: That is a recipe for disaster. И её приговор корице: cinnamon does not rise, it sits in the bowl and smells like Christmas — «корица не поднимается, она сидит в миске и пахнет Рождеством».", "audio_text": "Sarah(F): John, I have got the flour, the yeast and the new oven mitts. Where do we start?\nJohn(M): With an apology. I invited my boss and his wife to dinner on Saturday.\nSarah(F): You did what? John, you cannot even boil an egg without a phone call to your mother.\nJohn(M): That is unfair. I once made soup. It was brown, but it was soup.\nSarah(F): The fact that you sound proud of that is honestly the worst part. What are you planning to cook?\nJohn(M): Roast chicken, potatoes with rosemary, and I thought I would bake bread as well.\nSarah(F): Bread? Fresh bread on your first attempt, for your boss? That is a recipe for disaster.\nJohn(M): It cannot be that hard. People were baking bread five thousand years ago.\nSarah(F): Those people had a village, John. You have a cat who watches you burn toast.\nJohn(M): Fine, coach. Teach me. What goes into the dough first?\nSarah(F): Flour, water, salt and the yeast. Have you got the yeast?\nJohn(M): Yeast... Something from a jar. It smelled warm and friendly. It might have been cinnamon.\nSarah(F): Cinnamon. In the bread dough. Where the yeast should be.\nJohn(M): In my defence, both jars are brown and the labels have faded.\nSarah(F): Your defence is noted and rejected. Now, knead the dough for ten minutes. Real pressing and folding, not two polite pats.\nJohn(M): Like this?\nSarah(F): You are petting it, John. It is dough, not a hamster. Push it with the heel of your hand, fold it, turn it, again.\nJohn(M): Ten minutes? My arms will fall off before the bread even has a chance to.\nSarah(F): In spite of all my doubts, you are actually doing quite well. Now cover it and leave it somewhere warm to rise.\nJohn(M): The dough rises on its own? Without me?\nSarah(F): That is the whole magic of yeast. Although the magic only works if you use actual yeast and not a dessert spice.\nJohn(M): You are never going to let the cinnamon go, are you?\nSarah(F): Not while it is still funny. Right, the chicken. Chop the rosemary, rub it under the skin with some paprika.\nJohn(M): How much paprika? A pinch, a spoonful, half the jar?\nSarah(F): Start with two teaspoons. You can always add more, but you cannot take it out. Season it to taste.\nJohn(M): Season to taste. And if my taste is terrible?\nSarah(F): Then you call me on Saturday at five, and I will talk you through it. Now preheat the oven.\nJohn(M): The oven... Yes. The oven. I definitely know which knob is the oven.\nSarah(F): Two hundred degrees. Top and bottom heat, no grill. And do not touch the fan setting.\nJohn(M): Twenty minutes later, Sarah. The dough looks exactly the same as an hour ago.\nSarah(F): Because cinnamon does not rise, John. It sits in the bowl and smells like Christmas.\nJohn(M): So the bread is dead?\nSarah(F): The bread was never alive. Buy a nice loaf from the bakery on the corner and warm it up in your own oven.\nJohn(M): Is that lying?\nSarah(F): That is hosting. There is a difference.\nJohn(M): And if the chicken turns out wrong too?\nSarah(F): It will not. You have done the hard part already. The rest is just patience and a timer.\nJohn(M): You know, you are surprisingly good at this. Have you thought about giving up your real job?\nSarah(F): Every time I read a work email. OK, smell that? Rosemary and paprika. That smells like a proper Sunday dinner.\nJohn(M): It really does. Although now the whole flat smells of cinnamon and roast chicken at the same time.\nSarah(F): Festive and savoury. Your boss will either be very impressed or very confused.\nJohn(M): With my track record, I will take those odds.\nSarah(F): Good. Now taste the pan juices and season them. Careful, the spoon is hot.\nJohn(M): It is a little... unusual. Tasty, though.\nSarah(F): Unusual is my middle name. On Saturday you will say it with confidence.\nJohn(M): Tasty, though. Wait, should I make a dessert as well?\nSarah(F): Absolutely not. Some things are best left to professionals. Buy a cake.\nJohn(M): From the bakery on the corner. Warm it up in my own oven.\nSarah(F): Now you are hosting like a pro."}, {"id": "l2", "type": "listen", "sentence": "What does Sarah mean when she says, 'That is a recipe for disaster'?", "options": ["The plan is almost certain to end badly", "The dish needs a completely new recipe", "The kitchen is not equipped for real baking", "John should write his own recipes more often"], "correct": "The plan is almost certain to end badly", "explanation": "A recipe for disaster — «рецепт катастрофы»: план, где все ингредиенты на месте, но блюдо — беда. Сара имеет в виду не кулинарию, а сам замысел: свежий хлеб с первой попытки, да ещё для начальника. Слово recipe регулярно так живёт: a recipe for success — «рецепт успеха», a recipe for trouble — «готовая формула неприятностей». Обратный полёт шутки в конце диалога: Some things are best left to professionals — «некоторые вещи лучше оставить профессионалам» — Сара говорит это про покупной торт. Заметьте пассив с предлогом: are best left to — «лучше всего оставить (их)» + кому.", "audio_text": "Sarah(F): John, I have got the flour, the yeast and the new oven mitts. Where do we start?\nJohn(M): With an apology. I invited my boss and his wife to dinner on Saturday.\nSarah(F): You did what? John, you cannot even boil an egg without a phone call to your mother.\nJohn(M): That is unfair. I once made soup. It was brown, but it was soup.\nSarah(F): The fact that you sound proud of that is honestly the worst part. What are you planning to cook?\nJohn(M): Roast chicken, potatoes with rosemary, and I thought I would bake bread as well.\nSarah(F): Bread? Fresh bread on your first attempt, for your boss? That is a recipe for disaster.\nJohn(M): It cannot be that hard. People were baking bread five thousand years ago.\nSarah(F): Those people had a village, John. You have a cat who watches you burn toast.\nJohn(M): Fine, coach. Teach me. What goes into the dough first?\nSarah(F): Flour, water, salt and the yeast. Have you got the yeast?\nJohn(M): Yeast... Something from a jar. It smelled warm and friendly. It might have been cinnamon.\nSarah(F): Cinnamon. In the bread dough. Where the yeast should be.\nJohn(M): In my defence, both jars are brown and the labels have faded.\nSarah(F): Your defence is noted and rejected. Now, knead the dough for ten minutes. Real pressing and folding, not two polite pats.\nJohn(M): Like this?\nSarah(F): You are petting it, John. It is dough, not a hamster. Push it with the heel of your hand, fold it, turn it, again.\nJohn(M): Ten minutes? My arms will fall off before the bread even has a chance to.\nSarah(F): In spite of all my doubts, you are actually doing quite well. Now cover it and leave it somewhere warm to rise.\nJohn(M): The dough rises on its own? Without me?\nSarah(F): That is the whole magic of yeast. Although the magic only works if you use actual yeast and not a dessert spice.\nJohn(M): You are never going to let the cinnamon go, are you?\nSarah(F): Not while it is still funny. Right, the chicken. Chop the rosemary, rub it under the skin with some paprika.\nJohn(M): How much paprika? A pinch, a spoonful, half the jar?\nSarah(F): Start with two teaspoons. You can always add more, but you cannot take it out. Season it to taste.\nJohn(M): Season to taste. And if my taste is terrible?\nSarah(F): Then you call me on Saturday at five, and I will talk you through it. Now preheat the oven.\nJohn(M): The oven... Yes. The oven. I definitely know which knob is the oven.\nSarah(F): Two hundred degrees. Top and bottom heat, no grill. And do not touch the fan setting.\nJohn(M): Twenty minutes later, Sarah. The dough looks exactly the same as an hour ago.\nSarah(F): Because cinnamon does not rise, John. It sits in the bowl and smells like Christmas.\nJohn(M): So the bread is dead?\nSarah(F): The bread was never alive. Buy a nice loaf from the bakery on the corner and warm it up in your own oven.\nJohn(M): Is that lying?\nSarah(F): That is hosting. There is a difference.\nJohn(M): And if the chicken turns out wrong too?\nSarah(F): It will not. You have done the hard part already. The rest is just patience and a timer.\nJohn(M): You know, you are surprisingly good at this. Have you thought about giving up your real job?\nSarah(F): Every time I read a work email. OK, smell that? Rosemary and paprika. That smells like a proper Sunday dinner.\nJohn(M): It really does. Although now the whole flat smells of cinnamon and roast chicken at the same time.\nSarah(F): Festive and savoury. Your boss will either be very impressed or very confused.\nJohn(M): With my track record, I will take those odds.\nSarah(F): Good. Now taste the pan juices and season them. Careful, the spoon is hot.\nJohn(M): It is a little... unusual. Tasty, though.\nSarah(F): Unusual is my middle name. On Saturday you will say it with confidence.\nJohn(M): Tasty, though. Wait, should I make a dessert as well?\nSarah(F): Absolutely not. Some things are best left to professionals. Buy a cake.\nJohn(M): From the bakery on the corner. Warm it up in my own oven.\nSarah(F): Now you are hosting like a pro."}]}], "subtitles": [{"speaker": "Sarah", "text": "John, I have got the flour, the yeast and the new oven mitts. Where do we start?"}, {"speaker": "John", "text": "With an apology. I invited my boss and his wife to dinner on Saturday."}, {"speaker": "Sarah", "text": "You did what? John, you cannot even boil an egg without a phone call to your mother."}, {"speaker": "John", "text": "That is unfair. I once made soup. It was brown, but it was soup."}, {"speaker": "Sarah", "text": "The fact that you sound proud of that is honestly the worst part. What are you planning to cook?"}, {"speaker": "John", "text": "Roast chicken, potatoes with rosemary, and I thought I would bake bread as well."}, {"speaker": "Sarah", "text": "Bread? Fresh bread on your first attempt, for your boss? That is a recipe for disaster."}, {"speaker": "John", "text": "It cannot be that hard. People were baking bread five thousand years ago."}, {"speaker": "Sarah", "text": "Those people had a village, John. You have a cat who watches you burn toast."}, {"speaker": "John", "text": "Fine, coach. Teach me. What goes into the dough first?"}, {"speaker": "Sarah", "text": "Flour, water, salt and the yeast. Have you got the yeast?"}, {"speaker": "John", "text": "Yeast... Something from a jar. It smelled warm and friendly. It might have been cinnamon."}, {"speaker": "Sarah", "text": "Cinnamon. In the bread dough. Where the yeast should be."}, {"speaker": "John", "text": "In my defence, both jars are brown and the labels have faded."}, {"speaker": "Sarah", "text": "Your defence is noted and rejected. Now, knead the dough for ten minutes. Real pressing and folding, not two polite pats."}, {"speaker": "John", "text": "Like this?"}, {"speaker": "Sarah", "text": "You are petting it, John. It is dough, not a hamster. Push it with the heel of your hand, fold it, turn it, again."}, {"speaker": "John", "text": "Ten minutes? My arms will fall off before the bread even has a chance to."}, {"speaker": "Sarah", "text": "In spite of all my doubts, you are actually doing quite well. Now cover it and leave it somewhere warm to rise."}, {"speaker": "John", "text": "The dough rises on its own? Without me?"}, {"speaker": "Sarah", "text": "That is the whole magic of yeast. Although the magic only works if you use actual yeast and not a dessert spice."}, {"speaker": "John", "text": "You are never going to let the cinnamon go, are you?"}, {"speaker": "Sarah", "text": "Not while it is still funny. Right, the chicken. Chop the rosemary, rub it under the skin with some paprika."}, {"speaker": "John", "text": "How much paprika? A pinch, a spoonful, half the jar?"}, {"speaker": "Sarah", "text": "Start with two teaspoons. You can always add more, but you cannot take it out. Season it to taste."}, {"speaker": "John", "text": "Season to taste. And if my taste is terrible?"}, {"speaker": "Sarah", "text": "Then you call me on Saturday at five, and I will talk you through it. Now preheat the oven."}, {"speaker": "John", "text": "The oven... Yes. The oven. I definitely know which knob is the oven."}, {"speaker": "Sarah", "text": "Two hundred degrees. Top and bottom heat, no grill. And do not touch the fan setting."}, {"speaker": "John", "text": "Twenty minutes later, Sarah. The dough looks exactly the same as an hour ago."}, {"speaker": "Sarah", "text": "Because cinnamon does not rise, John. It sits in the bowl and smells like Christmas."}, {"speaker": "John", "text": "So the bread is dead?"}, {"speaker": "Sarah", "text": "The bread was never alive. Buy a nice loaf from the bakery on the corner and warm it up in your own oven."}, {"speaker": "John", "text": "Is that lying?"}, {"speaker": "Sarah", "text": "That is hosting. There is a difference."}, {"speaker": "John", "text": "And if the chicken turns out wrong too?"}, {"speaker": "Sarah", "text": "It will not. You have done the hard part already. The rest is just patience and a timer."}, {"speaker": "John", "text": "You know, you are surprisingly good at this. Have you thought about giving up your real job?"}, {"speaker": "Sarah", "text": "Every time I read a work email. OK, smell that? Rosemary and paprika. That smells like a proper Sunday dinner."}, {"speaker": "John", "text": "It really does. Although now the whole flat smells of cinnamon and roast chicken at the same time."}, {"speaker": "Sarah", "text": "Festive and savoury. Your boss will either be very impressed or very confused."}, {"speaker": "John", "text": "With my track record, I will take those odds."}, {"speaker": "Sarah", "text": "Good. Now taste the pan juices and season them. Careful, the spoon is hot."}, {"speaker": "John", "text": "It is a little... unusual. Tasty, though."}, {"speaker": "Sarah", "text": "Unusual is my middle name. On Saturday you will say it with confidence."}, {"speaker": "John", "text": "Tasty, though. Wait, should I make a dessert as well?"}, {"speaker": "Sarah", "text": "Absolutely not. Some things are best left to professionals. Buy a cake."}, {"speaker": "John", "text": "From the bakery on the corner. Warm it up in my own oven."}, {"speaker": "Sarah", "text": "Now you are hosting like a pro."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
