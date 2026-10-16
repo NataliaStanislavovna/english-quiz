@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Directions &amp; City: Road Signs &amp; Getting Around + Indirect Questions (углубление)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Directions &amp; City: Road Signs &amp; Getting Around + Indirect Questions (углубление)</h1><div class="subtitle">2026-10-16</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Off the beaten track</div><div class="translation">«Вдали от проторённых дорог» — о месте, которое находится не на людном маршруте, в стороне от главного пути. В диалоге Марк так описывает вторую аптеку: The other one is across town, a bit off the beaten track — «другая — на другом конце города, вдали от проторённых дорожек». Beaten — это причастие от to beat: «протоптанная» тропа, по которой ходили столько раз, что её выбили ногами. Антоним — on the beaten track, «на людном пути». Похожие образы: in the middle of nowhere — «в чистом поле», и идиома to beat a path to somebody&#x27;s door — «толпами ходить к кому-то».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Directions & City: Road Signs & Getting Around + Indirect Questions (углубление)", "subtitle": "2026-10-16", "date": "2026-10-16", "phrase_of_the_day": "Off the beaten track", "phrase_translation": "«Вдали от проторённых дорог» — о месте, которое находится не на людном маршруте, в стороне от главного пути. В диалоге Марк так описывает вторую аптеку: The other one is across town, a bit off the beaten track — «другая — на другом конце города, вдали от проторённых дорожек». Beaten — это причастие от to beat: «протоптанная» тропа, по которой ходили столько раз, что её выбили ногами. Антоним — on the beaten track, «на людном пути». Похожие образы: in the middle of nowhere — «в чистом поле», и идиома to beat a path to somebody's door — «толпами ходить к кому-то».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1016.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Directions & City", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "You see a yellow sign that says 'Roadworks ahead'. What should drivers expect?", "options": ["Workmen digging up and repairing the road", "A farmers' market spread along the road", "New houses being built beside the road", "Cars parked on both sides of the road"], "correct": "Workmen digging up and repairing the road", "explanation": "Roadworks — «дорожные работы»: ремонт дороги, труб или кабелей под ней. Знак Roadworks ahead означает «впереди дорожные работы» — снижай скорость и готовься к объезду. Слово стоит почти всегда во множественном числе, как scissors или trousers: The roadworks have eaten half the pavement — «дорожные работы съели половину тротуара» (реплика Марка из диалога). Обычные спутники: diversion (объезд), temporary traffic lights (временные светофоры), loose chippings (гравий). Не путайте с a road worker — «дорожный рабочий» (человек) и с the works — «канализация» в разговорном американском."}, {"id": "v2", "type": "choice", "sentence": "Mark says that the street past the clock tower is one-way. What does he mean?", "options": ["Traffic may only travel in one direction", "Only one car is allowed there at a time", "The street is closed to traffic on Sundays", "Cars may only park there late at night"], "correct": "Traffic may only travel in one direction", "explanation": "A one-way street — «улица с односторонним движением»: машины едут только в одну сторону. В диалоге Марк уточняет с юмором: That street is one-way, but only for cars, so you will be fine on foot — «улица односторонняя, но только для машин, пешком всё в порядке»: для пешеходов ограничение не действует. Знак на въезде — a no entry sign («кирпич»): белый прямоугольник с красным кругом. Система таких улиц в центре — the one-way system. Обратное понятие — a two-way street, «двусторонняя»; в переносном смысле It is a two-way street = «это работает в обе стороны» (об отношениях и компромиссах)."}, {"id": "v3", "type": "choice", "sentence": "What will you see in a pedestrian zone?", "options": ["Only people on foot, with no cars at all", "Only buses and taxis during the daytime", "Cyclists racing in a special fast lane", "Cars driving behind a man with a flag"], "correct": "Only people on foot, with no cars at all", "explanation": "A pedestrian zone — «пешеходная зона»: участок города, закрытый для машин. On foot — «пешком» (не «by foot»!). Синоним — a pedestrian street или walking street. Марк описывает её так: No cars there at all, just teenagers on bikes and one very confident goose — «машин нет вовсе, только подростки на велосипедах и одна очень уверенная в себе гусыня». Родственные слова: a pedestrian — «пешеход», a pedestrian crossing — «пешеходный переход» (разговорно a zebra crossing — «зебра», мы разбирали 16 сентября). Признаки на местности: Cars prohibited, residents' access only — «въезд только для жителей»."}, {"id": "v4", "type": "choice", "sentence": "Emma asks Mark to give her a lift. What does she want him to do?", "options": ["Take her to the shop in his car", "Carry her heavy bags up the stairs", "Lift her mood with some cheerful music", "Show her the route on a paper map"], "correct": "Take her to the shop in his car", "explanation": "To give somebody a lift — «подвезти кого-то» (британский английский): отвезти на своей машине. Американцы говорят to give somebody a ride. Просить можно так: I was wondering if you could give me a lift — именно так Эмма и говорит в диалоге, самой вежливой формой. Если вас подвезли, вас могут drop off — «высадить» (знакомо по аренде машины 3 октября: to drop the car off — «сдать машину»). Отдельно живёт lift = «лифт» (тоже британское; американское elevator) и to lift = «поднять», но в дороге lift — почти всегда «подвозка». Бесплатно: for free, не «for freedom»."}]}, {"id": "s2", "title": "Grammar — Indirect Questions (углубление)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "The direct question is 'What is this sign for?' Which indirect version is correct?", "options": ["Do you know what this sign is for?", "Do you know what is this sign for?", "Do you know for what this sign is?", "Do you know for what is this sign?"], "correct": "Do you know what this sign is for?", "explanation": "Два правила в одном вопросе. Первое: в косвенном вопросе порядок слов как в утверждении — what this sign is, а не what is this sign (мы разбирали это 23 сентября). Второе, новое: предлог остаётся в конце — what this sign is FOR. Передвигать его в начало (for what) не нужно: в разговорной речи предлог живёт в хвосте вопроса. Это тот же принцип, что и в пассиве с предлогами (урок 10 сентября): was looked after, will be dealt with — предлог не бросает свой глагол. Книжный вариант At what is this sign aimed? возможен, но звучит по-писаному и требует другого строя. Запомните: вопросительное слово + подлежащее + глагол + предлог в конце."}, {"id": "g2", "type": "choice", "sentence": "What does 'Do you happen to know...' add to a question?", "options": ["It makes the question softer and less direct", "It shows that the speaker is angry and tired", "It means the speaker already knows the answer", "It asks if the listener happens to work there"], "correct": "It makes the question softer and less direct", "explanation": "Do you happen to know...? — «случайно не знаете...?»: вежливая обёртка для вопроса к незнакомому человеку. Глагол to happen to do = «случайно оказаться в положении»: I happen to know = «я, как оказалось, знаю». Марк использует это в диалоге про дорожные работы: Do you happen to know when they finish? Nobody does — «Случайно не знаете, когда они закончат? Никто не знает». Лестница вежливости: Where is the station? (нейтрально) → Do you know where the station is? (мягче) → Do you happen to know where the station is? (ещё мягче) → I was wondering if you could tell me where the station is (самая вежливая, следующий вопрос). После happen to — глагол в первой форме, без to-дублирования."}, {"id": "g3", "type": "choice", "sentence": "You need a lift from your neighbour. Which request is the most natural polite English?", "options": ["I was wondering if you could give me a lift", "You are going to give me a lift, are you not?", "I want you to drive me there right now, please", "Are you driving me there, or am I walking there?"], "correct": "I was wondering if you could give me a lift", "explanation": "I was wondering if you could... — самая вежливая форма просьбы: «не мог бы ты...». Прошедшее время (was wondering, could) здесь не про прошлое, а про дистанцию вежливости: говорящий словно извиняется за сам факт беспокойства. Эмма в диалоге говорит именно так: I was wondering if you could give me a lift — «Не мог бы ты меня подвезти». Разбор ошибок: You are going to give me a lift, are you not? — почти приказ с требованием подтверждения; I want you to drive me right now — требование, please его не спасает; Are you driving me there, or am I walking there? — ультиматум с нажимом. Родственная форма: I was hoping you could help — «очень надеялся, что поможешь»."}, {"id": "g4", "type": "choice", "sentence": "The direct question is 'Is the chemist's open late tonight?' Complete: 'Do you know ___?'", "options": ["if the chemist's is open late", "is the chemist's open late tonight", "whether is the chemist's open late", "does the chemist's stay open late"], "correct": "if the chemist's is open late", "explanation": "Общий вопрос (да/нет) превращается в косвенный через if или whether: Do you know IF the chemist's is open late? — «Не знаете, аптека открыта допоздна?». Два обязательных условия: появляется if/whether (его нельзя выбросить, иначе останется бессмыслица) и исчезает вопросительный порядок слов — глагол is уходит после подлежащего: the chemist's IS open, а не is the chemist's open. Второй вспомогательный глагол (does) в косвенном вопросе не нужен совсем. Whether чуть формальнее if и обязателен после предлогов и перед or not: I am not sure whether or not it is open. Напоминание по лексике: the chemist's — «аптека» (британское, буквально «у химика»), так же как the butcher's и the baker's — урок 13 октября."}]}, {"id": "s3", "title": "Practical English — Asking a Stranger", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You stop a stranger in the street to ask the way. What do you say?", "options": ["Excuse me, could you tell me the way to the station?", "Hey there, you must tell me where the station is", "Listen, I need you to show me the way to the station", "You there, where is the station? Answer me quickly."], "correct": "Excuse me, could you tell me the way to the station?", "explanation": "Формула обращения к незнакомцу: Excuse me (не Sorry! — Sorry говорят после того, как что-то случилось) + вежливый косвенный вопрос: could you tell me the way to...? Остальные варианты грамматически безупречны, но звучат как приказ или допрос: you must tell me, I need you to show me, answer me quickly. Хорошая пара — Sorry to bother you: Sorry to bother you, could you tell me how to get to the station? — «Извините, что беспокою...» (так Эмма начинает разговор с Марком). Полезные ответы собеседника: Go straight on — «идите прямо», Take the second left — «на втором повороте налево», It is a five-minute walk — «пять минут пешком»."}, {"id": "p2", "type": "choice", "sentence": "A neighbour offers you a lift to the shop, but you prefer to walk. What do you say?", "options": ["That is very kind of you, but I enjoy the walk", "No, thank you, I never accept lifts from neighbours", "Only if you drive faster than my usual bus does", "Fine, but do not expect me to talk to you on the way"], "correct": "That is very kind of you, but I enjoy the walk", "explanation": "Вежливый отказ от предложения строится по формуле: поблагодарить за доброту + but + мягкая причина про себя (не про собеседника). That is very kind of you, but I enjoy the walk — «Это очень любезно с вашей стороны, но я люблю пройтись». Разбор ошибок: I never accept lifts from neighbours — звучит как принципиальный запрет, будто сосед предлагает что-то неприличное; Only if you drive faster than my usual bus — условие-подколка, обидно; Fine, but do not expect me to talk — согласие с угрозой. Если хотите согласиться: That would be lovely, thank you — «С удовольствием, спасибо». Если предлагаете сами: Would you like a lift? — «Подвезти вас?». Интонация That is very kind of you — тёплая, с падением в конце: это не вопрос, а благодарность."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "The direct question is 'What are you looking at?' Choose the correct indirect version.", "options": ["Could you tell me what you are looking at?", "Could you tell me what are you looking at?", "Could you tell me at what you are looking?", "Could you tell me at what are you looking?"], "correct": "Could you tell me what you are looking at?", "explanation": "Задача-звезда: одновременно ловит и на порядке слов, и на предлоге. Правило порядка слов: после Could you tell me идёт утвердительный строй — what you are looking at, а не what are you looking at: вопросительные is/are/do внутрь косвенного вопроса не заходят. Правило предлога: look at — неразрывная пара, поэтому предлог остаётся в самом конце: ...what you ARE looking AT. Перестановка at what («предлог впереди») — книжный, почти архаичный стиль, а в вариантах она ещё и склеена с вопросительным порядком. То же самое с любым «предложным» вопросом: What are you waiting for? → Do you know what you are waiting FOR? Who did you speak to? → Could you tell me who you spoke TO? Самопроверка: если в вашем косвенном вопросе после вопросительного слова сразу стоит am/is/are или does — где-то закралась ошибка."}, {"id": "c2", "type": "choice", "sentence": "Which question is grammatically correct?", "options": ["Who do you think is going to win the contest?", "Whom do you think is going to win the contest?", "Who do you think going to win the contest?", "Who you think is going to win the contest?"], "correct": "Who do you think is going to win the contest?", "explanation": "Конструкция «двойного вопроса»: вопрос к подлежащему + вставка do you think. Прямой вопрос — Who is going to win? Вставляем do you think сразу после вопросительного слова: Who do you think is going to win? — «Как вы думаете, кто победит?». Внутренняя часть (who... is going) сохраняет порядок слов утверждения — без второго инвертированного глагола. Разбор ловушек: Whom — объектная форма (формальное «кого»), но здесь who — подлежащее действия is going to win, значит только who; Who do you think going to win — потерян глагол is; Who you think is going — потерян вспомогательный do. Эмма использует эту конструкцию в диалоге: Who do you think decides on statues in this town? — «Как думаешь, кто в этом городе решает, какие ставить статуи?» Так же: What do you think is in this box? — та же схема: вопросительное слово + do you think + утвердительный строй."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why was everyone walking in the road this morning?", "options": ["The roadworks had eaten half the pavement", "A water pipe had flooded the whole pavement", "Market stalls were standing along the pavement", "The pavement was closed for a running event"], "correct": "The roadworks had eaten half the pavement", "explanation": "Эмма вспоминает утро: So that is why everyone was walking in the road this morning. I thought it was a new local sport — «Так вот почему все сегодня утром шли по дороге. Я думала, это новый местный спорт». Причина — в реплике Марка чуть раньше: the roadworks on the High Street have eaten half the pavement — «дорожные работы на Хай-стрит съели половину тротуара». Обратите внимание на образ: to eat — «съесть» — про тротуар, который буквально «съеден» траншеей. Времена: have eaten — Present Perfect, результат виден сейчас. The High Street — «главная улица» в британском городе (часто буквально так и называется). The council — «муниципалитет, городской совет»: The council decided to repair all the pipes at the same time — «городские власти решили ремонтировать все трубы одновременно».", "audio_text": "Emma(F): Mark, hello! Sorry to bother you. Could you tell me where the nearest chemist's is? I have got a headache the size of a planet.\nMark(M): That depends. Do you want the quick one or the one that is actually open?\nEmma(F): Is there a difference?\nMark(M): The quick one is ten minutes away, but the roadworks on the High Street have eaten half the pavement. The other one is across town, a bit off the beaten track.\nEmma(F): Roadworks? So that is why everyone was walking in the road this morning. I thought it was a new local sport.\nMark(M): Very funny. The council decided to repair all the pipes at the same time. Do you happen to know when they finish? Nobody does. Even the sign looks embarrassed.\nEmma(F): And how do I get to the far one without losing a shoe in the wet cement?\nMark(M): Walk to the clock tower, then take the second left. That street is one-way, but only for cars, so you will be fine on foot.\nEmma(F): Wait. One-way for cars and free for people?\nMark(M): Exactly. Cars go one way, pedestrians go wherever they like. Then you reach the pedestrian zone. No cars there at all, just teenagers on bikes and one very confident goose.\nEmma(F): And the chemist's itself?\nMark(M): Just past the statue of the man with the fish. You cannot miss it, mostly because nobody knows why it is there.\nEmma(F): Who do you think decides on statues in this town?\nMark(M): No idea, but I like to think the fish had connections.\nEmma(F): One last thing. I was wondering if you could give me a lift, my shoes and that cement will never be friends.\nMark(M): Hop in. But I do not drive through the pedestrian zone any more. I did it once, and a grandmother shouted at me in three languages.\nEmma(F): An impressive woman.\nMark(M): She runs the chemist's, actually. Tell her the fish sent you."}, {"id": "l2", "type": "listen", "sentence": "What happened when Mark drove through the pedestrian zone?", "options": ["A grandmother shouted at him in three languages", "A traffic warden gave him a very large fine", "His car got stuck behind a crowd of tourists", "Teenagers on bikes blocked the road in front"], "correct": "A grandmother shouted at him in three languages", "explanation": "Марк предупреждает: I do not drive through the pedestrian zone any more. I did it once, and a grandmother shouted at me in three languages — «Я больше не езжу через пешеходную зону. Один раз проехал — и бабушка накричала на меня на трёх языках». Финальная шутка Марка: She runs the chemist's, actually. Tell her the fish sent you — «Она, кстати, держит ту аптеку. Скажите, что вас послала рыба». Заметьте грамматику: I did it once — обычный Past Simple, без эмфазы; сравните с эмфатическим do из урока 11 октября (I DO listen!, I DID try) — там did + V1 усиливал утверждение, а здесь did — обычный вспомогательный. Runs = «управляет» — про магазин или заведение (так же to run a shop из урока 16 сентября). A traffic warden — «инспектор парковки» — появился в неверном варианте: это тот, кто выписывает штрафы за парковку, а не за пешеходную зону.", "audio_text": "Emma(F): Mark, hello! Sorry to bother you. Could you tell me where the nearest chemist's is? I have got a headache the size of a planet.\nMark(M): That depends. Do you want the quick one or the one that is actually open?\nEmma(F): Is there a difference?\nMark(M): The quick one is ten minutes away, but the roadworks on the High Street have eaten half the pavement. The other one is across town, a bit off the beaten track.\nEmma(F): Roadworks? So that is why everyone was walking in the road this morning. I thought it was a new local sport.\nMark(M): Very funny. The council decided to repair all the pipes at the same time. Do you happen to know when they finish? Nobody does. Even the sign looks embarrassed.\nEmma(F): And how do I get to the far one without losing a shoe in the wet cement?\nMark(M): Walk to the clock tower, then take the second left. That street is one-way, but only for cars, so you will be fine on foot.\nEmma(F): Wait. One-way for cars and free for people?\nMark(M): Exactly. Cars go one way, pedestrians go wherever they like. Then you reach the pedestrian zone. No cars there at all, just teenagers on bikes and one very confident goose.\nEmma(F): And the chemist's itself?\nMark(M): Just past the statue of the man with the fish. You cannot miss it, mostly because nobody knows why it is there.\nEmma(F): Who do you think decides on statues in this town?\nMark(M): No idea, but I like to think the fish had connections.\nEmma(F): One last thing. I was wondering if you could give me a lift, my shoes and that cement will never be friends.\nMark(M): Hop in. But I do not drive through the pedestrian zone any more. I did it once, and a grandmother shouted at me in three languages.\nEmma(F): An impressive woman.\nMark(M): She runs the chemist's, actually. Tell her the fish sent you."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, hello! Sorry to bother you. Could you tell me where the nearest chemist's is? I have got a headache the size of a planet."}, {"speaker": "Mark", "text": "That depends. Do you want the quick one or the one that is actually open?"}, {"speaker": "Emma", "text": "Is there a difference?"}, {"speaker": "Mark", "text": "The quick one is ten minutes away, but the roadworks on the High Street have eaten half the pavement. The other one is across town, a bit off the beaten track."}, {"speaker": "Emma", "text": "Roadworks? So that is why everyone was walking in the road this morning. I thought it was a new local sport."}, {"speaker": "Mark", "text": "Very funny. The council decided to repair all the pipes at the same time. Do you happen to know when they finish? Nobody does. Even the sign looks embarrassed."}, {"speaker": "Emma", "text": "And how do I get to the far one without losing a shoe in the wet cement?"}, {"speaker": "Mark", "text": "Walk to the clock tower, then take the second left. That street is one-way, but only for cars, so you will be fine on foot."}, {"speaker": "Emma", "text": "Wait. One-way for cars and free for people?"}, {"speaker": "Mark", "text": "Exactly. Cars go one way, pedestrians go wherever they like. Then you reach the pedestrian zone. No cars there at all, just teenagers on bikes and one very confident goose."}, {"speaker": "Emma", "text": "And the chemist's itself?"}, {"speaker": "Mark", "text": "Just past the statue of the man with the fish. You cannot miss it, mostly because nobody knows why it is there."}, {"speaker": "Emma", "text": "Who do you think decides on statues in this town?"}, {"speaker": "Mark", "text": "No idea, but I like to think the fish had connections."}, {"speaker": "Emma", "text": "One last thing. I was wondering if you could give me a lift, my shoes and that cement will never be friends."}, {"speaker": "Mark", "text": "Hop in. But I do not drive through the pedestrian zone any more. I did it once, and a grandmother shouted at me in three languages."}, {"speaker": "Emma", "text": "An impressive woman."}, {"speaker": "Mark", "text": "She runs the chemist's, actually. Tell her the fish sent you."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
