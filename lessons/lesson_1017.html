@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Money &amp; Banking: Contactless &amp; Installments + Quantifiers (few / a few, little / a little)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Money &amp; Banking: Contactless &amp; Installments + Quantifiers (few / a few, little / a little)</h1><div class="subtitle">2026-10-17</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Strapped for cash</div><div class="translation">«Без наличных, на мели» — быть strapped for cash значит временно испытывать нехватку денег: зарплата ещё не пришла, а расходы уже случились. Кейт так описывает своё положение в диалоге: My laptop died, and I am a bit strapped for cash this month — «Мой ноутбук умер, а я в этом месяце немного на мели». To be strapped — буквально «стянутый ремнём»: деньги словно туго перетянули кошелёк. A bit strapped — мягкий, бытовой вариант. Синонимы: to be short of money (я немного short в диалогах уже встречалось: I am a little short of money), to be hard up — «перебиваться», разговорно skint — «на нуле» (британское сленговое). Антоним по духу — to have money to burn, «деньги девать некуда».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Money & Banking: Contactless & Installments + Quantifiers (few / a few, little / a little)", "subtitle": "2026-10-17", "date": "2026-10-17", "phrase_of_the_day": "Strapped for cash", "phrase_translation": "«Без наличных, на мели» — быть strapped for cash значит временно испытывать нехватку денег: зарплата ещё не пришла, а расходы уже случились. Кейт так описывает своё положение в диалоге: My laptop died, and I am a bit strapped for cash this month — «Мой ноутбук умер, а я в этом месяце немного на мели». To be strapped — буквально «стянутый ремнём»: деньги словно туго перетянули кошелёк. A bit strapped — мягкий, бытовой вариант. Синонимы: to be short of money (я немного short в диалогах уже встречалось: I am a little short of money), to be hard up — «перебиваться», разговорно skint — «на нуле» (британское сленговое). Антоним по духу — to have money to burn, «деньги девать некуда».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1017.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Money & Banking", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Mark offers Kate an installment plan for the laptop. What is an installment plan?", "options": ["You pay the price in several monthly parts", "You get the laptop now and never pay at all", "You pay the whole price at once with a discount", "You borrow a laptop and return it in a year"], "correct": "You pay the price in several monthly parts", "explanation": "An installment plan — «рассрочка»: цена делится на части, и вы платите помесячно. In installments = «в рассрочку, частями»: pay in twelve monthly installments — «двенадцать ежемесячных платежей». Installment — «платёж, взнос» (американское написание; британское — instalment). Реклама часто обещает interest-free installments — «рассрочка без процентов», zero percent interest — «ноль процентов». Как предупреждает Марк: no interest as long as you pay on time — «без процентов, пока вы платите вовремя»: Miss a payment, and the interest appears very quickly — «просрочьте платёж, и проценты появятся очень быстро». Не путайте с layaway (американский порядок: магазин держит товар, пока вы доплачиваете) и с a loan — «кредит», где проценты есть почти всегда."}, {"id": "v2", "type": "choice", "sentence": "Kate asks about her credit limit. What is a credit limit?", "options": ["The largest amount the bank lets you owe", "The smallest payment you make every month", "The fee the bank takes from every purchase", "The number of cards you are allowed to have"], "correct": "The largest amount the bank lets you owe", "explanation": "A credit limit — «кредитный лимит»: максимум, который банк разрешает вам долженствовать по карте. В диалоге Марк говорит: It is five hundred euros at the moment — «Сейчас это пятьсот евро». Родственные выражения: to raise the limit — «поднять лимит», to exceed your limit — «превысить лимит» (за это берут штраф). Лимит связан с debt — «долг»: to be in debt — «быть в долгу», to get into debt — «влезть в долги», to pay off a debt — «погасить долг». Именно поэтому Марк осторожен: We could raise it, but I would rather you did not get into debt for a laptop — «Мы могли бы поднять, но я бы предпочёл, чтобы ты не влезала в долги из-за ноутбука» (конструкция would rather + человек + Past Simple — повторение урока 6 октября). Limit — и «предел» вообще: speed limit — «ограничение скорости», spending limit — «лимит трат»."}, {"id": "v3", "type": "choice", "sentence": "Mark says contactless is fine for small purchases. What does contactless mean?", "options": ["You tap your card without typing a PIN", "You wave goodbye to the shop assistant", "You pay later through your bank app", "You show your passport instead of a card"], "correct": "You tap your card without typing a PIN", "explanation": "Contactless payment — «бесконтактный платёж»: карта или телефон просто прикладываются к терминалу. Глагол здесь специальный — to tap: You just tap your card or your phone at the terminal — «Просто прикладываете карту или телефон к терминалу». Также to tap your card on the reader. Для покупок дороже определённой суммы терминал попросит PIN: For anything above fifty euros you will need your PIN — «На всё дороже пятидесяти евро понадобится ПИН». Разговорный синоним платёжного действия — Can I tap? — «Можно бесконтактно?». Телефон как карта: your phone works like a card — Google Pay, Apple Pay. Обратная сторона удобства — шутка Марка: do not hold it near the terminal while you are talking — телефон может сам оплатить чужой кофе. Cash — «наличные» (всегда в единственном числе: some cash, not moneys)."}, {"id": "v4", "type": "choice", "sentence": "Mark mentions the cash machine outside the branch. What is a cash machine?", "options": ["It gives out banknotes when you insert a card", "It counts coins and sorts them into paper rolls", "It prints statements for customers in the queue", "It exchanges foreign currency at the desk"], "correct": "It gives out banknotes when you insert a card", "explanation": "A cash machine — «банкомат» (британское): автомат, который выдаёт наличные по карте. Американский синоним — an ATM (automated teller machine), в Британии также разговорное a hole in the wall — «дырка в стене». Бесплатный банкомат — free to use, платный — some machines charge a fee (мы разбирали to charge a fee 6 октября). A bank branch — «отделение банка» (само здание, куда приходят люди); branch — буквально «ветка»: сеть отделений как ветви дерева. Глаголы про банкомат: to withdraw cash — «снять наличные» (не «take out money» в официальном стиле), to insert a card — «вставить карту», to enter your PIN — «ввести ПИН». В диалоге Кейт признаётся: I think I have used cash twice this year — «Кажется, я пользовалась наличными дважды за год» — и Марк подтверждает: Fewer and fewer people carry cash — «Всё меньше и меньше людей носят наличные»."}]}, {"id": "s2", "title": "Grammar — Quantifiers (few, a few)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Compare: 'Few customers complained about the fee' and 'A few customers complained about the fee.' What is the difference?", "options": ["Few means almost nobody; a few means some", "Few is formal English; a few is only for friends", "Few means many people; a few means almost none", "There is no difference in modern English"], "correct": "Few means almost nobody; a few means some", "explanation": "Крошечная разница в одну букву — и противоположный смысл. Few без артикля = «мало, почти никто» — говорящий подчёркивает нехватку: Few customers complained — «Почти никто не жаловался» (и это хорошо). A few = «несколько, некоторые» — нейтральное «было некоторое количество»: A few customers complained — «Несколько клиентов жаловались» (и стоит разобраться почему). Сравните с диалогом: Kate says she has used cash twice this year — почти никогда; а Mark could say a few times — пару раз случалось. Та же логика у множественного числа: quite a few = «довольно много» (усиление, а не уменьшение!). Типичная ошибка — писать a few, имея в виду «почти нет»: She has few friends nearby — «у неё почти нет друзей рядом» (грустно) vs She has a few friends nearby — «у неё есть несколько друзей рядом» (нормально)."}]}, {"id": "s3", "title": "Grammar — Quantifiers (little, a little)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g2", "type": "choice", "sentence": "Kate says about her savings: 'I have ___ money saved, but not enough for a laptop.' Which word fits her meaning?", "options": ["a little", "little", "a few", "few"], "correct": "a little", "explanation": "С неисчисляемыми словами (money, time, cash, interest) работает та же пара, что и few / a few. A little = «немного, но есть» — положительный факт: I have a little money saved — «У меня немного отложено» (денег мало, но они существуют). Little без артикля = «почти нет» — акцент на нехватке: I have little money saved — «У меня почти ничего не отложено». Кейт уточняет: a little money saved, but not enough — «немного есть, но не хватает»: раз деньги есть, нужен a little. Ловушки в неверных вариантах: a few и few работают только с исчисляемыми (a few coins, few customers), а money — неисчисляемое: нельзя «a few money». Проверка на исчисляемость простая: можно ли сказать two moneys? Нет — значит, much / little / a little. Монеты — исчисляемые: a few coins, few banknotes."}]}, {"id": "s4", "title": "Grammar — Quantifiers (fewer, less)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g3", "type": "choice", "sentence": "Mark says: '___ and ___ people carry cash these days.' Which pair is correct?", "options": ["Fewer and fewer people carry cash", "Less and less people carry cash", "Fewer and fewer people carries cash", "Lesser and lesser people carry cash"], "correct": "Fewer and fewer people carry cash", "explanation": "Люди — исчисляемое существительное, поэтому сравнительная форма от few: fewer — «меньше по количеству». Fewer and fewer people carry cash — «всё меньше людей носит наличные». Правило-компас: fewer + исчисляемые во множественном числе (fewer people, fewer coins, fewer payments), less + неисчисляемые (less money, less cash, less interest). Less and less people — классическая ошибка, которую слышат даже носители, но на экзамене и в письме она неверна. Третий вариант ловит грамматику подлежащего: fewer and fewer people — множественное число, глагол без -s: people carry, не carries. Lesser — «меньший по величине или значимости» (the lesser of two evils — «меньшее из двух зол»), с людьми в таком смысле не сочетается. Запомните пару из диалога: less cash, fewer banknotes — деньги неисчисляемы, купюры исчисляемы."}]}, {"id": "s5", "title": "Grammar — Quantifiers (much, many)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g4", "type": "choice", "sentence": "Complete the two sentences: 'I don't have ___ cash on me' and 'There are too ___ monthly payments.'", "options": ["much ... many", "many ... much", "few ... little", "much ... much"], "correct": "much ... many", "explanation": "Базовое правило, которое стоит повторить на новой теме: much — с неисчисляемыми (money, cash, time, interest), many — с исчисляемыми во множественном числе (payments, coins, cards). I do not have much cash on me — «У меня с собой мало наличных» (cash — неисчисляемое). There are too many monthly payments — «Слишком много ежемесячных платежей» (payments можно посчитать). Особенность much: в утвердительных предложениях про «много» он звучит книжно, вместо него — a lot of (I have a lot of cash), но в отрицаниях и вопросах much на месте: I do not have much cash, How much does it cost? Few и little в третьем варианте не подходят по смыслу — там нужен просто «мало», а не «почти нет». Формула самопроверки: подставьте число — можно «three payments»? Значит many. Нельзя «three cash»? Значит much."}]}, {"id": "s6", "title": "Practical English — Paying and Borrowing", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are buying a laptop and want to ask about paying in parts. What do you say to the assistant?", "options": ["Excuse me, do you offer an installment plan?", "Tell me how I can pay, I have my own ideas", "I will take it now and we discuss money later", "Is the price the same if I never pay at all?"], "correct": "Excuse me, do you offer an installment plan?", "explanation": "Вежливый вопрос о способах оплаты: Excuse me (обращаем внимание) + do you offer... — «предлагаете ли вы...». Do you offer an installment plan? — «У вас есть рассрочка?». Полезные продолжения: How many monthly payments are there? — «Сколько ежемесячных платежей?», Is it interest-free? — «Она без процентов?», Are there any extra fees? — «Есть ли дополнительные сборы?». Разбор ошибок: Tell me how I can pay, I have my own ideas — звучит как вызов продавцу на спор; I will take it now and we discuss money later — так покупают только в комедиях; вариант про never pay — шутка, которая в магазине может кончиться разговором с охраной. Если рассрочка не нужна, вежливо сказать: I would rather pay in full — «Я лучше заплачу полностью» (would rather + V1 — повторение урока 3 октября)."}, {"id": "p2", "type": "choice", "sentence": "The bank offers to raise your credit limit, but you do not want to borrow more. What do you say?", "options": ["Thank you, but I would rather keep it as it is", "Fine, raise it, I am sure something will turn up", "Why are you offering me money, what is the catch?", "I suppose I have no choice but to accept this"], "correct": "Thank you, but I would rather keep it as it is", "explanation": "Формула вежливого отказа от финансового предложения: поблагодарить + but + мягкое желание от себя. Thank you, but I would rather keep it as it is — «Спасибо, но я бы предпочёл оставить как есть». Так же отвечает разумный клиент банку из диалога: Марк прямо говорит, что не советовал бы поднимать лимит ради ноутбука — I would rather you did not get into debt. Разбор ошибок: Fine, raise it, I am sure something will turn up — «а вдруг что-нибудь придумается» — финансовая стратегия хомяка; Why are you offering me money, what is the catch? — подозрительность вместо вежливости (хотя вопрос про catch — «в чём подвох» — сам по себе полезен, задавать его можно мягче: Are there any conditions?); I suppose I have no choice — капитуляция, у вас всегда есть выбор. Похожие формы: I would rather not, thank you — короткий вежливый отказ; Let me think about it — «дайте подумать»."}]}, {"id": "s7", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "You want to say that almost nobody knows your secret. Complete: '___ people know about this, so please keep it quiet.'", "options": ["Few", "A few", "Little", "A little"], "correct": "Few", "explanation": "Задача-звезда: три ловушки в одной строке. Смысл «почти никто» передаёт few без артикля: Few people know about this — «Почти никто об этом не знает». A few поменяло бы смысл на противоположный: «несколько человек знают» — тогда просьба хранить тишину звучала бы странно, будто секрет уже гуляет. Little и a little не сочетаются с исчисляемым people — они для неисчисляемых: little money, a little time. Правило-компас: few / a few + существительные, которые можно посчитать (few people, a few friends); little / a little + то, что считается только «вообще» (little cash, a little interest). Тонкость восприятия: few часто читается как «жалко мало» — говорящий недоволен количеством, тогда как a few — спокойно-нейтральное «парочка есть». В диалоге разница тоже живёт: Kate used cash twice this year — по сути few times, «почти никогда»."}, {"id": "c2", "type": "choice", "sentence": "The contactless limit per payment is fifty euros. Complete: 'You can tap for ___ fifty euros; above that, you need your PIN.'", "options": ["less than", "fewer than", "little than", "few than"], "correct": "less than", "explanation": "Звёздный случай, на котором спотыкаются даже продвинутые: евро исчисляемы, но сумма в пятьдесят евро мыслится как единое количество денег — поэтому less than fifty euros — «меньше пятидесяти евро». Сравните: fewer than fifty euros звучало бы про отдельные купюры или монеты — «меньше пятидесяти штук евро», что возможно, но здесь смысл именно о размере платежа. Правило: деньги, суммы, время и расстояния как количество — с less: less than fifty euros, less than a hundred dollars, less than two hours, less than three miles. Fewer than — только для счёта отдельных объектов: fewer than fifty transactions — «меньше пятидесяти операций», fewer than twelve payments — «меньше двенадцати платежей» (платежи считаются по одному!). Третий и четвёртый варианты — грамматически невозможные формы: little than и few than в сравнении не существуют, little / few сравнительной формы с than не образуют (сравнительные — less и fewer). В диалоге эта граница проведена наизусть: For anything above fifty euros you will need your PIN — above fifty = more than fifty."}]}, {"id": "s8", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What does Mark say about the installment plan?", "options": ["There is no interest if you pay on time", "The interest is small and starts from month one", "It is interest-free only for the first laptop", "You get no interest if you pay everything today"], "correct": "There is no interest if you pay on time", "explanation": "Марк объясняет условия: You pay in twelve parts, with no interest... as long as you pay on time. Miss a payment, and the interest appears very quickly — «Двенадцать частей без процентов... пока вы платите вовремя. Просрочьте один платёж — и проценты появятся очень быстро». Конструкция as long as = «при условии что, пока» — мы разбирали её в первом условном 3 сентября. Обратите внимание на логическую пару в диалоге: Kate сначала настороженно говорит Too good to be true — «слишком хорошо, чтобы быть правдой» (повторение идиомы из урока 24 сентября про мошенников — полезный рефлекс клиента банка!), и только потом соглашается. Miss a payment — «пропустить платёж»; синоним to fall behind with payments — «отставать от платежей» (to fall behind — «отставать», повторение университетской темы 4 сентября).", "audio_text": "Kate(F): Good morning, Mark. I need some advice. My laptop died yesterday, and I am a bit strapped for cash this month.\nMark(M): I am sorry to hear that. Have you thought about an installment plan? You pay in twelve parts, with no interest.\nKate(F): No interest? That sounds too good to be true.\nMark(M): It is true, as long as you pay on time. Miss a payment, and the interest appears very quickly.\nKate(F): I see. I have a little money saved, but not enough for a whole laptop. Twelve parts sounds perfect.\nMark(M): And how will you pay? Cash, card?\nKate(F): I never carry cash any more. Is contactless fine?\nMark(M): Contactless is fine. You just tap your card or your phone at the terminal. For anything above fifty euros you will need your PIN.\nKate(F): My phone can pay? I thought that app was for ordering coffee.\nMark(M): That too. But yes, your phone works like a card. Just do not hold it near the terminal while you are talking, or you may pay for somebody else's coffee.\nKate(F): That actually happened to a friend of mine. She bought three travel tickets by accident.\nMark(M): Then she knows more about contactless than most people. By the way, the cash machine outside our branch is free to use, if you ever need real notes and coins.\nKate(F): Rarely. I think I have used cash twice this year.\nMark(M): You are not alone. Fewer and fewer people carry cash, so the head office is thinking about turning that machine into a coffee stand.\nKate(F): Please do not. I like knowing it is there. One more thing, what about my credit limit? Mine is quite small.\nMark(M): It is five hundred euros at the moment. We could raise it, but I would rather you did not get into debt for a laptop.\nKate(F): Good point. Twelve payments, no interest, and my limit stays small. Where do I sign?\nMark(M): Right here. And congratulations on the new laptop. What happened to the old one, by the way?\nKate(F): It fell into the bath. Long story.\nMark(M): I am almost afraid to ask."}, {"id": "l2", "type": "listen", "sentence": "What happened to Kate's friend and her phone?", "options": ["She bought three travel tickets by accident", "She paid for a stranger's coffee at the till", "She lost her card inside the cash machine", "She forgot her PIN at the checkout three times"], "correct": "She bought three travel tickets by accident", "explanation": "Кейт рассказывает: That actually happened to a friend of mine. She bought three travel tickets by accident — «Это действительно случилось с моей подругой. Она случайно купила три проездных билета» — телефон с включённой бесконтактной оплатой сам среагировал на терминал. Поэтому Марк и предупреждает: do not hold it near the terminal while you are talking, or you may pay for somebody else's coffee — «не держите его рядом с терминалом во время разговора, а то оплатите чужой кофе». Заметьте конструкцию while you are talking — Present Continuous после while (длинное фоновое действие, как в Past Continuous из урока 16 августа: while + процесс). By accident — «случайно, по неосторожности» (синоним accidentally; не «from accident»). Финальная шутка Марка: Then she knows more about contactless than most people — «Тогда она знает о бесконтактной оплате больше, чем большинство» — сравнение more...than, иронию передаёт контекст.", "audio_text": "Kate(F): Good morning, Mark. I need some advice. My laptop died yesterday, and I am a bit strapped for cash this month.\nMark(M): I am sorry to hear that. Have you thought about an installment plan? You pay in twelve parts, with no interest.\nKate(F): No interest? That sounds too good to be true.\nMark(M): It is true, as long as you pay on time. Miss a payment, and the interest appears very quickly.\nKate(F): I see. I have a little money saved, but not enough for a whole laptop. Twelve parts sounds perfect.\nMark(M): And how will you pay? Cash, card?\nKate(F): I never carry cash any more. Is contactless fine?\nMark(M): Contactless is fine. You just tap your card or your phone at the terminal. For anything above fifty euros you will need your PIN.\nKate(F): My phone can pay? I thought that app was for ordering coffee.\nMark(M): That too. But yes, your phone works like a card. Just do not hold it near the terminal while you are talking, or you may pay for somebody else's coffee.\nKate(F): That actually happened to a friend of mine. She bought three travel tickets by accident.\nMark(M): Then she knows more about contactless than most people. By the way, the cash machine outside our branch is free to use, if you ever need real notes and coins.\nKate(F): Rarely. I think I have used cash twice this year.\nMark(M): You are not alone. Fewer and fewer people carry cash, so the head office is thinking about turning that machine into a coffee stand.\nKate(F): Please do not. I like knowing it is there. One more thing, what about my credit limit? Mine is quite small.\nMark(M): It is five hundred euros at the moment. We could raise it, but I would rather you did not get into debt for a laptop.\nKate(F): Good point. Twelve payments, no interest, and my limit stays small. Where do I sign?\nMark(M): Right here. And congratulations on the new laptop. What happened to the old one, by the way?\nKate(F): It fell into the bath. Long story.\nMark(M): I am almost afraid to ask."}]}], "subtitles": [{"speaker": "Kate", "text": "Good morning, Mark. I need some advice. My laptop died yesterday, and I am a bit strapped for cash this month."}, {"speaker": "Mark", "text": "I am sorry to hear that. Have you thought about an installment plan? You pay in twelve parts, with no interest."}, {"speaker": "Kate", "text": "No interest? That sounds too good to be true."}, {"speaker": "Mark", "text": "It is true, as long as you pay on time. Miss a payment, and the interest appears very quickly."}, {"speaker": "Kate", "text": "I see. I have a little money saved, but not enough for a whole laptop. Twelve parts sounds perfect."}, {"speaker": "Mark", "text": "And how will you pay? Cash, card?"}, {"speaker": "Kate", "text": "I never carry cash any more. Is contactless fine?"}, {"speaker": "Mark", "text": "Contactless is fine. You just tap your card or your phone at the terminal. For anything above fifty euros you will need your PIN."}, {"speaker": "Kate", "text": "My phone can pay? I thought that app was for ordering coffee."}, {"speaker": "Mark", "text": "That too. But yes, your phone works like a card. Just do not hold it near the terminal while you are talking, or you may pay for somebody else's coffee."}, {"speaker": "Kate", "text": "That actually happened to a friend of mine. She bought three travel tickets by accident."}, {"speaker": "Mark", "text": "Then she knows more about contactless than most people. By the way, the cash machine outside our branch is free to use, if you ever need real notes and coins."}, {"speaker": "Kate", "text": "Rarely. I think I have used cash twice this year."}, {"speaker": "Mark", "text": "You are not alone. Fewer and fewer people carry cash, so the head office is thinking about turning that machine into a coffee stand."}, {"speaker": "Kate", "text": "Please do not. I like knowing it is there. One more thing, what about my credit limit? Mine is quite small."}, {"speaker": "Mark", "text": "It is five hundred euros at the moment. We could raise it, but I would rather you did not get into debt for a laptop."}, {"speaker": "Kate", "text": "Good point. Twelve payments, no interest, and my limit stays small. Where do I sign?"}, {"speaker": "Mark", "text": "Right here. And congratulations on the new laptop. What happened to the old one, by the way?"}, {"speaker": "Kate", "text": "It fell into the bath. Long story."}, {"speaker": "Mark", "text": "I am almost afraid to ask."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
