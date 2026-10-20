@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Technology: Social Media &amp; Cloud Storage + Subjunctive after suggest / insist (I suggest he turn off)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Technology: Social Media &amp; Cloud Storage + Subjunctive after suggest / insist (I suggest he turn off)</h1><div class="subtitle">2026-10-20</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Glued to your phone</div><div class="translation">«Прилипнуть к телефону» — to be glued to your phone значит не отрываться от экрана: буквально «приклеенный к телефону», как glued — «приклеенный» (от глагола to glue — «клеить»). Emma says Mark is completely glued to that screen — «Эмма говорит, что Марк совсем прилип к этому экрану». Конструкция работает с любым экраном: glued to the television — «прилипший к телевизору», glued to the screen — «к экрану», eyes glued to the page — «глаза прилипли к странице». Полная версия с глазами: His eyes were glued to the phone — «Его взгляд был прилиплен к телефону». Антоним-лекарство из сегодняшнего диалога — цифровой детокс: a digital detox — «детокс от гаджетов», to unplug — «отключиться» (и от розетки, и от интернета), phone-free dinner — «ужин без телефонов». Похвалить человека, который сумел: I could not put my phone down — «Я не мог отложить телефон» — прямой родственник из урока 11 сентября (to put a book down — о захватывающей книге).</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Technology: Social Media & Cloud Storage + Subjunctive after suggest / insist (I suggest he turn off)", "subtitle": "2026-10-20", "date": "2026-10-20", "phrase_of_the_day": "Glued to your phone", "phrase_translation": "«Прилипнуть к телефону» — to be glued to your phone значит не отрываться от экрана: буквально «приклеенный к телефону», как glued — «приклеенный» (от глагола to glue — «клеить»). Emma says Mark is completely glued to that screen — «Эмма говорит, что Марк совсем прилип к этому экрану». Конструкция работает с любым экраном: glued to the television — «прилипший к телевизору», glued to the screen — «к экрану», eyes glued to the page — «глаза прилипли к странице». Полная версия с глазами: His eyes were glued to the phone — «Его взгляд был прилиплен к телефону». Антоним-лекарство из сегодняшнего диалога — цифровой детокс: a digital detox — «детокс от гаджетов», to unplug — «отключиться» (и от розетки, и от интернета), phone-free dinner — «ужин без телефонов». Похвалить человека, который сумел: I could not put my phone down — «Я не мог отложить телефон» — прямой родственник из урока 11 сентября (to put a book down — о захватывающей книге).", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1020.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Social Media & Tech", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Mark was scrolling through his news feed. What is a news feed?", "options": ["The endless stream of posts an app shows you", "A short weather report the app sends you", "A private message that only relatives can read", "The list of rules every social network follows"], "correct": "The endless stream of posts an app shows you", "explanation": "A news feed — «лента новостей»: бесконечный поток постов, который приложение собирает для вас из подписок и алгоритмов. To scroll — «прокручивать (экран)» (жест пальцем вверх), поэтому to scroll through your feed — «листать ленту»; в диалоге Марк признаётся: I was scrolling through my news feed and lost track of time — «Я листал ленту и потерял счёт времени». To lose track of time — «потерять счёт времени» — полезнейшая фраза для оправданий. Родственные слова: a post — «пост, публикация», to post — «публиковать», a follower — «подписчик», to follow — «подписаться», to unfollow — «отписаться». Заметьте: doomscrolling — «думскроллинг», болезненное листание плохих новостей — слово года в словарях; оно построено точно на этом глаголе scroll. Лента тем и коварна: у неё нет конца, поэтому Lost track of time там случается со всеми."}, {"id": "v2", "type": "choice", "sentence": "The app asks Mark about privacy settings. What are privacy settings?", "options": ["Controls deciding who can see your posts", "Controls making your phone battery last longer", "Controls blocking all the adverts inside apps", "Controls changing the language of your screen"], "correct": "Controls deciding who can see your posts", "explanation": "Privacy settings — «настройки приватности»: переключатели, которые решают, кто видит ваши посты, фотографии и личные данные. Privacy — «частная жизнь, приватность» (от private — «частный»), settings — «настройки» (от to set — «устанавливать»; тот же корень в to set the timer — «поставить таймер» из урока о кухне). В диалоге приложение спрашивает: Public or private? — «Публично или приватно?» — и Эмма отвечает без колебаний: Private, obviously — «Приватно, очевидно», потому что Public означало бы, что «весь мир увидит приключение Марка с тортом». Полезные пары: a private account — «закрытый аккаунт», a public account — «открытый аккаунт», to share a post — «поделиться постом», personal data — «персональные данные». Мы уже проходили соседние темы онлайн-безопасности 31 августа (phishing, two-factor authentication) — настройки приватности лежат в той же полке: единственная защита, о которой стоит вспоминать до, а не после."}, {"id": "v3", "type": "choice", "sentence": "Emma came to help Mark set up cloud storage. What is cloud storage?", "options": ["Space on internet servers for keeping files", "A cable connecting your phone to a laptop", "A memory card kept inside your camera bag", "A locked drawer for storing old hard drives"], "correct": "Space on internet servers for keeping files", "explanation": "Cloud storage — «облачное хранилище»: место на серверах в интернете (the cloud — «облако»), куда копируются файлы, фото и документы; доступ с любого устройства по аккаунту. To store — «хранить» (знакомо по to store your luggage — «сдать багаж» из аэропортного урока), storage — «хранение, хранилище». Ключевой глагол урока: to back up — «сделать резервную копию, продублировать»: Your phone died last month and you lost five years of photos — «Твой телефон умер в прошлом месяце, и ты потерял пять лет фотографий» — именно этого боятся без.backup-а. Существительное пишется слитно: a backup — «резервная копия» (разница — в вопросе Challenge). Фразы: to back up your files to the cloud — «скопировать файлы в облако», an automatic backup — «автоматическое копирование». Ирония диалога: My mother had more pictures of my cat than I did — «У моей мамы было больше фотографий моего кота, чем у меня» — то есть единственный «облако-сторож» Марка работал через мамино сердце."}, {"id": "v4", "type": "choice", "sentence": "Somebody tagged Mark in a photo from the party. What does to tag somebody mean?", "options": ["To mark somebody in a picture so it shows on their page", "To send somebody a picture through a private message", "To remove somebody from a group picture without asking", "To save a picture secretly without the owner knowing it"], "correct": "To mark somebody in a picture so it shows on their page", "explanation": "To tag somebody (in a photo) — «отметить кого-то на фото»: приложение распознаёт лицо, привязывает снимок к аккаунту человека, и фото появляется на его странице. Существительное a tag — «ярлык, метка» (бирка на одежде — тоже tag; цена с биркой — a price tag). В диалоге: Somebody tagged me in a photo from Anna's birthday party. I am fighting for my reputation — «Кто-то отметил меня на фото с дня рождения Анны. Я сражаюсь за свою репутацию» — а потом выясняется, что есть и второй кадр, с другого ракурса (from a different angle), потому что The internet is cruel — «Интернет жесток». Соседи по смыслу: to post a photo — «выложить фото», to share — «поделиться», to like — «лайкнуть», a comment / to comment — «комментарий / комментировать». Грамматическая деталь: to tag somebody IN a photo — предлог in, «внутри» снимка. Отметка на фото — неопасна, пока на ней нет торта."}]}, {"id": "s2", "title": "Grammar — Subjunctive (I suggest that he turn off)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: 'I suggest that Mark ___ his notifications off during dinner.'", "options": ["turn", "turns", "turned", "turning"], "correct": "turn", "explanation": "Новая грамматическая конструкция: субъюнктив, «сослагательное наклонение» после глаголов предложения — suggest, recommend, insist, demand, require. После that в таких предложениях глагол стоит в БАЗОВОЙ форме, одинаковой для всех лиц и времён: I suggest that Mark TURN his notifications off — «Я предлагаю, чтобы Марк выключил уведомления» — не turns, хотя Mark — третье лицо! Правило одно на всё: suggest / insist / recommend / demand / require + that + человек + V1 (без -s, без прошедшего, без to). Почему так: это старое сослагательное наклонение, дожившее до современного английского из формул вежливого приказа. Из диалога: I suggest that you turn most of them off — «Я предлагаю вам выключить большинство из них» (об уведомлениях). Ловушки на слух: turns тянет туда привычкой третьего лица, turned — «прошлым» после suggest, turning — герундием; но структура fixed: that + подлежащее + базовая форма. Британский разговорный вариант с тем же смыслом — should: I suggest that Mark should turn... — но базовая форма считается более элегантной и экзаменационной."}]}, {"id": "s3", "title": "Grammar — Subjunctive (It is essential that...)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g2", "type": "choice", "sentence": "Complete: 'It is essential that everybody ___ their files to the cloud.'", "options": ["back up", "backs up", "backed up", "is backing up"], "correct": "back up", "explanation": "Субъюнктив живёт не только после suggest: те же конструкции с that + базовая форма работают после прилагательных необходимости — it is essential that, it is important that, it is vital that, it is necessary that. It is essential that everybody back up their files to the cloud — «Необходимо, чтобы каждый копировал свои файлы в облако» — everybody обычно тянет за собой backs up (третье лицо единственного числа), но в субъюнктиве форма одна: V1 без -s. Сравните пару: It is important that she BE informed (субъюнктив, базовая форма be) — обычная жизнь: she IS informed. Notice: даже неправильный глагол be в субъюнктиве — просто be: I insist that he be on time — «Я настаиваю, чтобы он был вовремя» (не is!, и это вопрос c1). Слова-маркеры, после которых искать базовую форму: suggest, recommend, insist, demand, require, ask + that; it is essential / vital / important / crucial that. Учебная подсказка: увидели that после этих слов — мысленно сотрите с глагола -s и любое прошедшее время."}]}, {"id": "s4", "title": "Grammar — Subjunctive (recommended that she take)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g3", "type": "choice", "sentence": "Complete: 'The doctor recommended that Emma ___ a full week off social media.'", "options": ["take", "takes", "took", "taking"], "correct": "take", "explanation": "Прошлое не ломает субъюнктив: глагол главного предложения может стоять в прошлом (recommended, insisted, suggested, demanded), а форма после that остаётся базовой. The doctor recommended that Emma take a full week off social media — «Врач порекомендовал Эмме взять целую неделю без соцсетей» — recommended в прошлом, но take без -s и без прошедшего: суб­ъюнктив «заморожен» во времени. Это главная ловушка темы: рука так и тянется написать took («прошлое за прошедшим») — но время уже закрыто глаголом recommended, а субъюнктив времени не имеет. Из диалога: She recommended that I take a full week off social media — «Она порекомендовала мне взять целую неделю без соцсетей», и Марк уточняет: A whole week? Did you survive? — «Целую неделю? Вы выжили?» Бонус: to take time off — «взять перерыв/отпуск» (off — «вне, свободно от»), a week off social media — «неделя вне соцсетей». Проверяйте себя вопросом: что порекомендовали — действие в прошлом или совет, timeless? Совет — значит, базовая форма."}]}, {"id": "s5", "title": "Grammar — Subjunctive vs other patterns", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g4", "type": "choice", "sentence": "Which sentence is correct?", "options": ["My sister suggests that I change my password", "My sister suggests that I changing my password", "My sister suggests me that I change my password", "My sister suggests that I to change my password"], "correct": "My sister suggests that I change my password", "explanation": "Сборная солянка ловушек вокруг suggest. Верный вариант: My sister suggests that I change my password — «Сестра предлагает мне сменить пароль»: that + I + базовая форма change. Разбор остальных. Второй: changing — герундий не встаёт после подлежащего I, конструкция suggest that somebody DO не принимает V-ing. Третий: suggests ME that — классическая ошибка: suggest не имеет объекта-человека перед that! Сравните с tell: She told ME that... — можно, а She suggested me that... — нельзя; человек встречается только внутри: suggest that I..., suggest to me that... (с to). Четвёртый: to change — инфинитив с to в субъюнктиве запрещён, to появляется только у другой модели: suggest doing (без человека — мы проходили 13 сентября: suggest + V-ing) и suggest to me to... — нет, и это тоже неверно; с человеком — только that + V1. Итоговая шпаргалка: suggest + V-ing (о действии вообще), suggest that + человек + V1 (о действии конкретного человека), и никогда — suggest somebody to do."}]}, {"id": "s6", "title": "Practical English — Digital Life", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are telling a story, but your friend keeps scrolling. What can you say naturally, half-joking?", "options": ["Am I competing with your phone for attention here?", "Your telephone is receiving too much information now", "I require that you look at me when I am speaking", "The screen of your phone is very bright this evening"], "correct": "Am I competing with your phone for attention here?", "explanation": "Мягкая ирония вместо претензии: Am I competing with your phone for attention here? — «Я тут соревнуюсь с твоим телефоном за внимание?» To compete with somebody for something — «соревноваться с кем-то за что-то»; вопрос с здесь (here) на конце добавляет шутливого сарказма. Спектр вежливых напоминаний о вежливости: Sorry, you were saying? — «Прости, ты что-то говорил?» (тонкий намёк), Are you with me? — «Ты меня слушаешь?», Earth to Anna! — «Земля вызывает Анну!» (классика, когда человек «в космосе» в телефоне), Put that thing down for one minute — «Отложи эту штуку на минуту». Разбор остальных: I require that you look... — грамматически безупречный субъюнктив (require that + look — базовая форма, сегодня мы это учили!), но звучит как приказ короля; остальные два — реплики робота: фразы про «яркий экран» и «слишком много информации» не просят собеседника вернуться в разговор. Урок: ироничный вопрос работает лучше прямого требования."}, {"id": "p2", "type": "choice", "sentence": "You want to propose a phone-free dinner to a friend. What do you say?", "options": ["How about we put the phones in the middle of the table?", "The phones must be switched off during our dinner time", "I would rather you did not bring your phone tonight", "Phones are not permitted at this particular restaurant"], "correct": "How about we put the phones in the middle of the table?", "explanation": "Предложение, а не запрет: How about we put the phones in the middle of the table? — «Как насчёт положить телефоны в центр стола?» — известная игра: кто первый потянется к телефону, платит за десерт (в разных странах её называют phone stacking — «стопка телефонов»). How about + we + V1 — разговорный способ предложить идею (вариант: How about putting the phones...? — с герундием). Разбор остальных: The phones must be switched off — пассив с must звучит как объявление в самолёте; I would rather you did not bring your phone — грамматически идеальное would rather + человек + Past Simple (мы учили 6 октября), но это вежливый отказ «лучше бы ты не приносила», давление, а не приглашение; Phones are not permitted — правило ресторана, а не дружеская инициатива. Разница тонов: предложение (How about...? / Shall we...? / Why don't we...?) приглашает выбрать, запрет (must / not permitted / would rather you did not) выбирает за собеседника."}]}, {"id": "s7", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: 'The coach insisted that every player ___ at the training ground by seven.'", "options": ["be", "is", "was", "being"], "correct": "be", "explanation": "Звёздная ловушка субъюнктива: глагол be. The coach insisted that every player be at the training ground by seven — «Тренер настаивал, чтобы каждый игрок был на базе к семи». Be — базовая форма: даже неправильный be не получает ни is (every player — третье лицо!), ни was (insisted — прошедшее!), ни being. Это то же «замороженное» правило, что в g2: insist / demand / suggest / require + that + подлежащее + V1, и для be форма V1 — просто be. Классические примеры с be из жизни: I insist that she be present at the meeting — «Я настаиваю, чтобы она присутствовала на встрече», They demanded that the report be rewritten — «Они потребовали переписать отчёт» (be + V3 — пассив в субъюнктиве!), It is essential that everyone be informed — «Необходимо, чтобы все были в курсе». Заметьте и это: insisted BE — прошедшее главного глагола и базовая форма зависимого не конфликтуют, а живут в одном предложении. Услышали is/was после insisted that — почти наверняка перед вами не субъюнктив, а ошибка."}, {"id": "c2", "type": "choice", "sentence": "Which sentence uses back up and backup correctly?", "options": ["I back up my files, and I keep a backup in the cloud", "I backup my files, and I keep a back up in the cloud", "I back up my files, and I keep a back up in the cloud", "I backup my files, and I keep a backup in the cloud"], "correct": "I back up my files, and I keep a backup in the cloud", "explanation": "Орфографическая развилка: глагол — из двух слов, существительное — слитно. To back up — «делать резервную копию» (глагол, раздельно): I back up my files every Friday; a backup — «резервная копия» (существительное, слитно): I keep a backup in the cloud. Правильная фраза совмещает обе формы: I back up my files, and I keep a backup in the cloud — «Я копирую файлы и держу копию в облаке». Остальные варианты путают слитность: to backup your files — распространённая, но словарями не признаваемая форма глагола (в аккуратном письме — только back up); a back up в два слова — несуществующее существительное. Это семейство фразовых глаголов, ведущих себя одинаково: to check in / a check-in (регистрация), to log in / a login (вход в систему — мы проходили 31 августа), to set up / a setup (настройка). Правило-однострочник: глагол дышит на две буквы шире — в нём между back и up можно вставить слово (back your files up), и это верный признак глагола."}]}, {"id": "s8", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What happened to Mark last month?", "options": ["His phone died and he lost five years of photos", "His phone was stolen at Anna's birthday party", "His phone deleted all his contacts by itself", "His phone locked him out of his cloud account"], "correct": "His phone died and he lost five years of photos", "explanation": "Эмма напоминает причину визита: Your phone died last month and you lost five years of photos — «Твой телефон умер в прошлом месяце, и ты потерял пять лет фотографий». To die — «умереть» — о технике значит «сломаться окончательно» (более нейтрально: my phone stopped working, разговорно: my phone died); мы уже встречали это в to break down — «ломаться» — о технике из урока о доме. Продолжение Марка: Do not remind me. My mother had more pictures of my cat than I did — «Не напоминай. У мамы было больше фотографий моего кота, чем у меня» — то есть никто не сделал backup, и кота спасла только мама. Обратите внимание на past simple в сравнении: had more pictures than I DID — did заменяет had, чтобы не повторять; этот приём («эллипсис вспомогательного») мы разбирали в So did I. Мораль сцены: cloud storage сегодня — не роскошь, а страховой полис для памяти.", "audio_text": "Emma(F): Mark, you have been staring at your phone for ten minutes. I am still standing in your doorway.\nMark(M): Sorry! I was scrolling through my news feed and lost track of time.\nEmma(F): What could possibly be so important?\nMark(M): Somebody tagged me in a photo from Anna's birthday party. I am fighting for my reputation.\nEmma(F): The photo where you fell into the cake?\nMark(M): There is a second one now. From a different angle. The internet is cruel.\nEmma(F): Mark, I came here to help you set up cloud storage, remember? Your phone died last month and you lost five years of photos.\nMark(M): Do not remind me. My mother had more pictures of my cat than I did.\nEmma(F): Exactly. So today we back everything up. First, install the app.\nMark(M): Done. It is asking about privacy settings. Public or private?\nEmma(F): Private, obviously. Unless you want the whole world to see your cake adventure.\nMark(M): Fair point. And what about all these notifications? My phone buzzes every thirty seconds.\nEmma(F): I suggest that you turn most of them off. Your phone will survive the silence.\nMark(M): Turn them off? Then how will I know that a stranger liked my photo from 2019?\nEmma(F): You will live. Honestly, you are completely glued to that screen.\nMark(M): I am not glued. I just check it occasionally. Every two minutes.\nEmma(F): My doctor said the same about me. She recommended that I take a full week off social media.\nMark(M): A whole week? Did you survive?\nEmma(F): Day three, I read an actual book. It was unsettling.\nMark(M): Fine. Notifications off. One less buzz. Now, is that cake photo still open on your phone?\nEmma(F): I am sending it to the group chat. Consider it motivation."}, {"id": "l2", "type": "listen", "sentence": "What did Emma's doctor recommend?", "options": ["That she take a full week off social media", "That she takes a full week off social media", "That she took a full week off social media", "That she taking a full week off social media"], "correct": "That she take a full week off social media", "explanation": "Эмма рассказывает: My doctor said the same about me. She recommended that I take a full week off social media — «Мой врач то же самое сказал обо мне. Она порекомендовала мне взять целую неделю без соцсетей». Это вчерашний грамматический герой вживую: recommended (прошедшее время!) + that + I/she TAKE — базовая форма субъюнктива, без -s и без прошедшего. Три ловушки рядом: takes — привычка третьего лица (она ведь she!), took — «прошлое за прошедшим», taking — герундий. Ответ Эммы на вопрос Марка A whole week? Did you survive? — «Целую неделю? Вы выжили?» — Day three, I read an actual book. It was unsettling — «На третий день я прочитала настоящую книгу. Это было тревожно» — unsettling — «лишающее покоя» (от to settle — «успокаиваться» + un-), тонкая шутка о том, что чтение без прокрутки ленты кажется странным. Bonus: an actual book — actual усиливает «настоящий, не экран», а не «актуальный» — ложный друг переводчика.", "audio_text": "Emma(F): Mark, you have been staring at your phone for ten minutes. I am still standing in your doorway.\nMark(M): Sorry! I was scrolling through my news feed and lost track of time.\nEmma(F): What could possibly be so important?\nMark(M): Somebody tagged me in a photo from Anna's birthday party. I am fighting for my reputation.\nEmma(F): The photo where you fell into the cake?\nMark(M): There is a second one now. From a different angle. The internet is cruel.\nEmma(F): Mark, I came here to help you set up cloud storage, remember? Your phone died last month and you lost five years of photos.\nMark(M): Do not remind me. My mother had more pictures of my cat than I did.\nEmma(F): Exactly. So today we back everything up. First, install the app.\nMark(M): Done. It is asking about privacy settings. Public or private?\nEmma(F): Private, obviously. Unless you want the whole world to see your cake adventure.\nMark(M): Fair point. And what about all these notifications? My phone buzzes every thirty seconds.\nEmma(F): I suggest that you turn most of them off. Your phone will survive the silence.\nMark(M): Turn them off? Then how will I know that a stranger liked my photo from 2019?\nEmma(F): You will live. Honestly, you are completely glued to that screen.\nMark(M): I am not glued. I just check it occasionally. Every two minutes.\nEmma(F): My doctor said the same about me. She recommended that I take a full week off social media.\nMark(M): A whole week? Did you survive?\nEmma(F): Day three, I read an actual book. It was unsettling.\nMark(M): Fine. Notifications off. One less buzz. Now, is that cake photo still open on your phone?\nEmma(F): I am sending it to the group chat. Consider it motivation."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, you have been staring at your phone for ten minutes. I am still standing in your doorway."}, {"speaker": "Mark", "text": "Sorry! I was scrolling through my news feed and lost track of time."}, {"speaker": "Emma", "text": "What could possibly be so important?"}, {"speaker": "Mark", "text": "Somebody tagged me in a photo from Anna's birthday party. I am fighting for my reputation."}, {"speaker": "Emma", "text": "The photo where you fell into the cake?"}, {"speaker": "Mark", "text": "There is a second one now. From a different angle. The internet is cruel."}, {"speaker": "Emma", "text": "Mark, I came here to help you set up cloud storage, remember? Your phone died last month and you lost five years of photos."}, {"speaker": "Mark", "text": "Do not remind me. My mother had more pictures of my cat than I did."}, {"speaker": "Emma", "text": "Exactly. So today we back everything up. First, install the app."}, {"speaker": "Mark", "text": "Done. It is asking about privacy settings. Public or private?"}, {"speaker": "Emma", "text": "Private, obviously. Unless you want the whole world to see your cake adventure."}, {"speaker": "Mark", "text": "Fair point. And what about all these notifications? My phone buzzes every thirty seconds."}, {"speaker": "Emma", "text": "I suggest that you turn most of them off. Your phone will survive the silence."}, {"speaker": "Mark", "text": "Turn them off? Then how will I know that a stranger liked my photo from 2019?"}, {"speaker": "Emma", "text": "You will live. Honestly, you are completely glued to that screen."}, {"speaker": "Mark", "text": "I am not glued. I just check it occasionally. Every two minutes."}, {"speaker": "Emma", "text": "My doctor said the same about me. She recommended that I take a full week off social media."}, {"speaker": "Mark", "text": "A whole week? Did you survive?"}, {"speaker": "Emma", "text": "Day three, I read an actual book. It was unsettling."}, {"speaker": "Mark", "text": "Fine. Notifications off. One less buzz. Now, is that cake photo still open on your phone?"}, {"speaker": "Emma", "text": "I am sending it to the group chat. Consider it motivation."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
