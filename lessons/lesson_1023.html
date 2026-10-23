@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Holidays &amp; Celebrations: A Wedding + Wishes &amp; Regrets (I wish / If only)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Holidays &amp; Celebrations: A Wedding + Wishes &amp; Regrets (I wish / If only)</h1><div class="subtitle">2026-10-23</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">To get cold feet</div><div class="translation">To get cold feet — «дрогнуть перед важным шагом», дословно «получить холодные ноги». Фраза о внезапном приступе сомнений и страха перед решением, которое уже почти принято. Классика жанра — жених или невеста за день до свадьбы: David got cold feet two days before the wedding — «У Дэвида за два дня до свадьбы сдали нервы». Но идиома живёт далеко за пределами загса: get cold feet перед ипотекой, сменой работы, переездом в другую страну — везде, где большая перемена уже на пороге, а внутри вдруг тихо паникует внутренний трус. Русские аналоги — «струсить», «засомневаться на пороге», «попятиться». Обратите внимание на форму: get cold feet — ноги во множественном числе, глагол get («получить, подхватить»), как болезнь: сомнения приходят сами, их не выбирают. Если человек передумал окончательно, говорят уже иначе — he backed out of the deal («вышел из договорённости»). Из сегодняшнего диалога: руки у Дэвида дрожат, но Эмма права — все так себя чувствуют перед тем, как tie the knot, и это ещё не cold feet, а просто здоровый страх перед большим днём.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Holidays & Celebrations: A Wedding + Wishes & Regrets (I wish / If only)", "subtitle": "2026-10-23", "date": "2026-10-23", "phrase_of_the_day": "To get cold feet", "phrase_translation": "To get cold feet — «дрогнуть перед важным шагом», дословно «получить холодные ноги». Фраза о внезапном приступе сомнений и страха перед решением, которое уже почти принято. Классика жанра — жених или невеста за день до свадьбы: David got cold feet two days before the wedding — «У Дэвида за два дня до свадьбы сдали нервы». Но идиома живёт далеко за пределами загса: get cold feet перед ипотекой, сменой работы, переездом в другую страну — везде, где большая перемена уже на пороге, а внутри вдруг тихо паникует внутренний трус. Русские аналоги — «струсить», «засомневаться на пороге», «попятиться». Обратите внимание на форму: get cold feet — ноги во множественном числе, глагол get («получить, подхватить»), как болезнь: сомнения приходят сами, их не выбирают. Если человек передумал окончательно, говорят уже иначе — he backed out of the deal («вышел из договорённости»). Из сегодняшнего диалога: руки у Дэвида дрожат, но Эмма права — все так себя чувствуют перед тем, как tie the knot, и это ещё не cold feet, а просто здоровый страх перед большим днём.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1023.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Holidays & Celebrations: A Wedding", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "David and Sarah are tying the knot in May. What does to tie the knot mean?", "options": ["To get married in a ceremony", "To get engaged to somebody", "To go on a first date with somebody", "To move in with your partner for good"], "correct": "To get married in a ceremony", "explanation": "To tie the knot — «пожениться»: разговорная идиома о самой свадьбе, буквально «завязать узел». They are tying the knot in May — «Они поженятся в мае». Глагол часто в форме -ing: When are they tying the knot? — «Когда они поженятся?». Образ старинный: во многих культурах связанные узлом ленты или скрещённые руки над головой пары символизировали союз, отсюда и узел. Полезная свадебная лестница: to fall in love — «влюбиться», to get engaged — «сделать предложение и помолвиться», to tie the knot — «пожениться», honeymoon — «медовый месяц». Не путайте уровни: engaged — только обещание пожениться, tied the knot — свадьба уже состоялась."}, {"id": "v2", "type": "choice", "sentence": "Mark is going to a stag do on Saturday. What is a stag do?", "options": ["A party for the groom before the wedding", "A party for the bride and her closest friends", "A formal dinner that follows the ceremony", "A holiday the couple take after the wedding"], "correct": "A party for the groom before the wedding", "explanation": "A stag do (иногда stag night или stag party) — «мальчишник»: вечеринка друзей в честь жениха перед свадьбой. Stag — «олень-самец», то есть «жених в окружении своей стаи». Про невесту — зеркальная фраза a hen party или a hen do («девичник»), hen — «курочка». Американцы говорят иначе: a bachelor party — «мальчишник» и a bachelorette party — «девичник». В диалоге Марк, лучший друг Дэвида, вспоминает stag do с мини-гольфом — и часом поисков пропавшего жениха у ветряной мельницы. Грамматическая деталь: go to a stag do, have a stag do — как любая вечеринка; а на самой свадьбе у жениха своя роль: Mark is the best man — «Марк — свидетель, дружка»."}, {"id": "v3", "type": "choice", "sentence": "The invitation says RSVP by the first of June. What are you expected to do?", "options": ["Reply whether you are coming or not", "Bring a gift for the newlyweds to the church", "Book your own room at the hotel for the night", "Arrive at least an hour before the ceremony"], "correct": "Reply whether you are coming or not", "explanation": "RSVP — просьба ответить, придёте вы или нет, к указанному сроку: Please RSVP by the first of June — «Ответьте, пожалуйста, до первого июня». Это аббревиатура французской вежливости repondez s'il vous plait — «пожалуйста, ответьте» (respond, если по-английски). RSVP можно и как глагол: Did Uncle Ben RSVP? — «Дядя Бен вообще ответил?» — прямо как в диалоге, где дядя Бен не отвечает никогда. Почему это важно: на ответы считают места, стулья и тарелки на reception — «свадебном банкете», поэтому молчание создаёт хаос. Вежливые формулы ответа на приглашение: We would love to come — «Мы с радостью придём» и Sadly, we can't make it — «К сожалению, не сможем». Отметьте пару by + дата — «к какому числу»."}, {"id": "v4", "type": "choice", "sentence": "Two days before the wedding David got cold feet. What happened to him?", "options": ["He suddenly felt nervous and unsure about marrying", "He caught a bad cold and lost his voice completely", "He put on thin socks and froze at the bus stop", "He decided to move the wedding to a warmer month"], "correct": "He suddenly felt nervous and unsure about marrying", "explanation": "To get cold feet — «дрогнуть, засомневаться перед важным шагом»: не болезнь и не погода, а внезапный приступ сомнений перед уже почти принятым решением. David got cold feet two days before the wedding — «За два дня до свадьбы у Дэвида сдали нервы». Ловушка перевода прямая: ноги тут ни при чём, и переохлаждение — неверный путь. Идиома работает везде, где большой шаг: I got cold feet about the mortgage — «Я струсил с ипотекой». Близкий по духу глагол to back out (of) — «передумать и выйти из договорённости»: cold feet — это ещё только сомнения, backed out — уже отказ. Если сомнения отступили, скажут My feet warmed up again — шутливое «отошло». Спокойная противоположность — She has been calm since Tuesday, как невеста из нашего диалога."}]}, {"id": "s2", "title": "Grammar — Wishes & Regrets (I wish / If only)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: 'I wish I ___ a better dancer. The whole reception is watching.'", "options": ["were", "am", "will be", "would be"], "correct": "were", "explanation": "Сожаление о настоящем: wish + Past Simple. I wish I WERE a better dancer — «Жаль, что я не умею лучше танцевать» (сейчас, на этом банкете). После wish прошедшая форма, хотя смысл — сегодняшний: реальность «я не очень умею», а желание — о другом настоящем. Were — форма сослагательного наклонения для всех лиц: I wish I were, he wishes he were; в разговорной речи встречается I wish I was, и это допустимо, но на экзамене и в письме — were. Ловушки. Am — настоящее после wish невозможно. Will be — will никогда не живёт после wish. Would be — wish + would существует, но только о ДРУГИХ людях и их раздражающих привычках (I wish the band would play quieter), о себе нельзя: желание о собственном умении — только were или could."}, {"id": "g2", "type": "choice", "sentence": "Complete: 'Emma wishes she ___ the photographer earlier. He is fully booked now.'", "options": ["had booked", "would book", "booked", "would have booked"], "correct": "had booked", "explanation": "Сожаление о прошлом: wish + had + V3. Emma wishes she HAD BOOKED the photographer earlier — «Эмма жалеет, что не забронировала фотографа раньше». Событие в прошлом (не забронировала), следствие в настоящем (он занят) — но форма смотрит в прошлое, поэтому had booked. Ловушки. Would book — wish + would о прошлом чужих действий не работает, к тому же фотограф — не человек, раздражающий Эмму своим поведением. Booked — это сожаление о настоящем (жаль, что сейчас его нет свободным), а у нас упущенный прошлый момент. Would have booked — так выглядит третья часть третьего условного (she would have booked if...), но после wish эта форма не ставится: сожаление — всегда had V3. Сравните время в паре: I wish I knew — «жаль, что не знаю (сейчас)» и I wish I had known — «жаль, что не знал (тогда)»."}, {"id": "g3", "type": "choice", "sentence": "Complete: 'Mark was ill on the wedding day. I wish he ___ with us.'", "options": ["could have been", "can be", "could be", "will have been"], "correct": "could have been", "explanation": "Новое сегодня: сожаление о прошлой невозможности — wish + could have + V3. I wish he COULD HAVE BEEN with us — «Жаль, что он не смог быть с нами» — Марк болел, то есть в прошлом у него не было возможности присутствовать, и мы об этом сожалеем. Это брат конструкции wish + had been, только с акцентом на невозможность, а не на недоделанность: I wish I had come — «жаль, что не пришёл» (мог, но не сделал), I wish I could have come — «жаль, что не смог прийти» (не было возможности). Ловушки. Could be — сожаление о настоящем: жаль, что его нет с нами сейчас. Can be — can после wish не живёт, как и will. Will have been — это Future Perfect, к желностям отношения не имеет. Формула на память: прошедшая невозможность — could have V3."}, {"id": "g4", "type": "choice", "sentence": "Which sentence is correct?", "options": ["If only I had kept the receipt for the gift", "If only I would have kept the receipt for the gift", "If only I have kept the receipt for the gift", "If only I did keep the receipt for the gift"], "correct": "If only I had kept the receipt for the gift", "explanation": "If only — эмоциональный брат I wish: то же значение, но сильнее («эх, если бы только...!»). Строятся одинаково: If only + Past Simple — о настоящем, If only + had V3 — о прошлом. If only I HAD KEPT the receipt for the gift — «Эх, если бы я только сохранил чек на подарок!» (прошлое: не сохранил, теперь подарок не обменять). Ловушки. Would have kept — частая ошибка под влиянием третьего условного: после if only в прошлом стоит только had V3, would здесь запрещён. Have kept — Present Perfect после if only не живёт. Did keep — вспомогательный did в утверждениях нужен только для эмфазы (I DID keep it — «я ведь сохранил!»), и тогда смысл обратный: не сожаление, а оправдание. Сравните окраску: I wish I had kept it — спокойное сожаление, If only I had kept it! — то же самое, но с вздохом и прижатой к сердцу рукой."}]}, {"id": "s3", "title": "Practical English — Weddings & Invitations", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You cannot attend the wedding. How do you reply to the invitation?", "options": ["Thank you for inviting us. Sadly, we can't come, but we wish you a wonderful day", "We are not coming. Send us some photos from the party if you remember", "No. We already have plans that weekend, so try the other people on your list", "Maybe we will come if our plans change, so keep two seats for us just in case"], "correct": "Thank you for inviting us. Sadly, we can't come, but we wish you a wonderful day", "explanation": "Формула вежливого отказа на RSVP из трёх шагов: благодарность — мягкое сожаление — доброе пожелание. Thank you for inviting us — «Спасибо, что позвали»; Sadly, we can't come или we can't make it — «К сожалению, не сможем» (to make it — «смочь присутствовать», разговорно и очень полезно); we wish you a wonderful day — «желаем вам чудесного дня». Объяснять причину не обязательно, но можно добавить одну строку: We will be abroad that week — «Мы будем за границей на той неделе». Разбор остальных. Send us some photos — требование, а не вежливость, и ставит молодожёнов в позицию обслуживающего персонала. Просто no — так отвечают на приглашение в суд, а не на свадьбу. Keep two seats just in case — худшее из миров: пары считают по ответам тарелки и стулья, «может быть» ломает всю рассадку."}, {"id": "p2", "type": "choice", "sentence": "Your friend has cold feet the night before the wedding. What do you say?", "options": ["Everyone feels this before the big day. Talk to Sarah tonight about it", "You should have thought about this before you proposed to her, really", "Then just cancel everything now, it is not too late to call the guests", "Say nothing, have a drink, and hope the feeling disappears by tomorrow"], "correct": "Everyone feels this before the big day. Talk to Sarah tonight about it", "explanation": "Поддержка при cold feet строится из трёх вещей: нормализация, разговор, без паники. Everyone feels this before the big day — «Все это чувствуют перед большим днём» — снимает страх сойти с ума: сомнение перед свадьбой — норма, а не сигнал бежать; the big day — «большой день», устойчивое имя любого судьбоносного события. Talk to Sarah tonight — «Поговори с Сарой сегодня вечером»: сомнения прячут от всех, кроме будущей жены, и именно разговор с ней лечит. Полезные соседние фразы: It is just nerves — «Это просто нервы», Whatever you decide, I am here — «Что бы ты ни решил, я рядом». Разбор остальных. Should have thought — упрёк о прошлом, когда человеку страшно сейчас, работает как удар. Cancel everything — escalate паники, а не помощь. Say nothing and have a drink — стратегия громоздить проблему в темноту, утром она станет только больше."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: 'If only Uncle Ben ___ to invitations. He never replies, he just appears.'", "options": ["would reply", "replied", "had replied", "will reply"], "correct": "would reply", "explanation": "Если перед вами не человек с планами, а человек с вредной привычкой — работает if only / wish + would: If only Uncle Ben WOULD REPLY to invitations — «Если бы только дядя Бен отвечал на приглашения!». Это не сожаление о прошлом, а раздражённое желание, чтобы кто-то другой изменил своё регулярное поведение. Формула-ориентир: would после wish/if only — только о других людях (или вещах-«хулиганах»: I wish the weather would improve) и только о настоящем и будущем. Ловушки. Replied — Past Simple после if only выражает сожаление о настоящем, но с привычками-раздражителями так не говорят: нужен именно would. Had replied — сожаление о прошлом разовом событии, а Бен не ответил один раз, он не отвечает системно. Will reply — will после if only не живёт никогда, как и после wish. Запомните пару из диалога: дядя Бен появляется, как погода — непредсказуемо, и остаётся только If only he would RSVP."}, {"id": "c2", "type": "choice", "sentence": "Which sentence expresses annoyance about somebody else's behaviour?", "options": ["I wish Ben would reply to his invitations on time", "I wish I had replied to the invitation much sooner", "I wish I could reply to every guest personally", "I wish the reception were a little closer to home"], "correct": "I wish Ben would reply to his invitations on time", "explanation": "Wish + would — маркер раздражения из-за чужого поведения: I wish Ben WOULD REPLY to his invitations on time — «Как бы я хотел, чтобы Бен наконец отвечал на приглашения вовремя». Ключевые признаки: подлежащее после wish — другой человек (Ben), would + V1, а ситуация — повторяющаяся привычка, которая бесит. Разбор соседей, все — законные, но о другом. I wish I had replied — сожаление о прошлом: я не ответил тогда, жалею сейчас (had V3). I wish I could reply — желание-возможность о настоящем: жаль, что не могу ответить каждому лично (could + V1). I wish the reception were closer — сожаление о настоящем положении дел: жаль, что банкет так далеко (were — сослагательное). Итоговая карта урока: раздражение на другого — would, сожаление о себе сейчас — Past Simple, сожаление о прошлом — had V3, невозможность в прошлом — could have V3."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What is Mark's main worry?", "options": ["He has to give a speech and he is nervous about it", "He has lost one of the wedding rings somewhere", "He has forgotten the time of the afternoon ceremony", "He has argued with David about the honeymoon plans"], "correct": "He has to give a speech and he is nervous about it", "explanation": "Марк — best man, «свидетель», и его главный страх раскрыт в первых же репликах. Эмма спрашивает Nerves or the speech? — «Нервы или речь?», и Марк отвечает Both — «И то и другое», добавляя I would rather carry the rings than give the speech — «Я предпочёл бы носить кольца, чем произносить речь» (would rather + V1 без to — «предпочёл бы», знакомая конструкция). Причина волнения названа прямо: как свидетель он обязан выйти с речью (a speech) перед девяноста гостями — только Ninety people and a rose bush, как утешает он сам Дэвида в финале. Кольца он не терял, время церемонии помнит отлично (the ceremony starts at two), а про медовый месяц они с Дэвидом только мечтают — Португалия, две недели солнца.", "audio_text": "Emma(F): Morning, Mark. You look like a man carrying two rings and a speech.\nMark(M): How did you know? I am the best man, and I have been awake since five.\nEmma(F): Nerves or the speech?\nMark(M): Both. I would rather carry the rings than give the speech, honestly.\nEmma(F): You will be fine. Did everyone RSVP in the end?\nMark(M): Everyone except Uncle Ben. He never replies. He just appears, like weather.\nEmma(F): Classic Ben. Is David ready? The ceremony starts at two.\nMark(M): He is in the garden, practising his vows to a rose bush.\nEmma(F): At least the bush got a rehearsal. Is the reception at the hotel afterwards?\nMark(M): The Grand Hotel. Dinner, speeches, then the band. I open the dancing.\nEmma(F): You? The man who dances like a step ladder?\nMark(M): Thank you for that image. I have been practising in the kitchen.\nEmma(F): And the stag do last week? Any disasters?\nMark(M): Only one. We lost the groom on the mini golf course for an hour.\nEmma(F): You lost David. On mini golf.\nMark(M): He was at the windmill. He said it reminded him of the honeymoon cottage.\nEmma(F): A romantic hiding from his own stag do. Where are they going, by the way?\nMark(M): Portugal. Two weeks of sun after all this rain.\nEmma(F): Lovely. And how is David this morning? Any sign of cold feet?\nMark(M): He says his hands are shaking since breakfast.\nEmma(F): Everyone feels that before they tie the knot. Even Sarah, probably.\nMark(M): Sarah is calm. She has been calm since Tuesday. It is terrifying.\nEmma(F): That is called being organised. Look, here comes the man himself.\nMark(M): David, two o'clock, no pressure. Only ninety people and a rose bush.\nEmma(F): The bush believed in you, David. We all do."}, {"id": "l2", "type": "listen", "sentence": "What do we learn about the stag do?", "options": ["David disappeared for an hour near the windmill", "David refused to play and went home before dinner", "David broke his ankle on the mini golf course", "David spent the whole evening talking about Portugal"], "correct": "David disappeared for an hour near the windmill", "explanation": "История с мальчишника — жемчужина диалога. Mark says Only one disaster. We lost the groom on the mini golf course for an hour — «Только один конфуз: мы потеряли жениха на площадке мини-гольфа на час». Нашёлся он у декорации: He was at the windmill — «Он был у ветряной мельницы», и объяснение трогательное — it reminded him of the honeymoon cottage — «она напомнила ему домик для медового месяца». Эмма резюмирует A romantic hiding from his own stag do — «Романтик, прячущийся от собственного мальчишника». Обратите внимание на to lose somebody — «потерять кого-то из виду» (не «потерять» навсегда, а временно не найти — как lost luggage в аэропорту). Травмы не было, домой никто не уходил, а Португалия появилась в разговоре позже и в другом месте — уже как план медового месяца.", "audio_text": "Emma(F): Morning, Mark. You look like a man carrying two rings and a speech.\nMark(M): How did you know? I am the best man, and I have been awake since five.\nEmma(F): Nerves or the speech?\nMark(M): Both. I would rather carry the rings than give the speech, honestly.\nEmma(F): You will be fine. Did everyone RSVP in the end?\nMark(M): Everyone except Uncle Ben. He never replies. He just appears, like weather.\nEmma(F): Classic Ben. Is David ready? The ceremony starts at two.\nMark(M): He is in the garden, practising his vows to a rose bush.\nEmma(F): At least the bush got a rehearsal. Is the reception at the hotel afterwards?\nMark(M): The Grand Hotel. Dinner, speeches, then the band. I open the dancing.\nEmma(F): You? The man who dances like a step ladder?\nMark(M): Thank you for that image. I have been practising in the kitchen.\nEmma(F): And the stag do last week? Any disasters?\nMark(M): Only one. We lost the groom on the mini golf course for an hour.\nEmma(F): You lost David. On mini golf.\nMark(M): He was at the windmill. He said it reminded him of the honeymoon cottage.\nEmma(F): A romantic hiding from his own stag do. Where are they going, by the way?\nMark(M): Portugal. Two weeks of sun after all this rain.\nEmma(F): Lovely. And how is David this morning? Any sign of cold feet?\nMark(M): He says his hands are shaking since breakfast.\nEmma(F): Everyone feels that before they tie the knot. Even Sarah, probably.\nMark(M): Sarah is calm. She has been calm since Tuesday. It is terrifying.\nEmma(F): That is called being organised. Look, here comes the man himself.\nMark(M): David, two o'clock, no pressure. Only ninety people and a rose bush.\nEmma(F): The bush believed in you, David. We all do."}]}], "subtitles": [{"speaker": "Emma", "text": "Morning, Mark. You look like a man carrying two rings and a speech."}, {"speaker": "Mark", "text": "How did you know? I am the best man, and I have been awake since five."}, {"speaker": "Emma", "text": "Nerves or the speech?"}, {"speaker": "Mark", "text": "Both. I would rather carry the rings than give the speech, honestly."}, {"speaker": "Emma", "text": "You will be fine. Did everyone RSVP in the end?"}, {"speaker": "Mark", "text": "Everyone except Uncle Ben. He never replies. He just appears, like weather."}, {"speaker": "Emma", "text": "Classic Ben. Is David ready? The ceremony starts at two."}, {"speaker": "Mark", "text": "He is in the garden, practising his vows to a rose bush."}, {"speaker": "Emma", "text": "At least the bush got a rehearsal. Is the reception at the hotel afterwards?"}, {"speaker": "Mark", "text": "The Grand Hotel. Dinner, speeches, then the band. I open the dancing."}, {"speaker": "Emma", "text": "You? The man who dances like a step ladder?"}, {"speaker": "Mark", "text": "Thank you for that image. I have been practising in the kitchen."}, {"speaker": "Emma", "text": "And the stag do last week? Any disasters?"}, {"speaker": "Mark", "text": "Only one. We lost the groom on the mini golf course for an hour."}, {"speaker": "Emma", "text": "You lost David. On mini golf."}, {"speaker": "Mark", "text": "He was at the windmill. He said it reminded him of the honeymoon cottage."}, {"speaker": "Emma", "text": "A romantic hiding from his own stag do. Where are they going, by the way?"}, {"speaker": "Mark", "text": "Portugal. Two weeks of sun after all this rain."}, {"speaker": "Emma", "text": "Lovely. And how is David this morning? Any sign of cold feet?"}, {"speaker": "Mark", "text": "He says his hands are shaking since breakfast."}, {"speaker": "Emma", "text": "Everyone feels that before they tie the knot. Even Sarah, probably."}, {"speaker": "Mark", "text": "Sarah is calm. She has been calm since Tuesday. It is terrifying."}, {"speaker": "Emma", "text": "That is called being organised. Look, here comes the man himself."}, {"speaker": "Mark", "text": "David, two o'clock, no pressure. Only ninety people and a rose bush."}, {"speaker": "Emma", "text": "The bush believed in you, David. We all do."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
