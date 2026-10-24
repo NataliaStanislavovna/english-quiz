@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Restaurant: Early Bird Menus &amp; Tipping + Subject-verb Agreement</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Restaurant: Early Bird Menus &amp; Tipping + Subject-verb Agreement</h1><div class="subtitle">2026-10-24</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">The early bird catches the worm</div><div class="translation">The early bird catches the worm — «ранняя пташка ловит червячка», то есть кто встаёт и приходит раньше всех, тот и получает лучшее. Дословный перевод работает и по-русски, и смысл тот же: преимущество у тех, кто не откладывает. В ресторанном контексте — буквально: early bird menu, «меню для ранних пташек», — это скидочное меню для тех, кто ужинает до определённого часа, обычно до половины седьмого или семи вечера. Ресторан выигрывает (гости до пикового часа), гость выигрывает (три блюда по цене двух). Отсюда же существительное an early bird — «ранняя пташка»: You are an early bird tonight — «Сегодня ты ранняя пташка». По-русски так говорят про тех, кто рано встаёт, но по-английски идиома шире: она о любом раннем действии — ранней брони, раннем приходе, раннем заказе. Полезная пара на будущее: the early bird catches the worm — про успех через ранний подъём, а вторая, менее известная половина шутки — but the second mouse gets the cheese — «но сыр достаётся второй мышке» (которая не попала в мышеловку). Юмор для друзей, не для собеседования.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Restaurant: Early Bird Menus & Tipping + Subject-verb Agreement", "subtitle": "2026-10-24", "date": "2026-10-24", "phrase_of_the_day": "The early bird catches the worm", "phrase_translation": "The early bird catches the worm — «ранняя пташка ловит червячка», то есть кто встаёт и приходит раньше всех, тот и получает лучшее. Дословный перевод работает и по-русски, и смысл тот же: преимущество у тех, кто не откладывает. В ресторанном контексте — буквально: early bird menu, «меню для ранних пташек», — это скидочное меню для тех, кто ужинает до определённого часа, обычно до половины седьмого или семи вечера. Ресторан выигрывает (гости до пикового часа), гость выигрывает (три блюда по цене двух). Отсюда же существительное an early bird — «ранняя пташка»: You are an early bird tonight — «Сегодня ты ранняя пташка». По-русски так говорят про тех, кто рано встаёт, но по-английски идиома шире: она о любом раннем действии — ранней брони, раннем приходе, раннем заказе. Полезная пара на будущее: the early bird catches the worm — про успех через ранний подъём, а вторая, менее известная половина шутки — but the second mouse gets the cheese — «но сыр достаётся второй мышке» (которая не попала в мышеловку). Юмор для друзей, не для собеседования.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1024.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Restaurant: Early Bird Menus & Tipping", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "The restaurant advertises an early bird menu. What is it?", "options": ["A cheaper menu if you eat before a certain time", "A menu with smaller portions cooked for children", "A menu of breakfast dishes that is served all day", "A special menu that only regular customers may order"], "correct": "A cheaper menu if you eat before a certain time", "explanation": "An early bird menu — «меню для ранних пташек»: фиксированный набор блюд со скидкой для тех, кто ужинает до определённого часа, обычно до половины седьмого или семи вечера. В нашем диалоге — три блюда за двадцать евро, если успеть до half past six. Название идёт от идиомы the early bird catches the worm — «ранняя пташка ловит червячка»: кто пришёл раньше, тот платит меньше. Ресторану это тоже выгодно: гости до вечернего пика заполняют пустой зал. Близкая соседка из прошлого урока — an early check-in, «раннее заселение» в отеле, и там же early bird по-американски ещё и «спецпредложение для тех, кто бронирует заранее». Ловушка значения: это не завтрак и не детское меню — часы решают всё. Спросить можно так: What time does the early bird menu finish? — «До какого часа действует меню для ранних пташек?»"}, {"id": "v2", "type": "choice", "sentence": "Kate asks the waiter for a window table. What is she asking for?", "options": ["A table right next to the window, usually with a view", "A table reserved for guests who are staying at the hotel", "A table near the kitchen that is served a little faster", "A small round table for two that is standing by the bar"], "correct": "A table right next to the window, usually with a view", "explanation": "A window table — «столик у окна»: самое желанное место в зале, особенно на закате или с видом на улицу. Просят его вежливо: Could we have a table by the window, please? — «Можно нам столик у окна, пожалуйста?» (by the window — тот же смысл, что at the window). В диалоге официант предупреждает: a window table is free until seven — «столик у окна свободен до семи», потому что вечером приходит большая компания. Отсюда важный нюанс бронирования: window table просят при заказе, а не на месте — Table for two, under the name Kate — «Столик на двоих, на имя Кейт» (under the name — «на имя», знакомая формула из отелей). Другие «места со смыслом»: a corner table — «столик в углу», самый уютный, a terrace table — «столик на террасе», летом ценится выше окна. Ловушка: a table by the bar — это у бара, а не у окна."}, {"id": "v3", "type": "choice", "sentence": "At the end of the meal Kate says, 'Could we split the bill?' What does she want?", "options": ["Each person wants to pay for their own share", "One person wants to pay for all the others today", "The restaurant should divide it between two cards only", "The waiter should remove the service charge from it"], "correct": "Each person wants to pay for their own share", "explanation": "To split the bill — «разделить счёт»: каждый платит свою долю, чаще всего поровну. Could we split the bill, please? — «Можно нам разделить счёт?» — стандартная фраза, когда ужинают друзьями. Полезно знать соседей по смыслу. Separate bills — «отдельные счёта»: официант приносит два счёта, и каждый платит за то, что заказал сам — так честнее, если один брал лобстера, а другой суп. To pay for somebody — «заплатить за кого-то»: It is on me — «С меня», приглашение всей компании; знакомая идиома on the house — «за счёт заведения» — про подарок от ресторана, а не от друга. Разница культур: в Британии и Европе split the bill — нормальная просьба, официант не удивится; отдельные счёта (separate checks) — скорее американская привычка. Ловушка: to split не значит «уменьшить счёт» — скидки тут ни при чём, только делёж оплаты."}, {"id": "v4", "type": "choice", "sentence": "The menu says 'Service is not included.' What does this mean for you?", "options": ["The waiter's service is not in the price, so a tip is expected", "The restaurant refuses to serve you at that particular table", "The food will arrive later because the kitchen is very busy", "The menu price does not include any drinks that you order"], "correct": "The waiter's service is not in the price, so a tip is expected", "explanation": "Service is not included — «обслуживание не входит в счёт»: цена в меню покрывает только еду и напитки, а работу официанта принято отблагодарить чаевыми отдельно. Ключевое слово service здесь — «обслуживание, работа зала», не «сервисный сбор» в целом. Сравните: service is included — «обслуживание уже включено», тогда чаевые факультативны, а в Америке в счёт иногда вписывают automatic service charge — «автоматический сервисный сбор» для больших компаний. Культуры разные. США: чаевые — основная часть дохода официанта, норма от пятнадцати до двадцати процентов, не оставить — почти оскорбление. Британия: около десяти процентов, и только если сервис хороший. Европа: часто округляют счёт вверх или оставляют мелочь. В диалоге Кейт подводит итог: Fifteen to twenty percent there. Here ten is fine if the service is good — «Там пятнадцать-двадцать процентов. Здесь десяти достаточно, если обслуживание хорошее»."}]}, {"id": "s2", "title": "Grammar — Subject-verb Agreement", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: 'Neither of us ___ tonight, so we can both enjoy the wine.'", "options": ["is driving", "are driving", "am driving", "be driving"], "correct": "is driving", "explanation": "Neither of us IS driving — «Никто из нас двоих не ведёт машину». Новая тема сегодня — согласование подлежащего и глагола. Правило: neither of и either of + существительное или местоимение — формально единственное число, глагол в единственном: neither of us IS, either of you IS, neither of the dishes IS spicy. Логика английская, не русская: ни один — значит «ни один», а «ни один» — это один, только с отрицанием. В разговорной речи иногда слышно neither of us are, но на экзамене и в письме — is. Ловушки. Are driving — согласование по слову us, самая частая ошибка: грамматическое подлежащее здесь neither, а не us. Am driving — am живёт только с I, а us — не я. Be driving — be без вспомогательного глагола не строит время. Запомните пару из диалога: Neither of us is driving tonight — и Марк тут же добавил wait, I am."}, {"id": "g2", "type": "choice", "sentence": "Complete: 'The news about the salmon ___ not good, I am afraid.'", "options": ["is", "are", "were", "have been"], "correct": "is", "explanation": "The news IS not good — «Новости о лососе неутешительны». News — ловушка-парник: слово выглядит как множественное число (заканчивается на -s), но грамматически оно неисчисляемое и единственное: the news is, good news is, no news is good news — «отсутствие новостей — хорошая новость». Этим словом официант в диалоге сообщает, что лосось закончился: The news is not good, I am afraid — «Боюсь, новости неутешительные». Семейка таких же «обманщиков»: mathematics is, physics is, economics is — названия наук на -ics — единственное число; darts is — «дартс» как игра тоже одно. А в противоположную сторону работают police и people: the police ARE, people ARE — множественные без -s на конце. Have been — вдвойне неверно: и множественное число, и форма, которая требует for/since. Формула на память: news — это одна порция информации, а не много новых."}, {"id": "g3", "type": "choice", "sentence": "Complete: 'Ten euros ___ a good price for two courses.'", "options": ["is", "are", "were", "have been"], "correct": "is", "explanation": "Ten euros IS a good price — «Десять евро — хорошая цена». Правило сумм, расстояний и времени: если названо количество как единое целое, глагол в единственном числе. Ten euros is a good price — это не «десять отдельных евро», а одна цена. Ten kilometres is a long walk — «Десять километров — долгая прогулка». Twenty minutes is enough — «Двадцати минут достаточно». В диалоге Марк говорит именно так: Ten euros is still a good price for two courses. Логика: подлежащее — не предметы, а количество, а количество — одно. Для сравнения: если считать объекты поштучно, работает множественное — There are ten euros on the table — «На столе десять евро (монетами/купюрами)» — потому что речь о физических деньгах, а не о цене. Were и have been — согласование по слову euros, та же ловушка, что и в neither of us are: смотрите на смысл подлежащего, а не на последнюю букву перед глаголом."}, {"id": "g4", "type": "choice", "sentence": "Which sentence is correct?", "options": ["The police are investigating the missing salmon", "The police is investigating the missing salmon", "The polices are investigating the missing salmon", "The police was investigating the missing salmon"], "correct": "The police are investigating the missing salmon", "explanation": "The police ARE investigating — «Полиция расследует». Police — существительное-коллектив, которое в британском английском всегда ведёт себя как множественное число: the police are, the police were, the police have. У него нет формы единственного числа, поэтому the police is — ошибка, а the polices — формы не существует вовсе. Если нужен один человек — a police officer — «полицейский» или разговорное a policeman, a policewoman. Шутка из диалога: The police could not have found us a better table — «Полиция не нашла бы нам столик лучше» — Марк преувеличивает качество сервиса, и глагол стоит именно во множественном. Соседние коллективы ведут себя по-британски свободно: the staff are friendly — «персонал дружелюбен», people are waiting — «люди ждут». А вот staff и team по обе стороны океана: британцы скажут the team are winning («команда как люди»), американцы — the team is winning («команда как одна единица»); на экзамене безопаснее единственное число для team, но police — всегда только множественное."}]}, {"id": "s3", "title": "Practical English — At the Restaurant", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Your table is next to the noisy kitchen door. What do you say to the waiter?", "options": ["Would it be possible to move to a table by the window?", "Move us somewhere quieter, this table is far too noisy", "We are leaving unless you find us a better table now", "Why did you put us next to the kitchen door tonight?"], "correct": "Would it be possible to move to a table by the window?", "explanation": "Вежливая просьба о пересадке строится по формуле: вопрос + возможность + конкретика. Would it be possible to move to a table by the window? — «Было бы возможно пересесть за столик у окна?» — три сигнала вежливости: вопросительная форма (не приказ), would (условное, а не прямое), it possible (просите о возможности, а не о услуги как о долге). Рабочие варианты той же силы: Could we possibly move to a quieter table? — «Можно ли нам, возможно, пересесть за столик потише?», We were wondering if we could change tables — «Мы думали, можно ли нам поменять столик» — супер-вежливая форма из косвенных вопросов. Если столиков нет, вежливый официант предложит альтернативу: The window tables are taken, but the corner table is free — «Столики у окна заняты, но угловой свободен». Разбор остальных. Move us — императив, так говорят только очень усталые люди. We are leaving unless — ультиматум, за который в хорошем ресторане и уносят быстрее. Why did you put us — вопрос-обвинение: дверь кухни выбирал не он."}, {"id": "p2", "type": "choice", "sentence": "You and your friend want to pay separately. What do you ask the waiter?", "options": ["Could we split the bill, please, when you have a moment", "We will only pay for the drinks and nothing else today", "Can you bring the bill at once because our taxi is here", "Is the tip included in this, or do we pay the tip twice"], "correct": "Could we split the bill, please, when you have a moment", "explanation": "Could we split the bill, please — «Можно нам разделить счёт, пожалуйста» — три части: could (вежливая возможность), split the bill (само действие), please (полирующий штрих). Хвост when you have a moment — «когда будет минутка» — снимает давление: вы не гоните официанта, а просите в его ритме. Если хотите платить каждый за своё, уточните: Could we have separate bills? — «Можно нам отдельные счёта?». Картой за двоих: Shall I pay by card and you give me your half in cash? — «Мне картой, а ты отдашь свою половину наличными?». Разбор остальных. Only pay for the drinks — не просьба, а реплика скандалиста. At once because our taxi — спешка честная, но грубая; вежливее: whenever you can, we are in a bit of a hurry — «когда сможете, мы немного спешим». Do we pay the tip twice — вопрос на миллион, но сформулирован подозрительно: сначала проверьте в счёте строку service charge, а если её нет — I am afraid so, the service is not included."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: 'Twenty minutes ___ enough for a quick lunch, surely?'", "options": ["is", "are", "were", "seem"], "correct": "is", "explanation": "Twenty minutes IS enough — «Двадцати минут достаточно». Это правило из основной части урока, но на уровне Challenge: период времени как единое количество — единственное число. Twenty minutes is enough, half an hour is too long, three days is a short holiday — везде глагол в единственном, потому что подлежащее — не минуты, а один отрезок. Ловушки. Are — согласование по слову minutes, классика жанра. Were — та же ошибка плюс прошедшее время без причины. Seem — двойной промах: и множественное число (нужно seems), и странный смысл — период времени не «кажется достаточным», а является. Тест для себя: можно ли вставить одно слово-подлежащее? This period is enough — можно, значит is. Для сравнения поштучного счёта: Twenty minutes have passed and he still has not called — «Двадцать минут прошло, а он так и не позвонил» — здесь минуты считаются как отдельные единицы, поэтому have. Разница тонкая, но на письме её видно."}, {"id": "c2", "type": "choice", "sentence": "Complete: 'Neither the waiter nor the customers ___ happy with the new menu.'", "options": ["are", "is", "am", "be"], "correct": "are", "explanation": "Neither the waiter nor the customers ARE happy — «Не доволен ни официант, ни посетители». Правило соседства: в конструкции neither... nor... глагол согласуется с БЛИЖАЙШИМ подлежащим. Здесь ближайшее — the customers, множественное число, значит are. Переставьте части — и глагол изменится: Neither the customers nor the waiter IS happy — «посетители» ушли дальше, «официант» стал ближайшим — единственное число. То же правило работает для either... or...: Either the chef or the waiters ARE responsible, Either the waiters or the chef IS responsible. Проверка на слух: прочитайте только вторую половину — the customers are happy звучит верно, the waiter is happy звучит верно — и подставьте нужную. Ловушки. Is — согласование по первому подлежащему, а надо по второму, ближайшему. Am — am живёт только с I, которого тут нет. Be — голый инфинитив вместо глагола предложения. Совет: в neither... nor сначала найдите глагол, потом подлежащее прямо перед ним."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What does the early bird menu offer?", "options": ["Three courses for twenty euros before half past six", "A free glass of wine for every guest who arrives first", "Two breakfast dishes that are served until ten o'clock", "Half price desserts for guests who book a week ahead"], "correct": "Three courses for twenty euros before half past six", "explanation": "Условия спецпредложения названы в диалоге дважды. Марк объясняет план: We are forty minutes early. The early bird menu finishes at half past six — «Мы на сорок минут раньше. Меню для ранних пташек заканчивается в половине седьмого». А позже добавляет: Nobody says no to a three course meal for twenty euros — «Никто не откажется от обеда из трёх блюд за двадцать евро». Итак: три блюда, двадцать евро, успеть до half past six — время в диалоге словами, как положено. Обратите внимание на three course meal — «комплексный обед из трёх блюд»: закуска, основное, десерт; слово course здесь — «блюдо в составе комплекса», не «курс». Другие варианты не совпадают: вино никто не дарил, завтраки до десяти — не про вечерний ресторан, а о брони за неделю речи не было — столик у окна достался просто потому, что они пришли раньше всех.", "audio_text": "Kate(F): Good evening. A table for two, under the name Kate.\nJohn(M): Welcome. A window table is free until seven, when the birthday party arrives.\nMark(M): The window table! The early bird plan is working.\nKate(F): Do not get too excited. The early bird menu means we eat dinner at six.\nMark(M): Nobody says no to a three course meal for twenty euros.\nJohn(M): Here is the early bird menu. The news is not good, I am afraid. The salmon has just sold out.\nKate(F): The salmon was the whole reason we came early.\nMark(M): Do not panic. Ten euros is still a good price for two courses. The chicken is fine.\nJohn(M): Excellent choice. And to drink?\nKate(F): Still water for me. Mark?\nMark(M): The same. Neither of us is driving tonight. Wait. I am.\nKate(F): You had one lemonade last time and called it a wild evening.\nJohn(M): I will give you a moment with the menus.\nMark(M): So. A window table, a quiet corner, and no birthday party until seven.\nKate(F): The early bird catches the worm. And the chicken catches you, apparently.\nJohn(M): Are you ready to order?\nKate(F): We are. Two chicken courses, please. And could we split the bill later?\nJohn(M): Of course. Service is not included, just so you know.\nMark(M): In America the tip is almost compulsory, right?\nKate(F): Fifteen to twenty percent there. Here ten is fine if the service is good.\nMark(M): The service was great. The police could not have found us a better table.\nKate(F): The police have nothing to do with chicken, Mark. Ten percent it is."}, {"id": "l2", "type": "listen", "sentence": "What do Kate and Mark say about tipping?", "options": ["In America fifteen to twenty percent is expected", "In Britain leaving a tip is considered deeply rude", "In America the tip is always printed in the menu", "In Britain the waiter must chase you for the tip"], "correct": "In America fifteen to twenty percent is expected", "explanation": "Культура чаевых — кульминация диалога. Марк спрашивает: In America the tip is almost compulsory, right? — «В Америке чаевые почти обязательны, да?», и Кейт отвечает: Fifteen to twenty percent there. Here ten is fine if the service is good — «Там пятнадцать-двадцать процентов. Здесь десяти достаточно, если обслуживание хорошее». There — Америка, here — Британия. Заметьте согласование, сегодняшнюю грамматику, в самой фразе: fifteen to twenty percent IS expected — сумма как единое количество — единственное число. Официант Джон добавил важное: Service is not included, just so you know — «Обслуживание не входит в счёт, чтобы вы знали» — вежливое предупреждение, а не выпрашивание. Итог диалога: The service was great... Ten percent it is — «Обслуживание было отличным... Десять процентов, решено». Ругательства о британском этикете Джон не говорил, меню чаевые не печатают, и никто никого не догонял.", "audio_text": "Kate(F): Good evening. A table for two, under the name Kate.\nJohn(M): Welcome. A window table is free until seven, when the birthday party arrives.\nMark(M): The window table! The early bird plan is working.\nKate(F): Do not get too excited. The early bird menu means we eat dinner at six.\nMark(M): Nobody says no to a three course meal for twenty euros.\nJohn(M): Here is the early bird menu. The news is not good, I am afraid. The salmon has just sold out.\nKate(F): The salmon was the whole reason we came early.\nMark(M): Do not panic. Ten euros is still a good price for two courses. The chicken is fine.\nJohn(M): Excellent choice. And to drink?\nKate(F): Still water for me. Mark?\nMark(M): The same. Neither of us is driving tonight. Wait. I am.\nKate(F): You had one lemonade last time and called it a wild evening.\nJohn(M): I will give you a moment with the menus.\nMark(M): So. A window table, a quiet corner, and no birthday party until seven.\nKate(F): The early bird catches the worm. And the chicken catches you, apparently.\nJohn(M): Are you ready to order?\nKate(F): We are. Two chicken courses, please. And could we split the bill later?\nJohn(M): Of course. Service is not included, just so you know.\nMark(M): In America the tip is almost compulsory, right?\nKate(F): Fifteen to twenty percent there. Here ten is fine if the service is good.\nMark(M): The service was great. The police could not have found us a better table.\nKate(F): The police have nothing to do with chicken, Mark. Ten percent it is."}]}], "subtitles": [{"speaker": "Kate", "text": "Good evening. A table for two, under the name Kate."}, {"speaker": "John", "text": "Welcome. A window table is free until seven, when the birthday party arrives."}, {"speaker": "Mark", "text": "The window table! The early bird plan is working."}, {"speaker": "Kate", "text": "Do not get too excited. The early bird menu means we eat dinner at six."}, {"speaker": "Mark", "text": "Nobody says no to a three course meal for twenty euros."}, {"speaker": "John", "text": "Here is the early bird menu. The news is not good, I am afraid. The salmon has just sold out."}, {"speaker": "Kate", "text": "The salmon was the whole reason we came early."}, {"speaker": "Mark", "text": "Do not panic. Ten euros is still a good price for two courses. The chicken is fine."}, {"speaker": "John", "text": "Excellent choice. And to drink?"}, {"speaker": "Kate", "text": "Still water for me. Mark?"}, {"speaker": "Mark", "text": "The same. Neither of us is driving tonight. Wait. I am."}, {"speaker": "Kate", "text": "You had one lemonade last time and called it a wild evening."}, {"speaker": "John", "text": "I will give you a moment with the menus."}, {"speaker": "Mark", "text": "So. A window table, a quiet corner, and no birthday party until seven."}, {"speaker": "Kate", "text": "The early bird catches the worm. And the chicken catches you, apparently."}, {"speaker": "John", "text": "Are you ready to order?"}, {"speaker": "Kate", "text": "We are. Two chicken courses, please. And could we split the bill later?"}, {"speaker": "John", "text": "Of course. Service is not included, just so you know."}, {"speaker": "Mark", "text": "In America the tip is almost compulsory, right?"}, {"speaker": "Kate", "text": "Fifteen to twenty percent there. Here ten is fine if the service is good."}, {"speaker": "Mark", "text": "The service was great. The police could not have found us a better table."}, {"speaker": "Kate", "text": "The police have nothing to do with chicken, Mark. Ten percent it is."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
