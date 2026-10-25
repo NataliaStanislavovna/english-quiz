@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Feelings &amp; Emotions: Emotions and Prepositions + as if / as though</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Feelings &amp; Emotions: Emotions and Prepositions + as if / as though</h1><div class="subtitle">2026-10-25</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Chin up</div><div class="translation">Chin up — «Выше нос!», «Не вешай нос». Буквальная картинка: chin — подбородок, up — вверх; поднятый подбородок = собравшийся человек. Смысл: «соберись, всё наладится», мягкое подбадривание для того, у кого не задалось. В диалоге Марк говорит это Эмме накануне прослушивания, после того как её кот ушёл посреди монолога: Chin up. Tomorrow evening you will call me and say, guess what, they chose me — «Выше нос. Завтра вечером ты позвонишь и скажешь: угадай, что — меня взяли». Семья похожих: Cheer up! — «Взбодрись!», Do not let it get you down — «Не позволяй этому тебя расстраивать», It will all work out — «Всё устроится». Русский аналог работает дословно: «выше нос». Можно и продолжить: Chin up, the audition is not the end of the world — «Выше нос, прослушивание — не конец света».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Feelings & Emotions: Emotions and Prepositions + as if / as though", "subtitle": "2026-10-25", "date": "2026-10-25", "phrase_of_the_day": "Chin up", "phrase_translation": "Chin up — «Выше нос!», «Не вешай нос». Буквальная картинка: chin — подбородок, up — вверх; поднятый подбородок = собравшийся человек. Смысл: «соберись, всё наладится», мягкое подбадривание для того, у кого не задалось. В диалоге Марк говорит это Эмме накануне прослушивания, после того как её кот ушёл посреди монолога: Chin up. Tomorrow evening you will call me and say, guess what, they chose me — «Выше нос. Завтра вечером ты позвонишь и скажешь: угадай, что — меня взяли». Семья похожих: Cheer up! — «Взбодрись!», Do not let it get you down — «Не позволяй этому тебя расстраивать», It will all work out — «Всё устроится». Русский аналог работает дословно: «выше нос». Можно и продолжить: Chin up, the audition is not the end of the world — «Выше нос, прослушивание — не конец света».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1025.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Feelings & Emotions: Emotions and Prepositions", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "Complete: 'Emma is excited ___ the audition tomorrow.'", "options": ["about", "for", "with", "to"], "correct": "about", "explanation": "Excited ABOUT — «в предвкушении чего-то, радостно взволнован». Главная тема сегодняшнего урока: эмоции в английском жёстко привязаны к своим предлогам, и их учат парамами, а не по логике русского перевода. Excited about the audition — «волнуюсь перед прослушиванием в приятном смысле». Целая семья «хорошего волнения и тревоги» живёт с about: nervous about — «нервничаю из-за», worried about — «беспокоюсь о», anxious about — «тревожусь о». Ловушка прямого переноса: по-русски «взволнована прослушиванием» (творительный падеж), и рука пишет excited with или excited of — таких сочетаний в английском нет. Самопроверка вопросом: excited about what? — the audition, the trip, the results — всегда about."}, {"id": "v2", "type": "choice", "sentence": "Complete: 'Mark is terrified ___ spiders, so he never visits the pet shop.'", "options": ["of", "with", "about", "at"], "correct": "of", "explanation": "Terrified OF — «в паническом ужасе от чего-то, до смерти боюсь». Страх в английском живёт с предлогом of: afraid of, scared of, frightened of, terrified of. Обратите внимание на лестницу интенсивности: afraid of — просто «боится», scared of — «испуган», frightened of — «напуган», terrified of — «в паническом ужасе». Террор можно усилить наречием absolutely: absolutely terrified — «в абсолютном ужасе»; вспомните старый урок о крайних прилагательных — их усиливают absolutely, а не very. Разбор соседей: about живёт с волнением и тревогой (worried about, excited about), with не сочетается со страхом, at отмечает момент испуга (startled at the noise — «вздрогнул от шума»), но не постоянный страх перед пауками."}, {"id": "v3", "type": "choice", "sentence": "In the dialogue, Emma says the cat 'let her down'. What does 'to let somebody down' mean?", "options": ["To disappoint somebody who was counting on you", "To help somebody who is moving to a new flat", "To criticise somebody behind their back", "To make somebody laugh at a difficult moment"], "correct": "To disappoint somebody who was counting on you", "explanation": "To let somebody down — «подвести, не оправдать ожиданий». Это разделяемый глагол: let + человек + down. В диалоге Эмма жалуется: The cat walked out during my monologue on Tuesday. That really let me down — «Кот ушёл посреди моего монолога в вторник. Это меня по-настоящему подвело». Существительное тоже есть: what a let-down — «какое разочарование». Близкие по смыслу: to disappoint somebody — «разочаровать» (нейтральное), to fail somebody — «не выручить в нужный момент». Ловушки частиц: to let somebody in — «впустить», to let somebody off — «отпустить без наказания» — одна частица меняет всё. Грамматика: местоимение встаёт между глаголом и частицей — let me down, let her down, а не let down me."}, {"id": "v4", "type": "choice", "sentence": "What does 'to get on somebody's nerves' mean?", "options": ["To annoy somebody slowly but regularly", "To comfort somebody who feels nervous", "To remind somebody about an old promise", "To encourage somebody before a show"], "correct": "To annoy somebody slowly but regularly", "explanation": "To get on somebody's nerves — «действовать кому-то на нервы, раздражать»: не одним ударом, а методично, капля за каплей. My neighbour's drilling gets on my nerves — «Соседское сверление действует мне на нервы». Грамматическая подпись конструкции: предлог on и притяжательное перед nerves — gets on MY nerves, on HIS nerves. Полезная семья «нервов»: to be a bundle of nerves — «комок нервов» (так Эмма описывает себя в диалоге накануне прослушивания), nerves of steel — «стальные нервы», to hit a nerve — «задеть за живое». Разбор остальных: comfort somebody — «утешать», противоположный смысл; remind about — «напоминать о»; encourage — «подбадривать» — ни одно не про раздражение."}]}, {"id": "s2", "title": "Grammar — as if / as though", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: 'Take an umbrella. It looks as if it ___ rain.'", "options": ["is going to", "was going to", "would go to", "will go to"], "correct": "is going to", "explanation": "It looks as if it IS GOING TO rain — «Похоже, собирается дождь». Сегодня новая тема: as if / as though — «как будто». Первый закон: если ситуация выглядит реальной и вероятной, глагол после as if остаётся в обычном настоящем времени. Тучи сгущаются, темнеет — вы правда ждёте дождь, поэтому is going to. Так же: She looks as if she is tired — «Она выглядит усталой (и скорее всего так и есть)», He sounds as if he is crying — «Звучит так, будто он плачет (наверное, правда плачет)». После looks, sounds, feels конструкция as if чаще всего описывает честное наблюдение — вывод по виду. Ловушки: was going to — прошедшее без причины; would go to и will go to — после as if о вероятном настоящем не ставят will/would. Формула на память: looks as if + Present — правдоподобно."}, {"id": "g2", "type": "choice", "sentence": "Complete: 'He once sold popcorn, but he acts as if he ___ Spielberg.'", "options": ["were", "is", "will be", "would be"], "correct": "were", "explanation": "He acts as if he WERE Spielberg — «Он держится так, будто он Спилберг». Второй закон as if: если сравнение заведомо неправдивое, после as if ставят прошедшую форму — Past Simple, а для всех лиц предпочитают were, как в сослагательном наклонении. Он не Спилберг и никогда им не был, но ведёт себя так, словно это правда. Сравните пары: He acts as if he were the boss — он не начальник, versus He looks as if he is the boss — может, и правда начальник. Это were — не множественное число, а сигнал нереальности, знакомый по I wish I were из урока о сожалениях: там то же were для всех лиц. Was после as if встречается в разговорной речи, но на экзамене и в письме — were. Ловушки: is — теряется сигнал нереальности; will be — будущее здесь не работает; would be — would живёт в главной части предложения, а не сразу после as if."}, {"id": "g3", "type": "choice", "sentence": "Emma says, 'The director talks as if he had worked with the Royal Shakespeare Company.' What does she mean?", "options": ["He has not worked there, but his manner suggests he has", "He worked there for years and rarely talks about it", "He is going to work there after the spring season", "He was invited there once but politely refused it"], "correct": "He has not worked there, but his manner suggests he has", "explanation": "Третий закон as if: Past Perfect после as if — нереальность о прошлом. He talks as if he had worked with the Royal Shakespeare Company — «Он говорит так, будто работал с Королевской шекспировской труппой», хотя на самом деле он однажды продавал попкорн рядом с театром. Формула: as if + had + V3 = «будто сделал то, чего на самом деле не делал». Ещё примеры: He describes Paris as if he had lived there for years — «Он описывает Париж, будто прожил там годы», Grandpa describes the match as if he had watched it himself — «Дед описывает матч, будто сам его смотрел». В диалоге есть реплика-соседка, не перепутайте: You look as if you have seen a ghost — «Ты выглядишь так, будто видела привидение» — там Present Perfect, потому что это правдоподобный вывод по виду, а не выдумка. Разница только в реальности: had V3 — выдумка о прошлом, Present — честный вывод."}, {"id": "g4", "type": "choice", "sentence": "In informal conversation, which word can replace 'as if'? — 'It looks ___ it is going to rain.'", "options": ["like", "alike", "such", "so"], "correct": "like", "explanation": "It looks LIKE it is going to rain — «Похоже, будет дождь». В разговорном английском as if можно заменить одним словом like — и это не ошибка, а норма устной речи: It sounds like he is upset, It feels like the whole day was wasted. Лестница стилей: as though — самый книжный, as if — нейтральный, like — разговорный, но общепринятый. Все три означают одно: «как будто». Сравните письмо и сообщение: It seems as though the meeting is cancelled (коллеге по почте) и It looks like the meeting is cancelled (другу в чате). Ловушки: alike — «похожий», прилагательное (They look alike — «Они похожи»); such живёт в конструкции so/such...that из урока о результативных придаточных; so — усилитель прилагательного и наречия. Только like работает вместо as if."}]}, {"id": "s3", "title": "Practical English — Reacting to Good and Bad News", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "Your friend says, 'I have got the job!' What is the best response?", "options": ["That is brilliant news! I am so happy for you!", "That is brilliant news! I am so sorry for you!", "That is terrible news! What a shame, honestly!", "That is brilliant news! Are you feeling okay?"], "correct": "That is brilliant news! I am so happy for you!", "explanation": "Реакция на хорошую новость строится из трёх частей: оценка + эмоция + предлог FOR (радоваться ЗА кого-то). That is brilliant news! I am so happy for you! — «Это блестящая новость! Я так за тебя рада!». Готовые формулы: Congratulations, that is fantastic! — «Поздравляю, это фантастика!», Well done, you deserve it! — «Молодец, ты это заслужил!», I am so pleased for you! — «Я так рад за тебя!». Хотите продолжить разговор — добавьте вопрос: When do you start? — «Когда выходишь?». Разбор остальных. I am so sorry for you — предлог правильный, эмоция нет: sorry говорят о плохом. What a shame — «какая жалость», соболезнование, не поздравление. Are you feeling okay — так спрашивают у человека, которому плохо, а не у того, кто получил работу."}, {"id": "p2", "type": "choice", "sentence": "Your friend says, 'I failed my driving test again.' What is the best response?", "options": ["I am sorry to hear that. Do not be too hard on yourself.", "I am happy to hear that. At least you tried once again.", "I am sorry to hear that. You never practise anyway.", "I am glad to hear that. Now you can save on the car."], "correct": "I am sorry to hear that. Do not be too hard on yourself.", "explanation": "Реакция на плохую новость: сначала сочувствие, потом поддержка — и никогда критика. I am sorry to hear that — «Сочувствую» — знакомая формула из урока о настроениях. Дальше: Do not be too hard on yourself — «Не суди себя слишком строго»: be hard on somebody — «быть излишне требовательным к кому-то». Полезные продолжения: It is not the end of the world — «Это не конец света», Chin up — «Выше нос» (фраза дня), Better luck next time — «Удачи в следующий раз». Разбор остальных: happy to hear that — радоваться чужой неудаче; you never practise anyway — добивание вместо поддержки; glad... save on the car — цинизм, который друга не утешит. Формула на память: sorry + support."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: 'Grandpa describes the match as if he ___ it himself last night.'", "options": ["had watched", "has watched", "was watching", "would watch"], "correct": "had watched", "explanation": "Grandpa describes the match as if he HAD WATCHED it himself — «Дед описывает матч так, будто сам смотрел его вчера вечером». Нереальность о прошлом = Past Perfect после as if: дед матч не смотрел, но его рассказ звучит иначе. Тот же закон, что в основном уроке: He talks as if he had worked with the Royal Shakespeare Company — had + V3 для выдуманного прошлого. Правило выбора времени: если неправда относится к прошлому — had V3; если к «сейчас» — Past Simple (He talks as if he knew everything — «говорит так, будто всё знает»). Разбор: has watched — сигнал нереальности теряется, выходит, что дед правда смотрел; was watching — Past Continuous не передаёт «будто»; would watch — would не живёт сразу после as if в этой роли. Проверка: можно вставить «на самом деле»? Дед на самом деле НЕ смотрел — значит, had watched."}, {"id": "c2", "type": "choice", "sentence": "Which sentence means that the speaker believes the situation is probably TRUE?", "options": ["It looks as if she is tired", "He talks as if he were the boss", "She spends as if she owned a bank", "He acts as if he had met her before"], "correct": "It looks as if she is tired", "explanation": "It looks as if she IS tired — единственное предложение, где говорящий верит в правдивость ситуации: Present после as if — правдоподобный вывод по виду, она, скорее всего, действительно устала. Остальные три — нереальные сравнения, и их выдают прошедшие формы: as if he WERE the boss — он не начальник (Past Simple о нереальном настоящем), as if she OWNED a bank — она не владеет банком, as if he HAD MET her before — он не встречал её раньше (Past Perfect о нереальном прошлом). Это и есть главный экзаменационный вопрос про as if: Present — «похоже на правду», Past Simple — «явная выдумка о настоящем», Past Perfect — «выдумка о прошлом». Тренируйтесь на парах: She looks as if she is crying — наверное, правда плачет, versus She talks as if she owned the place — не владеет, но держится так, будто владеет."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What does Emma say about the director?", "options": ["He once sold popcorn next to a theatre", "He has directed three plays by Shakespeare", "He worked as an actor in Hollywood films", "He refuses to watch any amateur productions"], "correct": "He once sold popcorn next to a theatre", "explanation": "Правда о директоре раскрывается в две реплики. Эмма: The director is terrifying. He talks as if he had worked with the Royal Shakespeare Company — «Директор ужасен. Он говорит так, будто работал с Королевской шекспировской труппой». Марк уточняет: Has he? — «Работал?» — и Эмма признаётся: He once sold popcorn next to a theatre — «Он однажды продавал попкорн рядом с театром». But he acts as if he were Spielberg — «Но держится так, будто он Спилберг». Вся шутка построена на сегодняшней грамматике: had worked — выдуманное прошлое, were — нереальное настоящее. Обратите внимание и на эмоциональные предлоги вокруг: Emma is excited about the audition, the lead actor is proud of his voice. Три шекспировские пьесы, Голливуд и бойкот любительских спектаклей — заслуги, которых у директора нет.", "audio_text": "Emma(F): Mark! Come in. Mind the scripts on the floor, I was rehearsing my death scene.\nMark(M): Your death scene? You look as if you have seen a ghost yourself.\nEmma(F): Very funny. The audition is tomorrow, and I am a bundle of nerves.\nMark(M): You? You give presentations at work every week.\nEmma(F): Presentations do not include fainting. And the director is terrifying. He talks as if he had worked with the Royal Shakespeare Company.\nMark(M): Has he?\nEmma(F): He once sold popcorn next to a theatre. But he acts as if he were Spielberg.\nMark(M): Every group needs a visionary. What about the other actors?\nEmma(F): The lead actor is so proud of his voice that he reads the phone book for fun.\nMark(M): I would pay to watch that. What is the play about?\nEmma(F): A woman who faints whenever she is excited about anything. Typecasting, if you ask me.\nMark(M): Do not be so hard on yourself. You will be wonderful.\nEmma(F): Easy for you to say. The cat walked out during my monologue on Tuesday. That really let me down.\nMark(M): The cat also walked out during Kate's birthday dinner. He is consistent.\nEmma(F): True. He is not impressed by anything these days.\nMark(M): Chin up. Tomorrow evening you will call me and say, guess what, they chose me.\nEmma(F): Or, guess what, I have joined a quiet book club instead.\nMark(M): Either way, the popcorn man will be proud of you."}, {"id": "l2", "type": "listen", "sentence": "What does Mark mean when he says 'Chin up'?", "options": ["Cheer up, things will turn out well", "Sit up straight and relax your shoulders", "Speak louder so everyone can hear you", "Stop rehearsing and go to bed early"], "correct": "Cheer up, things will turn out well", "explanation": "Chin up — «Выше нос, не вешай нос». Буквальная картинка: chin — подбородок, up — вверх; поднятый подбородок — поза собравшегося человека. Марк говорит это Эмме после истории про кота, который ушёл посреди монолога: Chin up. Tomorrow evening you will call me and say, guess what, they chose me — «Выше нос. Завтра вечером ты позвонишь мне и скажешь: угадай, что — меня взяли». Это разговорное подбадривание, точный русский аналог — «выше нос». Семья похожих: Cheer up! — «Взбодрись!», Do not let it get you down — «Не позволяй этому тебя расстраивать», It will all work out — «Всё устроится». Остальные варианты — советы про осанку, громкость и режим: полезные, но не про настроение. Заметьте и грамматику реплики: they chose me — вопрос в косвенной речи... а точнее просто будущее, о котором Эмма мечтает.", "audio_text": "Emma(F): Mark! Come in. Mind the scripts on the floor, I was rehearsing my death scene.\nMark(M): Your death scene? You look as if you have seen a ghost yourself.\nEmma(F): Very funny. The audition is tomorrow, and I am a bundle of nerves.\nMark(M): You? You give presentations at work every week.\nEmma(F): Presentations do not include fainting. And the director is terrifying. He talks as if he had worked with the Royal Shakespeare Company.\nMark(M): Has he?\nEmma(F): He once sold popcorn next to a theatre. But he acts as if he were Spielberg.\nMark(M): Every group needs a visionary. What about the other actors?\nEmma(F): The lead actor is so proud of his voice that he reads the phone book for fun.\nMark(M): I would pay to watch that. What is the play about?\nEmma(F): A woman who faints whenever she is excited about anything. Typecasting, if you ask me.\nMark(M): Do not be so hard on yourself. You will be wonderful.\nEmma(F): Easy for you to say. The cat walked out during my monologue on Tuesday. That really let me down.\nMark(M): The cat also walked out during Kate's birthday dinner. He is consistent.\nEmma(F): True. He is not impressed by anything these days.\nMark(M): Chin up. Tomorrow evening you will call me and say, guess what, they chose me.\nEmma(F): Or, guess what, I have joined a quiet book club instead.\nMark(M): Either way, the popcorn man will be proud of you."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark! Come in. Mind the scripts on the floor, I was rehearsing my death scene."}, {"speaker": "Mark", "text": "Your death scene? You look as if you have seen a ghost yourself."}, {"speaker": "Emma", "text": "Very funny. The audition is tomorrow, and I am a bundle of nerves."}, {"speaker": "Mark", "text": "You? You give presentations at work every week."}, {"speaker": "Emma", "text": "Presentations do not include fainting. And the director is terrifying. He talks as if he had worked with the Royal Shakespeare Company."}, {"speaker": "Mark", "text": "Has he?"}, {"speaker": "Emma", "text": "He once sold popcorn next to a theatre. But he acts as if he were Spielberg."}, {"speaker": "Mark", "text": "Every group needs a visionary. What about the other actors?"}, {"speaker": "Emma", "text": "The lead actor is so proud of his voice that he reads the phone book for fun."}, {"speaker": "Mark", "text": "I would pay to watch that. What is the play about?"}, {"speaker": "Emma", "text": "A woman who faints whenever she is excited about anything. Typecasting, if you ask me."}, {"speaker": "Mark", "text": "Do not be so hard on yourself. You will be wonderful."}, {"speaker": "Emma", "text": "Easy for you to say. The cat walked out during my monologue on Tuesday. That really let me down."}, {"speaker": "Mark", "text": "The cat also walked out during Kate's birthday dinner. He is consistent."}, {"speaker": "Emma", "text": "True. He is not impressed by anything these days."}, {"speaker": "Mark", "text": "Chin up. Tomorrow evening you will call me and say, guess what, they chose me."}, {"speaker": "Emma", "text": "Or, guess what, I have joined a quiet book club instead."}, {"speaker": "Mark", "text": "Either way, the popcorn man will be proud of you."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
