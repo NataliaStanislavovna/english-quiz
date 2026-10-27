@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Transport &amp; Commuting: Travelcards, Barriers &amp; Penalty Fares + Timetabled Future (Present Simple for Schedules) + be due to / be about to</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Transport &amp; Commuting: Travelcards, Barriers &amp; Penalty Fares + Timetabled Future (Present Simple for Schedules) + be due to / be about to</h1><div class="subtitle">2026-10-27</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">That ship has sailed</div><div class="translation">That ship has sailed — «этот поезд ушёл»: возможность упущена, момент закрыт, возвращаться к решению поздно. Буквальная картинка: корабль отошёл от пристани, и как ни беги по пирсу — не догонишь. В диалоге Кейт просит вернуть штраф «за моральный ущерб», а Марк отвечает: That ship has sailed, Kate. The refund office closed an hour ago — «Этот поезд ушёл, Кейт. Касса возвратов закрылась час назад». Идиома отлично работает в бытовых спорах: Shall we ask for a discount? — That ship has sailed — «Может, попросим скидку? — Поздно уже». Обратите внимание на форму: Present Perfect (has sailed), потому что отплытие уже произошло и его результат — недоступность — действует сейчас. Русские аналоги: «поезд ушёл», «поздно пить боржоми». Семья похожих: to miss the boat — «опоздать, упустить шанс» (про само упущение), to miss the train — то же самое; That ship has sailed — про осознание, что шанс уже не вернуть.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Transport & Commuting: Travelcards, Barriers & Penalty Fares + Timetabled Future (Present Simple for Schedules) + be due to / be about to", "subtitle": "2026-10-27", "date": "2026-10-27", "phrase_of_the_day": "That ship has sailed", "phrase_translation": "That ship has sailed — «этот поезд ушёл»: возможность упущена, момент закрыт, возвращаться к решению поздно. Буквальная картинка: корабль отошёл от пристани, и как ни беги по пирсу — не догонишь. В диалоге Кейт просит вернуть штраф «за моральный ущерб», а Марк отвечает: That ship has sailed, Kate. The refund office closed an hour ago — «Этот поезд ушёл, Кейт. Касса возвратов закрылась час назад». Идиома отлично работает в бытовых спорах: Shall we ask for a discount? — That ship has sailed — «Может, попросим скидку? — Поздно уже». Обратите внимание на форму: Present Perfect (has sailed), потому что отплытие уже произошло и его результат — недоступность — действует сейчас. Русские аналоги: «поезд ушёл», «поздно пить боржоми». Семья похожих: to miss the boat — «опоздать, упустить шанс» (про само упущение), to miss the train — то же самое; That ship has sailed — про осознание, что шанс уже не вернуть.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1027.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Transport & Commuting: Travelcards, Barriers & Penalty Fares", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "What is 'a day travelcard'?", "options": ["A ticket for unlimited travel in one area for one day", "A ticket that is valid for exactly one single journey only", "A discount card that gives cheaper tickets for a whole year", "A special pass that only works after nine in the morning"], "correct": "A ticket for unlimited travel in one area for one day", "explanation": "A day travelcard — «дневная поездная карта»: один билет, который действует целый день на неограниченное число поездок в заданной зоне (город, зоны метро, пригороды). Travel — «поездки», card — «карта», day — «день»: сложите три слова и получите смысл. Ключевая выгода — unlimited travel, «неограниченные поездки»: три поездки в день — карта уже окупается, пять — экономия налицо. Близкий родственник — a day pass, «дневной пропуск» (то же самое), и a season ticket — «абонемент» на месяц или год из уроков о транспорте. Важно не путать с a single — «билет в одну сторону» и a return — «туда-обратно» (оба — ровно одна или две поездки). Вариант «только после девяти утра» — это отдельный тип off-peak day ticket со скидкой вне часов пик, но у него другое имя. Правило дня: много поездок за день → a day travelcard."}, {"id": "v2", "type": "choice", "sentence": "At a station, what does 'to tap in and tap out' mean?", "options": ["To touch your card on a reader at the start and end of a trip", "To show your passport to the guard when you board the train", "To buy a paper ticket from the machine before each journey", "To press the emergency button when your train arrives late"], "correct": "To touch your card on a reader at the start and end of a trip", "explanation": "To tap in и to tap out — «приложить карту при входе и на выходе»: касание (tap — «лёгкий удар, постукивание», как tap on the shoulder) картой или телефоном жёлтого считывателя на барьере. Tap in — в начале поездки (барьер открывается), tap out — в конце (по этим двум касаниям система списывает правильную сумму за фактически пройденное расстояние). Это та же бесконтактная логика, что to tap для оплаты из урока о банке — contactless payment, только здесь касание обязательно дважды. В диалоге — главная мораль дня: Кейт прошла за открытый барьер вслед за чемоданом Дэвида, не сделала tap out, и система до сих пор считает, что она «едет где-то». Правило Марка: you always tap out, even when the barrier is already open — «всегда прикладывай карту на выходе, даже если барьер и так открыт». Забытый tap out = maximum fare, максимальный тариф маршрута."}, {"id": "v3", "type": "choice", "sentence": "What is 'a penalty fare'?", "options": ["A fine you pay for travelling without a valid ticket", "A cheap ticket you buy at the last minute before boarding", "An extra charge for taking a large suitcase onto a train", "A refund the railway pays you when your train is delayed"], "correct": "A fine you pay for travelling without a valid ticket", "explanation": "A penalty fare — «штрафной тариф»: сумма, которую списывают или требуют на месте, если вы ехали без действительного билета — забыли tap out (система видит «безбилетника»), сели не в тот вагон, поехали с билетом не на ту зону. Penalty — «наказание, штраф» (a penalty в футболе — «пенальти», та же семья), fare — «плата за проезд» из первых уроков о транспорте. В диалоге цифры конкретные: A penalty fare is eighty pounds — «Штрафной тариф — восемьдесят фунтов» — за одно забытое касание на выходе. Не путайте с компенсацией за задержку: a refund for a delay / delay repay — это деньги, которые ЖЕЛЕЗНАЯ ДОРОГА возвращает ВАМ (было в уроке о забастовках), а penalty fare — наоборот, вы платите дороге. Ловушка варианта про чемодан: за крупный багаж в британских поездах доплаты обычно нет, а вот за безбилетный проезд — всегда."}, {"id": "v4", "type": "choice", "sentence": "What does 'to top up' mean when talking about a travel card?", "options": ["To add more money to the card's balance at a machine", "To swap an old card for a brand new one at the office", "To stick a photograph onto the front of the travel card", "To pay a fine for losing the card somewhere on the train"], "correct": "To add more money to the card's balance at a machine", "explanation": "To top up — «пополнить (баланс)»: добавить денег на карту через автомат или приложение. Картинка прозрачная: top — «верх», up — «вверх»; вы «доливаете» счёт до верха, как доливают стакан или бензобак (to top up the tank — «долить бак» — тот же глагол). Если баланс пустой, барьер при tap in покажет красный и не откроется — сначала top up the card. В диалоге Кейт спрашивает: Where can I top up my card? — «Где мне пополнить карту?» — и Марк отвечает: The machine by the cafe — «Автомат у кафе». Глагол легко гнётся: to top it up, I topped up twenty pounds — «пополнил на двадцать фунтов»; существительное — a top-up. Полезное родство из банка: to put aside — «откладывать» тоже про добавление, но на счёт-копилку, а top up — именно на текущий расходный баланс. Формула дня Марка: tap in, tap out, top up — «коснись на входе, коснись на выходе, пополни вовремя»."}]}, {"id": "s2", "title": "Grammar — Timetabled Future: Present Simple for Schedules + be due to / be about to", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: 'According to the timetable, the fast train to York ___ at nine ten.'", "options": ["leaves", "is leaving", "will be leaving", "has left"], "correct": "leaves", "explanation": "According to the timetable, the fast train to York LEAVES at nine ten — «По расписанию, скорый поезд в Йорк отправляется в девять десять». Сегодня новая тема: расписание говорит о будущем через Present Simple. Логика такая: поезд, автобус, паром и самолёт ходят по РАСПИСАНИЮ — раз и навсегда установленному, напечатанному, не зависящему от чьих-то личных планов. Для таких «железных» событий английский использует Present Simple, хотя смысл — будущее: The train leaves at nine ten. The bus arrives at noon. What time does the flight land? Маркер according to the timetable почти подписывает ответ. Разбор остальных: is leaving и will be leaving грамматически возможны в живой речи (как договорённость или процесс в будущем — вспомните урок о Future Continuous), но для события из расписания экзаменационно-правильная форма — просто leaves; has left — прошедшее время, а девять десять ещё не наступило. Формула: расписание → Present Simple, даже о завтрашнем дне."}, {"id": "g2", "type": "choice", "sentence": "Complete: 'Look at the board — our train is ___ to depart from platform two.'", "options": ["due", "owe", "thank", "because"], "correct": "due", "explanation": "Look at the board — our train is DUE to depart from platform two — «Смотрите на табло — наш поезд должен отправиться со второй платформы». Be due to do — «отправляется по расписанию, ожидается»: официальная формула объявлений и табло, которая глядит на план со стороны. Due — «ожидаемый, положенный по сроку»: the train is due to arrive at noon — «поезд прибывает в полдень (по расписанию)», I am due to start a new job on Monday — «я начинаю новую работу в понедельник (так договорено)». В диалоге Кейт торопит: My train is due to leave at nine ten — «Мой поезд отправляется в девять десять». Обратите внимание: be due to спокойно сочетается с точным временем, в отличие от be about to. Разбор ловушек: owe — «быть должным (деньги)», глагол, сюда не встаёт; thank и because — вовсе из другого фильма, они не образуют с to инфинитивных конструкций. Семейство дня: be due to (по плану), be about to (вот-вот), timetable Present Simple (по расписанию)."}, {"id": "g3", "type": "choice", "sentence": "Complete: 'Run! The doors are closing — the train is ___ to leave!'", "options": ["about", "around", "close", "near"], "correct": "about", "explanation": "Run! The doors are closing — the train is ABOUT to leave! — «Беги! Двери закрываются — поезд вот-вот отправится!» Be about to do — «вот-вот сделает»: действие в ближайшую секунду, уже стартовало или держится на последнем вдохе. Это самая острая форма будущего: дверь закрывается, автобус трогается, чайник вот-вот закипит. Именно так Марк подгоняет Кейт в диалоге: Now run, the doors are already closing. Оттенки трёх форм дня: is due to leave at nine ten — «отправление в девять десять запланировано» (спокойная справка), leaves at nine ten — «так написано в расписании» (устойчивый факт), is about to leave — «уходит прямо сейчас, считанные секунды!» (драма у барьера). Важно: be about to НЕ сочетается с указанием точного времени — нельзя is about to leave at nine ten; для точного часа берите due to или Present Simple. Разбор ловушек: around и near описывают «около» по месту или времени, но конструкций is around to do / is near to do не существует; is close to leaving — грамматически возможно (close to + V-ing, «близок к отправлению»), но в нашем пропуске стоит to leave — инфинитив, и close с ним не работает. Только about."}, {"id": "g4", "type": "choice", "sentence": "Complete: 'I ___ my cousin at the station at noon — we agreed on it last night.'", "options": ["am meeting", "meet", "have met", "will have met"], "correct": "am meeting", "explanation": "I AM MEETING my cousin at the station at noon — we agreed on it last night — «Я встречаю кузину на вокзале в полдень — мы договорились об этом вчера вечером». Это вторая половина карты будущего: Present Continuous для ЛИЧНОЙ ДОГОВОРЁННОСТИ. Логика-разделитель: расписание принадлежит железной дороге → Present Simple (the train leaves at noon); план принадлежит вам и кому-то ещё по обоюдной договорённости → Present Continuous (I am meeting my cousin at noon). Маркер-улика здесь — we agreed on it last night: раз была договорённость людей, а не пункт в расписании, встаёт am meeting. Это ровно то правило, что вы проходили в уроке о рабочих встречах (I am meeting the design team) — сегодня оно легло рядом с timetabled future, и пара «поезд в nine ten leaves / я в noon am meeting» — классический экзаменационный контраст. Разбор остальных: meet — Present Simple регулярной привычки («встречаю каждую неделю»), но одна встреча по договорённости так не звучит; have met — уже произошло, а полдень впереди; will have met — Future Perfect, «встреча будет завершена К полудню» (вспомните урок о by + результат), смысл не тот."}]}, {"id": "s3", "title": "Practical English — At the Ticket Office and the Barriers", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "The clerk asks, 'How can I help you?' You want one day of unlimited travel in the city. What is the best response?", "options": ["A day travelcard, please — the one for unlimited trips in the city.", "Give me whatever ticket is the cheapest and do not explain anything.", "I do not know what I want, so just sell me something random, please.", "A single ticket, please, and I will walk back home after my meeting."], "correct": "A day travelcard, please — the one for unlimited trips in the city.", "explanation": "Формула покупки в кассе: назвать билет + please + при необходимости одно уточнение. A day travelcard, please — the one for unlimited trips in the city — «Дневную поездную карту, пожалуйста — ту, что с неограниченными поездками по городу». Так вы (1) звучите вежливо, (2) даёте кассиру точный тип билета, (3) уточняете деталь без лекции. Полезные соседние формулы: A return to Cambridge, please — «Туда-обратно в Кембридж, пожалуйста»; Two singles to Dover — «Два билета в одну сторону до Дувра»; Which is cheaper, a day travelcard or single tickets? — «Что выгоднее, дневная карта или отдельные билеты?» — вопрос, который экономит деньги, если поездок три и больше (как в сегодняшнем сюжете). Разбор остальных: «дайте что подешевле и не объясняйте» — требование без please, звучит грубо; «продайте что-нибудь случайное» — перекладывание решения на кассира; single с планом «домой пойду пешком» — вежливо, но задача была про день неограниченных поездок, а single — одна поездка."}, {"id": "p2", "type": "choice", "sentence": "You tapped in, but the barrier will not open, and you suspect you were charged twice. What is the best thing to say to a member of staff?", "options": ["Excuse me, the barrier will not open, and I think I was charged twice.", "Your machine has stolen my money, and I want to speak to the manager!", "Never mind, I will just squeeze through behind the next large suitcase.", "Hold my coffee while I keep tapping my card until something happens."], "correct": "Excuse me, the barrier will not open, and I think I was charged twice.", "explanation": "Жалоба-запрос к персоналу строится так: вежливое вступление (Excuse me) + факт + осторожное предположение (I think), а не приговор. Excuse me, the barrier will not open, and I think I was charged twice — «Извините, барьер не открывается, и, кажется, с меня списали дважды». I think смягчает претензию и приглашает сотрудника ПРОВЕРИТЬ, а не оправдываться — тот же принцип, что в вежливых жалобах в ресторане (I am afraid..., a bit...) из сентябрьского урока. Заметьте грамматику: was charged — пассив («с меня списали»), will not open — упорное «не открывается вообще» (will not + глагол о неисправности, как the engine will not start). Полезные соседние фразы: Could you check my card, please? — «Не могли бы вы проверить мою карту?»; I tapped in but never tapped out — «Я приложил карту на входе, но не приложил на выходе» (сегодняшний грех Кейт). Разбор остальных: «ваша машина украла мои деньги» — обвинение с криком, разговор пойдёт о хамстве, а не о карте; протискиваться за чемоданом — так и рождаются penalty fares, как у Кейт; долбить картой до чуда — вопрос не решит, а кофе остынет."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Kate's card balance was empty, so she ___ at the machine by the cafe before tapping in.", "options": ["topped it up", "took it up", "put it up", "filled it up"], "correct": "topped it up", "explanation": "Kate's card balance was empty, so she TOPPED IT UP at the machine by the cafe — «Баланс карты Кейт был пуст, поэтому она пополнила её в автомате у кафе». To top up — устойчивый фразовый глагол именно про добавление на баланс: карту, телефон (top up your mobile), бензобак. Две вещи, которые проверяет этот вопрос. Первая — сам фразовый глагол: из четырёх похожих «up-конструкций» про деньги и уровни работает только top up. Вторая — место местоимения: если объект — короткое местоимение (it), оно встаёт ВНУТРЬ: topped it up, а не topped up it; с полным существительным оба порядка верны — topped up the card или topped the card up. В диалоге это третья заповедь Марка: Tap in, tap out, top up. The holy trinity of rail travel — «Коснись на входе, коснись на выходе, пополни. Святая троица железнодорожных путешествий». Разбор близнецов: take up — «браться за что-то» (take up a sport, из урока о спорте); put up — «возводить, вывешивать» (put up a shelf); fill up — «заполнить целиком» ёмкость (fill up the tank), про баланс карты так не говорят."}, {"id": "c2", "type": "choice", "sentence": "Which sentence uses the Present Simple about a FUTURE, timetabled event?", "options": ["The stopping train leaves platform six in five minutes.", "Kate leaves her card at home every single morning.", "Look, the guard leaves the platform right now.", "The train left platform six exactly five minutes ago."], "correct": "The stopping train leaves platform six in five minutes.", "explanation": "The stopping train leaves platform six in five minutes — «Тихоход отправляется с шестой платформы через пять минут» — это Present Simple со смыслом БУДУЩЕГО: событие взято из расписания, а расписание говорит о будущем в настоящем времени. Улики: подлежащее — транспорт по расписанию (train), маркер будущего — in five minutes «через пять минут», и ни слова о чьих-то личных планах. Именно эта форма — из сегодняшней темы: the fast train leaves from platform four, my train is due to leave at nine ten. Разбор остальных, все с тем же глаголом leave: Kate leaves her card at home every single morning — Present Simple, но про регулярную привычку с every morning, будущего здесь нет (и, судя по сегодняшнему диалогу, Кейт оставляет дома скорее бдительность, чем карту); Look, the guard leaves the platform right now — действие происходит сейчас, и по-английски там просится Present Continuous (is leaving), потому что это не пункт расписания, а живое наблюдение; The train left platform six exactly five minutes ago — Past Simple, поезд уже ушёл, даже дважды. Тест на распознавание: расписание + маркер будущего → Present Simple."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why does the barrier treat Kate as a fare evader?", "options": ["She walked through behind a suitcase and never tapped out", "She jumped over the barrier to avoid paying for her ticket", "She was travelling with an expired card from another city", "She tapped her card twice and cancelled her own ticket"], "correct": "She walked through behind a suitcase and never tapped out", "explanation": "Разгадка в начале диалога. Марк читает экран: It says you tapped in yesterday morning and never tapped out — «Здесь написано, что вы приложили карту вчера утром и не приложили на выходе». Кейт объясняет, как это вышло: Yesterday I was helping David with his enormous suitcase. The barrier opened for him, and I simply walked through behind it — «Вчера я помогала Дэвиду с его огромным чемоданом. Барьер открылся для него, и я просто прошла следом». Система видит: tap in был, tap out не было — значит, пассажир «всё ещё едет», и налицо неоплаченная поездка. Отсюда и мораль Марка, она же главное правило урока: you always tap out, even when the barrier is already open — «всегда прикладывайте карту на выходе, даже если барьер уже открыт». Прыжки через барьер, просроченная карта чужого города и двойное касание в диалоге не звучали — это правдоподобные, но выдуманные причины. Ловушка: behind a suitcase — «за чемоданом», а не «перед» или «под».", "audio_text": "Kate(F): Mark! Perfect timing. This barrier has just declared war on me.\nMark(M): It is a ticket barrier, Kate, not a robot uprising. What did you do?\nKate(F): Nothing! I tapped in, the light went green, and now it is calling me a fare evader.\nMark(M): Let me see. Ah. It says you tapped in yesterday morning and never tapped out.\nKate(F): Yesterday I was helping David with his enormous suitcase. The barrier opened for him, and I simply walked through behind it.\nMark(M): So the system thinks you are still travelling somewhere. Perhaps a beach.\nKate(F): Very funny. Can we fix it? My train is due to leave at nine ten.\nMark(M): The staff desk can sort it out. But remember the rule. You always tap out, even when the barrier is already open.\nKate(F): And what happens if I forget again?\nMark(M): You pay the maximum fare. A penalty fare is eighty pounds.\nKate(F): Eighty pounds! For one forgotten tap on a Tuesday?\nMark(M): The railway is not known for its sense of humour. Or its refunds.\nKate(F): Can I at least get the eighty pounds back for emotional damage?\nMark(M): That ship has sailed, Kate. The refund office closed an hour ago.\nKate(F): Noted. Tap in, tap out. Now, which platform for York?\nMark(M): The fast train leaves from platform four. The stopping train goes from platform six.\nKate(F): What is the difference, apart from the platform number?\nMark(M): The fast one takes one hour fifty. The stopping one visits every village with a postbox.\nKate(F): The fast one, please. And is it direct, with no changes?\nMark(M): You change at Peterborough, but it is just across the platform. Two minutes.\nKate(F): Get off, cross, get on again? With my luck today, I will miss it by a second.\nMark(M): Take the stopping train then, and enjoy the postboxes.\nKate(F): You have the soul of a railway announcer. Oh, and where can I top up my card?\nMark(M): The machine by the cafe. Tap in, tap out, top up. The holy trinity of rail travel.\nKate(F): Tap in, tap out, top up. See? I can learn things.\nMark(M): There is a first time for everything. Now run, the doors are already closing.\nKate(F): You said nine ten! My watch says nine oh two!\nMark(M): Your watch stopped yesterday. Probably the moment you forgot to tap out of it."}, {"id": "l2", "type": "listen", "sentence": "What does Mark say about the trip to York?", "options": ["You change at Peterborough, just across the platform", "You take a direct train with no changes at all", "You must buy a second ticket when you reach Peterborough", "You wait two hours at Peterborough for a later connection"], "correct": "You change at Peterborough, just across the platform", "explanation": "Кейт спрашивает: And is it direct, with no changes? — «А поезд прямой, без пересадок?» Марк отвечает: You change at Peterborough, but it is just across the platform. Two minutes — «Пересадка в Питерборо, но это буквально через платформу. Две минуты». To change (trains) at — «делать пересадку в» — глагол из первых транспортных уроков; здесь пересадка пустяковая: выйти, перейти на соседнюю платформу, сесть снова (get off, cross, get on again — как переформулировала Кейт). Заодно отметьте пару из объяснения Марка: the fast train leaves from platform four — скорый (полтора часа до Йорка) против the stopping train — «тихоход», который visits every village with a postbox — «заглядывает в каждую деревню с почтовым ящиком» (остановок столько, что шутка почти документальная). Прямой поезд без пересадок, второй билет в Питерборо и двухчасовое ожидание — ни один из этих вариантов Марк не произносил. Ловушка слушания: two minutes — это время на переход между платформами, а не время опоздания или ожидания.", "audio_text": "Kate(F): Mark! Perfect timing. This barrier has just declared war on me.\nMark(M): It is a ticket barrier, Kate, not a robot uprising. What did you do?\nKate(F): Nothing! I tapped in, the light went green, and now it is calling me a fare evader.\nMark(M): Let me see. Ah. It says you tapped in yesterday morning and never tapped out.\nKate(F): Yesterday I was helping David with his enormous suitcase. The barrier opened for him, and I simply walked through behind it.\nMark(M): So the system thinks you are still travelling somewhere. Perhaps a beach.\nKate(F): Very funny. Can we fix it? My train is due to leave at nine ten.\nMark(M): The staff desk can sort it out. But remember the rule. You always tap out, even when the barrier is already open.\nKate(F): And what happens if I forget again?\nMark(M): You pay the maximum fare. A penalty fare is eighty pounds.\nKate(F): Eighty pounds! For one forgotten tap on a Tuesday?\nMark(M): The railway is not known for its sense of humour. Or its refunds.\nKate(F): Can I at least get the eighty pounds back for emotional damage?\nMark(M): That ship has sailed, Kate. The refund office closed an hour ago.\nKate(F): Noted. Tap in, tap out. Now, which platform for York?\nMark(M): The fast train leaves from platform four. The stopping train goes from platform six.\nKate(F): What is the difference, apart from the platform number?\nMark(M): The fast one takes one hour fifty. The stopping one visits every village with a postbox.\nKate(F): The fast one, please. And is it direct, with no changes?\nMark(M): You change at Peterborough, but it is just across the platform. Two minutes.\nKate(F): Get off, cross, get on again? With my luck today, I will miss it by a second.\nMark(M): Take the stopping train then, and enjoy the postboxes.\nKate(F): You have the soul of a railway announcer. Oh, and where can I top up my card?\nMark(M): The machine by the cafe. Tap in, tap out, top up. The holy trinity of rail travel.\nKate(F): Tap in, tap out, top up. See? I can learn things.\nMark(M): There is a first time for everything. Now run, the doors are already closing.\nKate(F): You said nine ten! My watch says nine oh two!\nMark(M): Your watch stopped yesterday. Probably the moment you forgot to tap out of it."}]}], "subtitles": [{"speaker": "Kate", "text": "Mark! Perfect timing. This barrier has just declared war on me."}, {"speaker": "Mark", "text": "It is a ticket barrier, Kate, not a robot uprising. What did you do?"}, {"speaker": "Kate", "text": "Nothing! I tapped in, the light went green, and now it is calling me a fare evader."}, {"speaker": "Mark", "text": "Let me see. Ah. It says you tapped in yesterday morning and never tapped out."}, {"speaker": "Kate", "text": "Yesterday I was helping David with his enormous suitcase. The barrier opened for him, and I simply walked through behind it."}, {"speaker": "Mark", "text": "So the system thinks you are still travelling somewhere. Perhaps a beach."}, {"speaker": "Kate", "text": "Very funny. Can we fix it? My train is due to leave at nine ten."}, {"speaker": "Mark", "text": "The staff desk can sort it out. But remember the rule. You always tap out, even when the barrier is already open."}, {"speaker": "Kate", "text": "And what happens if I forget again?"}, {"speaker": "Mark", "text": "You pay the maximum fare. A penalty fare is eighty pounds."}, {"speaker": "Kate", "text": "Eighty pounds! For one forgotten tap on a Tuesday?"}, {"speaker": "Mark", "text": "The railway is not known for its sense of humour. Or its refunds."}, {"speaker": "Kate", "text": "Can I at least get the eighty pounds back for emotional damage?"}, {"speaker": "Mark", "text": "That ship has sailed, Kate. The refund office closed an hour ago."}, {"speaker": "Kate", "text": "Noted. Tap in, tap out. Now, which platform for York?"}, {"speaker": "Mark", "text": "The fast train leaves from platform four. The stopping train goes from platform six."}, {"speaker": "Kate", "text": "What is the difference, apart from the platform number?"}, {"speaker": "Mark", "text": "The fast one takes one hour fifty. The stopping one visits every village with a postbox."}, {"speaker": "Kate", "text": "The fast one, please. And is it direct, with no changes?"}, {"speaker": "Mark", "text": "You change at Peterborough, but it is just across the platform. Two minutes."}, {"speaker": "Kate", "text": "Get off, cross, get on again? With my luck today, I will miss it by a second."}, {"speaker": "Mark", "text": "Take the stopping train then, and enjoy the postboxes."}, {"speaker": "Kate", "text": "You have the soul of a railway announcer. Oh, and where can I top up my card?"}, {"speaker": "Mark", "text": "The machine by the cafe. Tap in, tap out, top up. The holy trinity of rail travel."}, {"speaker": "Kate", "text": "Tap in, tap out, top up. See? I can learn things."}, {"speaker": "Mark", "text": "There is a first time for everything. Now run, the doors are already closing."}, {"speaker": "Kate", "text": "You said nine ten! My watch says nine oh two!"}, {"speaker": "Mark", "text": "Your watch stopped yesterday. Probably the moment you forgot to tap out of it."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
