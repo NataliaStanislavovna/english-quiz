@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>House &amp; Home: Bathroom Renovation &amp; Smart Heating + Participle Clauses (Feeling cold, Kate... / Built in 1935...)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>House &amp; Home: Bathroom Renovation &amp; Smart Heating + Participle Clauses (Feeling cold, Kate... / Built in 1935...)</h1><div class="subtitle">2026-10-29</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">Home and dry</div><div class="translation">Home and dry — «дома и в тепле», идиома успешного завершения: дело сделано, можно выдыхать. Дословно «домой добрался и не промок» — картинка путника, который вернулся под крышу до дождя. Так говорят о проекте, ремонте, сделке, наконец закрытых: The renovation is finished — we are home and dry — «Ремонт закончен — теперь всё, дело в шляпе». В диалоге Джон подводит итог экскурсии Кейт: Everything works, nothing leaks, and the floor is warm. You are home and dry — «Всё работает, ничего не течёт, пол тёплый. Ты дома и в тепле» — идеальный момент для этой идиомы: ремонт с тремя месяцами ожидания плиточника наконец-то позади. Русские аналоги: «конец — делу венец», «теперь можно спать спокойно». Семья похожих: over the hump — «самое трудное позади», out of the woods — «вышли из леса, опасность миновала» (обычно про болезнь или кризис), safe and sound — «цел и невредим» (про людей и вещи). Антоним по настроению: not out of the woods yet — «рано расслабляться».</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "House & Home: Bathroom Renovation & Smart Heating + Participle Clauses (Feeling cold, Kate... / Built in 1935...)", "subtitle": "2026-10-29", "date": "2026-10-29", "phrase_of_the_day": "Home and dry", "phrase_translation": "Home and dry — «дома и в тепле», идиома успешного завершения: дело сделано, можно выдыхать. Дословно «домой добрался и не промок» — картинка путника, который вернулся под крышу до дождя. Так говорят о проекте, ремонте, сделке, наконец закрытых: The renovation is finished — we are home and dry — «Ремонт закончен — теперь всё, дело в шляпе». В диалоге Джон подводит итог экскурсии Кейт: Everything works, nothing leaks, and the floor is warm. You are home and dry — «Всё работает, ничего не течёт, пол тёплый. Ты дома и в тепле» — идеальный момент для этой идиомы: ремонт с тремя месяцами ожидания плиточника наконец-то позади. Русские аналоги: «конец — делу венец», «теперь можно спать спокойно». Семья похожих: over the hump — «самое трудное позади», out of the woods — «вышли из леса, опасность миновала» (обычно про болезнь или кризис), safe and sound — «цел и невредим» (про людей и вещи). Антоним по настроению: not out of the woods yet — «рано расслабляться».", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1029.mp3", "sections": [{"id": "s1", "title": "Vocabulary — House & Home: Bathroom Renovation & Smart Heating", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "What is 'grout'?", "options": ["The paste between tiles that keeps water out of the joints", "The cream you polish the tiles with after every shower", "The tool that cuts tiles in straight lines along a guide", "The mat on the floor that stops you slipping after a bath"], "correct": "The paste between tiles that keeps water out of the joints", "explanation": "Grout — «затирка»: паста или раствор, которым заполняют швы между плитками, чтобы вода не просачивалась под кафель. Глагол отсюда to grout — «затирать швы», а to regrout — «обновить затирку»: старую вычищают и кладут новую — самая частая операция при освежении ванной без замены всей плитки. В диалоге Кейт подтверждает: Dave regrouted everything and put in new sealant — «Дэйв полностью обновил затирку и положил новый герметик». Joint — «шов, стык» (у плиток; то же слово про суставы и про «совместный»). Разбор соседей: sealant — «герметик», резиновая прослойка по краям ванны и душа, следующая линия обороны после затирки; polirующий крем, режущий инструмент и антискользящий коврик — предметы из той же ванной, но к швам отношения не имеют."}, {"id": "v2", "type": "choice", "sentence": "What does 'to insulate' mean?", "options": ["To cover walls and pipes with material that stops heat escaping", "To connect all the radiators to the boiler with new copper pipes", "To treat the walls with special paint that kills mould and damp", "To replace the old single windows with modern double-glazed ones"], "correct": "To cover walls and pipes with material that stops heat escaping", "explanation": "To insulate — «утеплять, изолировать (от холода или шума)»: покрывать стены, полы, трубы материалом, который не выпускает тепло. Существительное insulation — «изоляция, утепление»: wall insulation — утепление стен, sound insulation — звукоизоляция. В диалоге Кэт жалуется на бюджет: The house is insulated now, and my wallet feels very thin — «Дом теперь утёплен, а кошелёк стал очень тонким». Ловушка перевода: insulate — про тепло и звук, а «изолировать от людей» — это to isolate (он чувствует себя изолированным — He feels isolated). Разбор соседей: подключение радиаторов — это plumbing, работа сантехника (plumber из урока 5 октября); краска от плесени — это anti-mould paint; замена окон — отличный способ утеплить дом, но у слова insulate значение шире и первичное — само покрытие материалом-барьером."}, {"id": "v3", "type": "choice", "sentence": "What is 'a smart meter'?", "options": ["A device that shows how much energy you are using right now", "A gadget that turns the heating on when your phone rings", "A camera that checks whether the radiators are leaking water", "A lock that recognises your voice and opens the front door"], "correct": "A device that shows how much energy you are using right now", "explanation": "A smart meter — «умный счётчик»: цифровой счётчик электроэнергии и газа, который показывает расход в реальном времени и сам отправляет показания поставщику — больше не нужно ползти под лестницу и списывать цифры. В диалоге Кейт разбирает свою новую ванную: The thermostat knows when I am home, and the smart meter counts every penny of it — «Термостат знает, когда я дома, а умный счётчик считает каждую копейку этого». Различайте соседей по дому: a thermostat — «термостат», прибор, который держит заданную температуру и включает-выключает отопление; a meter — «счётчик», который только измеряет (энергию, воду, газ); прилагательное smart сегодня про всю технику — «умный, подключённый к сети». Разбор остальных: включение отопления от звонка — фантазия про автоматизацию; камера за радиаторами и голосовой замок — умные устройства, но не счётчики: у meter всегда работа измерять."}, {"id": "v4", "type": "choice", "sentence": "What is 'a damp patch'?", "options": ["A dark wet area on a wall caused by moisture in the building", "A piece of soft fabric for wiping the bathroom mirror dry", "A section of old wallpaper that keeps peeling off the ceiling", "A small rug by the bath that soaks up the drips and spills"], "correct": "A dark wet area on a wall caused by moisture in the building", "explanation": "A damp patch — «пятно сырости»: тёмное влажное пятно на стене или потолке, признак того, что в конструкцию просачивается вода. Damp — «сырость, влага» (и прилагательное «сырой»): rising damp — «поднимающаяся сырость», знаменитый кошмар британских домов, когда влага идёт вверх от фундамента. В диалоге Кейт показывает угол у душа: That was the damp patch. The old sealant had failed, and water was sneaking behind the tiles — «Это было пятно сырости. Старый герметик вышел из строя, и вода просачивалась за плитку». Тонкий нюанс: damp про сырость в доме — это всегда проблема, а damp cloth — просто «влажная тряпка», там слово нейтральное. Разбор соседей: тряпка для зеркала — cloth, не patch; отслаивающиеся обои — частое СЛЕДСТВИЕ сырости, но само пятно — это влага в стене; коврик у ванны — bath mat, слово patch о нём не скажут."}]}, {"id": "s2", "title": "Grammar — Participle Clauses (Feeling cold, Kate... / Built in 1935...)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: '___ all the tiles by Friday, Dave spent the weekend on the grout.'", "options": ["Having laid", "Laying", "To lay", "Laid"], "correct": "Having laid", "explanation": "HAVING LAID all the tiles by Friday, Dave spent the weekend on the grout — «Уложив всю плитку к пятнице, Дэйв выходные посвятил затирке». Сегодняшняя новинка — причастные обороты (participle clauses): Having + V3, причастие перфектное, означает действие, которое ЗАВЕРШИЛОСЬ РАНЬШЕ основного: сначала уложил плитку, потом занялся затиркой — два последовательных шага одного Дэйва. Ровно эта конструкция звучит в диалоге: Having finished the grout on Friday, he started on the pipes the same afternoon — «Закончив затирку в пятницу, он в тот же день взялся за трубы». Разбор остальных: Laying — причастие настоящего, означает одновременность или причину («укладывая» — процесс шёл В МОМЕНТ затирки, абсурд); To lay — инфинитив цели, «чтобы уложить», меняет смысл; Laid — голое причастие прошедшего с пассивным смыслом, «будучи уложенным», но плитку укладывал сам Дэйв, актив. Проверка на субъект: действие причастия и главное действие обязан выполнять ОДИН человек — здесь оба раза Дэйв."}, {"id": "g2", "type": "choice", "sentence": "Complete: '___ in 1935, the house still has its original front door.'", "options": ["Built", "Building", "Having built", "To build"], "correct": "Built", "explanation": "BUILT in 1935, the house still has its original front door — «Построенный в 1935 году, дом до сих пор хранит свою входную дверь в оригинале». Здесь вторая ипостась причастного оборота: причастие прошедшее (V3, Past Participle) имеет ПАССИВНЫЙ смысл — дом был ПОСТРОЕН кем-то, сам он не строитель. Формула: Built in 1935 = which was built in 1935 — причастный оборот сжимает придаточное определительное до двух слов. Точно так же: a flat renovated last year — «квартира, отремонтированная в прошлом году», tiles imported from Spain — «плитка, импортированная из Испании». В диалоге Джон шутит о доме Кейт: Built in the thirties, and it learned to gossip — «Построен в тридцатые — и научился сплетничать» (про умный счётчик, который докладывает о расходах). Разбор остальных: Building — активное настоящее, «строя» — дом не строит сам себя; Having built — перфект, но тоже активный: субъект что-то построил САМ, а дом — объект; To build — инфинитив цели, «чтобы построить», бессмыслица. Мини-правило: кого описываем — деятеля или результат? Результат, «сделанный кем-то» → V3."}, {"id": "g3", "type": "choice", "sentence": "Three sentences have a classic participle mistake — the doer does not match. Which sentence is CORRECT?", "options": ["Walking around the flat, Emma noticed a damp patch above the door.", "Walking around the flat, the damp patch appeared above the door.", "Walking around the flat, there was a damp patch above the door.", "Walking around the flat, the door had a damp patch above it."], "correct": "Walking around the flat, Emma noticed a damp patch above the door.", "explanation": "Правильно: WALKING around the flat, EMMA noticed a damp patch — «Гуляя по квартире, Эмма заметила пятно сырости над дверью». Золотое правило причастного оборота: действие в -ing и действие главного глагола выполняет ОДИН И ТОТ ЖЕ субъект. Гуляла Эмма — и заметила Эмма, всё сходится. Остальные три варианта — знаменитая ошибка dangling participle, «повисшее причастие»: субъект не совпадает. Walking around the flat, the damp patch appeared — буквальный смысл «пятно сырости гуляло по квартире и появилось» — пятно не гуляет; Walking around the flat, there was a damp patch — «там было пятно» вообще без деятеля, гулять некому; Walking around the flat, the door had a damp patch — выходит, гуляла ДВЕРЬ. Смешно по-английски и грубо по-экзаменационному: в русском мы спокойно говорим «Гуляя по квартире, над дверью было пятно» — падежами такое спасается, а в английском нет. Лекарство простое: после запятой сразу ставьте того, кто действовал в обеих частях. Классика жанра: Opening the door, she screamed — «Открыв дверь, она закричала» (открывала и кричала — она)."}, {"id": "g4", "type": "choice", "sentence": "Complete: 'The engineer ___ our boiler this morning says it will last another winter.'", "options": ["checking", "checked", "checks", "who checking"], "correct": "checking", "explanation": "The engineer CHECKING our boiler this morning says it will last another winter — «Инженер, проверяющий наш котёл сегодня утром, говорит, что тот протянет ещё одну зиму». Это третья работа причастия настоящего (-ing): оно заменяет придатительное определительное. The engineer checking our boiler = The engineer WHO IS checking our boiler — «инженер, который проверяет». Правило сжатия: who is / which is перед причастием убираются, остаётся одно -ing. Тот же механизм: the man repairing the roof — «мастер, ремонтирующий крышу» (= who is repairing); anyone knowing the answer — «любой, кто знает ответ». Разбор остальных: checked — причастие прошедшее с пассивом, «проверенный» (получился «инженер, проверенный нашим котёлом» — котёл сильнее, но не так); checks — личный глагол, но тогда придаточному нужен свой субъект (The engineer WHO CHECKS) — голый checks внутрь фразы не встаёт; who checking — недоразумение: either who checks, либо просто checking, но не оба сразу. Логика выбора заодно: инженер сам проверяет котёл → актив → -ing."}]}, {"id": "s3", "title": "Practical English — Talking to Trades and Suppliers", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "The tiler has almost finished, but one row of tiles looks uneven. What is the best way to raise it?", "options": ["Would you mind taking another look at this row? It seems a bit uneven.", "This is the worst tiling in Europe, and I am calling the council today.", "I will just live with it and tell my friends it is modern art from now on.", "That row is crooked. Fix it before lunch, or you are not getting paid."], "correct": "Would you mind taking another look at this row? It seems a bit uneven.", "explanation": "Формула вежливой претензии мастеру: Would you mind taking another look at this row? It seems a bit uneven — «Не могли бы вы ещё раз взглянуть на этот ряд? Кажется, он немного неровный». Три опоры вежливости: Would you mind + V-ing — самая мягкая просьба (дословно «возражали бы вы против»); to take another look — «взглянуть ещё раз», нейтрально, без обвинения; it seems a bit uneven — претензия через seems («кажется») и bit («немного»), вы оставляете мастеру путь отступить. Эта схема работает с любым мастером: Would you mind taking another look at the sealant? — про герметик; Could you double-check the grout in the corner? — «Перепроверьте затирку в углу?» Вспомните из урока 10 октября: письменная смета (a written quote) — до работы, а такие фразы — на приёмке. Разбор остальных: звонок в совет (council) — эскалация на ровном месте; «скажу друзьям, что это современное искусство» — капитуляция, проблема остаётся; ультиматум «до обеда или не заплачу» — грубость, мастер с репутацией Дэйва просто уйдёт, а ряд останется."}, {"id": "p2", "type": "choice", "sentence": "You want a smart meter installed. What is the best way to ask your energy supplier on the phone?", "options": ["Could you tell me whether a smart meter installation is free of charge?", "Send somebody with the meter today, I have already waited since spring.", "Am I supposed to work out how the meter works, or will you explain?", "How much does your cheapest thermostat cost, and do you sell radiators?"], "correct": "Could you tell me whether a smart meter installation is free of charge?", "explanation": "Лучший вопрос: Could you tell me whether a smart meter installation is free of charge? — «Не подскажете, установка умного счётчика бесплатна?» Здесь косвенный вопрос из урока 23 сентября (Could you tell me + утвердительный порядок слов) плюс whether — «ли», формальный брат if, обязательный перед or not (whether or not). Ключевые слова темы: installation — «установка» (to install a meter), free of charge — «бесплатно» (ср. free of plastic bags); полезные продолжения: How long does the installation take? — «Сколько занимает установка?»; Will the engineer need access to the hallway? — «Инженеру нужен доступ в прихожую?»; Do I need to be at home? — «Мне нужно быть дома?» Разбор остальных: «пришлите кого-нибудь сегодня, я жду с весны» — требование без вопроса и без вежливости; «я должен сам разобраться, как он работает, или вы объясните?» — вопрос с претензией вместо сути (правильный вариант: Could you explain how to read it?); вариант про термостат и радиаторы — вежлив, но про другие приборы: счётчик измеряет, термостат регулирует — путать их в разговоре с поставщиком значит уйти с ответом не на тот вопрос."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: '___ by two neighbours, Dave seemed like the right person to call.'", "options": ["Recommended", "Recommending", "Having recommended", "To recommend"], "correct": "Recommended", "explanation": "RECOMMENDED by two neighbours, Dave seemed like the right person to call — «Рекомендованный двумя соседями, Дэйв казался человеком, которого стоило позвать». Причастие прошедшее (V3) с пассивным смыслом: Дэйва рекомендовали, сам он никого не рекомендовал. Развёрнутый вариант: Dave, who had been recommended by two neighbours, seemed... — причастный оборот сжимает всё это в одно слово Recommended by two neighbours. Точная параллель из диалога: Built in the thirties — дом построен кем-то. Разбор остальных: Recommending — активное «рекомендуя»: получается, Дэйв ходил и рекомендовал сам себя соседям; Having recommended — перфектный актив: «порекомендовав (кого-то), Дэйв...» — действие чужое атрибуту не клеится; To recommend — инфинитив цели, «чтобы порекомендовать», ломает смысл фразы. Быстрый тест на такие пропуски: субъект — автор действия или его объект? Объект, «его рекомендовали» → V3; автор, «он рекомендует» → V-ing; автор, и действие уже позади → Having V3."}, {"id": "c2", "type": "choice", "sentence": "In which sentence does the participle clause describe an action that was FINISHED BEFORE the main action?", "options": ["Having finished the grout, Dave moved on to the pipes.", "Feeling the cold tiles, Kate decided on underfloor heating.", "Built in the thirties, the house still has thick walls.", "Whistling cheerfully, Dave packed up his tools at five."], "correct": "Having finished the grout, Dave moved on to the pipes.", "explanation": "HAVING FINISHED the grout, Dave moved on to the pipes — «Закончив затирку, Дэйв перешёл к трубам»: перфектное причастие Having + V3 — единственная форма, которая прямо сообщает: первое действие ЗАВЕРШЕНО КО МОМЕНТУ второго. Сначала пятница и затирка, потом тот же день и трубы — строгая последовательность, и в диалоге Кейт произносит эту фразу дословно: Having finished the grout on Friday, he started on the pipes the same afternoon. Разбор остальных: Feeling the cold tiles — «чувствуя холод плитки»: одновременность, ощущение и решение наступают вместе, это причастие-причина; Built in the thirties — свойство-описание, дом был построен когда-то давно, здесь нет «действия субъекта до другого действия», это пассивная характеристика, как broken window — «разбитое окно»; Whistling cheerfully — «насвистывая»: классическая одновременность, Дэйв насвистывает В МОМЕНТ сборов. Карта урока одним взглядом: V-ing = одновременно или причина; V3 = пассив, «сделанный кем-то»; Having V3 = завершено раньше; и всегда один и тот же субъект у причастия и главного глагола."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why is the bathroom floor warm under John's feet?", "options": ["Kate had underfloor heating installed during the renovation", "The flat below keeps its private sauna running all day long", "The thermostat pumps hot water through the old bathroom radiators", "Dave the tiler left his heat gun buried under the new tiles"], "correct": "Kate had underfloor heating installed during the renovation", "explanation": "Разгадка звучит в самом начале экскурсии, как только Джон ступает на пол: John — The floor is warm. Why is the floor warm? Am I standing on a secret? Kate — Underfloor heating. Having suffered through two winters on cold tiles, I promised myself this — «Тёплый пол. Настрадавшись две зимы на холодной плитке, я обещала это себе». Underfloor heating — «тёплый пол», обогрев под плиткой; обратите внимание на перфектное причастие Having suffered — «настрадавшись»: причина (две зимы мёрзших ног) предшествовала решению, поэтому Having + V3, а не просто Suffering. Заодно заметьте конструкцию had it installed — Кейт «попросила установить» (have something done из урока 30 августа: не сама монтировала, а поручила). Разбор остальных: сауна снизу, радиаторы от термостата и «похороненный под плиткой тепловентилятор Дэйва» в диалоге не звучали — это правдоподобные, но выдуманные объяснения; термостат в диалоге есть, но он регулирует температуру, а греет именно пол.", "audio_text": "Kate(F): John, welcome to the first bathroom tour in history with a guest list.\nJohn(M): I feel honoured. I brought flowers, but I left them in the hall. Condensation, you know.\nKate(F): Smart thinking. The extractor fan deals with steam now, but let's not push it.\nJohn(M): The floor is warm. Why is the floor warm? Am I standing on a secret?\nKate(F): Underfloor heating. Having suffered through two winters on cold tiles, I promised myself this.\nJohn(M): And this little screen on the wall?\nKate(F): The thermostat. It knows when I am home, and the smart meter counts every penny of it.\nJohn(M): So the house reports on you now. Built in the thirties, and it learned to gossip.\nKate(F): It only gossips about energy. Speaking of which, see that corner near the shower?\nJohn(M): The dark patch? I assumed it was modern art.\nKate(F): That was the damp patch. The old sealant had failed, and water was sneaking behind the tiles.\nJohn(M): So the tiler regrouted everything and put in new sealant?\nKate(F): Dave the tiler. Not knowing anyone reliable, I asked the neighbours, and three of them said Dave.\nJohn(M): Dave sounds like a local legend.\nKate(F): He is. Having finished the grout on Friday, he started on the pipes the same afternoon.\nJohn(M): And the mirror does not fog up at all?\nKate(F): The extractor fan again. Struggling with fogged mirrors for years, I nearly forgot what I look like.\nJohn(M): Everything glitters. What was the total damage, if I may ask?\nKate(F): Do not ask. The house is insulated now, and my wallet feels very thin.\nJohn(M): Cheer up. Everything works, nothing leaks, and the floor is warm. You are home and dry.\nKate(F): Home, dry, and slightly poorer. Would you like a cup of tea, standing on the warm tiles?\nJohn(M): That is the warmest invitation I have ever received."}, {"id": "l2", "type": "listen", "sentence": "What had caused the dark patch near the shower?", "options": ["The old sealant had failed and water got behind the tiles", "The previous owners spilt dark paint and never cleaned it off", "The extractor fan pushed the steam into that corner at night", "The damp rose up from the cellar during the rainy season"], "correct": "The old sealant had failed and water got behind the tiles", "explanation": "Кейт сама объясняет судьбу тёмного пятна: That was the damp patch. The old sealant had failed, and water was sneaking behind the tiles — «Это было пятно сырости. Старый герметик вышел из строя, и вода просачивалась за плитку». Цепочка событий — целый маленький сюжет урока: герметик (sealant) по краям душа перестал держать воду → влага пробралась под кафель → на стене расцвело тёмное пятно сырости (damp patch) → Дэйв обновил затирку (regrouted) и положил новый герметик. Заметьте пассаж в Past Perfect: The old sealant HAD FAILED — отказ герметика случился РАНЬШЕ, чем Кейт это обнаружила, классическое «предпрошедшее» из урока 20 августа. И грамматика дня в соседней строке: Not knowing anyone reliable, I asked the neighbours — «Не зная никого надёжного, я спросила соседей» — причастие с отрицанием: not ставится ПЕРЕД причастием. Разбор остальных: краска прежних хозяев, ночной пар из вытяжки и «сырость из подвала» — типичные причины пятен в реальной жизни, но в этом диалоге их не называли.", "audio_text": "Kate(F): John, welcome to the first bathroom tour in history with a guest list.\nJohn(M): I feel honoured. I brought flowers, but I left them in the hall. Condensation, you know.\nKate(F): Smart thinking. The extractor fan deals with steam now, but let's not push it.\nJohn(M): The floor is warm. Why is the floor warm? Am I standing on a secret?\nKate(F): Underfloor heating. Having suffered through two winters on cold tiles, I promised myself this.\nJohn(M): And this little screen on the wall?\nKate(F): The thermostat. It knows when I am home, and the smart meter counts every penny of it.\nJohn(M): So the house reports on you now. Built in the thirties, and it learned to gossip.\nKate(F): It only gossips about energy. Speaking of which, see that corner near the shower?\nJohn(M): The dark patch? I assumed it was modern art.\nKate(F): That was the damp patch. The old sealant had failed, and water was sneaking behind the tiles.\nJohn(M): So the tiler regrouted everything and put in new sealant?\nKate(F): Dave the tiler. Not knowing anyone reliable, I asked the neighbours, and three of them said Dave.\nJohn(M): Dave sounds like a local legend.\nKate(F): He is. Having finished the grout on Friday, he started on the pipes the same afternoon.\nJohn(M): And the mirror does not fog up at all?\nKate(F): The extractor fan again. Struggling with fogged mirrors for years, I nearly forgot what I look like.\nJohn(M): Everything glitters. What was the total damage, if I may ask?\nKate(F): Do not ask. The house is insulated now, and my wallet feels very thin.\nJohn(M): Cheer up. Everything works, nothing leaks, and the floor is warm. You are home and dry.\nKate(F): Home, dry, and slightly poorer. Would you like a cup of tea, standing on the warm tiles?\nJohn(M): That is the warmest invitation I have ever received."}]}], "subtitles": [{"speaker": "Kate", "text": "John, welcome to the first bathroom tour in history with a guest list."}, {"speaker": "John", "text": "I feel honoured. I brought flowers, but I left them in the hall. Condensation, you know."}, {"speaker": "Kate", "text": "Smart thinking. The extractor fan deals with steam now, but let's not push it."}, {"speaker": "John", "text": "The floor is warm. Why is the floor warm? Am I standing on a secret?"}, {"speaker": "Kate", "text": "Underfloor heating. Having suffered through two winters on cold tiles, I promised myself this."}, {"speaker": "John", "text": "And this little screen on the wall?"}, {"speaker": "Kate", "text": "The thermostat. It knows when I am home, and the smart meter counts every penny of it."}, {"speaker": "John", "text": "So the house reports on you now. Built in the thirties, and it learned to gossip."}, {"speaker": "Kate", "text": "It only gossips about energy. Speaking of which, see that corner near the shower?"}, {"speaker": "John", "text": "The dark patch? I assumed it was modern art."}, {"speaker": "Kate", "text": "That was the damp patch. The old sealant had failed, and water was sneaking behind the tiles."}, {"speaker": "John", "text": "So the tiler regrouted everything and put in new sealant?"}, {"speaker": "Kate", "text": "Dave the tiler. Not knowing anyone reliable, I asked the neighbours, and three of them said Dave."}, {"speaker": "John", "text": "Dave sounds like a local legend."}, {"speaker": "Kate", "text": "He is. Having finished the grout on Friday, he started on the pipes the same afternoon."}, {"speaker": "John", "text": "And the mirror does not fog up at all?"}, {"speaker": "Kate", "text": "The extractor fan again. Struggling with fogged mirrors for years, I nearly forgot what I look like."}, {"speaker": "John", "text": "Everything glitters. What was the total damage, if I may ask?"}, {"speaker": "Kate", "text": "Do not ask. The house is insulated now, and my wallet feels very thin."}, {"speaker": "John", "text": "Cheer up. Everything works, nothing leaks, and the floor is warm. You are home and dry."}, {"speaker": "Kate", "text": "Home, dry, and slightly poorer. Would you like a cup of tea, standing on the warm tiles?"}, {"speaker": "John", "text": "That is the warmest invitation I have ever received."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
