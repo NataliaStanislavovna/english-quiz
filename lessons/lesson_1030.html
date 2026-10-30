@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Food &amp; Cooking: Recipes Step by Step + -ever Compounds (Whatever / Wherever / However)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Food &amp; Cooking: Recipes Step by Step + -ever Compounds (Whatever / Wherever / However)</h1><div class="subtitle">2026-10-30</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">The proof of the pudding</div><div class="translation">The proof of the pudding (is in the eating) — «пудинг проверяется на вкус», то есть «всё проверяется на практике»: о результате судят не по обещаниям и не по внешнему виду, а по тому, что получилось в конце. Дословно «доказательство пудинга — в его съедении»: как бы красиво торт ни выглядел, пока его не попробовали, рано хвалиться. Фраза из четырнадцатого века, и в ней содержится вся честность выпечки: However carefully you follow the recipe, the proof of the pudding is in the eating — «сколько бы тщательно ты ни следовал рецепту, судят не по процессу, а по результату» — так Эмма подбивает черту под уроком Марка. Русские аналоги: «цена вещи — в деле», «не говори „хочу“, а скажи „сделал“», «каков поп, таков и приход» (по результату). Семья похожих: the acid test — «проба на прочность, решающая проверка»; actions speak louder than words — «дела громче слов»; practice what you preach — «сам делай, чему учишь». Сокращённый вариант the proof of the pudding тоже нормален в разговоре.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Food & Cooking: Recipes Step by Step + -ever Compounds (Whatever / Wherever / However)", "subtitle": "2026-10-30", "date": "2026-10-30", "phrase_of_the_day": "The proof of the pudding", "phrase_translation": "The proof of the pudding (is in the eating) — «пудинг проверяется на вкус», то есть «всё проверяется на практике»: о результате судят не по обещаниям и не по внешнему виду, а по тому, что получилось в конце. Дословно «доказательство пудинга — в его съедении»: как бы красиво торт ни выглядел, пока его не попробовали, рано хвалиться. Фраза из четырнадцатого века, и в ней содержится вся честность выпечки: However carefully you follow the recipe, the proof of the pudding is in the eating — «сколько бы тщательно ты ни следовал рецепту, судят не по процессу, а по результату» — так Эмма подбивает черту под уроком Марка. Русские аналоги: «цена вещи — в деле», «не говори „хочу“, а скажи „сделал“», «каков поп, таков и приход» (по результату). Семья похожих: the acid test — «проба на прочность, решающая проверка»; actions speak louder than words — «дела громче слов»; practice what you preach — «сам делай, чему учишь». Сокращённый вариант the proof of the pudding тоже нормален в разговоре.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1030.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Food & Cooking: Recipes Step by Step", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "What does 'to preheat the oven' mean?", "options": ["To turn the oven on early so it reaches the right temperature", "To clean the oven with a special spray after you finish baking", "To open the oven door briefly while the cake is still rising", "To cover the oven shelves with paper before you put the tin in"], "correct": "To turn the oven on early so it reaches the right temperature", "explanation": "To preheat the oven — «разогреть духовку заранее»: включить её ДО начала работы, чтобы к моменту, когда тесто готово, духовка уже держала нужную температуру. Pre- — приставка «заранее, предварительно» (сравните preview — предварительный просмотр, prepay — оплатить заранее). Рецепты пишут это первой строкой: Preheat the oven to one hundred and eighty degrees — «Разогрейте духовку до ста восьмидесяти градусов» — и в диалоге Эмма начинает именно с этого. Почему это важно: если сажать тесто в холодную духовку, пирог поднимется неровно и осядет. Разбор остальных: чистка духовки спреем — это to clean the oven, работа ПОСЛЕ выпечки; открывание двери во время подъёма — наоборот, вредная привычка, из-за которой пирог опадает; бумага на противнях — это про baking paper, к температуре отношения не имеет."}, {"id": "v2", "type": "choice", "sentence": "In baking, what is 'batter'?", "options": ["The wet mixture of eggs, flour and milk before it is baked", "The sweet lemon juice poured over the cake once it is baked", "The sheet of paper placed inside the tin so the cake does not stick", "The thick cream spread between the layers of a finished cake"], "correct": "The wet mixture of eggs, flour and milk before it is baked", "explanation": "Batter — «жидкое тесто»: полужидкая смесь яиц, муки, сахара и молока, из которой пекут кексы, блины и оладьи. В диалоге Марк спрашивает с удивлением. The batter? We have batter now? When did it become batter? — «Тесто? У нас теперь тесто? Когда оно стало тестом?» — и Эмма объясняет: The moment the flour went in — «в тот момент, когда добавили муку». Важная пара: batter — ЖИДКОЕ тесто (льётся, его льют — pour the batter into the tin), а dough — ПЛОТНОЕ тесто для хлеба и пирожков, его МЕСЯТ (to knead the dough из урока 15 октября). Разбор остальных: сладкая лимонная пропитка — это drizzle; бумага внутри формы — baking paper; крем между коржами готового торта — frosting или filling. Все четыре слова — гости одной кухни, но batter отвечает именно за сырую жидкую смесь до духовки."}, {"id": "v3", "type": "choice", "sentence": "A recipe says 'sift in the flour and fold it in gently'. What do you do?", "options": ["Mix the flour in slowly with a spatula, keeping the air in it", "Beat everything fast with a whisk until the mixture turns pale", "Press the dough firmly with both hands until it feels smooth", "Pour hot liquid over the dry ingredients while stirring quickly"], "correct": "Mix the flour in slowly with a spatula, keeping the air in it", "explanation": "To fold in — «аккуратно вмешать»: двигать лопаткой (spatula) медленно сверху вниз и по кругу, чтобы мука соединилась с массой, а пузырьки воздуха, добытые взбиванием, НЕ вышли — именно они поднимают кекс. Ключевая реплика диалога: Fold, do not stir — «вмешивай, а не мешай». Разница глаголов кухни: to stir — «мешать» свободно по кругу (чай, суп); to beat — «взбивать» быстро венчиком (яйца с сахаром до бледности — Beat the eggs and sugar until the mixture looks pale); to whisk — «взбивать венчиком/миксером» (an electric whisk из диалога); to knead — «месить» плотное тесто руками; to fold — самое бережное движение, для муки и взбитых белков. To sift — «просеять» через сито (a sieve): мука насыщается воздухом и без комков. Разбор остальных: быстрый венчик выпустит воздух и окупит всю работу насмарку; руками мнут dough, не жидкое тесто; горячая жидкость — это уже другой рецепт целиком."}, {"id": "v4", "type": "choice", "sentence": "How do you use 'the skewer test' to check if a cake is ready?", "options": ["You push a thin stick into the middle; if it comes out clean, it is done", "You tap the top of the cake; if it sounds hollow inside, it is done", "You shake the tin gently; if the top wobbles like jelly, it is done", "You press the top lightly; if your finger leaves a mark, it is done"], "correct": "You push a thin stick into the middle; if it comes out clean, it is done", "explanation": "A skewer — «шпажка», тонкая деревянная палочка; skewer test — главный способ проверить кекс. Шпажку втыкают в САМУЮ СЕРЕДКУ и вынимают: сухая и чистая (comes out clean) — кекс готов, мокрая, с налипшим тестом — сырое, пеките дальше. В диалоге Эмма объясняет: You poke holes so the drizzle can soak in — «ты делаешь дырочки, чтобы пропитка впиталась», и Марк шутит про «дуэль с кексом на маленьких шпагах» (A tiny sword fight with a cake). Полезная пара: to poke holes — «наколоть дырочки», to soak in — «впитаться». Разбор остальных: постукивание по коржу — способ проверить ХЛЕБ, он должен звучать поло; дрожащий как желе верх — верный признак того, что кекс СЫРОЙ, а не готовый; вмятина от пальца — тоже про недопечённое, тесто не пружинит. Ловушка всех трёх: они описывают настоящие кухонные приметы, но к skewer test не относятся — у шпажки одна работа, быть вынутой сухой."}]}, {"id": "s2", "title": "Grammar — -ever Compounds (Whatever / Wherever / However)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: '___ drawer you open in this kitchen, you will find a gadget.'", "options": ["Whichever", "Whatever", "Wherever", "However"], "correct": "Whichever", "explanation": "WHICHEVER drawer you open in this kitchen, you will find a gadget — «В какой бы ящик этой кухни ты ни заглянул, найдёшь гаджет». Сегодняшняя новинка — слова семейства -ever, «кто/что/где бы ни»: whichever = любой из конкретного НАБОРА вариантов, «который бы ни» — ящиков на кухне конечное число, и речь о выборе из них. Формула: whichever + существительное (drawer, pan, recipe). Рядом в диалоге стоит сестра whatever = «что угодно, что бы ни», она про вещи вообще, без выбора из набора. Как выбирать: после пропуска стоит существительное-вариант (drawer) → whichever; целая ситуация-вещь → whatever; место → wherever; образ действия или прилагательное → however; время → whenever; человек → whoever. Разбор остальных: Whatever drawer звучит почти по-русски «какой-нибудь ящик», но выбор из набора требует which-; Wherever — «где бы ни», а ящик уже выбран как объект; However — «как бы ни», про способ действия."}, {"id": "g2", "type": "choice", "sentence": "'However careful you are, flour ends up on the floor.' What does this mean?", "options": ["It does not matter how careful you are; flour ends up on the floor", "You are not careful enough, so flour always ends up on the floor", "The more careful you are, the more flour ends up on the floor", "You are so careful that no flour ever ends up on the floor"], "correct": "It does not matter how careful you are; flour ends up on the floor", "explanation": "HOWEVER CAREFUL you are, flour ends up on the floor — «Каким бы осторожным ты ни был, мука всё равно окажется на полу». However + прилагательное или наречие = no matter how — «каким бы... ни», «сколь бы... ни»: качество (осторожность) НЕ меняет результат. Сравните с диалогом: However long I beat this, it stays yellow — «сколько бы я это ни взбивал, оно остаётся жёлтым» и However strange it sounds, it works — «как бы странно это ни звучало, это работает». Важное отличие от however «однако» с запятой внутри предложения: там это наречие-связка, а здесь — именно «как бы ни» + слово качества. Разбор остальных: «ты недостаточно осторожен» — упрёк, у however смысл другой: ДАЖЕ достаточная осторожность не поможет; the more... the more — «чем..., тем...» из урока 11 сентября, конструкция роста, а тут константа; so careful that — «так осторожен, что» — восхищённый результат, противоположный смысл. Тест наоборот: если фразу можно начать с No matter how — ваш вариант however."}, {"id": "g3", "type": "choice", "sentence": "Which sentence uses the -ever word correctly?", "options": ["Whenever a recipe offers you a shortcut, take it.", "Wherever a recipe offers you a shortcut, take it.", "Whatever a recipe offers you a shortcut, take it.", "However a recipe offers you a shortcut, take it.", "Whoever a recipe offers you a shortcut, take it."], "correct": "Whenever a recipe offers you a shortcut, take it.", "explanation": "WHENEVER a recipe offers you a shortcut, take it — «Всякий раз, когда рецепт предлагает упрощение, пользуйся им» — эта фраза дословно звучит в диалоге. Whenever = every time that = no matter when — «каждый раз, когда», про ВРЕМЯ и повторяющиеся случаи: Whenever I bake, the smoke alarm sings — «всякий раз, когда я пеку, поёт дымовая сигнализация». Проверка подстановкой: каждое ли «когда» подходит? Да → whenever. Разбор остальных: Wherever — «где бы ни», про МЕСТА (Wherever I look on this counter — прямо из диалога), а «предлагать упрощение» — событие, не место; Whatever — «что бы ни», но перед ним должно стоять существительное-вещь или глагол без прямого объекта, а здесь предложение целиком (a recipe offers you a shortcut) уже полноценно, things не выбирают; However — «как бы ни», требует прилагательного или наречия рядом; Whoever — «кто бы ни», про людей, а рецепт — не человек. Схема проста: время → whenever, место → wherever, вещь → whatever, выбор из набора → whichever, человек → whoever, способ/качество → however."}, {"id": "g4", "type": "choice", "sentence": "Complete: '___ broke my spatula last time, please confess now.'", "options": ["Whoever", "Whichever", "Whenever", "However"], "correct": "Whoever", "explanation": "WHOEVER broke my spatula last time, please confess now — «Кто бы ни сломал мою лопатку в прошлый раз, признайтесь сейчас». Whoever = any person who — «любой, кто», «кто бы ни»: человек неизвестен, и слово охватывает всех возможных кандидатов сразу. Развёрнутый вид: The person who broke it, whoever that may be, please confess. В диалоге та же форма в шутке Эммы: Whoever eats it does so politely — «кто бы его ни ел, будет есть вежливо» (про неудачный кекс). Не путайте с who вопросительным: здесь нет вопроса, есть охват всех. Разбор остальных: Whichever — выбор из набора ПРЕДМЕТОВ, а сломать лопатку мог только человек; Whenever — про время, «когда бы ни», но сломал кто-то, а не когда-то; However — «как бы ни», требует прилагательного или наречия рядом с собой. Мини-таблица: человек → whoever, вещь из набора → whichever, любая вещь → whatever, место → wherever, время → whenever, способ → however."}]}, {"id": "s3", "title": "Practical English — Talking About Recipes", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "A friend's lemon cake was wonderful, and you would like to cook it too. What is the best way to ask?", "options": ["That lemon cake was wonderful. Would you mind sharing the recipe?", "Give me the recipe right now. I have asked twice, and I am waiting.", "The cake was fine, I suppose. What shop did you buy that one from?", "I found a similar recipe online, so yours is hardly a secret now."], "correct": "That lemon cake was wonderful. Would you mind sharing the recipe?", "explanation": "Лучший вариант. That lemon cake was wonderful. Would you mind sharing the recipe? — «Тот лимонный кекс был чудесен. Не могли бы вы поделиться рецептом?» Схема из двух шагов: искренний комплимент + мягкая просьба. Would you mind + V-ing — самая деликатная просьба английского (дословно «возражали бы вы против»), знакомая по уроку 29 октября; to share a recipe — «поделиться рецептом», стандартный глагол именно здесь. Полезные продолжения: Could you send me the recipe? — «Можете прислать рецепт?»; Do you have it written down? — «Он у вас записан?»; I would love to try it myself — «Я бы с удовольствием попробовал сам». Разбор остальных: «дай рецепт сейчас, я жду» — требование, дружбу не укрепляет; «неплохо, из какого магазина?» — оскорбление труду хозяйки (и кекс был домашний!); «в интернете есть похожий, так что у тебя не секрет» — агрессия с претензией на шантаж. Рецепт в семье — валюта; просят её вежливо."}, {"id": "p2", "type": "choice", "sentence": "At a baking class, you missed one step while beating your eggs. What is the best way to ask the teacher?", "options": ["Sorry, could you go through that step once more? I missed it.", "You go far too fast. Nobody can follow a person who moves like that.", "I skipped that step on purpose because it looked much too difficult.", "Which step was that again? To be honest, I was not listening."], "correct": "Sorry, could you go through that step once more? I missed it.", "explanation": "Правильный тон. Sorry, could you go through that step once more? I missed it — «Извините, не могли бы вы пройти этот шаг ещё раз? Я его пропустил». Формула: короткое Sorry + вежливый вопрос с could + честное признание I missed it без самобичевания. To go through — «пройтись по, разобрать» (шаги, список, инструкции); once more — «ещё раз»; to miss a step — «пропустить шаг» (заметьте: miss — и «пропустить урок», и «опоздать на поезд» — слово-многостаночник). Полезные соседние фразы для мастер-классов: Could you show us again, a bit slower? — «Покажите ещё раз, помедленнее?»; Are we supposed to fold now or stir? — «Сейчас положено вмешивать или мешать?» (be supposed to из урока 1 октября); Which tin should I use? — «Какую форму мне взять?» Разбор остальных: «вы слишком быстро двигаетесь» — обвинение преподавателя; «пропустил нарочно, слишком сложно» — гордость не туда; «не слушал, если честно» — честно, но невежливо: без Sorry и could это звучит как отчёт, а не просьба."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: '___ much sugar you put in the drizzle, a bad bake stays a bad bake.'", "options": ["However", "Whatever", "Wherever", "Whichever"], "correct": "However", "explanation": "HOWEVER much sugar you put in the drizzle, a bad bake stays a bad bake — «Сколько бы сахара ты ни положил в пропитку, неудачная выпечка останется неудачной выпечкой». Здесь however работает с much: however much / however many / however long / however often — «сколько бы ни / как долго бы ни / как часто бы ни». Это тот же however + качество, где качество измеряется (much, many, long, often), а не оценивается прилагательным. Именно так он стоит в диалоге: However long I beat this, it stays yellow — «сколько бы я его ни взбивал». Разбор остальных: Whatever much — не существует: whatever сам заменяет вещь целиком и с much в пару не встаёт; Wherever — «где бы ни», про места; Whichever — «какой бы ни (из набора)», требует существительного рядом (whichever pan). Проверка на слух: между -ever словом и подлежащим (you) стоит слово-мерка (much)? Тогда только however. Вторая жизнь фразы: no matter how much sugar — полный синоним, чуть разговорнее."}, {"id": "c2", "type": "choice", "sentence": "'Whatever happens, do not tell Kate.' What does this sentence mean?", "options": ["No matter what happens, Mark must keep the cake a secret", "Kate already knows everything, so there is no secret to keep", "Something terrible will certainly happen to the cake in the oven", "Mark should answer honestly if Kate asks him about the party"], "correct": "No matter what happens, Mark must keep the cake a secret", "explanation": "WHATEVER HAPPENS, do not tell Kate — «Что бы ни случилось, не говори Кейт» — фраза Эммы в конце диалога, рядом с Then we buy one next year and never speak of this — «тогда в следующем году мы просто купим кекс и никогда об этом не заговорим». Whatever happens = no matter what happens: любые исходы — плоский кекс, сгоревший кекс, идеальный кекс — не меняют инструкцию: Кейт не знать. Грамматика состава: whatever здесь — подлежащее маленького придаточного (happens — его сказуемое), всё придаточное целиком работает условием для главного. Сравните масштаб: Whatever happens — любая ситуация вообще; Whichever happens — одна из известного набора ситуаций (например, из двух исходов «получился/не получился»). Разбор остальных: «Кейт уже всё знает» — противоречит самому запрету; «что-то ужасное обязательно случится» — whatever НЕ предсказывает, а накрывает ВСЕ варианты, включая удачные; «отвечай честно, если спросит» — противоположность просьбы, Эмма просит о молчании. Заметьте пару из диалога. Mark — My lips are sealed — «Мои губы запечатаны», идиома «могила, никому не скажу»."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What does Emma tell Mark to do with the flour?", "options": ["She tells him to sift it in and fold it gently with a spatula", "She tells him to beat it into the mixture with the electric whisk", "She tells him to knead it firmly with his hands until it is smooth", "She tells him to sprinkle it over the top before the tin goes in"], "correct": "She tells him to sift it in and fold it gently with a spatula", "explanation": "Фраза Эммы звучит прямо: You sift the flour in and fold it gently with the spatula. Gently. Fold, do not stir — «Просей муку и аккуратно вмешай её лопаткой. Аккуратно. Вмешивай, не мешай». Двойное послание урока в одной реплике: to sift — «просеять» (через sieve, сито), to fold — бережное движение сверху вниз, сохраняющее воздух в тесте; слово gently, повторённое дважды, — главный маркер техники. Дальше в диалоге Марк переспрашивает Fold, not stir. You bakers have rules for everything — «Вмешивать, не мешать. У вас, пекарей, правила на всё» — и это правда: mixing verbs из сегодняшнего урока (stir, beat, whisk, knead, fold) — целый словарь, где каждый глагол отвечает за своё движение. Разбор остальных: электрический венчик (an electric whisk) в диалоге ЕСТЬ, но им взбивают яйца с сахаром, а муку он убьёт; месить руками (to knead) — судьба хлебного dough, не кексового batter; посыпать мукой сверху — приём для посыпания стола, в диалоге его не было.", "audio_text": "Emma(F): Welcome to Baking School, chapter one. Today we are making a lemon drizzle cake for Kate's birthday.\nMark(M): I have made toast before. Twice. Both times successfully.\nEmma(F): Then you are ready. Step one, preheat the oven to one hundred and eighty.\nMark(M): Done. Whatever that machine is screaming about, it is not my fault.\nEmma(F): That is the smoke alarm from last time. Ignore it. Now grease the tin and line it with baking paper.\nMark(M): Grease it with what? Wherever I look on this counter, I see gadgets, and not one of them is butter.\nEmma(F): Whichever drawer you open, the butter is in the fridge. Top shelf, behind the eggs.\nMark(M): Found it. Now what?\nEmma(F): Beat the eggs and sugar in the mixing bowl until the mixture looks pale.\nMark(M): However long I beat this, it stays yellow. Is that normal?\nEmma(F): Eggs are yellow, Mark. Keep going.\nMark(M): My arm is falling off.\nEmma(F): That is why the recipe says use an electric whisk. Whenever a recipe offers you a shortcut, take it.\nMark(M): Noted. What is this sieve for?\nEmma(F): You sift the flour in and fold it gently with the spatula. Gently. Fold, do not stir.\nMark(M): Fold, not stir. You bakers have rules for everything.\nEmma(F): We do. Otherwise the cake comes out flat and sad. Now pour the batter into the tin.\nMark(M): The batter? When did it become batter?\nEmma(F): The moment the flour went in. Language moves fast in the kitchen. Into the oven, thirty-five minutes.\nMark(M): And while it bakes?\nEmma(F): We mix lemon juice and sugar for the drizzle. Then you skewer the cake and pour it over while it is still warm.\nMark(M): A skewer? Like a tiny sword fight with a cake?\nEmma(F): You poke holes so the drizzle can soak in. However strange it sounds, it works.\nMark(M): And if it comes out flat and sad anyway?\nEmma(F): Then we buy one next year and never speak of this. Whatever happens, do not tell Kate.\nMark(M): My lips are sealed.\nEmma(F): Good. And Mark, however it turns out, the proof of the pudding is in the eating.\nMark(M): Meaning we will only know it worked when we taste it?\nEmma(F): Exactly. Baking is very honest that way."}, {"id": "l2", "type": "listen", "sentence": "Why does Mark need to poke holes in the finished cake with a skewer?", "options": ["So the lemon drizzle can soak right into the warm cake", "To let the steam escape so the top does not crack in the middle", "To check how hot the middle of the cake is before it cools down", "To make the cake look homemade, because Emma loves rustic baking"], "correct": "So the lemon drizzle can soak right into the warm cake", "explanation": "Разгадка в двух репликах. Эмма: Then you skewer the cake and pour it over while it is still warm — «потом ты накалываешь кекс шпажкой и поливаешь пропиткой, пока он тёплый», и на шутку Марка про «дуэль на маленьких шпагах» она отвечает прямо: You poke holes so the drizzle can soak in — «Ты накалываешь дырочки, чтобы пропитка впиталась». Вся логика lemon drizzle cake: дырочки — каналы, по которым жидкий лимонный сироп уходит вглубь кекса; поэтому и льют на ТЁПЛЫЙ кекс — тёплое тесто впитывает лучше остывшего. Полезные слова вокруг: to soak in — «впитаться», drizzle — «пропитка» (буквально «морось» — сироп льётся тонкой струйкой, как дождик), to pour over — «полить сверху». Заметьте грамматику цели из урока 26 октября рядом: You poke holes SO THAT the drizzle CAN soak in — Эмма говорит короткую версию, но смысл именно so-that-овой: дырочки не для красоты, а ради пропитки. Разбор остальных: пар и трещины, температура середины и «рустиканский вид» — правдоподобные кухонные заботы, но в диалоге про них не было ни слова.", "audio_text": "Emma(F): Welcome to Baking School, chapter one. Today we are making a lemon drizzle cake for Kate's birthday.\nMark(M): I have made toast before. Twice. Both times successfully.\nEmma(F): Then you are ready. Step one, preheat the oven to one hundred and eighty.\nMark(M): Done. Whatever that machine is screaming about, it is not my fault.\nEmma(F): That is the smoke alarm from last time. Ignore it. Now grease the tin and line it with baking paper.\nMark(M): Grease it with what? Wherever I look on this counter, I see gadgets, and not one of them is butter.\nEmma(F): Whichever drawer you open, the butter is in the fridge. Top shelf, behind the eggs.\nMark(M): Found it. Now what?\nEmma(F): Beat the eggs and sugar in the mixing bowl until the mixture looks pale.\nMark(M): However long I beat this, it stays yellow. Is that normal?\nEmma(F): Eggs are yellow, Mark. Keep going.\nMark(M): My arm is falling off.\nEmma(F): That is why the recipe says use an electric whisk. Whenever a recipe offers you a shortcut, take it.\nMark(M): Noted. What is this sieve for?\nEmma(F): You sift the flour in and fold it gently with the spatula. Gently. Fold, do not stir.\nMark(M): Fold, not stir. You bakers have rules for everything.\nEmma(F): We do. Otherwise the cake comes out flat and sad. Now pour the batter into the tin.\nMark(M): The batter? When did it become batter?\nEmma(F): The moment the flour went in. Language moves fast in the kitchen. Into the oven, thirty-five minutes.\nMark(M): And while it bakes?\nEmma(F): We mix lemon juice and sugar for the drizzle. Then you skewer the cake and pour it over while it is still warm.\nMark(M): A skewer? Like a tiny sword fight with a cake?\nEmma(F): You poke holes so the drizzle can soak in. However strange it sounds, it works.\nMark(M): And if it comes out flat and sad anyway?\nEmma(F): Then we buy one next year and never speak of this. Whatever happens, do not tell Kate.\nMark(M): My lips are sealed.\nEmma(F): Good. And Mark, however it turns out, the proof of the pudding is in the eating.\nMark(M): Meaning we will only know it worked when we taste it?\nEmma(F): Exactly. Baking is very honest that way."}]}], "subtitles": [{"speaker": "Emma", "text": "Welcome to Baking School, chapter one. Today we are making a lemon drizzle cake for Kate's birthday."}, {"speaker": "Mark", "text": "I have made toast before. Twice. Both times successfully."}, {"speaker": "Emma", "text": "Then you are ready. Step one, preheat the oven to one hundred and eighty."}, {"speaker": "Mark", "text": "Done. Whatever that machine is screaming about, it is not my fault."}, {"speaker": "Emma", "text": "That is the smoke alarm from last time. Ignore it. Now grease the tin and line it with baking paper."}, {"speaker": "Mark", "text": "Grease it with what? Wherever I look on this counter, I see gadgets, and not one of them is butter."}, {"speaker": "Emma", "text": "Whichever drawer you open, the butter is in the fridge. Top shelf, behind the eggs."}, {"speaker": "Mark", "text": "Found it. Now what?"}, {"speaker": "Emma", "text": "Beat the eggs and sugar in the mixing bowl until the mixture looks pale."}, {"speaker": "Mark", "text": "However long I beat this, it stays yellow. Is that normal?"}, {"speaker": "Emma", "text": "Eggs are yellow, Mark. Keep going."}, {"speaker": "Mark", "text": "My arm is falling off."}, {"speaker": "Emma", "text": "That is why the recipe says use an electric whisk. Whenever a recipe offers you a shortcut, take it."}, {"speaker": "Mark", "text": "Noted. What is this sieve for?"}, {"speaker": "Emma", "text": "You sift the flour in and fold it gently with the spatula. Gently. Fold, do not stir."}, {"speaker": "Mark", "text": "Fold, not stir. You bakers have rules for everything."}, {"speaker": "Emma", "text": "We do. Otherwise the cake comes out flat and sad. Now pour the batter into the tin."}, {"speaker": "Mark", "text": "The batter? When did it become batter?"}, {"speaker": "Emma", "text": "The moment the flour went in. Language moves fast in the kitchen. Into the oven, thirty-five minutes."}, {"speaker": "Mark", "text": "And while it bakes?"}, {"speaker": "Emma", "text": "We mix lemon juice and sugar for the drizzle. Then you skewer the cake and pour it over while it is still warm."}, {"speaker": "Mark", "text": "A skewer? Like a tiny sword fight with a cake?"}, {"speaker": "Emma", "text": "You poke holes so the drizzle can soak in. However strange it sounds, it works."}, {"speaker": "Mark", "text": "And if it comes out flat and sad anyway?"}, {"speaker": "Emma", "text": "Then we buy one next year and never speak of this. Whatever happens, do not tell Kate."}, {"speaker": "Mark", "text": "My lips are sealed."}, {"speaker": "Emma", "text": "Good. And Mark, however it turns out, the proof of the pudding is in the eating."}, {"speaker": "Mark", "text": "Meaning we will only know it worked when we taste it?"}, {"speaker": "Emma", "text": "Exactly. Baking is very honest that way."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
