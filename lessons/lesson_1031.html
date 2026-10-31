@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Holidays &amp; Celebrations: Halloween Party + Do you mind if I...? (mind questions)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Holidays &amp; Celebrations: Halloween Party + Do you mind if I...? (mind questions)</h1><div class="subtitle">2026-10-31</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">A skeleton in the cupboard</div><div class="translation">A skeleton in the cupboard (американский вариант — a skeleton in the closet) — «скелет в шкафу»: стыдная семейная тайна, которую давно прячут и очень не хотят выносить на свет. Дословный скелет висит у Эммы в коридоре как декорация к Хэллоуину — а идиома про декорации другого рода: про истории, которые семья хранит за закрытыми дверями, потому что рассказ о них испортил бы репутацию. Классический пример: у почтенного банкира в молодости была судимость — это его skeleton in the cupboard. Русские аналоги: «скелет в шкафу» (калька уже прижилась), «семейная тайна», «шито-белыми нитками», «не выносить сор из избы». Семья похожих выражений: to have something to hide — «иметь что скрывать»; dirty laundry — «грязное бельё» (don&#x27;t wash your dirty laundry in public — не выноси сор из избы); a guilty secret — «тайна с грузом вины». В сегодняшнем диалоге фраза работает в обе стороны сразу: скелет-декорация пугает Марка, а Эмма заключает — If it scares you, that simply means it is working — «если он тебя пугает, значит, он работает», и это формула хорошего Хэллоуина.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Holidays & Celebrations: Halloween Party + Do you mind if I...? (mind questions)", "subtitle": "2026-10-31", "date": "2026-10-31", "phrase_of_the_day": "A skeleton in the cupboard", "phrase_translation": "A skeleton in the cupboard (американский вариант — a skeleton in the closet) — «скелет в шкафу»: стыдная семейная тайна, которую давно прячут и очень не хотят выносить на свет. Дословный скелет висит у Эммы в коридоре как декорация к Хэллоуину — а идиома про декорации другого рода: про истории, которые семья хранит за закрытыми дверями, потому что рассказ о них испортил бы репутацию. Классический пример: у почтенного банкира в молодости была судимость — это его skeleton in the cupboard. Русские аналоги: «скелет в шкафу» (калька уже прижилась), «семейная тайна», «шито-белыми нитками», «не выносить сор из избы». Семья похожих выражений: to have something to hide — «иметь что скрывать»; dirty laundry — «грязное бельё» (don't wash your dirty laundry in public — не выноси сор из избы); a guilty secret — «тайна с грузом вины». В сегодняшнем диалоге фраза работает в обе стороны сразу: скелет-декорация пугает Марка, а Эмма заключает — If it scares you, that simply means it is working — «если он тебя пугает, значит, он работает», и это формула хорошего Хэллоуина.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1031.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Holidays & Celebrations: Halloween", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "What is a 'fancy dress party'?", "options": ["A party where everyone comes in costumes, as witches or ghosts", "A party where everyone wears evening suits and long formal dresses", "A party where the host serves expensive food and vintage champagne", "A party where the guests must learn formal dancing before arriving"], "correct": "A party where everyone comes in costumes, as witches or ghosts", "explanation": "Fancy dress party — «костюмированная вечеринка»: гости наряжаются в костюмы ведьм, скелетов, супергероев — именно про неё сегодняшний диалог. Ловушка ложного друга перевода: fancy dress — НЕ «нарядное платье»! В британском английском fancy dress = карнавальный костюм, fancy dress party = костюмированная вечеринка, а to dress up as a ghost = «нарядиться привидением». Если американец говорит fancy dress, он, скорее всего, имеет в виду элегантный вечерний наряд — в США костюмированная вечеринка называется costume party. Полезный ряд: a costume — костюм; to dress up — наряжаться; a wig — парик; a witch hat — шляпа ведьмы; a white sheet with two eye holes — классический костюм привидения, как у Марка. Разбор остальных: вечерние платья и смокинги — это black tie или a formal event; дорогое шампанское — про угощение, а не про дресс-код; уроки бальных танцев перед вечеринкой — чистая фантазия."}, {"id": "v2", "type": "choice", "sentence": "What is a 'jack-o'-lantern'?", "options": ["A pumpkin with a carved scary face and a candle inside it", "A lantern that people hang on the front door in December", "A large scented candle shaped like a ghost for garden walks", "A sweet pumpkin pie served warm on a cold October evening"], "correct": "A pumpkin with a carved scary face and a candle inside it", "explanation": "Jack-o'-lantern — «Светильник Джека»: тыква, у которой вырезана страшная рожица, а внутрь ставят свечу — главный символ Хэллоуина. Название идёт из ирландской легенды о скупом Джеке, обманувшем дьявола и обречённом бродить по свету с тлеющим угольком в вырезанной репе; эмигранты в Америке заменили репу на тыкву — она была дешевле и больше. Глагол дня: to carve — «вырезать» (carve a scary face); дальше по рецепту: to sketch the face first — «сначала набросать лицо карандашом» (совет Эммы), to scoop out the seeds — «вычистить ложкой семечки» (Марк сравнивает это с чисткой рыбы, окончившей университет), to put a candle inside — «поставить свечу внутрь». Бонус: очищенные семечки можно запечь — roasted pumpkin seeds, полезный перекус после резьбы. Разбор остальных: фонарь на двери в декабре — уже рождественская история; ароматическая свеча в форме привидения существует в магазинах, но jack-o'-lantern — именно тыква; тыквенный пирог — pumpkin pie, его едят, а не ставят на подоконник с горящей свечой."}, {"id": "v3", "type": "choice", "sentence": "What do children do when they go 'trick-or-treating'?", "options": ["They go from door to door in costumes asking for sweets", "They play tricks on their neighbours without asking them first", "They stay at home and give sweets out to other children", "They bake pumpkin pies and sell them in the street market"], "correct": "They go from door to door in costumes asking for sweets", "explanation": "Trick-or-treating — хэллоуинский обход соседей: дети в костюмах стучат в двери и говорят Trick or treat — «Угощение или шутка», и хозяева дают им сладости. Дословно это мягкая угроза: не дашь угощение (treat) — устрою шутку-пакость (trick), но в современной традиции всё дружелюбно, максимум мыльные нитки на кустах. Ряд из диалога: to hand out sweets — «раздавать сладости» (Марк хочет этим заниматься), to answer the door — «открывать дверь» стучащимся, sweets — британское «конфеты», американцы скажут candy. Заметьте социальный контракт: дети говорят thank you — Марк даже приготовил речь для тех, кто забывает, а Эмма отвечает You cannot lecture children — «ты не можешь читать детям нотации» (to lecture — «отчитывать, читать нотации»). Разбор остальных: шутки без спроса — это как раз нарушенный договор trick-or-treat; сидеть дома и раздавать — работа взрослых; печь и продавать пироги — благотворительная ярмарка, не Хэллоуин."}, {"id": "v4", "type": "choice", "sentence": "The house at the end of the street looks 'spooky' at night. What does this mean?", "options": ["It looks strange and slightly frightening in a mysterious way", "It looks extremely loud and terribly annoying to everyone nearby", "It looks beautiful and elegantly decorated for a special event", "It looks funny and completely harmless, even for small children"], "correct": "It looks strange and slightly frightening in a mysterious way", "explanation": "Spooky — «жутковатый, мистический»: не ужасающий, а именно странно-тревожный, как старый дом со скрипучими ступенями, туманом и воронами. Это слово атмосферы: a spooky house, a spooky story, spooky sounds in the dark. Различайте лестницу страха: scary — «пугающий» вообще (a scary film — страшный фильм); spooky — пугающий загадочностью и мистикой (a spooky forest — жуткий лес в тумане); terrified — «в ужасе», крайняя точка лестницы страха из урока 25 октября; а scared — «испуганный», это про ЧЕЛОВЕКА и его чувство (I am scared), не про предмет: дом не может быть scared. В диалоге Эмма обещает Марку a spooky sheet with eye holes — «жутковатая простыня с дырками для глаз», и это лучший комплимент хэллоуинскому костюму: не страшный, а именно мистический. Рядом haunted — «с привидениями» (a haunted house, a haunted castle curtain из диалога). Разбор остальных: громкий и раздражающий — annoying; красиво украшенный — beautifully decorated; смешной и безобидный — harmless, про spooky ровно наоборот."}]}, {"id": "s2", "title": "Grammar — Do you mind if I...? / Would you mind...?", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Your friend asks 'Do you mind if I turn the music up?' You are happy to agree. What do you say?", "options": ["No, not at all. Go ahead.", "Yes, I mind very much, thank you.", "No, I would prefer that you did.", "Yes, of course I do, always."], "correct": "No, not at all. Go ahead.", "explanation": "Вопрос с mind — это «Ты против?», поэтому согласие начинается с НЕТ: No, not at all. Go ahead — «Нет, нисколько. Включай». Механика: Do you mind? = Does it bother you? = «Это тебя беспокоит?», и честный ответ „не беспокоит“ отрицателен. Полный словарь дружелюбных ответов: No, not at all; No, of course not; Not at all, go ahead; No, that is fine by me — все начинаются с no, потому что отрицают возражение. Это зеркальная ловушка для русского «да, конечно»: английское Yes, I mind значит «возражаю!». Точная фраза звучит в диалоге: Эмма спрашивает Do you mind if I turn the music up? — и Марк отвечает No, not at all. Go ahead. Разбор остальных: Yes, I mind very much = «возражаю, и сильно» — это отказ, а не согласие; No, I would prefer that you did — склейка отрицания и чужой конструкции, по-английски бессмысленна; Yes, of course I do, always — «возражаю всегда» — тоже вежливый отказ на языке оригинала."}, {"id": "g2", "type": "choice", "sentence": "Complete: 'Would you mind if I ___ your witch hat for the party tonight?'", "options": ["borrowed", "borrow", "borrowing", "will borrow"], "correct": "borrowed", "explanation": "WOULD you mind if I BORROWED your witch hat — «Ты бы не возражал, если бы я одолжила твою ведьминскую шляпу на сегодняшнюю вечеринку?» После would mind if I стоит Past Simple — прошедшая форма как сигнал вежливости и отдалённости (тот же механизм, что в I wish I were и It is time you went из урока 22 сентября). Важно: смысл НАСТОЯЩИЙ — шляпа нужна сегодня вечером, форма прошедшая только смягчает просьбу. Пара, которую надо держать рядом: Would you mind if I borrowed (вежливее, отдалённее) и Do you mind if I borrow (прямее, Present Simple, между близкими) — обе просят разрешение для СЕБЯ. Разговорная речь иногда допускает would you mind if I borrow, но на экзамене и в аккуратном английском — Past Simple. Разбор остальных: borrow — форма для do you mind if I; borrowing — герундий, но после if I герундий невозможен, там нужно сказуемое; will borrow — will в таком придаточном не живёт, как и в if-частях условных предложений."}, {"id": "g3", "type": "choice", "sentence": "Complete: 'Would you mind ___ me with the cobwebs in the hallway?'", "options": ["helping", "to help", "if I help", "help"], "correct": "helping", "explanation": "WOULD you mind HELPING me with the cobwebs — «Не поможете ли вы мне с паутиной в коридоре?» После mind ВСЕГДА герундий V-ing: Would you mind helping, Do you mind opening, He won't mind waiting — mind = «возражать против», а против стоит предмет или действие-существительное, отсюда герундий. Заметьте: здесь НЕТ if I — просьба адресована ДРУГОМУ человеку, вы просите ЕГО помочь, и строение другое, чем у would you mind if I borrowed (разрешение для себя). Отрицательная просьба: Would you mind NOT smoking in here? — «Не могли бы вы здесь не курить?» — not стоит прямо перед герундием, как в asked somebody not to do из Reported Commands. Фраза из диалога: Would you mind handing me the candles? — «Не могли бы вы передать мне свечи?» — тот же герундий handing. Разбор остальных: to help — инфинитив после mind невозможен, mind не из семьи decide или want; if I help — обломки другой конструкции, к тому же после would там нужен Past Simple; help — голый глагол после mind не ставится, нужна либо герундиевая форма, либо разворот с if."}, {"id": "g4", "type": "choice", "sentence": "A neighbour asks 'Would you mind moving your car?' You actually need that exact parking space tonight. What is the best reply?", "options": ["I am afraid I need that space tonight. Could I move it in the morning?", "Yes, sure, no problem at all, I will move it somewhere else right now.", "No, I will never move my car, and please stop asking me about it.", "I have no idea where my car is, maybe you should call somebody else."], "correct": "I am afraid I need that space tonight. Could I move it in the morning?", "explanation": "Отказ на mind-вопрос должен быть мягким и объяснённым: I am afraid I need that space tonight — «Боюсь, место нужно мне сегодня» — плюс встречное предложение Could I move it in the morning? — «Могу я передвинуть её утром?» Формула отказа: I am afraid + причина + альтернатива. Отвечать на Would you mind... резко — почти грубость: сам вопрос уже извинился за беспокойство. Рабочие заготовки: I would rather you didn't, if you don't mind — «Я бы предпочёл, чтобы вы не делали этого» (would rather + Past из урока 6 октября); I am sorry, but I am using it right now — «Извините, но он мне сейчас нужен»; Could you give me ten minutes? — «Дайте мне десять минут» — и это уже почти согласие. Заметьте герундий у соседа: Would you mind MOVING your car — движение просят сделать ВАС. Разбор остальных: «конечно, без проблем, сейчас перееду» — согласие, а место нужно вам; «никогда не перееду, отстаньте» — вражда до конца дней; «понятия не имею, где моя машина» — абсурд: машина стоит именно там."}]}, {"id": "s3", "title": "Practical English — Party Invitations & Requests", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You want to invite a friend to your Halloween party on Saturday. What is the best way to say it?", "options": ["We are having a fancy dress party on Saturday. Would you like to come?", "You should come to our party on Saturday, and you must wear a costume.", "Our party is on Saturday, but costumes are strictly for children only.", "I am going to a party on Saturday, and everyone says it will be huge."], "correct": "We are having a fancy dress party on Saturday. Would you like to come?", "explanation": "Лучшее приглашение. We are having a fancy dress party on Saturday. Would you like to come? — «В субботу у нас костюмированная вечеринка. Хочешь прийти?» Три детали: Present Continuous для запланированного события (we are having — вечеринка уже готовится, из урока 14 октября); fancy dress сразу задаёт дресс-код; Would you like to come? — открытое приглашение без давления. Естественные продолжения: You could dress up as anything you like — «Можешь нарядиться кем угодно»; It starts at seven — «Начало в семь»; Bring a friend if you like — «Можешь взять с собой друга». Отвечают на приглашение по-разному: We would love to come — «С удовольствием придём» (из свадебного урока 23 октября); I will be there — «Буду»; Sadly, I can't make it — «Увы, не смогу». Разбор остальных: «должен прийти и обязан надеть костюм» — приказ вместо приглашения, should и must давят; «костюмы строго для детей» — и странная информация, и гостей не зовут; «я иду на вечеринку, все говорят, она грандиозная» — вы делитесь новостями, но никого не приглашаете."}, {"id": "p2", "type": "choice", "sentence": "You want to borrow your friend's witch hat for tonight. What is the most natural request?", "options": ["Would you mind if I borrowed your witch hat for tonight?", "I am taking your witch hat tonight, so please hide it from me.", "Could you possibly buy me a witch hat before the party tonight?", "Do you know where a person can steal a decent witch hat tonight?"], "correct": "Would you mind if I borrowed your witch hat for tonight?", "explanation": "Правильная форма. Would you mind if I borrowed your witch hat for tonight? — «Ты не будешь против, если я одолжу твою шляпу ведьмы на сегодня?» Это сегодняшняя грамматика в действии: would mind if I + Past Simple = деликатная просьба о разрешении, ровно между Can I borrow (нейтрально) и I was wondering if I could borrow (церемонно, из урока 16 октября). Словарь вокруг: to borrow — «одолжить себе» (vs to lend — «дать взаймы», пара из урока 27 сентября); for tonight — «на сегодняшний вечер». И обязательно дождитесь ответа: No, not at all — «конечно, бери», ведь отрицание после mind означает отсутствие возражений. Разбор остальных: «я беру твою шляпу, спрячь её от меня» — абсурдный ультиматум; «не мог бы ты КУПИТЬ мне шляпу» — просьба о подарке, а шляпа у друга уже есть; «где можно УКРАСТЬ приличную шляпу» — юмор, но на просьбу это не похоже."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: 'Do you mind ___ the door for the trick-or-treaters?'", "options": ["opening", "to open", "if I open", "open"], "correct": "opening", "explanation": "DO you mind OPENING the door for the trick-or-treaters — «Не откроешь ли ты дверь для хэллоуинских гостей?» Здесь склеиваются два механизма, которые важно развести. Механизм один: mind + V-ing — просьба к ДРУГОМУ (открывать будете ВЫ, вас и просят): Do you mind opening? / Would you mind opening? Механизм два: mind if I + Present Simple (после do) или Past Simple (после would) — просьба о разрешении для СЕБЯ: Do you mind if I open the door? — «Я открою, ты не против?» В нашем пропуске if I нет, значит, работает герундий: mind + opening. Минимальная пара для повторения вслух: Would you mind opening the window? — просьба к вам открыть; Would you mind if I opened the window? — вы просите разрешение открыть сами. Разбор остальных: to open — после mind инфинитив не живёт никогда; if I open — обломки другой конструкции, которых в предложении нет; open — голый глагол после mind невозможен, он уместен только после make, let и help в Complex Object."}, {"id": "c2", "type": "choice", "sentence": "What does the idiom 'a skeleton in the cupboard' mean?", "options": ["An embarrassing family secret that nobody wants to reveal", "A Halloween decoration that people store until late October", "Old clothes and rubbish that fills every wardrobe at home", "A medical problem that runs in a family for many generations"], "correct": "An embarrassing family secret that nobody wants to reveal", "explanation": "A skeleton in the cupboard — «скелет в шкафу»: позорная или неудобная семейная тайна, которую прячут от чужих глаз. Идиома родом из романов девятнадцатого века: если в шкафу буквально лежит скелет, о хозяине дома есть что скрывать — и переносный смысл закрепился навсегда. Пример: Everyone has a skeleton in the cupboard — my aunt was a pirate, and we never discuss it — «У каждого есть тайна: моя тётя была пиратом, и мы это не обсуждаем». Американцы говорят a skeleton in the closet, но смысл тот же. В диалоге Эмма обыгрывает идиому буквально: Have you seen the skeleton in the cupboard? — и Марк умоляет: Please tell me that is a decoration — «Скажи, что это декорация». Ответ Эммы — It is hanging in the hallway. If it scares you, that simply means it is working — «Он висит в коридоре. Если он тебя пугает — значит, работает». Разбор остальных: декорация до конца октября — буквальный смысл фразы, но идиома не о Хэллоуине; хлам в шкафу — это беспорядок, а не тайна; наследственная болезнь — просто факт, а не устойчивое выражение."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. Why does Mark want to answer the door instead of joining the party?", "options": ["He has prepared a speech for children who forget to say thank you", "He is afraid of the party music and wants to stay somewhere quiet", "He has already promised to hand out sweets at another house", "He does not have a costume and is embarrassed to come without one"], "correct": "He has prepared a speech for children who forget to say thank you", "explanation": "Разгадка в двух репликах. Эмма уточняет: You want to hand out sweets to trick-or-treaters? — «Ты хочешь раздавать сладости детям, которые ходят по домам?» — и Марк признаётся: I have prepared a speech for the ones who do not say thank you — «Я подготовил речь для тех, кто не говорит спасибо». Движущая сила Марка — педагогический порыв: он хочет встречать у двери (to answer the door), раздавать сладости (to hand out sweets) и заодно отчитывать невоспитанных детей. Эмма осаживает: You cannot lecture children, Mark. It is Halloween, not a school assembly — «Ты не можешь читать детям нотации. Это Хэллоуин, а не школьная линейка» (assembly — «общешкольная линейка», слово из школьного урока 18 сентября; to lecture — «читать нотации»). Разбор остальных: музыку они обсуждали раньше — Марк просил лишь без оргáна, страха перед ней нет; другой дом в диалоге не упоминался; а костюм у него ЕСТЬ, пусть и сомнительный — о нём второй вопрос.", "audio_text": "Emma(F): Mark, tonight is Halloween, and you are on pumpkin duty. Here is the knife.\nMark(M): Pumpkin duty. Is that an official job title now?\nEmma(F): It is. You carve a scary face, and I will do the cobwebs by the window.\nMark(M): Cobwebs? We have real ones in the corner. Can we just point at those?\nEmma(F): Those are load-bearing cobwebs, Mark. We do not touch them. Sketch the face first.\nMark(M): Done. Two triangle eyes, a nose, and a smile with two teeth missing.\nEmma(F): Why are the teeth missing?\nMark(M): Authenticity. Every skeleton I have ever met had dental problems.\nEmma(F): I will pretend I did not hear that. Do you mind if I turn the music up?\nMark(M): No, not at all. Go ahead. Just nothing with organ music. That is how horror films start.\nEmma(F): Agreed. Now scoop out the seeds. All of them.\nMark(M): It is like cleaning a fish that went to university.\nEmma(F): That is a pumpkin, not a philosopher. Keep scooping. Would you mind handing me the candles?\nMark(M): Here you are. And what are they for?\nEmma(F): A jack-o'-lantern without a candle is just an angry vegetable.\nMark(M): Fair point. By the way, do you mind if I skip the party and answer the door instead?\nEmma(F): You want to hand out sweets to trick-or-treaters?\nMark(M): I have prepared a speech for the ones who do not say thank you.\nEmma(F): You cannot lecture children, Mark. It is Halloween, not a school assembly.\nMark(M): Fine. But I am wearing a costume. What did you get me?\nEmma(F): A ghost. One white sheet with two eye holes. Very traditional.\nMark(M): A sheet. After all my pumpkin work, I am a sheet with eye holes.\nEmma(F): A spooky sheet with eye holes. And if a child asks, you are a haunted castle curtain.\nMark(M): You know what, that is actually better than a superhero costume.\nEmma(F): I know. Have you seen the skeleton in the cupboard, by the way?\nMark(M): Please tell me that is a decoration.\nEmma(F): It is hanging in the hallway. If it scares you, that simply means it is working.\nMark(M): Then our Halloween is ready. Bring on the children and their manners."}, {"id": "l2", "type": "listen", "sentence": "What costume has Emma prepared for Mark?", "options": ["A white sheet with two eye holes, sold as a traditional ghost", "A skeleton suit hanging in the hallway next to the cobwebs", "A haunted castle curtain from an old horror film decoration", "A superhero outfit that Emma bought after the pumpkin carving"], "correct": "A white sheet with two eye holes, sold as a traditional ghost", "explanation": "Эмма объявляет приговор: A ghost. One white sheet with two eye holes. Very traditional — «Привидение. Одна белая простыня с двумя дырками для глаз. Очень традиционно». Это классика домашнего Хэллоуина: простыня, прорези для глаз, готово. Марк оскорблён масштабом («После всей моей работы с тыквой я — простыня с дырками»), но Эмма повышает его звание: A spooky sheet with eye holes. And if a child asks, you are a haunted castle curtain — «Жутковатая простыня с дырками. А если ребёнок спросит, ты — занавес из замка с привидениями». Haunted — «населённый призраками, с привидениями» (a haunted house — дом с привидениями). И под занавес Марк соглашается, что занавес даже лучше супергероя. Разбор остальных: скелет в доме ЕСТЬ, но он декорация в коридоре, а не костюм; занавес из замка — легенда прикрытия для детей, а не настоящая одежда; супергеройский костюм — то, с чем Марк сравнивает свою простыню, значит, его никто не покупал.", "audio_text": "Emma(F): Mark, tonight is Halloween, and you are on pumpkin duty. Here is the knife.\nMark(M): Pumpkin duty. Is that an official job title now?\nEmma(F): It is. You carve a scary face, and I will do the cobwebs by the window.\nMark(M): Cobwebs? We have real ones in the corner. Can we just point at those?\nEmma(F): Those are load-bearing cobwebs, Mark. We do not touch them. Sketch the face first.\nMark(M): Done. Two triangle eyes, a nose, and a smile with two teeth missing.\nEmma(F): Why are the teeth missing?\nMark(M): Authenticity. Every skeleton I have ever met had dental problems.\nEmma(F): I will pretend I did not hear that. Do you mind if I turn the music up?\nMark(M): No, not at all. Go ahead. Just nothing with organ music. That is how horror films start.\nEmma(F): Agreed. Now scoop out the seeds. All of them.\nMark(M): It is like cleaning a fish that went to university.\nEmma(F): That is a pumpkin, not a philosopher. Keep scooping. Would you mind handing me the candles?\nMark(M): Here you are. And what are they for?\nEmma(F): A jack-o'-lantern without a candle is just an angry vegetable.\nMark(M): Fair point. By the way, do you mind if I skip the party and answer the door instead?\nEmma(F): You want to hand out sweets to trick-or-treaters?\nMark(M): I have prepared a speech for the ones who do not say thank you.\nEmma(F): You cannot lecture children, Mark. It is Halloween, not a school assembly.\nMark(M): Fine. But I am wearing a costume. What did you get me?\nEmma(F): A ghost. One white sheet with two eye holes. Very traditional.\nMark(M): A sheet. After all my pumpkin work, I am a sheet with eye holes.\nEmma(F): A spooky sheet with eye holes. And if a child asks, you are a haunted castle curtain.\nMark(M): You know what, that is actually better than a superhero costume.\nEmma(F): I know. Have you seen the skeleton in the cupboard, by the way?\nMark(M): Please tell me that is a decoration.\nEmma(F): It is hanging in the hallway. If it scares you, that simply means it is working.\nMark(M): Then our Halloween is ready. Bring on the children and their manners."}]}], "subtitles": [{"speaker": "Emma", "text": "Mark, tonight is Halloween, and you are on pumpkin duty. Here is the knife."}, {"speaker": "Mark", "text": "Pumpkin duty. Is that an official job title now?"}, {"speaker": "Emma", "text": "It is. You carve a scary face, and I will do the cobwebs by the window."}, {"speaker": "Mark", "text": "Cobwebs? We have real ones in the corner. Can we just point at those?"}, {"speaker": "Emma", "text": "Those are load-bearing cobwebs, Mark. We do not touch them. Sketch the face first."}, {"speaker": "Mark", "text": "Done. Two triangle eyes, a nose, and a smile with two teeth missing."}, {"speaker": "Emma", "text": "Why are the teeth missing?"}, {"speaker": "Mark", "text": "Authenticity. Every skeleton I have ever met had dental problems."}, {"speaker": "Emma", "text": "I will pretend I did not hear that. Do you mind if I turn the music up?"}, {"speaker": "Mark", "text": "No, not at all. Go ahead. Just nothing with organ music. That is how horror films start."}, {"speaker": "Emma", "text": "Agreed. Now scoop out the seeds. All of them."}, {"speaker": "Mark", "text": "It is like cleaning a fish that went to university."}, {"speaker": "Emma", "text": "That is a pumpkin, not a philosopher. Keep scooping. Would you mind handing me the candles?"}, {"speaker": "Mark", "text": "Here you are. And what are they for?"}, {"speaker": "Emma", "text": "A jack-o'-lantern without a candle is just an angry vegetable."}, {"speaker": "Mark", "text": "Fair point. By the way, do you mind if I skip the party and answer the door instead?"}, {"speaker": "Emma", "text": "You want to hand out sweets to trick-or-treaters?"}, {"speaker": "Mark", "text": "I have prepared a speech for the ones who do not say thank you."}, {"speaker": "Emma", "text": "You cannot lecture children, Mark. It is Halloween, not a school assembly."}, {"speaker": "Mark", "text": "Fine. But I am wearing a costume. What did you get me?"}, {"speaker": "Emma", "text": "A ghost. One white sheet with two eye holes. Very traditional."}, {"speaker": "Mark", "text": "A sheet. After all my pumpkin work, I am a sheet with eye holes."}, {"speaker": "Emma", "text": "A spooky sheet with eye holes. And if a child asks, you are a haunted castle curtain."}, {"speaker": "Mark", "text": "You know what, that is actually better than a superhero costume."}, {"speaker": "Emma", "text": "I know. Have you seen the skeleton in the cupboard, by the way?"}, {"speaker": "Mark", "text": "Please tell me that is a decoration."}, {"speaker": "Emma", "text": "It is hanging in the hallway. If it scares you, that simply means it is working."}, {"speaker": "Mark", "text": "Then our Halloween is ready. Bring on the children and their manners."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
