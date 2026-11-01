@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Law &amp; Crime: In Court + Relative Clauses with Prepositions (to whom / for which)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Law &amp; Crime: In Court + Relative Clauses with Prepositions (to whom / for which)</h1><div class="subtitle">2026-11-01</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">To throw the book at someone</div><div class="translation">To throw the book at someone — дословно «швырнуть в кого-то книгу»: в переносном смысле — «вложить всю строгость закона», наказать по полной программе, вписать все возможные обвинения и максимальное наказание. Представьте судью, который вместо одного наказания хватает весь свод законов (the book = the rulebook) и обрушивает его на подсудимого целиком. Пример из сегодняшнего диалога: The judge did not throw the book at him. He got community service and probation — «Судья не стал карать его по максимуму: он получил общественные работы и испытательный срок». Русские аналоги: «врезать по полной», «приговорить по всей строгости закона», «не оставить живого места». Противоположная по духу фраза — to let somebody off with a warning / with a fine — «отпустить с предупреждением / со штрафом». Семья похожих выражений: to face the full force of the law — «испытать на себе всю мощь закона»; to come down hard on somebody — «жёстко обойтись с кем-то»; to get off lightly — «легко отделаться» — как тот юноша с сорока шоколадными плитками.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Law & Crime: In Court + Relative Clauses with Prepositions (to whom / for which)", "subtitle": "2026-11-01", "date": "2026-11-01", "phrase_of_the_day": "To throw the book at someone", "phrase_translation": "To throw the book at someone — дословно «швырнуть в кого-то книгу»: в переносном смысле — «вложить всю строгость закона», наказать по полной программе, вписать все возможные обвинения и максимальное наказание. Представьте судью, который вместо одного наказания хватает весь свод законов (the book = the rulebook) и обрушивает его на подсудимого целиком. Пример из сегодняшнего диалога: The judge did not throw the book at him. He got community service and probation — «Судья не стал карать его по максимуму: он получил общественные работы и испытательный срок». Русские аналоги: «врезать по полной», «приговорить по всей строгости закона», «не оставить живого места». Противоположная по духу фраза — to let somebody off with a warning / with a fine — «отпустить с предупреждением / со штрафом». Семья похожих выражений: to face the full force of the law — «испытать на себе всю мощь закона»; to come down hard on somebody — «жёстко обойтись с кем-то»; to get off lightly — «легко отделаться» — как тот юноша с сорока шоколадными плитками.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1101.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Law & Crime: In Court", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "What is 'bail'?", "options": ["Money that an accused person leaves with the court to stay out of prison before the trial", "Money that the winner of a lawsuit receives from the losing side after the trial", "Money that a lawyer charges a client for every hour spent inside the courtroom", "A document that gives a witness the right to refuse to answer questions in court"], "correct": "Money that an accused person leaves with the court to stay out of prison before the trial", "explanation": "Bail — «залог»: деньги или гарантия, которые обвиняемый оставляет суду, чтобы дождаться процесса на свободе, а не в камере. Полный набор: to pay bail — «внести залог»; to be released on bail — «освобождён под залог»; a bail hearing — «заседание о залоге»; to jump bail — «сбежать, не явившись в суд» (тогда залог сгорает — to forfeit the bail). Если человек является на все заседания, деньги возвращают. В диалоге Эмма объясняет историю про человека с лодкой: That is bail. He paid money to stay out of prison until the trial starts — «Это залог. Он заплатил, чтобы не сидеть в тюрьме до начала процесса». Не путать с deposit из жилищного урока 3 сентября: жилищный депозит — залог арендодателю, bail — залог суду. Разбор остальных: деньги проигравшей стороны победителю — это damages, компенсация по иску (a lawsuit); почасовая оплата юриста — a fee; документ, дающий право не отвечать, — правовая экзотика, к bail отношения не имеет."}, {"id": "v2", "type": "choice", "sentence": "A judge sentences a young offender to 'community service'. What does this mean?", "options": ["He must do unpaid work for the town instead of going to prison", "He must attend paid training sessions to become a local lawyer", "He must visit the police station every week and report his travels", "He must clean the prison cells to earn money for his own family"], "correct": "He must do unpaid work for the town instead of going to prison", "explanation": "Community service — «общественные работы»: наказание без тюрьмы, когда осуждённый бесплатно работает на благо города — чистит парки, красит заборы, убирает улицы. В диалоге: He got community service and probation — и Эмма добавляет Two hundred hours of it — «двести часов» такой работы. Ряд наказаний от строгого к мягкому: a prison sentence — тюремный срок; a suspended sentence — условный срок с отсрочкой; probation — «испытательный срок, надзор» (осуждённый живёт дома, но регулярно отмечается у probation officer — «инспектора пробации»); community service — общественные работы; a fine — штраф. Слово offender — «правонарушитель, осуждённый» (от to offend — «нарушать закон», ср. an offence — «правонарушение»). Разбор остальных: платные курсы будущих юристов — не наказание, а мечта; еженедельные отметки в полиции — скорее часть probation; уборка камер за деньги — фантазия: работы бесплатные и вне тюрьмы."}, {"id": "v3", "type": "choice", "sentence": "What does 'to appeal' mean in a legal context?", "options": ["To ask a higher court to change the decision made by a lower court", "To ask a famous lawyer to prepare new evidence for a second trial", "To ask a witness to repeat the testimony more slowly for the jury", "To ask a judge for permission to leave the courtroom for a break"], "correct": "To ask a higher court to change the decision made by a lower court", "explanation": "To appeal — «подавать апелляцию, обжаловать приговор»: просить вышестоящий суд пересмотреть решение нижестоящего. Существительное звучит так же — an appeal: to lodge an appeal — «подать апелляцию», to win an appeal — «выиграть обжалование», to lose an appeal — «проиграть его». В диалоге: His lawyers can appeal, and a higher court looks at the whole case again — «Его юристы могут подать апелляцию, и вышестоящий суд заново рассмотрит дело». Произношение: /əˈpiːl/, ударение на второй слог. Логика лестницы судов: a magistrates' court / a crown court — суды первой инстанции; the Court of Appeal — апелляционный суд. Обратите внимание: appeal бывает и не к суду — the film appeals to a young audience — «фильм привлекает молодую аудиторию», но в правовом контексте это всегда обжалование. Разбор остальных: новый юрист и новые доказательства — подготовка к повторному процессу, а не сам акт обжалования; попросить свидетеля говорить медленнее может любой участник прямо в ходе слушания; перерыв в заседании — a recess, к апелляции не относится."}, {"id": "v4", "type": "choice", "sentence": "What does it mean 'to testify' in court?", "options": ["To speak in court and say what you know about the case, under oath", "To write a formal letter to the judge asking for a milder sentence", "To decide together with the jury whether the accused person is guilty", "To translate everything that a foreign witness says during a trial"], "correct": "To speak in court and say what you know about the case, under oath", "explanation": "To testify — «давать показания, свидетельствовать в суде»: рассказать под присягой то, что ты знаешь о деле. Существительное — testimony — «показания» (по смыслу множественное, как evidence). Ряд из зала суда: under oath — «под присягой»; the witness stand — «место свидетеля в зале»; to cross-examine — «подвергнуть перекрёстному допросу» (вопросами стороне противника занимается оппонирующий адвокат); perjury — «лжесвидетельство» — отдельное преступление, если под присягой соврать. В диалоге Эмма описывает работу присяжного: You listen to the evidence and to the witnesses who testify — «Вы слушаете доказательства и свидетелей, которые дают показания». Произношение глагола: /ˈtestɪfaɪ/. Не путать с to verify — «проверять»: свидетель не проверяет, а рассказывает. Разбор остальных: письмо судье о смягчении — a plea for leniency, его пишут адвокаты; решать вину — работа the jury, а не свидетеля; переводчик в суде — an interpreter, полезная, но другая профессия."}]}, {"id": "s2", "title": "Grammar — Relative Clauses with Prepositions (to whom / for which)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete the formal sentence: 'The lawyer ___ I spoke was very reassuring.'", "options": ["to whom", "to who", "whom to", "who to"], "correct": "to whom", "explanation": "The lawyer TO WHOM I spoke was very reassuring — «Адвокат, с которым я разговаривал, очень меня успокоил». Это формальный, письменный строй английского: предлог ставится ПЕРЕД относительным местоимением, и после предлога могут стоять только whom (о людях) и which (о предметах). Запомните жёсткое правило: после предлога who и that НЕЖИЗНЕСПОСОБНЫ — on who, to that в формальном строе невозможны. В разговорной речи ту же мысль говорят иначе, предлогом в хвосте: The lawyer I spoke TO was very reassuring — и здесь местоимение можно даже выбросить, потому что оно объектное (об опущении — урок 19 октября про относительные предложения). Сравните регистры одной фразой: formal — the client to whom the letter was sent; neutral — the client who the letter was sent to; casual — the client the letter was sent to. В судебном контексте формальный строй уместен как нигде: The witness to whom the question was addressed refused to answer. Разбор остальных: to who — двойная ошибка, who не живёт после предлога; whom to и who to — предлог не может стоять после местоимения в этом строе (разворот a person to talk to — это другая конструкция, инфинитив цели)."}, {"id": "g2", "type": "choice", "sentence": "Complete the formal sentence: 'The firm ___ she works handles criminal cases.'", "options": ["for which", "which for", "that for", "for that"], "correct": "for which", "explanation": "The firm FOR WHICH she works handles criminal cases — «Фирма, в которой она работает, ведёт уголовные дела». Схема та же, что в первом вопросе, только о предмете: предлог + which — ведь говорят work FOR a firm, hence for which. Формальный письменный английский любит этот строй в отчётах, контрактах и судебных документах: the company for which he was driving; the account into which the money was paid; the trial during which new evidence appeared. Разговорный вариант — предлог в хвост: The firm she works FOR handles criminal cases — без which, с опущенным объектным местоимением. Полезный тест на предлог: задайте вопрос «работать НА кого/что?» — work for somebody — значит, предлог for. Частые пары: work for → for which; live in → in which; depend on → on which; arrive at → at which. Разбор остальных: which for — предлог не может болтаться после местоимения; that for и for that — that вообще не выживает после предлога, это главное табу сегодняшней темы."}, {"id": "g3", "type": "choice", "sentence": "Complete: 'The police interviewed five neighbours, ___ had seen anything useful.'", "options": ["none of whom", "none of them", "none of who", "whom of none"], "correct": "none of whom", "explanation": "The police interviewed five neighbours, NONE OF WHOM had seen anything useful — «Полиция опросила пятерых соседей, и ни один из них ничего полезного не видел». Это non-defining clause с запятой (обязательна!) плюс квантификор + of whom: none of whom — «ни один из которых», some of whom — «некоторые из которых», both of whom — «оба из которых», all of whom — «все из которых», several of whom — «несколько из которых». О предметах то же самое с of which: He gave three reasons, none of which convinced the jury — «Он назвал три причины, и ни одна не убедила присяжных». Согласование: five neighbours, none of whom WAS — формально единственное число (none of + единственное, как neither of us IS из урока 24 октября). Ловушка, на которой спотыкаются: после запятой нельзя поставить просто none of them — понадобился бы союз: five neighbours, and none of them had seen — без and это ошибка comma splice, две сросшиеся половинки. Разбор остальных: none of them — не хватает связки, придаточное не построено; none of who — who после предлога of невозможен, только whom; whom of none — слова из правильного набора в невозможном порядке."}, {"id": "g4", "type": "choice", "sentence": "Which sentence is correct formal English?", "options": ["The evidence on which the verdict was based was rather weak", "The evidence on that the verdict was based was rather weak", "The evidence on who the verdict was based was rather weak", "The evidence which on the verdict was based was rather weak"], "correct": "The evidence on which the verdict was based was rather weak", "explanation": "Правильный вариант: The evidence ON WHICH the verdict was based was rather weak — «Доказательства, на которых основывался вердикт, были довольно слабыми». Механика: to base a verdict on evidence — «основать вердикт на доказательствах», предлог on; в пассиве (a verdict is based on evidence) предлог никуда не девается — пассив с предлогами мы проходили 10 сентября (was looked after, will be dealt with). Дальше работает сегодняшнее правило: предлог + which о предметах, предлог + whom о людях. Обратите внимание на два was: первый — сказуемое главного предложения (the evidence WAS weak), второй — внутри придаточного (the verdict WAS based). Образец той же конструкции из судебной практики: The witness on whose testimony the case was built later changed her story — «Свидетель, чьи показания лежали в основе дела, позже изменила версию» (on whose — «чей» после предлога, whose из урока 19 октября). Разбор остальных: on that — that мёртв после предлога, главное табу; on who — после предлога о людях только whom, а здесь и вовсе предмет (evidence); which on — предлог обязан стоять ПЕРЕД местоимением, а не после."}]}, {"id": "s3", "title": "Practical English — At the Police Station & After the Verdict", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are at the police station to report a stolen bicycle. What is the best way to begin?", "options": ["Good morning. I would like to report a theft. My bicycle was stolen yesterday evening.", "Someone stole my bicycle, and you people never do anything about it, as usual.", "I am not leaving this desk until you find my bicycle and arrest the thief today.", "My bicycle is missing, but maybe it just walked away, so I am not sure yet."], "correct": "Good morning. I would like to report a theft. My bicycle was stolen yesterday evening.", "explanation": "Правильное начало: Good morning. I would like to report a theft. My bicycle was stolen yesterday evening — «Добрый день. Я хотел бы заявить о краже. Мой велосипед украли вчера вечером». Формула I would like to report + преступление — стандартное открытие разговора (to report a theft — «заявить о краже»; burglary — «кража со взломом», robbery — «грабёж», shoplifting — «кража в магазине» — лестница из урока 15 сентября). Заметьте пассив: was stolen — «украден», потому что вор неизвестен (пассив — урок 10 сентября). Что спросит офицер дальше: When and where did it happen? — «Когда и где это произошло?»; Can you describe the bicycle? — «Опишите велосипед»; Do you have the frame number or a photo? — «Есть номер рамы или фото?». В конце вам выдадут a reference number — «номер заявления» (пригодится страховой) и попросят дать a statement — «письменное показание». Разбор остальных: «вы никогда ничего не делаете» — обвинение персонала не ускорит приём заявления; «не уйду от стойки, пока не найдёте» — ультиматум; «может, он ушёл сам» — юмор, но заявление так не подают."}, {"id": "p2", "type": "choice", "sentence": "Your close friend has just been found not guilty after a long and difficult trial. What do you say?", "options": ["Thank goodness! I always believed you were innocent. How are you feeling?", "Well, the jury probably made a mistake, but congratulations on the luck.", "You should still apologise to the court, just to be polite to the judge.", "Let us never talk about this case again, and please change the subject."], "correct": "Thank goodness! I always believed you were innocent. How are you feeling?", "explanation": "Лучший ответ: Thank goodness! I always believed you were innocent. How are you feeling? — «Слава богу! Я всегда верил, что ты невиновен. Как ты себя чувствуешь?» Три части поддержки: эмоция (Thank goodness! — «слава богу», облегчение), вера в друга (innocent — «невиновный», пара к guilty из урока 2 сентября: not guilty — «невиновен») и внимание к человеку, а не только к вердикту (How are you feeling?). Полезный ряд: to be acquitted — «быть оправданным» (формально); The jury reached a verdict of not guilty — «присяжные вынесли оправдательный вердикт»; What a relief! — «Какое облегчение!»; This ordeal is finally over — «Это испытание наконец закончилось» (an ordeal — «тяжёлое испытание»). Друзья часто добавляют: Now you can get your life back — «Теперь можешь вернуть свою жизнь». Разбор остальных: «присяжные наверняка ошиблись» — сомнение в друге под видом комплимента; «извини́сь перед судом для вежливости» — оправданному не за что извиняться; «никогда не будем об этом говорить» — другу нужна поддержка, а не запрет темы."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: 'The lawyer gave three reasons, ___ convinced the jury.'", "options": ["none of which", "none of them", "neither of which", "which of none"], "correct": "none of which", "explanation": "The lawyer gave three reasons, NONE OF WHICH convinced the jury — «Адвокат назвал три причины, и ни одна не убедила присяжных». Это сегодняшняя конструкция в чистом виде: запятая + квантификор + of + which (о предметах) или of whom (о людях). Тонкая ловушка с neither: neither of which — «ни одна ИЗ ДВУХ», оно работает только с парами: two reasons, neither of which convinced. Здесь причин три — значит, none. Вторая ловушка — none of them: без союза and это comma splice, две сросшиеся грамматические половинки (а вот three reasons, and none of them convinced — можно). Проверьте согласование: none of which convinced — единственное число в строгом английском (none of the reasons WAS convincing), как и none of whom was. Для сравнения с другими квантификорами: three reasons, all of which were absurd — «три причины, все абсурдны»; five witnesses, two of whom changed their stories — «пять свидетелей, двое изменили показания». Разбор остальных: none of them — не хватает связки; neither of which — только для двух; which of none — слова правильные, порядок невозможный."}, {"id": "c2", "type": "choice", "sentence": "Complete the formal sentence: 'The lawyer to ___ the accused confessed refused to take the case.'", "options": ["whom", "who", "which", "that"], "correct": "whom", "explanation": "The lawyer TO WHOM the accused confessed refused to take the case — «Адвокат, которому обвиняемый признался, отказался вести дело». Звёздная ловушка темы в одном вопросе. Предлог to уже стоит перед пропуском (to confess TO somebody — «признаться кому-то»), а после предлога живут только два местоимения: whom — о людях и which — о предметах. Кто здесь? Адвокат — человек, значит, whom. Кто выжить не может: who (после предлога — никогда), that (после предлога — никогда) и which (о человеке нельзя). Разговорная версия той же фразы — предлог в хвост, местоимение можно выбросить: The lawyer the accused confessed TO refused to take the case. Обратите внимание на смысл: обвиняемый признался одному адвокату, а тот отказался от дела (to refuse to do — «отказаться сделать», из урока о герундии и инфинитиве). Красивая пара для повторения: to confess to a crime — «признаться в преступлении» (to!) и to confess to somebody — «признаться кому-то» (тоже to). Разбор остальных: who — умирает сразу после предлога; which — для вещей, адвокат не вещь; that — главный запрещённый после предлогов."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What punishment did the young shoplifter in Emma's case receive?", "options": ["Community service and probation, with a small fine on top of it", "Two hundred hours in prison and a large fine to pay afterwards", "A bail payment that kept him out of prison until the trial", "A public apology in front of the whole jury and the judge"], "correct": "Community service and probation, with a small fine on top of it", "explanation": "Разгадка в двух репликах. Эмма: The judge did not throw the book at him. He got community service and probation — «Судья не стал карать его по максимуму: общественные работы и испытательный срок». И добавляет: Two hundred hours of it, plus a small fine — «Двести часов этого плюс небольшой штраф». Судья дозировал строгость: вина доказана (Guilty), но вместо тюрьмы — community service (бесплатные работы на город), probation (надзор без заключения) и скромный штраф (a fine). Идиома дня to throw the book at somebody здесь работает как контраст: судья МОГ «швырнуть книгу законов», но смилостивился. Разбор остальных: двести часов относились к общественным работам, а не к тюрьме; bail — залог до процесса, который платят, чтобы ждать суда на свободе, а не наказание; публичных извинений в диалоге не было.", "audio_text": "David(M): Emma, I have received a strange official letter. It says I am summoned for jury service.\nEmma(F): Congratulations. The court has chosen you to help decide a real trial.\nDavid(M): I thought it was a parking fine. I almost paid it out of pure habit.\nEmma(F): That habit tells me a lot about your parking, David.\nDavid(M): So what do I actually do there? I am not a lawyer, you know.\nEmma(F): You listen to the evidence and to the witnesses who testify. Then you discuss the verdict with eleven other people.\nDavid(M): What if I do not understand all the legal words?\nEmma(F): You raise your hand and ask. The judge explains everything. Mine was very patient.\nDavid(M): Was your case serious?\nEmma(F): A shoplifting one. The young man had forty chocolate bars hidden in his coat.\nDavid(M): Forty chocolate bars. What did the jury decide?\nEmma(F): Guilty. But the judge did not throw the book at him. He got community service and probation.\nDavid(M): So he cleans parks instead of sitting in a cell?\nEmma(F): Two hundred hours of it, plus a small fine. His lawyer was actually quite good.\nDavid(M): And what about that man in the news, the one with the boat? He walks free while he waits.\nEmma(F): That is bail. He paid money to stay out of prison until the trial starts.\nDavid(M): And if he does not like his verdict?\nEmma(F): His lawyers can appeal, and a higher court looks at the whole case again.\nDavid(M): This is better than television. Do I at least get paid for jury duty?\nEmma(F): A small amount per day. Do not plan a new boat around it.\nDavid(M): One last question. Can I bring my own little hammer for the verdict?\nEmma(F): That is not that kind of jury, David. The judge has the hammer, and he does not share."}, {"id": "l2", "type": "listen", "sentence": "What does David's final question about the hammer show?", "options": ["He has mixed up the jury with the judge and his gavel", "He has forgotten that courtrooms do not allow any tools", "He believes every juror must bring personal evidence", "He thinks the verdict has to be printed and signed"], "correct": "He has mixed up the jury with the judge and his gavel", "explanation": "Финальный обмен. Дэвид: Can I bring my own little hammer for the verdict? — «Могу я принести свой маленький молоточек для вердикта?» Эмма расставляет роли: That is not that kind of jury, David. The judge has the hammer, and he does not share — «Присяжные — не та организация, Дэвид. Молоточек есть у судьи, и он им не делится». Дэвид перепутал участников процесса: стучать молоточком (a gavel — «судейский молоток») — атрибут судьи (the judge), которым тот объявляет решения и восстанавливает порядок, а работа присяжных (the jury) — слушать доказательства (to listen to the evidence), обсуждать дело в комнате совещаний (the deliberation room) и выносить вердикт (to reach a verdict) — беззвучно и без реквизита. Милая деталь: судья не делится молотком — фирменная строгость. Разбор остальных: запрет инструментов в судах в диалоге не звучал; личные доказательства приносили бы свидетели, а не присяжные; про печать и подпись Дэвид не говорил — его смущал именно ритуал с молотком.", "audio_text": "David(M): Emma, I have received a strange official letter. It says I am summoned for jury service.\nEmma(F): Congratulations. The court has chosen you to help decide a real trial.\nDavid(M): I thought it was a parking fine. I almost paid it out of pure habit.\nEmma(F): That habit tells me a lot about your parking, David.\nDavid(M): So what do I actually do there? I am not a lawyer, you know.\nEmma(F): You listen to the evidence and to the witnesses who testify. Then you discuss the verdict with eleven other people.\nDavid(M): What if I do not understand all the legal words?\nEmma(F): You raise your hand and ask. The judge explains everything. Mine was very patient.\nDavid(M): Was your case serious?\nEmma(F): A shoplifting one. The young man had forty chocolate bars hidden in his coat.\nDavid(M): Forty chocolate bars. What did the jury decide?\nEmma(F): Guilty. But the judge did not throw the book at him. He got community service and probation.\nDavid(M): So he cleans parks instead of sitting in a cell?\nEmma(F): Two hundred hours of it, plus a small fine. His lawyer was actually quite good.\nDavid(M): And what about that man in the news, the one with the boat? He walks free while he waits.\nEmma(F): That is bail. He paid money to stay out of prison until the trial starts.\nDavid(M): And if he does not like his verdict?\nEmma(F): His lawyers can appeal, and a higher court looks at the whole case again.\nDavid(M): This is better than television. Do I at least get paid for jury duty?\nEmma(F): A small amount per day. Do not plan a new boat around it.\nDavid(M): One last question. Can I bring my own little hammer for the verdict?\nEmma(F): That is not that kind of jury, David. The judge has the hammer, and he does not share."}]}], "subtitles": [{"speaker": "David", "text": "Emma, I have received a strange official letter. It says I am summoned for jury service."}, {"speaker": "Emma", "text": "Congratulations. The court has chosen you to help decide a real trial."}, {"speaker": "David", "text": "I thought it was a parking fine. I almost paid it out of pure habit."}, {"speaker": "Emma", "text": "That habit tells me a lot about your parking, David."}, {"speaker": "David", "text": "So what do I actually do there? I am not a lawyer, you know."}, {"speaker": "Emma", "text": "You listen to the evidence and to the witnesses who testify. Then you discuss the verdict with eleven other people."}, {"speaker": "David", "text": "What if I do not understand all the legal words?"}, {"speaker": "Emma", "text": "You raise your hand and ask. The judge explains everything. Mine was very patient."}, {"speaker": "David", "text": "Was your case serious?"}, {"speaker": "Emma", "text": "A shoplifting one. The young man had forty chocolate bars hidden in his coat."}, {"speaker": "David", "text": "Forty chocolate bars. What did the jury decide?"}, {"speaker": "Emma", "text": "Guilty. But the judge did not throw the book at him. He got community service and probation."}, {"speaker": "David", "text": "So he cleans parks instead of sitting in a cell?"}, {"speaker": "Emma", "text": "Two hundred hours of it, plus a small fine. His lawyer was actually quite good."}, {"speaker": "David", "text": "And what about that man in the news, the one with the boat? He walks free while he waits."}, {"speaker": "Emma", "text": "That is bail. He paid money to stay out of prison until the trial starts."}, {"speaker": "David", "text": "And if he does not like his verdict?"}, {"speaker": "Emma", "text": "His lawyers can appeal, and a higher court looks at the whole case again."}, {"speaker": "David", "text": "This is better than television. Do I at least get paid for jury duty?"}, {"speaker": "Emma", "text": "A small amount per day. Do not plan a new boat around it."}, {"speaker": "David", "text": "One last question. Can I bring my own little hammer for the verdict?"}, {"speaker": "Emma", "text": "That is not that kind of jury, David. The judge has the hammer, and he does not share."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
