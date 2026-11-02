@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Art &amp; Culture: At the Museum &amp; Gallery + Phrasal Verbs (Separable vs Inseparable)</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #e94560; --accent-light: #ff6b81;
+  --correct: #2ed573; --wrong: #ff4757; --text: #eaeaea; --text-dim: #8892a4;
+  --border: #2a3a5e; --btn-radius: 12px;
+  --theory-bg: rgba(255,255,255,0.03); --theory-border: #3a4a6e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 600px; margin: 0 auto; }
+.header { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--accent-light); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.phrase-box { background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(255,107,129,0.08)); border: 1px solid rgba(233,69,96,0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; text-align: center; }
+.phrase-box .label { font-size: 11px; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.phrase-box .phrase { font-size: 16px; font-weight: 600; font-style: italic; color: var(--text); }
+.phrase-box .translation { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px; }
+.section-audio { text-align: center; margin-bottom: 14px; padding: 12px; background: rgba(233,69,96,0.08); border-radius: 10px; border: 1px solid rgba(233,69,96,0.2); }
+.section-title .icon { font-size: 20px; }
+.theory { background: var(--theory-bg); border-left: 3px solid var(--theory-border); border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); }
+.theory strong { color: var(--text); font-weight: 600; }
+.question-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.question-number { font-size: 12px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sentence { font-size: 15px; line-height: 1.7; margin-bottom: 14px; padding: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+.speak-btn { background: rgba(233,69,96,0.15); border: 2px solid var(--accent); border-radius: 50%; width: 52px; height: 52px; font-size: 24px; color: var(--accent-light); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all 0.2s ease; line-height: 1; }
+.speak-btn:active { transform: scale(0.92); }
+.speak-btn.speaking { animation: pulse 0.8s ease-in-out infinite; background: rgba(233,69,96,0.3); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options.horizontal { flex-direction: row; justify-content: center; gap: 12px; }
+.option-btn { background: rgba(255,255,255,0.06); border: 2px solid var(--border); border-radius: var(--btn-radius); padding: 14px 20px; font-size: 15px; color: var(--text); cursor: pointer; transition: all 0.2s ease; text-align: center; min-height: 48px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.option-btn:active { transform: scale(0.97); }
+.option-btn.correct { background: rgba(46,213,115,0.15); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+.option-btn.wrong { background: rgba(255,71,87,0.15); border-color: var(--wrong); color: var(--wrong); font-weight: 600; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.option-btn:disabled:active { transform: none; }
+.option-btn .letter { font-weight: 700; margin-right: 8px; color: var(--text-dim); }
+.option-btn.correct .letter { color: var(--correct); }
+.option-btn.wrong .letter { color: var(--wrong); }
+.tf-btn { flex: 1; max-width: 140px; padding: 18px 24px; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.explanation { margin-top: 10px; padding: 10px 12px; background: rgba(46,213,115,0.08); border-left: 3px solid var(--correct); border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; color: var(--text-dim); display: none; }
+.explanation.visible { display: block; }
+.results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s ease; }
+.results .score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.results .score .pct { font-size: 24px; color: var(--text-dim); }
+.results .score.excellent { color: var(--correct); }
+.results .score.good { color: var(--accent-light); }
+.results .score.needs-work { color: var(--wrong); }
+.results .message { font-size: 16px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+.results-detail { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.results-detail h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.result-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; line-height: 1.5; }
+.result-item .ri-q { color: var(--text-dim); margin-bottom: 4px; }
+.result-item .ri-correct { color: var(--correct); font-weight: 600; }
+.result-item .ri-wrong { color: var(--wrong); font-weight: 600; text-decoration: line-through; margin-right: 8px; }
+.restart-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: var(--btn-radius); padding: 16px 40px; font-size: 16px; font-weight: 700; color: white; cursor: pointer; margin-top: 20px; transition: all 0.2s ease; }
+.restart-btn:active { transform: scale(0.97); }
+.hidden { display: none; }
+.speed-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s ease; }
+.subtitles { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 10px; text-align: left; }
+.subtitles .sub-toggle { font-size: 12px; color: var(--accent-light); cursor: pointer; margin-bottom: 8px; display: block; }
+.subtitles .sub-line { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.subtitles .sub-line:last-child { border-bottom: none; margin-bottom: 0; }
+.subtitles .sub-speaker { font-size: 11px; color: var(--accent-light); text-transform: uppercase; margin-bottom: 2px; }
+.subtitles .sub-hanzi { font-size: 16px; color: var(--text); line-height: 1.6; }
+.speed-btn:active { transform: scale(0.95); }
+.speed-btn.active { background: rgba(233,69,96,0.2); border-color: var(--accent); color: var(--accent-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><h1>Art &amp; Culture: At the Museum &amp; Gallery + Phrasal Verbs (Separable vs Inseparable)</h1><div class="subtitle">2026-11-02</div></div>
+  <div class="phrase-box"><div class="label">💡 Фраза дня</div><div class="phrase">A feast for the eyes</div><div class="translation">A feast for the eyes — дословно «пир для глаз»: что-то настолько красивое, что на это хочется смотреть, как на праздничный стол, — зрелище, доставляющее эстетическое удовольствие. A feast — «пир, праздничное застолье»; отсюда же a feast for the ears — «пир для ушей» о прекрасной музыке. Пример: The gallery room full of Monet&#x27;s watercolours was a real feast for the eyes — «Зал, полный акварелей Моне, был настоящим пиром для глаз». Русские аналоги: «красота неописуемая», «глаз не отвести», «зрелище для души». Семья похожих выражений: a visual treat — «визуальное наслаждение»; simply breathtaking — «просто захватывает дух»; a sight to behold — «зрелище, которое стоит увидеть». Ироничный контраст из сегодняшнего диалога: Марк не сразу признал кучу из тринадцати кирпичей пиром для глаз — но кошачьи портреты его смягчили.</div></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="quizContent"></div>
+  <div class="results hidden" id="results">
+    <div style="font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Результат</div>
+    <div class="score" id="scoreDisplay"></div>
+    <div class="message" id="scoreMessage"></div>
+    <div class="results-detail" id="resultsDetail"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Пройти ещё раз</button>
+  </div>
+</div>
+<script>
+const quizData = {"title": "Art & Culture: At the Museum & Gallery + Phrasal Verbs (Separable vs Inseparable)", "subtitle": "2026-11-02", "date": "2026-11-02", "phrase_of_the_day": "A feast for the eyes", "phrase_translation": "A feast for the eyes — дословно «пир для глаз»: что-то настолько красивое, что на это хочется смотреть, как на праздничный стол, — зрелище, доставляющее эстетическое удовольствие. A feast — «пир, праздничное застолье»; отсюда же a feast for the ears — «пир для ушей» о прекрасной музыке. Пример: The gallery room full of Monet's watercolours was a real feast for the eyes — «Зал, полный акварелей Моне, был настоящим пиром для глаз». Русские аналоги: «красота неописуемая», «глаз не отвести», «зрелище для души». Семья похожих выражений: a visual treat — «визуальное наслаждение»; simply breathtaking — «просто захватывает дух»; a sight to behold — «зрелище, которое стоит увидеть». Ироничный контраст из сегодняшнего диалога: Марк не сразу признал кучу из тринадцати кирпичей пиром для глаз — но кошачьи портреты его смягчили.", "audio_url": "https://nataliastanislavovna.github.io/english-quiz/lessons/audio_1102.mp3", "sections": [{"id": "s1", "title": "Vocabulary — Art & Culture: At the Museum & Gallery", "icon": "📚", "theory": "", "instruction": "", "questions": [{"id": "v1", "type": "choice", "sentence": "What does a museum 'curator' do?", "options": ["Takes care of the collection and organizes what will be shown", "Sells tickets at the entrance and checks the visitors' bags", "Paints copies of famous pictures for the museum gift shop", "Guards the rooms and asks the visitors not to touch the art"], "correct": "Takes care of the collection and organizes what will be shown", "explanation": "A curator — «куратор»: человек, который управляет собранием музея, отбирает работы, придумывает и собирает выставки, пишет сопроводительные тексты (те самые labels — «этикетки» у каждой работы). Слово пришло из латыни: curare — «заботиться», так что куратор буквально «заботится» о коллекции. Родственные слова: to curate an exhibition — «курировать выставку» (глагол!); a curated selection — «тщательно отобранная подборка» — слово вышло за пределы музеев и живёт в магазинах и плейлистах. Не путать соседей по музею: a conservator — «реставратор, хранитель» (лечит и чинит картины — как Анна из сегодняшнего грамматического вопроса); an attendant / a guard — «смотритель, охранник» (следит, чтобы никто не трогал экспонаты); a docent — «экскурсовод» в американских музеях. Разбор остальных: билеты и сумки — работа кассира и охраны; копии для сувенирного магазина пишет не куратор; следить за порядком в залах — задача смотрителей."}, {"id": "v2", "type": "choice", "sentence": "In a modern art museum, what is an 'installation'?", "options": ["A large artwork, often filling a whole room, made of mixed materials", "A small glass case where the museum keeps its oldest coins", "A short film that plays on a screen near the main entrance", "A monthly event where artists paint pictures in front of visitors"], "correct": "A large artwork, often filling a whole room, made of mixed materials", "explanation": "An installation — «инсталляция»: объёмное произведение современного искусства, которое «устанавливают» прямо в пространстве — от английского to install — «устанавливать». Инсталляция может занять целый зал и собрана из чего угодно: кирпичей, видео, звука, ткани, воды. Часто её называют site-specific — «созданная для конкретного места»: в другом зале она просто не будет работать. В сегодняшнем диалоге Эмма и Марк стоят перед инсталляцией Whispers of the Wall — «Шёпот стены» — тринадцатью кирпичами, где тринадцатый, по словам этикетки, «символизирует надежду». Соседние понятия: a sculpture — «скульптура», традиционный объект на постаменте; an exhibition — «выставка», событие из многих чужих работ (инсталляция — одна цельная работа одного автора); an exhibit — «экспонат», отдельный предмет на выставке (эту пару мы разбирали 29 августа). Разбор остальных: стеклянная витрина с монетами — a display case; фильм у входа — это video art, но не всякий ролик инсталляция; событие, где художники рисуют при публике, называют a live painting session."}, {"id": "v3", "type": "choice", "sentence": "A painting described as 'a watercolour' is painted...", "options": ["with paints mixed with water, usually on special paper", "with thick oil paints, applied slowly on a canvas", "with hot wax and metal tools, pressed on a board", "with spray cans, painted quickly on a large wall"], "correct": "with paints mixed with water, usually on special paper", "explanation": "A watercolour — «акварель»: краски, разведённые водой, обычно на специальной грубой бумаге (watercolour paper). Слово буквально значит «водный цвет»: water + colour. Акварель прозрачная и светлая, её почти нельзя переписать заново — в этом её сложность и престиж. Ряд техник: an oil painting — «масляная живопись» (толстые медленно сохнущие краски на холсте — a canvas); a pastel — «пастель»; a sketch — «набросок, эскиз»; a mural — «роспись на стене». В диалоге Эмма обещает Марку зал с акварелями — watercolours — и это первое, что он готов назвать искусством: кошачьи портреты. Полезная пара: a portrait — «портрет, изображение человека» (в широком смысле — и животного) и a landscape — «пейзаж»; теми же словами называют и ориентацию листа: портретная и альбомная. Разбор остальных: маслом — это an oil painting; горячий воск — древняя техника encaustic, редкость; баллончики на стене — граффити или мурал, к акварели не относятся."}, {"id": "v4", "type": "choice", "sentence": "What is a museum's 'permanent collection'?", "options": ["The artworks the museum owns and displays all year round", "The exhibits that only VIP guests can see by invitation", "The pieces that are brought from abroad for one season", "The paintings kept in storage because they were damaged"], "correct": "The artworks the museum owns and displays all year round", "explanation": "A permanent collection — «постоянная экспозиция, собрание музея»: работы, которые принадлежат музею и выставлены всегда (permanent — «постоянный»). Её противоположность — a temporary exhibition / a special exhibition — «временная выставка»: привозные работы, которые через несколько месяцев уедут (по билетам их часто продают отдельно). Полезный ряд: on display / on show — «выставлено, доступно зрителям»; in storage — «в хранилище» (у больших музеев в запасниках лежит большинство работ — Лувр показывает лишь малую часть!); a wing — «крыло, корпус здания» (the east wing — «восточное крыло»); admission — «вход, плата за вход»: free admission — «вход свободный», an admission fee — «входная плата». Из билета в диалоге: аудиогид может быть включён в цену — the audio guide is included in the ticket. Разбор остальных: показы для VIP — это a private view, «закрытый просмотр»; привозные работы одного сезона — как раз temporary exhibition; повреждённые картины чинит реставратор, и хранилище — не определение постоянной коллекции."}]}, {"id": "s2", "title": "Grammar — Phrasal Verbs (Separable vs Inseparable)", "icon": "📖", "theory": "", "instruction": "", "questions": [{"id": "g1", "type": "choice", "sentence": "Complete: 'The staff are busy. They are putting ___ the labels before the exhibition opens tomorrow.'", "options": ["up", "down", "on", "off"], "correct": "up", "explanation": "They are putting UP the labels — «Они развешивают таблички». To put up — «повесить, разместить, установить» (постер, полку, табличку, палатку): put up a poster — «повесить плакат», put up a tent — «поставить палатку». Это отделяемый фразовый глагол (separable): цельный предмет может стоять с двух сторон — put up the labels или put the labels up, оба варианта верны. Развилка значений по частицам: put down — «положить вниз», а о человеке — «унизить» (Don't put me down); put on — «надеть» (одежду) или «включить» (свет, музыку); put off — «отложить, перенести» (The meeting was put off — встречу перенесли). А чтобы оценить всю мощь частицы up, добавьте третье слово: put up with — «терпеть, мириться» — этим фразовым глаголом Марк из диалога признаёт кошачьи портреты искусством: That is art I can put up with. Разбор остальных: «положить таблички вниз» и «отложить выставку» ломают смысл, а «надеть таблички» — просто не по-английски."}, {"id": "g2", "type": "choice", "sentence": "Complete: 'Anna is a conservator. She looks ___ the oldest paintings in the museum.'", "options": ["after", "for", "at", "into"], "correct": "after", "explanation": "She looks AFTER the oldest paintings — «Она заботится о самых старых картинах» — то есть ухаживает за ними, следит за их состоянием. To look after — «присматривать, заботиться»: look after the children — «присматривать за детьми», look after a pet — «заботиться о питомце» (слово из ветеринариного урока 22 октября). Это НЕОТДЕЛЯЕМЫЙ фразовый глагол (inseparable): предлог и глагол нельзя разорвать существительным или местоимением — можно только look after the paintings или look after them, но никак не look the paintings after. Почему: after здесь ведёт за собой объект, как обычный предлог. Развилка по частицам: look for — «искать» (I am looking for my gloves — я ищу перчатки); look at — «смотреть на» (буквально, глазами); look into — «расследовать, вникать» (The council will look into the problem — совет разберётся с проблемой). Контекст здесь решает: консерватор не «смотрит на» картины и не «ищет» их — её работа именно забота. Разбор остальных: for — «она ищет старые картины», у неё уже есть собрание; at — грамматически возможно, но тогда пропадает смысл профессии; into — реставратор не детектив."}, {"id": "g3", "type": "choice", "sentence": "Complete: 'No time to walk? I will pick you ___ outside the museum at two.'", "options": ["up", "on", "out", "over"], "correct": "up", "explanation": "I will pick you UP outside the museum at two — «Я заеду за тобой к музею в два». To pick somebody up — «забрать, заехать за кем-то» (на машине): pick up the kids from school — «забрать детей из школы», pick up a friend at the airport — «встретить друга в аэропорту». Это отделяемый глагол, и здесь видна главная закономерность дня: местоимение you стоит РОВНО ПОСЕРЕДИНЕ — pick you up. С существительным оба порядка живы: pick up Emma или pick Emma up; с местоимением — только средний: pick her up, и никогда pick up her в этом значении. У pick up много лиц: «поднять» (pick up a coin — поднять монету); «подхватить» болезнь (pick up a cold — подхватить простуду); «научиться между делом» (pick up a bit of Italian — нахватать немного итальянского); «подобрать попутчика». Разбор остальных: pick on — «придираться» (смысл и строй другие); pick out — «выбрать из многих»; pick over — «перебирать». С you посередине каждое из них грамматически живо, но говорит о музее что-то странное — «заеду и заберу» сюда подходит безупречно."}, {"id": "g4", "type": "choice", "sentence": "Which sentence is correct?", "options": ["The guard turned the alarm off because a cat walked in", "The guard turned off it because a cat walked in", "The guard turned off them because a cat walked in", "The guard off turned it because a cat walked in"], "correct": "The guard turned the alarm off because a cat walked in", "explanation": "Правильный вариант: The guard turned the alarm off because a cat walked in — «Охранник выключил сигнализацию, потому что вошла кошка». Здесь работает железное правило порядка слов для отделяемых фразовых глаголов: СУЩЕСТВИТЕЛЬ-объект может стоять с двух сторон — turn off the alarm или turn the alarm off, — а МЕСТОИМЕНИЕ-объект живёт только в середине, между глаголом и частицей: turn it off. Сравните три этажа: turn off the alarm ✅, turn the alarm off ✅, turn it off ✅ — и два запретных: turn off it ❌, turn off them ❌. Лайфхак для речи: если объект — it, him, her, them, us, me — смело вставляйте его в середину, ошибиться невозможно. А почему кошка? В сегодняшнем музее вообще много животных: кот прошёл мимо датчика, кошачьи портреты в акварели — искусствоведческий вкус Марка сложился не на пустом месте. Разбор остальных: off it и off them — местоимение после частицы запрещено (и them вдобавок не согласуется с alarm — он один); off turned it — частица не может стоять перед глаголом, это уже не английский порядок слов."}]}, {"id": "s3", "title": "Practical English — At the Museum: Photos & Tickets", "icon": "💬", "theory": "", "instruction": "", "questions": [{"id": "p1", "type": "choice", "sentence": "You are in a museum and want to take photos, but you are not sure it is allowed. What do you ask the attendant?", "options": ["Excuse me, is it all right to take photos in this room?", "Excuse me, give me permission to photograph everything now.", "Excuse me, why is it forbidden to take photos in this museum?", "Excuse me, do the photos cost extra at the door or inside?"], "correct": "Excuse me, is it all right to take photos in this room?", "explanation": "Лучший вопрос: Excuse me, is it all right to take photos in this room? — «Простите, можно ли фотографировать в этом зале?» Формула is it all right to do — мягкий и универсальный способ спросить разрешения (is it okay to — чуть разговорнее, may I — чуть формальнее). Типичный ответ смотрителя: Yes, but no flash, please — «Да, но без вспышки» (flash вредит акварели и textiles — текстилю); Photos are fine, but no tripods — «Фотографировать можно, но без штативов»; I am afraid photography is not allowed in this wing — «Боюсь, в этом крыле снимать нельзя». Полезный ряд запретов: not allowed — «не разрешено» (нейтрально); forbidden — «запрещено» (строже); Do not touch — «не трогать» — самая частая надпись музея, с которой Марк из диалога согласен мгновенно. Разбор остальных: «дайте мне разрешение» — требование, а не вежливый вопрос; «почему у вас запрещено?» — звучит как претензия; «фотографии стоят дополнительно?» — музей не продаёт право снимать, вопрос не о том."}, {"id": "p2", "type": "choice", "sentence": "At the ticket desk you want to know if the audio guide is included in the ticket price. What do you say?", "options": ["Could you tell me whether the audio guide is included in the ticket?", "Could you tell me whether is the audio guide included in the ticket?", "Could you tell me how much costs the audio guide with the ticket?", "Could you tell me where I can buying the audio guide for ticket?"], "correct": "Could you tell me whether the audio guide is included in the ticket?", "explanation": "Правильная фраза: Could you tell me whether the audio guide is included in the ticket? — «Не подскажете, аудиогид включён в стоимость билета?» Это косвенный вопрос — тема уроков 23 сентября и 16 октября: после Could you tell me порядок слов как в утверждении — the audio guide IS included, без вопроса is в начале. Выбор whether здесь не случаен: whether звучит чуть формальнее if и обязателен перед or not (Is it included or not? → whether it is included or not). Готовый набор кассира: Two tickets for the permanent collection, please — «Два билета в постоянную экспозицию»; How long does the tour take? — «Сколько длится экскурсия?» (сорок минут, как аудиогид Марка); Does the ticket include the temporary exhibition? — «Билет включает временную выставку?»; Where does the tour start? — «Откуда начинается экскурсия?». Слово included — «включено в цену» — работает везде: breakfast is included — «завтрак включён» (отельный урок 12 октября). Разбор остальных: whether is the audio guide — вопросительный порядок внутри косвенного вопроса, классическая ошибка; how much costs — то же самое плюс cost без -s после косвенного вопроса; where I can buying — после can только чистый инфинитив buy, а «for ticket» — не английское сочетание."}]}, {"id": "s4", "title": "Challenge", "icon": "✏️", "theory": "", "instruction": "", "questions": [{"id": "c1", "type": "choice", "sentence": "Complete: 'We are looking forward ___ the new exhibition of watercolours.'", "options": ["to", "for", "at", "with"], "correct": "to", "explanation": "We are looking forward TO the new exhibition — «Мы с нетерпением ждём новую выставку акварелей». To look forward to — трёхчастный фразовый глагол: look + forward + to, и здесь главная ловушка: to — это ПРЕДЛОГ, а не частица инфинитива. Поэтому за ним идёт существительное (look forward to the concert) или герундий: look forward to seeing you — «ждём встречи с вами» (это мы проходили ещё 28 августа в уроке о герундии и инфинитиве — и никогда look forward to see). Объект у трёхчастных глаголов может стоять только в самом конце — разорвать их нельзя: никак не look the exhibition forward to. Семья трёхчастных для коллекции: put up with — «терпеть» (из сегодняшнего диалога); run out of — «закончиться» (we ran out of coffee); catch up with — «нагнать кого-то»; get on with — « ладить с кем-то»; look up to — «уважать, равняться» (she looks up to her curator). Правильный английский ставит точку: after the exhibition we are looking forward to a cup of tea. Разбор остальных: forward for, forward at, forward with — в этом глаголе третья часть намертво приросла, это to."}, {"id": "c2", "type": "choice", "sentence": "Complete: 'Mark cooks every weekend, just like his father. He really takes ___ his dad.'", "options": ["after", "up", "on", "off"], "correct": "after", "explanation": "He really takes AFTER his dad — «Он пошёл в отца» — похож на отца характером или привычками. To take after — «походить на родственника, пойти в кого-то»: She takes after her grandmother — «Она пошла в бабушку». Глагол неотделяемый и почти всегда о семейном сходстве — объект только после after. Сегодняшний тонкий контраст: take after — «пойти в кого-то» (сходство), а look after из грамматического вопроса — «заботиться» — предлог одинаковый, смыслы из разных миров. Развилка по частицам закрывает тему: take up — «начать заниматься» (take up a sport — из спортивного урока 8 сентября, take up photography); take on — «взять на работу» или «принять вызов» (the gallery took on a young artist); take off — «взлететь» о самолёте и «снять» одежду ( separable — take your coat off, из грамматической части урока: существительное посередине можно, местоимение — только там же: take it off). Разбор остальных: takes up his dad — «начал заниматься папой», абсурд; takes on his dad — «нанял папу или вызвал на бой»; takes off his dad — только если папу можно снять, как пальто."}]}, {"id": "s5", "title": "Listening Comprehension", "icon": "🎧", "theory": "", "instruction": "Listen to the audio, then answer the questions below.", "questions": [{"id": "l1", "type": "listen", "sentence": "Listen to the dialogue. What does the label say about the thirteenth brick in the installation?", "options": ["It is the brick that the artist says represents hope", "It is the brick that the artist added to the pile by mistake", "It is the brick that the visitors are allowed to touch", "It is the brick that was taken from an ancient city wall"], "correct": "It is the brick that the artist says represents hope", "explanation": "Разгадка в трёх репликах. Марк: It is a pile of bricks, Emma. Twelve bricks — «Это куча кирпичей. Двенадцать кирпичей». Эмма: Thirteen. The label says the thirteenth brick represents hope — «Тринадцать. На табличке сказано, что тринадцатый кирпич олицетворяет надежду». Здесь и лексика урока: the label — «табличка, этикетка» у произведения (curator их пишет — вопрос один); represents — «олицетворяет, символизирует»; an installation — «инсталляция», о которой Эмма говорит: The label says it is an installation. Юмор диалога строится на классическом споре о современном искусстве: для Марка это двенадцать кирпичей, для таблички — Whispers of the Wall с кусочком надежды сверху. Разбор остальных: ошибки нет и в помине — художник посчитал кирпичи честно; «можно потрогать» — наоборот, надпись гласит Do not touch, и это первое, что Марк в музее понял; про древнюю стену в диалоге не было ни слова.", "audio_text": "Mark(M): Remind me why we are in a modern art gallery on a Saturday?\nEmma(F): Because culture is good for you, and because it is raining.\nMark(M): Those are two different reasons.\nEmma(F): They are both excellent ones. Take this audio guide. It explains everything.\nMark(M): This one says the tour is forty minutes long.\nEmma(F): Then we have forty minutes to become better people.\nMark(M): Fine. What is this room about?\nEmma(F): The label says it is an installation. It is called Whispers of the Wall.\nMark(M): It is a pile of bricks, Emma. Twelve bricks.\nEmma(F): Thirteen. The label says the thirteenth brick represents hope.\nMark(M): The label also says do not touch. That is the first thing I understand here.\nEmma(F): Put your hand down, Mark. The guard is already watching us.\nMark(M): I was pointing at the fire extinguisher. Is it part of the exhibition?\nEmma(F): That is a real fire extinguisher. Unless that is the artist's little joke.\nMark(M): The audio guide just called this room a journey. A journey through bricks.\nEmma(F): Come on, the watercolours are in the next room. You will like those.\nMark(M): Why? Because they look like something?\nEmma(F): Because they are portraits of cats, and you are a person of culture.\nMark(M): Now that is art I can put up with.\nEmma(F): Twenty minutes in, and you are already an expert. That was fast.\nMark(M): Wait. Does the gift shop sell the bricks?\nEmma(F): Everything here is for sale. Hope is extra."}, {"id": "l2", "type": "listen", "sentence": "What does Mark mean by 'Now that is art I can put up with'?", "options": ["He has finally found something in the gallery he truly likes", "He has decided that all modern art must be removed at once", "He has promised to stop making jokes for the rest of the tour", "He has agreed to buy the whole pile of bricks in the shop"], "correct": "He has finally found something in the gallery he truly likes", "explanation": "Финальная точка маршрута. Эмма: The watercolours are in the next room. You will like those — «Акварели в соседнем зале, тебе понравится». Марк: Why? Because they look like something? — «Почему? Потому что они похожи на что-то?» Эмма: Because they are portraits of cats, and you are a person of culture — «Потому что это портреты кошек, а ты человек культуры». И тогда Марк: Now that is art I can put up with — «Вот это искусство, которое я в состоянии терпеть». To put up with — «терпеть, мириться с чем-то» — фразовый глагол из сегодняшней грамматики, трёхчастный: put + up + with, объект только в самом конце. Формула смягчённого признания: грубовато-ироничное «вот это я готов вынести» означает, что после кирпичей Марк нашёл-то, что ему по-настоящему приятно. Идиома дня a feast for the eyes подходит сюда идеально: кошачьи портреты — первый «пир для глаз» за весь визит. Разбор остальных: «убрать весь современный арт» — Марк смягчается, а не объявляет войну; «перестать шутить» — он и не собирался, последняя реплика про кирпичи в магазине снова шутка; «купить всю кучу кирпичей» — он лишь спросил, продают ли их, и Эмма ответила, что hope is extra — «надежда продаётся отдельно».", "audio_text": "Mark(M): Remind me why we are in a modern art gallery on a Saturday?\nEmma(F): Because culture is good for you, and because it is raining.\nMark(M): Those are two different reasons.\nEmma(F): They are both excellent ones. Take this audio guide. It explains everything.\nMark(M): This one says the tour is forty minutes long.\nEmma(F): Then we have forty minutes to become better people.\nMark(M): Fine. What is this room about?\nEmma(F): The label says it is an installation. It is called Whispers of the Wall.\nMark(M): It is a pile of bricks, Emma. Twelve bricks.\nEmma(F): Thirteen. The label says the thirteenth brick represents hope.\nMark(M): The label also says do not touch. That is the first thing I understand here.\nEmma(F): Put your hand down, Mark. The guard is already watching us.\nMark(M): I was pointing at the fire extinguisher. Is it part of the exhibition?\nEmma(F): That is a real fire extinguisher. Unless that is the artist's little joke.\nMark(M): The audio guide just called this room a journey. A journey through bricks.\nEmma(F): Come on, the watercolours are in the next room. You will like those.\nMark(M): Why? Because they look like something?\nEmma(F): Because they are portraits of cats, and you are a person of culture.\nMark(M): Now that is art I can put up with.\nEmma(F): Twenty minutes in, and you are already an expert. That was fast.\nMark(M): Wait. Does the gift shop sell the bricks?\nEmma(F): Everything here is for sale. Hope is extra."}]}], "subtitles": [{"speaker": "Mark", "text": "Remind me why we are in a modern art gallery on a Saturday?"}, {"speaker": "Emma", "text": "Because culture is good for you, and because it is raining."}, {"speaker": "Mark", "text": "Those are two different reasons."}, {"speaker": "Emma", "text": "They are both excellent ones. Take this audio guide. It explains everything."}, {"speaker": "Mark", "text": "This one says the tour is forty minutes long."}, {"speaker": "Emma", "text": "Then we have forty minutes to become better people."}, {"speaker": "Mark", "text": "Fine. What is this room about?"}, {"speaker": "Emma", "text": "The label says it is an installation. It is called Whispers of the Wall."}, {"speaker": "Mark", "text": "It is a pile of bricks, Emma. Twelve bricks."}, {"speaker": "Emma", "text": "Thirteen. The label says the thirteenth brick represents hope."}, {"speaker": "Mark", "text": "The label also says do not touch. That is the first thing I understand here."}, {"speaker": "Emma", "text": "Put your hand down, Mark. The guard is already watching us."}, {"speaker": "Mark", "text": "I was pointing at the fire extinguisher. Is it part of the exhibition?"}, {"speaker": "Emma", "text": "That is a real fire extinguisher. Unless that is the artist's little joke."}, {"speaker": "Mark", "text": "The audio guide just called this room a journey. A journey through bricks."}, {"speaker": "Emma", "text": "Come on, the watercolours are in the next room. You will like those."}, {"speaker": "Mark", "text": "Why? Because they look like something?"}, {"speaker": "Emma", "text": "Because they are portraits of cats, and you are a person of culture."}, {"speaker": "Mark", "text": "Now that is art I can put up with."}, {"speaker": "Emma", "text": "Twenty minutes in, and you are already an expert. That was fast."}, {"speaker": "Mark", "text": "Wait. Does the gift shop sell the bricks?"}, {"speaker": "Emma", "text": "Everything here is for sale. Hope is extra."}]};
+let answered = 0, totalQuestions = 0, answers = {}, sectionData = [];
+
+function init() {
+  sectionData = quizData.sections || quizData;
+  sectionData.forEach(s => {
+    if (!answers[s.id]) answers[s.id] = {};
+    (s.questions || []).forEach(q => { totalQuestions++; answers[s.id][q.id] = null; });
+  });
+  renderAll(); updateProgress();
+  // Fix: after audio ends, reset so it can be replayed
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function renderAll() {
+  const c = document.getElementById('quizContent'); c.innerHTML = ''; let gq = 0;
+  sectionData.forEach(sec => {
+    let h = '<div class="section-card" id="section_' + sec.id + '">';
+    h += '<div class="section-title"><span class="icon">' + (sec.icon||'📝') + '</span>' + esc(sec.title) + '</div>';
+    if (sec.theory) h += '<div class="theory">' + fmtTheory(sec.theory) + '</div>';
+    if (sec.instruction) h += '<div style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">' + esc(sec.instruction) + '</div>';
+    // Section-level audio: use pre-generated MP3 if available, else TTS fallback
+    var secAudioTexts = [...new Set((sec.questions||[]).filter(q=>q.type==='listen'&&q.audio_text).map(q=>q.audio_text))];
+    var secAudioUrl = quizData.audio_url || '';
+    if (secAudioTexts.length > 0) {
+      h += '<div class="section-audio">';
+      if (secAudioUrl) {
+        h += '<audio id="dialogAudio" controls preload="auto" style="width:100%;border-radius:10px;margin-bottom:6px;">';
+        h += '<source src="' + secAudioUrl + '" type="audio/mpeg">';
+        h += '</audio>';
+        h += '<div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;">';
+        h += '<span style="font-size:12px;color:var(--text-dim);">Скорость:</span>';
+        h += '<button class="speed-btn" data-speed="0.5" onclick="setAudioSpeed(0.5,this)">🐢 0.5x</button>';
+        h += '<button class="speed-btn" data-speed="0.75" onclick="setAudioSpeed(0.75,this)">0.75x</button>';
+        h += '<button class="speed-btn active" data-speed="1" onclick="setAudioSpeed(1,this)">1x</button>';
+        h += '</div>';
+      } else {
+        h += '<button class="speak-btn" data-audio-b64="' + btoa(unescape(encodeURIComponent(JSON.stringify(secAudioTexts)))) + '" onclick="speakSection(this)">🔊</button>';
+      }
+      h += '<div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Нажми Play, чтобы послушать диалог</div>';
+      // Subtitles / transcript (like Chinese lessons)
+      var subData = quizData.subtitles || [];
+      if (subData.length > 0) {
+        h += '<div class="subtitles">';
+        h += '<span class="sub-toggle" onclick="toggleSubs(this)">📝 Текст диалога (нажми, чтобы показать/скрыть)</span>';
+        h += '<div class="sub-body" style="display:none;">';
+        subData.forEach(function(sl) {
+          h += '<div class="sub-line">';
+          h += '<div class="sub-speaker">' + esc(sl.speaker) + '</div>';
+          h += '<div class="sub-hanzi">' + esc(sl.text) + '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+    (sec.questions||[]).forEach(q => {
+      gq++; h += '<div class="question-block"><div class="question-number">Вопрос ' + gq + '</div>';
+      if (q.sentence) h += '<div class="sentence">' + fmtSent(q.sentence, sec.id, q.id, q.type) + '</div>';
+      h += renderOpts(sec.id, q);
+      if (q.explanation) h += '<div class="explanation" id="exp_'+sec.id+'_'+q.id+'">' + esc(q.explanation) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>'; c.insertAdjacentHTML('beforeend', h);
+  });
+}
+
+function speakSection(btn) {
+  const texts = JSON.parse(decodeURIComponent(escape(atob(btn.dataset.audioB64))));
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn || texts.length === 0) return; btn.classList.add('speaking');
+  const v = window.speechSynthesis.getVoices();
+  const voice = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  let idx = 0;
+  function next() {
+    if (idx >= texts.length) { btn.classList.remove('speaking'); return; }
+    const u = new SpeechSynthesisUtterance(texts[idx]); u.lang='en-US'; u.rate=0.85;
+    if (voice) u.voice = voice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    u.onerror = () => { btn.classList.remove('speaking'); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function speak(btn) {
+  const text = btn.dataset.audioText;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('speaking'));
+  if (!btn) return; btn.classList.add('speaking');
+  const u = new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.85;
+  const v = window.speechSynthesis.getVoices();
+  const ev = v.find(x=>x.lang.startsWith('en')&&/female/i.test(x.name)) || v.find(x=>x.lang.startsWith('en-')) || v.find(x=>x.lang.startsWith('en'));
+  if (ev) u.voice = ev;
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  window.speechSynthesis.speak(u);
+}
+
+if (window.speechSynthesis) { window.speechSynthesis.getVoices(); if (window.speechSynthesis.onvoiceschanged!==undefined) { window.speechSynthesis.onvoiceschanged = function(){}; } }
+
+function fmtTheory(t) { return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function fmtSent(s,sid,qid,type) { if(!s) return ''; if(type==='choice'||type==='listen') { let bi=0; return esc(s).replace(/___+/g, function() { return '<span class="blank" id="blank_'+sid+'_'+qid+'_'+(bi++)+'">___</span>'; }); } return esc(s); }
+
+function renderOpts(sid, q) {
+  const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (q.type==='tf') return '<div class="options horizontal"><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="T" onclick="sel(this)">✓ True</button><button class="option-btn tf-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="F" onclick="sel(this)">✗ False</button></div>';
+  if (q.type==='choice'||q.type==='listen') {
+    let h='<div class="options">';
+    var _opts = (q.options||[]).slice();
+    for (var _i=_opts.length-1; _i>0; _i--) { var _j=Math.floor(Math.random()*(_i+1)); var _t=_opts[_i]; _opts[_i]=_opts[_j]; _opts[_j]=_t; }
+    _opts.forEach((o,i) => { h+='<button class="option-btn" data-sec="'+sid+'" data-q="'+q.id+'" data-val="'+esc(o)+'" onclick="sel(this)"><span class="letter">'+L[i]+'</span>'+esc(o)+'</button>'; });
+    return h+'</div>';
+  }
+  return '';
+}
+
+function sel(btn) {
+  const sid=btn.dataset.sec, qid=btn.dataset.q, val=btn.dataset.val;
+  if(answers[sid][qid]!==null) return;
+  answers[sid][qid]=val; answered++;
+  const sec=sectionData.find(s=>s.id===sid), q=sec.questions.find(x=>x.id==qid);
+  const corr=String(q.correct), ok=val===corr;
+  btn.parentElement.querySelectorAll('.option-btn').forEach(s => {
+    s.disabled=true; if(s.dataset.val===corr) s.classList.add('correct'); if(s===btn&&!ok) s.classList.add('wrong');
+  });
+  const blanks=document.querySelectorAll('[id^="blank_'+sid+'_'+qid+'"]');
+  if(blanks.length) {
+    const parts=corr.split(/\s*\.\.\.\s*/).filter(w=>w.trim());
+    if(parts.length>1 && blanks.length>1) {
+      blanks.forEach((b,bi)=> { if(parts[bi]) { b.textContent=parts[bi]; b.classList.add(ok?'filled':'wrong-fill'); } });
+    } else {
+      blanks[0].textContent=corr.replace(/\s*\.\.\.\s*/g,' ');
+      blanks[0].classList.add(ok?'filled':'wrong-fill');
+      for(let bi=1;bi<blanks.length;bi++) { blanks[bi].textContent=''; blanks[bi].classList.add(ok?'filled':'wrong-fill'); }
+    }
+  }
+  const ex=document.getElementById('exp_'+sid+'_'+qid); if(ex) ex.classList.add('visible');
+  updateProgress();
+  if(answered>=totalQuestions) setTimeout(showRes, 800);
+}
+
+function updateProgress() { document.getElementById('progressFill').style.width = (totalQuestions>0?(answered/totalQuestions*100):0)+'%'; }
+
+function showRes() {
+  document.getElementById('quizContent').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  let ok=0, d='';
+  sectionData.forEach(sec => {
+    sec.questions.forEach(q => {
+      const ua=answers[sec.id][q.id], cs=String(q.correct), isOK=ua===cs; if(isOK) ok++;
+      d+='<div class="result-item"><div class="ri-q">'+esc(sec.title)+' — '+q.id+'</div>';
+      if(q.sentence) d+='<div>'+esc(q.sentence.replace(/___+/g,cs))+'</div>';
+      else if(q.options) d+='<div>'+esc(q.options.join(' / '))+'</div>';
+      if(!isOK&&ua!==null) d+='<div><span class="ri-wrong">'+esc(ua)+'</span> <span class="ri-correct">'+esc(cs)+'</span></div>';
+      if(isOK) d+='<div><span class="ri-correct">✓ '+esc(cs)+'</span></div>';
+      if(q.explanation) d+='<div style="color:var(--text-dim);font-size:12px;margin-top:4px;">'+esc(q.explanation)+'</div>';
+      d+='</div>';
+    });
+  });
+  const p=Math.round(ok/totalQuestions*100), el=document.getElementById('scoreDisplay');
+  el.innerHTML=ok+'/'+totalQuestions+' <span class="pct">('+p+'%)</span>';
+  el.className='score '+(p>=90?'excellent':p>=60?'good':'needs-work');
+  let m=''; if(p>=90) m='🎉 Отлично!'; else if(p>=70) m='👍 Хороший результат!'; else if(p>=50) m='📚 Стоит повторить.'; else m='💪 Попробуй ещё раз!';
+  document.getElementById('scoreMessage').textContent=m;
+  document.getElementById('resultsDetail').innerHTML='<h3>Подробно</h3>'+d;
+}
+
+function restartQuiz() {
+  answered=0; if(window.speechSynthesis) window.speechSynthesis.cancel();
+  Object.keys(answers).forEach(k=>Object.keys(answers[k]).forEach(qk=>answers[k][qk]=null));
+  document.getElementById('quizContent').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  renderAll(); updateProgress(); window.scrollTo(0,0);
+  // Re-attach audio ended handler after re-render
+  var audioEl = document.getElementById('dialogAudio');
+  if (audioEl) {
+    audioEl.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.pause();
+    });
+  }
+}
+
+function setAudioSpeed(speed, btn) {
+  const audio = document.getElementById('dialogAudio');
+  if (audio) audio.playbackRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toggleSubs(el) { var body = el.parentElement.querySelector('.sub-body'); if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none'; }
+init();
+</script>
+</body>
+</html>
